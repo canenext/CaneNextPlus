@@ -6325,6 +6325,12 @@ border-radius:10px;background:#fff;font-size:15px;
     width:100%;
   }
 }
+</style><style id="hide-de-outside-risk">
+.app-page:not(#risk) [data-metric="de"],
+.app-page:not(#risk) .de-card,
+.app-page:not(#risk) .de-ratio,
+.app-page:not(#risk) #deRatio,
+.app-page:not(#risk) #deStatus{display:none!important;}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -6512,7 +6518,6 @@ border-radius:10px;background:#fff;font-size:15px;
 <button class="btn secondary" id="realClearFiltersBtn" type="button">ล้างตัวกรอง</button>
 <div class="real-plot-count" id="realPlotCount">แสดง 0 จาก 0 แปลง</div>
 </div>
-
 <div class="table-responsive">
 <table class="table real-plot-table">
 <thead>
@@ -6680,7 +6685,7 @@ border-radius:10px;background:#fff;font-size:15px;
 <tr><td>วงเงินค้ำประกันรวม</td><td id="totalGuarantee">5,500,000</td></tr>
 <tr><td>งบส่งเสริมที่ใช้ลงทุน</td><td id="promotionBudget">0</td></tr>
 <tr><td>ผลต่าง</td><td id="guaranteeDiff">5,500,000</td></tr>
-<tr><td>D/E</td><td id="deRatio">0.00</td></tr>
+
 <tr><td>สถานะ</td><td id="deStatus"><span class="status ok">ปกติ</span></td></tr>
 </tbody>
 </table>
@@ -6765,17 +6770,7 @@ border-radius:10px;background:#fff;font-size:15px;
 <h4>Scenario Comparison</h4>
 <table class="table analytics-table" id="scenarioCompareTable">
 <thead>
-<tr>
-<th>Scenario</th>
-<th>ผลผลิต</th>
-<th>คาดการณ์ผลผลิต (ตัน)</th>
-<th>งบส่งเสริม</th>
-<th>D/E</th>
-<th>รายได้</th>
-<th>ต้นทุนรวม</th>
-<th>กำไรสุทธิ</th>
-<th>กำไร/ไร่</th>
-</tr>
+
 </thead>
 <tbody>
 <tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>
@@ -6791,7 +6786,7 @@ border-radius:10px;background:#fff;font-size:15px;
 <div class="dashboard-kpi"><span>🚚 คาดการณ์ผลผลิตอ้อย</span><b id="dashTotalYield">-</b></div>
 <div class="dashboard-kpi"><span>💰 กำไรสุทธิ</span><b id="dashNetProfit">-</b></div>
 <div class="dashboard-kpi"><span>📈 กำไร</span><b id="dashProfitPerRai">-</b></div>
-<div class="dashboard-kpi"><span>🏦 D/E</span><b id="dashDE">-</b></div>
+
 </div>
 <div class="dashboard-alerts" id="dashboardAlerts">
 <div class="dash-alert info">ยังไม่มีข้อมูล Scenario สำหรับสรุป Dashboard</div>
@@ -6800,15 +6795,7 @@ border-radius:10px;background:#fff;font-size:15px;
 <h4>Scenario Ranking</h4>
 <table class="table dashboard-ranking-table">
 <thead>
-<tr>
-<th>Rank</th>
-<th>Scenario</th>
-<th>ผลผลิต</th>
-<th>กำไรสุทธิ</th>
-<th>กำไร/ไร่</th>
-<th>D/E</th>
-<th>สถานะ</th>
-</tr>
+
 </thead>
 <tbody id="dashboardRankingBody">
 <tr><td colspan="7">ยังไม่มีข้อมูล Scenario</td></tr>
@@ -6822,7 +6809,7 @@ border-radius:10px;background:#fff;font-size:15px;
 <div class="dash-compare-card"><span>💰 กำไรสูงสุด</span><b id="cmpBestProfit">-</b></div>
 <div class="dash-compare-card"><span>📈 กำไร/ไร่สูงสุด</span><b id="cmpBestProfitPerRai">-</b></div>
 <div class="dash-compare-card"><span>💸 ต้นทุนต่ำสุด</span><b id="cmpLowestCost">-</b></div>
-<div class="dash-compare-card"><span>🏦 D/E ต่ำสุด</span><b id="cmpLowestDE">-</b></div>
+
 <div class="dash-compare-card"><span>🚰 ระบบน้ำคุ้มค่าที่สุด</span><b id="cmpBestWater">-</b></div>
 </div>
 </div>
@@ -7192,7 +7179,7 @@ function renderScenarioCardV2(data){
           <div class="scenario-result-row"><span>ผลผลิต</span><b data-result="yieldPerRai">0.00 ตัน/ไร่</b></div>
           <div class="scenario-result-row"><span>คาดการณ์ผลผลิตอ้อย</span><b data-result="totalYield">0.00 ตัน</b></div>
           <div class="scenario-result-row"><span>งบส่งเสริม</span><b data-result="promotionCost">0.00 บาท</b></div>
-          
+          <div class="scenario-result-row"><span>D/E</span><b data-result="deRatio">0.00</b></div>
           <div class="scenario-result-row"><span>ต้นทุนระบบน้ำ</span><b data-result="waterCost">0.00 บาท</b></div>
           <div class="scenario-result-row"><span>ค่าตัด+ขึ้น+บรรทุก</span><b data-result="harvestCostTotal">0.00 บาท</b></div>
           <div class="scenario-result-row"><span>รายได้</span><b data-result="revenue">0.00 บาท</b></div>
@@ -9792,6 +9779,30 @@ document.addEventListener('DOMContentLoaded', function(){
       refreshFilterOptions();
       window.filterRealPlotsByYear();
     },100);
+  });
+})();
+</script><script id="remove-de-outside-risk-script">
+(function(){
+  const matchDE=t=>/(^|\s)D\s*[/\-]\s*E($|\s)|Debt\s*\/\s*Equity|อัตราส่วนหนี้สินต่อทุน/i.test(t||'');
+  function clean(){
+    document.querySelectorAll('.app-page:not(#risk)').forEach(page=>{
+      page.querySelectorAll('tr,.scenario-result-row,.scenario-result-box,.analytics-kpi,.dashboard-card,.metric,.stat,.card,.result-item,.compare-row,.comparison-row,.summary-item').forEach(el=>{
+        if(matchDE(el.textContent)) el.remove();
+      });
+      page.querySelectorAll('th,td,span,label,h3,h4,p,small,b,strong').forEach(el=>{
+        if(matchDE(el.textContent)){
+          const p=el.parentElement;
+          if(p && /(metric|stat|result|kpi|card|row|item)/i.test(p.className||'')) p.remove();
+          else el.remove();
+        }
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded',clean);
+  window.addEventListener('canenext:farmer-changed',()=>setTimeout(clean,50));
+  document.addEventListener('DOMContentLoaded',()=>{
+    const root=document.querySelector('.app-main')||document.body;
+    new MutationObserver(clean).observe(root,{childList:true,subtree:true});
   });
 })();
 </script></body>

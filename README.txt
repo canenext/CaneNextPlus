@@ -1,4 +1,1 @@
-Cane Next+ Scenario Analysis
-
-Removed D/E display from Scenario Analysis.
-Removed elements: 1
+Removed D/E outside risk menu. Static items removed: 5
