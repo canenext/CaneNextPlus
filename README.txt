@@ -1,9 +1,27 @@
-Cane Next+ เวอร์ชันล่าสุด พร้อม Supabase Auth และ Data Management
+Cane Next+ User Management
 
-อัปโหลดขึ้น GitHub Pages:
-1. วาง index.html และ config.js ในโฟลเดอร์เดียวกัน
-2. Commit และรอ GitHub Pages อัปเดต
-3. สร้างผู้ใช้ใน Supabase Authentication > Users
-4. Login ด้วยอีเมล/รหัสผ่านนั้น
-5. ทดสอบ Data Management: เลือก Excel และ Preview
-6. ก่อน Import จริง ต้อง Deploy Edge Function import-cane-excel
+1) Supabase > SQL Editor
+   เปิด user_management_schema.sql แล้ว Run
+
+2) กำหนดบัญชีเดิมให้เป็น Admin
+   update public.user_profiles
+   set role='admin', status='active'
+   where email='อีเมลแอดมินของคุณ';
+
+3) Deploy Edge Function:
+   supabase functions deploy manage-users
+
+4) อัปโหลด index.html และ config.js ขึ้น GitHub Pages ในโฟลเดอร์เดียวกัน
+
+5) Login ด้วยบัญชี Admin
+   เมนู "จัดการผู้ใช้งาน" จะแสดงเฉพาะ Admin
+
+Roles:
+- admin: ทุกสิทธิ์
+- manager: ข้อมูลระดับเขต
+- extension: ข้อมูลระดับเขตย่อย
+- viewer: ดูข้อมูลอย่างเดียว
+
+หมายเหตุ:
+Edge Function ใช้ Service Role เฉพาะบน Supabase Server เท่านั้น
+ห้ามใส่ Secret/Service Role Key ใน HTML

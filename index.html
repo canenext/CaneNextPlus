@@ -6331,6 +6331,49 @@ border-radius:10px;background:#fff;font-size:15px;
 @media(max-width:640px){.dm-heading-row{flex-direction:column;align-items:flex-start}.dm-summary-grid{grid-template-columns:1fr}.dm-import-actions{flex-direction:column}.dm-import-actions .btn{width:100%}}
 </style>
 
+
+<style id="canenext-user-admin-style">
+.admin-only-menu{display:none!important}
+body.is-admin .admin-only-menu{display:flex!important}
+
+#user-management{padding-top:18px!important}
+#user-management .um-card{
+  background:#fff;border:1px solid #D9E6F4;border-radius:16px;
+  box-shadow:0 6px 18px rgba(8,59,115,.05);padding:18px;margin-bottom:16px;
+}
+#user-management .um-card>h3,.um-heading h3{
+  margin:0 0 12px!important;color:#0A3D78!important;font-size:18px!important;font-weight:400!important;
+}
+.um-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.um-heading p{margin:0;color:#6B7F93;font-size:14px}
+.um-form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.um-form-grid .form-group{margin-bottom:0}
+.um-form-grid select{
+  width:100%;border:1px solid #cfe0f1;border-radius:16px;padding:14px 16px;
+  font-family:inherit;font-size:15px;color:#083B73;background:#fff
+}
+.um-form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+.um-message{margin-top:12px;padding:10px 12px;border-radius:10px;display:none;font-size:14px}
+.um-message.ok{display:block;background:#EDF9F2;color:#167248}
+.um-message.error{display:block;background:#FFF1F1;color:#C62828}
+.um-list-toolbar{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}
+.um-list-toolbar .form-group{margin:0;flex:1;max-width:430px}
+.um-user-table th,.um-user-table td{text-align:center!important;vertical-align:middle!important}
+.um-role{display:inline-flex;padding:5px 10px;border-radius:999px;background:#EAF4FF;color:#0B5CAD;font-size:12px;font-weight:700}
+.um-status-active{color:#167248;font-weight:700}
+.um-status-inactive{color:#C62828;font-weight:700}
+.um-actions{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.um-actions button{border:1px solid #CFE0F1;background:#fff;color:#0B5CAD;border-radius:999px;padding:6px 10px;font-family:inherit;cursor:pointer}
+.um-actions .danger{color:#C62828;border-color:#F0C8C8}
+@media(max-width:1100px){.um-form-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){
+  .um-heading,.um-list-toolbar{flex-direction:column;align-items:stretch}
+  .um-form-grid{grid-template-columns:1fr}
+  .um-form-actions{flex-direction:column}
+  .um-form-actions .btn{width:100%}
+}
+</style>
+
 </head>
 <body class="locked">
 
@@ -6397,6 +6440,7 @@ border-radius:10px;background:#fff;font-size:15px;
         <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
         <a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> Promotion</a>
         <a href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
+        <a href="#user-management" class="admin-only-menu" onclick="showMainMenu(event, 'user-management')"><i class="fa-solid fa-users-gear menu-icon"></i> จัดการผู้ใช้งาน</a>
       </div>
     </nav>
   </header>
@@ -7020,6 +7064,101 @@ border-radius:10px;background:#fff;font-size:15px;
       <table class="table dm-preview-table">
         <thead id="dmPreviewHead"></thead>
         <tbody id="dmPreviewBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<section class="section app-page user-management-page" id="user-management">
+  <div class="um-card">
+    <div class="um-heading">
+      <div>
+        <h3>จัดการผู้ใช้งาน</h3>
+        <p>เพิ่ม แก้ไข และกำหนดสิทธิ์ผู้ใช้งาน Cane Next+</p>
+      </div>
+      <button class="btn" type="button" onclick="CaneUserAdmin.openCreateForm()">+ เพิ่มผู้ใช้งาน</button>
+    </div>
+  </div>
+
+  <div class="um-card" id="umFormCard" hidden>
+    <h3 id="umFormTitle">เพิ่มผู้ใช้งาน</h3>
+    <div class="um-form-grid">
+      <div class="form-group">
+        <label for="umEmail">อีเมล</label>
+        <input id="umEmail" type="email" placeholder="name@example.com">
+      </div>
+      <div class="form-group">
+        <label for="umPassword">รหัสผ่านเริ่มต้น</label>
+        <input id="umPassword" type="password" placeholder="อย่างน้อย 8 ตัวอักษร">
+      </div>
+      <div class="form-group">
+        <label for="umFullName">ชื่อ-สกุล</label>
+        <input id="umFullName" type="text" placeholder="ชื่อผู้ใช้งาน">
+      </div>
+      <div class="form-group">
+        <label for="umEmployeeCode">รหัสพนักงาน</label>
+        <input id="umEmployeeCode" type="text" placeholder="เช่น EMP001">
+      </div>
+      <div class="form-group">
+        <label for="umRole">สิทธิ์ผู้ใช้งาน</label>
+        <select id="umRole">
+          <option value="viewer">Viewer — ดูข้อมูลอย่างเดียว</option>
+          <option value="extension">Extension — นักส่งเสริม</option>
+          <option value="manager">Manager — ผู้จัดการเขต</option>
+          <option value="admin">Admin — ผู้ดูแลระบบ</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="umZone">เขต</label>
+        <input id="umZone" type="text" placeholder="เช่น 05">
+      </div>
+      <div class="form-group">
+        <label for="umSubzone">เขตย่อย</label>
+        <input id="umSubzone" type="text" placeholder="เช่น 05-03">
+      </div>
+      <div class="form-group">
+        <label for="umStatus">สถานะ</label>
+        <select id="umStatus">
+          <option value="active">ใช้งาน</option>
+          <option value="inactive">ปิดใช้งาน</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="um-form-actions">
+      <button class="btn secondary" type="button" onclick="CaneUserAdmin.closeForm()">ยกเลิก</button>
+      <button class="btn" id="umSaveBtn" type="button" onclick="CaneUserAdmin.saveUser()">บันทึกผู้ใช้งาน</button>
+    </div>
+    <div class="um-message" id="umFormMessage"></div>
+  </div>
+
+  <div class="um-card">
+    <div class="um-list-toolbar">
+      <div class="form-group">
+        <label for="umSearch">ค้นหาผู้ใช้งาน</label>
+        <input id="umSearch" type="text" placeholder="ชื่อ อีเมล รหัสพนักงาน เขต..." oninput="CaneUserAdmin.renderUsers()">
+      </div>
+      <button class="btn secondary" type="button" onclick="CaneUserAdmin.loadUsers()">รีเฟรช</button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table um-user-table">
+        <thead>
+          <tr>
+            <th>รหัสพนักงาน</th>
+            <th>ชื่อ-สกุล</th>
+            <th>อีเมล</th>
+            <th>Role</th>
+            <th>เขต</th>
+            <th>เขตย่อย</th>
+            <th>สถานะ</th>
+            <th>จัดการ</th>
+          </tr>
+        </thead>
+        <tbody id="umUserTableBody">
+          <tr><td colspan="8">กำลังโหลดข้อมูล...</td></tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -9261,6 +9400,178 @@ document.addEventListener('DOMContentLoaded', function(){
   setTimeout(testConnection,500);
  });
  window.addEventListener('click',()=>setTimeout(testConnection,100));
+})();
+</script>
+
+
+<script id="canenext-user-admin-script">
+(function(){
+  let profiles=[];
+  let editingId=null;
+
+  function msg(text,type=''){
+    const el=document.getElementById('umFormMessage');
+    if(!el)return;
+    el.textContent=text;
+    el.className='um-message '+type;
+  }
+
+  async function getMyProfile(){
+    const {data:{user}}=await window.caneSupabase.auth.getUser();
+    if(!user) return null;
+    const {data,error}=await window.caneSupabase
+      .from('user_profiles')
+      .select('*')
+      .eq('auth_uid',user.id)
+      .maybeSingle();
+    if(error) throw error;
+    return data;
+  }
+
+  async function applyRole(){
+    try{
+      if(!window.caneSupabase) return;
+      const profile=await getMyProfile();
+      window.CANENEXT_CURRENT_PROFILE=profile;
+      document.body.classList.toggle('is-admin',profile?.role==='admin' && profile?.status==='active');
+
+      if(profile?.status==='inactive'){
+        alert('บัญชีนี้ถูกปิดการใช้งาน');
+        await window.caneSupabase.auth.signOut();
+      }
+    }catch(err){
+      console.error('Profile load failed',err);
+      document.body.classList.remove('is-admin');
+    }
+  }
+
+  function formValue(id){return document.getElementById(id)?.value.trim()||''}
+  function setValue(id,v){const e=document.getElementById(id);if(e)e.value=v??''}
+
+  window.CaneUserAdmin={
+    async init(){
+      await applyRole();
+      if(document.body.classList.contains('is-admin')) await this.loadUsers();
+    },
+
+    openCreateForm(){
+      editingId=null;
+      document.getElementById('umFormCard').hidden=false;
+      document.getElementById('umFormTitle').textContent='เพิ่มผู้ใช้งาน';
+      ['umEmail','umPassword','umFullName','umEmployeeCode','umZone','umSubzone'].forEach(id=>setValue(id,''));
+      setValue('umRole','viewer');setValue('umStatus','active');
+      document.getElementById('umEmail').disabled=false;
+      document.getElementById('umPassword').closest('.form-group').style.display='';
+      msg('');
+      document.getElementById('umFormCard').scrollIntoView({behavior:'smooth',block:'start'});
+    },
+
+    openEdit(id){
+      const p=profiles.find(x=>x.id===id);
+      if(!p)return;
+      editingId=id;
+      document.getElementById('umFormCard').hidden=false;
+      document.getElementById('umFormTitle').textContent='แก้ไขผู้ใช้งาน';
+      setValue('umEmail',p.email);setValue('umFullName',p.full_name);
+      setValue('umEmployeeCode',p.employee_code);setValue('umRole',p.role);
+      setValue('umZone',p.zone);setValue('umSubzone',p.subzone);setValue('umStatus',p.status);
+      document.getElementById('umEmail').disabled=true;
+      document.getElementById('umPassword').closest('.form-group').style.display='none';
+      msg('');
+    },
+
+    closeForm(){
+      document.getElementById('umFormCard').hidden=true;
+      editingId=null;msg('');
+    },
+
+    async saveUser(){
+      const btn=document.getElementById('umSaveBtn');
+      btn.disabled=true;btn.textContent='กำลังบันทึก...';msg('');
+      try{
+        const profile=window.CANENEXT_CURRENT_PROFILE;
+        if(profile?.role!=='admin') throw new Error('ไม่มีสิทธิ์จัดการผู้ใช้งาน');
+
+        const payload={
+          action: editingId?'update':'create',
+          profile_id:editingId,
+          email:formValue('umEmail'),
+          password:formValue('umPassword'),
+          full_name:formValue('umFullName'),
+          employee_code:formValue('umEmployeeCode'),
+          role:formValue('umRole'),
+          zone:formValue('umZone')||null,
+          subzone:formValue('umSubzone')||null,
+          status:formValue('umStatus')
+        };
+
+        if(!editingId && (!payload.email || !payload.password || !payload.full_name)){
+          throw new Error('กรุณากรอกอีเมล รหัสผ่าน และชื่อ-สกุล');
+        }
+
+        const {data,error}=await window.caneSupabase.functions.invoke('manage-users',{body:payload});
+        if(error) throw error;
+        msg(data?.message||'บันทึกสำเร็จ','ok');
+        await this.loadUsers();
+        setTimeout(()=>this.closeForm(),800);
+      }catch(err){
+        console.error(err);msg(err.message||'บันทึกไม่สำเร็จ','error');
+      }finally{
+        btn.disabled=false;btn.textContent='บันทึกผู้ใช้งาน';
+      }
+    },
+
+    async toggleStatus(id,status){
+      if(!confirm(status==='active'?'ปิดการใช้งานผู้ใช้นี้หรือไม่?':'เปิดการใช้งานผู้ใช้นี้หรือไม่?'))return;
+      const {error}=await window.caneSupabase.functions.invoke('manage-users',{
+        body:{action:'status',profile_id:id,status:status==='active'?'inactive':'active'}
+      });
+      if(error){alert('แก้ไขสถานะไม่สำเร็จ');return}
+      await this.loadUsers();
+    },
+
+    async resetPassword(id){
+      const password=prompt('กำหนดรหัสผ่านใหม่ (อย่างน้อย 8 ตัวอักษร)');
+      if(!password)return;
+      const {error}=await window.caneSupabase.functions.invoke('manage-users',{
+        body:{action:'reset_password',profile_id:id,password}
+      });
+      if(error){alert('รีเซ็ตรหัสผ่านไม่สำเร็จ');return}
+      alert('รีเซ็ตรหัสผ่านแล้ว');
+    },
+
+    async loadUsers(){
+      if(!document.body.classList.contains('is-admin'))return;
+      const {data,error}=await window.caneSupabase.from('user_profiles').select('*').order('created_at',{ascending:false});
+      if(error){console.error(error);return}
+      profiles=data||[];this.renderUsers();
+    },
+
+    renderUsers(){
+      const q=(document.getElementById('umSearch')?.value||'').toLowerCase();
+      const list=profiles.filter(p=>[p.employee_code,p.full_name,p.email,p.role,p.zone,p.subzone].join(' ').toLowerCase().includes(q));
+      const body=document.getElementById('umUserTableBody');
+      if(!body)return;
+      body.innerHTML=list.length?list.map(p=>`
+        <tr>
+          <td>${p.employee_code||'-'}</td>
+          <td>${p.full_name||'-'}</td>
+          <td>${p.email||'-'}</td>
+          <td><span class="um-role">${p.role}</span></td>
+          <td>${p.zone||'-'}</td>
+          <td>${p.subzone||'-'}</td>
+          <td class="${p.status==='active'?'um-status-active':'um-status-inactive'}">${p.status==='active'?'ใช้งาน':'ปิดใช้งาน'}</td>
+          <td><div class="um-actions">
+            <button onclick="CaneUserAdmin.openEdit('${p.id}')">แก้ไข</button>
+            <button onclick="CaneUserAdmin.resetPassword('${p.id}')">รหัสผ่าน</button>
+            <button class="${p.status==='active'?'danger':''}" onclick="CaneUserAdmin.toggleStatus('${p.id}','${p.status}')">${p.status==='active'?'ปิดใช้งาน':'เปิดใช้งาน'}</button>
+          </div></td>
+        </tr>`).join(''):'<tr><td colspan="8">ไม่พบข้อมูลผู้ใช้งาน</td></tr>';
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>window.CaneUserAdmin.init(),700));
+  document.addEventListener('click',()=>setTimeout(applyRole,120));
 })();
 </script>
 
