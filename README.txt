@@ -1,9 +1,10 @@
-Cane Next+ Layout Balanced After D/E Removal
+Cane Next+ Dashboard Balanced
 
-ปรับ:
-- Dashboard KPI จัดใหม่ให้สมดุล
-- Scenario Analysis result cards เติมพื้นที่ให้พอดี
-- Analytics/AI cards ปรับจำนวนคอลัมน์ใหม่
-- Summary และ KPI grid ใช้ auto-fit
-- Responsive บน Desktop / Tablet / Mobile
-- D/E ยังคงอยู่เฉพาะเมนูวิเคราะห์ความเสี่ยง
+- Removed all Dashboard D/E logic and alerts
+- Recommendation now uses highest net profit
+- Ranking table reduced to 6 columns
+- KPI cards arranged as 5 balanced cards
+- Executive Comparison arranged as 5 balanced cards
+- Financial Summary remains 2 equal columns
+- Responsive for desktop, tablet and mobile
+- D/E remains only in Risk Analysis

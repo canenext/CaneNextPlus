@@ -6440,6 +6440,116 @@ border-radius:10px;background:#fff;font-size:15px;
     grid-template-columns:1fr !important;
   }
 }
+</style><style id="dashboard-balanced-final-style">
+/* Dashboard balanced after removing D/E */
+#dashboard .dashboard-kpi-grid{
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:12px !important;
+}
+#dashboard .dashboard-kpi{
+  min-width:0 !important;
+  min-height:126px !important;
+  padding:16px 12px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+#dashboard .dashboard-kpi span{
+  min-height:42px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:13px !important;
+  line-height:1.35 !important;
+  white-space:normal !important;
+}
+#dashboard .dashboard-kpi b{
+  margin-top:9px !important;
+  font-size:18px !important;
+  line-height:1.25 !important;
+  overflow-wrap:anywhere !important;
+}
+
+#dashboard .dashboard-comparison-grid{
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:12px !important;
+}
+#dashboard .dash-compare-card{
+  min-width:0 !important;
+  min-height:112px !important;
+  padding:15px 12px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+#dashboard .dash-compare-card span{
+  min-height:38px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:13px !important;
+  line-height:1.35 !important;
+}
+#dashboard .dash-compare-card b{
+  margin-top:8px !important;
+  font-size:15px !important;
+  line-height:1.35 !important;
+  overflow-wrap:anywhere !important;
+}
+
+#dashboard .dashboard-financial-grid{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+#dashboard .dashboard-fin-card{
+  min-width:0 !important;
+  height:100% !important;
+}
+
+#dashboard .dashboard-ranking-table{
+  min-width:860px !important;
+}
+#dashboard .dashboard-ranking-table th,
+#dashboard .dashboard-ranking-table td{
+  text-align:center !important;
+  vertical-align:middle !important;
+}
+#dashboard .dashboard-ranking-table th:nth-child(1){width:72px}
+#dashboard .dashboard-ranking-table th:nth-child(2){width:150px}
+#dashboard .dashboard-ranking-table th:nth-child(6){width:260px}
+
+@media(max-width:1250px){
+  #dashboard .dashboard-kpi-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+  #dashboard .dashboard-kpi-grid > :nth-child(4),
+  #dashboard .dashboard-kpi-grid > :nth-child(5){
+    grid-column:span 1 !important;
+  }
+  #dashboard .dashboard-comparison-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+}
+@media(max-width:850px){
+  #dashboard .dashboard-kpi-grid,
+  #dashboard .dashboard-comparison-grid,
+  #dashboard .dashboard-financial-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+@media(max-width:560px){
+  #dashboard .dashboard-kpi-grid,
+  #dashboard .dashboard-comparison-grid,
+  #dashboard .dashboard-financial-grid{
+    grid-template-columns:1fr !important;
+  }
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -6900,8 +7010,7 @@ border-radius:10px;background:#fff;font-size:15px;
 <div class="dashboard-section">
 <h4>Scenario Ranking</h4>
 <table class="table dashboard-ranking-table">
-<thead>
-</thead>
+<thead><tr><th>อันดับ</th><th>Scenario</th><th>ผลผลิต</th><th>กำไรสุทธิ</th><th>กำไร/ไร่</th><th>สถานะ</th></tr></thead>
 <tbody id="dashboardRankingBody">
 <tr><td colspan="7">ยังไม่มีข้อมูล Scenario</td></tr>
 </tbody>
@@ -7900,7 +8009,6 @@ function dashboardGetRows(){
       yield:dashboardParse(get('yieldPerRai')),
       totalYield:dashboardParse(get('totalYield')),
       promotion:dashboardParse(get('promotionCost')),
-      de:dashboardParse(get('deRatio')),
       revenue:dashboardParse(get('revenue')),
       totalCost:dashboardParse(get('totalCost')),
       netProfit:dashboardParse(get('netProfit')),
@@ -7938,31 +8046,28 @@ function refreshDashboard(){
 
   if(!rows.length){
     if(alerts) alerts.innerHTML = '<div class="dash-alert info">ยังไม่มีข้อมูล Scenario สำหรับสรุป Dashboard</div>';
-    if(body) body.innerHTML = '<tr><td colspan="7">ยังไม่มีข้อมูล Scenario</td></tr>';
+    if(body) body.innerHTML = '<tr><td colspan="6">ยังไม่มีข้อมูล Scenario</td></tr>';
     return;
   }
 
-  const safe = rows.filter(r=>r.de<=1);
-  const recommended = (safe.length ? safe : rows).sort((a,b)=>b.netProfit-a.netProfit)[0];
+  const recommended = [...rows].sort((a,b)=>b.netProfit-a.netProfit)[0];
   const bestYield = [...rows].sort((a,b)=>b.totalYield-a.totalYield)[0];
   const bestProfit = [...rows].sort((a,b)=>b.netProfit-a.netProfit)[0];
   const bestProfitPerRai = [...rows].sort((a,b)=>b.profitPerRai-a.profitPerRai)[0];
   const lowestCost = [...rows].sort((a,b)=>a.totalCost-b.totalCost)[0];
-  const lowestDE = [...rows].sort((a,b)=>a.de-b.de)[0];
+
 
   setDash('dashRecommended', recommended.title);
   setDash('dashYieldPerRai', recommended.yieldText);
   setDash('dashTotalYield', recommended.totalYieldText);
   setDash('dashNetProfit', recommended.netProfitText);
   setDash('dashProfitPerRai', recommended.profitPerRaiText);
-  setDash('dashDE', recommended.deText);
 
   if(alerts){
-    const deWarnings = rows.filter(r=>r.de>1).map(r=>`<div class="dash-alert danger">🔴 ${r.title} มี D/E เกิน 1.00 ควรทบทวนงบส่งเสริม</div>`).join('');
     alerts.innerHTML = `
       <div class="dash-alert ok">🟢 แนะนำใช้ ${recommended.title} เป็นแนวทางหลัก</div>
       ${recommended.yield < 10 ? '<div class="dash-alert warn">🟡 ผลผลิตของ Scenario ที่แนะนำต่ำกว่าเป้าหมาย ควรติดตามการจัดการแปลง</div>' : ''}
-      ${deWarnings || '<div class="dash-alert ok">🟢 D/E ของ Scenario หลักอยู่ในเกณฑ์ปลอดภัย</div>'}
+      ${recommended.netProfit < 0 ? '<div class="dash-alert danger">🔴 Scenario ที่แนะนำมีผลกำไรติดลบ ควรทบทวนต้นทุนและงบลงทุน</div>' : '<div class="dash-alert ok">🟢 Scenario ที่แนะนำมีผลกำไรเป็นบวก</div>'}
     `;
   }
 
@@ -7974,14 +8079,12 @@ function refreshDashboard(){
       if(r.title===bestProfit.title) badges.push('<span class="dash-badge">🥇 Best Profit</span>');
       if(r.title===bestYield.title) badges.push('<span class="dash-badge">🌾 Best Yield</span>');
       if(r.title===lowestCost.title) badges.push('<span class="dash-badge">💸 Lowest Cost</span>');
-      if(r.title===lowestDE.title) badges.push('<span class="dash-badge">🏦 Lowest D/E</span>');
       return `<tr>
         <td>${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1}</td>
         <td>${r.title}</td>
         <td>${r.yieldText}</td>
         <td>${r.netProfitText}</td>
         <td>${r.profitPerRaiText}</td>
-        <td>${r.deText}</td>
         <td>${badges.join(' ') || 'ปกติ'}</td>
       </tr>`;
     }).join('');
@@ -7991,7 +8094,6 @@ function refreshDashboard(){
   setDash('cmpBestProfit', `${bestProfit.title} (${bestProfit.netProfitText})`);
   setDash('cmpBestProfitPerRai', `${bestProfitPerRai.title} (${bestProfitPerRai.profitPerRaiText})`);
   setDash('cmpLowestCost', `${lowestCost.title} (${lowestCost.totalCostText})`);
-  setDash('cmpLowestDE', `${lowestDE.title} (D/E ${lowestDE.deText})`);
   setDash('cmpBestWater', recommended.water || '-');
 
   const guarantee = 5500000;
@@ -8011,7 +8113,6 @@ function refreshDashboard(){
   ['dashNetProfit','finNetProfit'].forEach(id=>applySemanticColor(id,'profit'));
   ['dashProfitPerRai'].forEach(id=>applySemanticColor(id,'profit'));
   ['finRevenue','finTotalCost'].forEach(id=>applySemanticColor(id,'money'));
-  applySemanticColor('dashDE','de');
 
 }
 const _oldShowMainMenuDashboard = window.showMainMenu;
@@ -9908,6 +10009,21 @@ document.addEventListener('DOMContentLoaded', function(){
     const root=document.querySelector('.app-main')||document.body;
     new MutationObserver(clean).observe(root,{childList:true,subtree:true});
   });
+})();
+</script><script id="dashboard-balanced-final-script">
+(function(){
+  function cleanDashboard(){
+    const dashboard=document.getElementById('dashboard');
+    if(!dashboard) return;
+
+    dashboard.querySelectorAll('[id="dashDE"],[id="cmpLowestDE"],.de-card,.de-ratio').forEach(el=>el.remove());
+
+    const empty=dashboard.querySelector('#dashboardRankingBody td[colspan]');
+    if(empty) empty.setAttribute('colspan','6');
+  }
+
+  document.addEventListener('DOMContentLoaded',cleanDashboard);
+  window.addEventListener('canenext:farmer-changed',()=>setTimeout(cleanDashboard,50));
 })();
 </script></body>
 </html>
