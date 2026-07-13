@@ -6295,54 +6295,40 @@ border-radius:10px;background:#fff;font-size:15px;
 <script src="./config.js"></script>
 
 
-<style id="supabase-data-management-style">
+<style id="supabase-enterprise-integration-style">
+#authMessage.auth-error{background:#FFF1F1!important;border-color:#F0C8C8!important;color:#C62828!important}
+#authMessage.auth-success{background:#EDF9F2!important;border-color:#A9D7BF!important;color:#167248!important}
+.login-submit:disabled{opacity:.65;cursor:not-allowed}
+
+#data-management{padding-top:18px!important}
 #data-management .dm-card{
-  background:#fff;
-  border:1px solid #D9E6F4;
-  border-radius:16px;
-  box-shadow:0 6px 18px rgba(8,59,115,.05);
-  padding:18px;
-  margin-bottom:16px;
+  background:#fff;border:1px solid #D9E6F4;border-radius:16px;
+  box-shadow:0 6px 18px rgba(8,59,115,.05);padding:18px;margin-bottom:16px;
 }
-#data-management .dm-card > h3,
-#data-management .dm-heading-row h3{
-  margin:0 0 12px!important;
-  color:#0A3D78!important;
-  font-size:18px!important;
-  font-weight:400!important;
+#data-management .dm-card>h3,.dm-heading-row h3{
+  margin:0 0 12px!important;color:#0A3D78!important;font-size:18px!important;font-weight:400!important;
 }
 .dm-heading-row{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .dm-heading-row p{margin:0;color:#6B7F93;font-size:14px!important}
 .dm-connection{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#F3F8FF;color:#5B6F86}
 .dm-dot{width:9px;height:9px;border-radius:50%;background:#D97706}
-.dm-connection.ok .dm-dot{background:#2E7D32}
-.dm-connection.error .dm-dot{background:#C62828}
-.dm-upload-area{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.dm-file-name{color:#334E68;font-size:15px}
+.dm-connection.ok .dm-dot{background:#2E7D32}.dm-connection.error .dm-dot{background:#C62828}
+.dm-upload-area{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.dm-file-name{font-size:15px}
 .dm-note,.dm-security-note{margin-top:12px;padding:10px 12px;background:#F7FBFF;border-left:3px solid #0B5CAD;color:#5B6F86;font-size:13px;line-height:1.5}
 .dm-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .dm-sheet{padding:12px;border:1px solid #D9E6F4;border-radius:12px;background:#F7FBFF}
 .dm-sheet span{display:block;font-size:14px!important;color:#5B6F86}
 .dm-sheet b{display:block;margin:5px 0;font-size:20px!important;color:#083B73}
 .dm-sheet small{font-size:12px!important;color:#6B7F93}
-.dm-sheet.ok{border-color:#A9D7BF;background:#F2FBF6}
-.dm-sheet.error{border-color:#E4B4B4;background:#FFF6F6}
+.dm-sheet.ok{border-color:#A9D7BF;background:#F2FBF6}.dm-sheet.error{border-color:#E4B4B4;background:#FFF6F6}
 .dm-validation{margin-top:12px;padding:11px 12px;border-radius:10px;font-size:14px}
-.dm-validation.neutral{background:#F3F8FF;color:#5B6F86}
-.dm-validation.ok{background:#EDF9F2;color:#167248}
-.dm-validation.error{background:#FFF1F1;color:#C62828}
+.dm-validation.neutral{background:#F3F8FF;color:#5B6F86}.dm-validation.ok{background:#EDF9F2;color:#167248}.dm-validation.error{background:#FFF1F1;color:#C62828}
 .dm-import-actions{display:flex;gap:10px;justify-content:flex-end}
 .dm-progress-wrap{margin-top:14px;display:grid;grid-template-columns:1fr 50px;align-items:center;gap:10px}
-.dm-progress{height:10px;background:#E8F0F7;border-radius:999px;overflow:hidden}
-.dm-progress i{display:block;width:0;height:100%;background:#0B5CAD;transition:width .2s}
+.dm-progress{height:10px;background:#E8F0F7;border-radius:999px;overflow:hidden}.dm-progress i{display:block;width:0;height:100%;background:#0B5CAD}
 .dm-preview-table{min-width:900px!important}
 @media(max-width:900px){.dm-summary-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){
-  .dm-heading-row{flex-direction:column;align-items:flex-start}
-  .dm-summary-grid{grid-template-columns:1fr}
-  .dm-import-actions{flex-direction:column}
-  .dm-import-actions .btn{width:100%}
-}
+@media(max-width:640px){.dm-heading-row{flex-direction:column;align-items:flex-start}.dm-summary-grid{grid-template-columns:1fr}.dm-import-actions{flex-direction:column}.dm-import-actions .btn{width:100%}}
 </style>
 
 </head>
@@ -6362,10 +6348,10 @@ border-radius:10px;background:#fff;font-size:15px;
       <div class="login-form-panel">
         <form class="login-card" onsubmit="handleLogin(event)">
           <h2>เข้าสู่ระบบ</h2>
-          <p class="hint">กรอกชื่อผู้ใช้และรหัสผ่าน เพื่อเข้าสู่แพลตฟอร์ม Cane Next Plus+</p>
+          <p class="hint">กรอกอีเมลและรหัสผ่านที่สร้างไว้ใน Supabase เพื่อเข้าสู่แพลตฟอร์ม Cane Next Plus+</p>
           <div class="form-group">
-            <label for="username">ชื่อผู้ใช้</label>
-            <input id="username" type="text" placeholder="กรอกชื่อผู้ใช้" autocomplete="username" required />
+            <label for="username">อีเมล</label>
+            <input id="username" type="email" placeholder="กรอกอีเมล" autocomplete="email" required />
           </div>
           <div class="form-group">
             <label for="password">รหัสผ่าน</label>
@@ -6376,7 +6362,7 @@ border-radius:10px;background:#fff;font-size:15px;
             <a href="#">ลืมรหัสผ่าน?</a>
           </div>
           <button class="btn login-submit" type="submit">เข้าสู่ระบบ</button>
-          <div class="demo-note">Demo: สามารถกรอกข้อมูลใดก็ได้ แล้วกด “เข้าสู่ระบบ” เพื่อเข้าหน้าเว็บ</div>
+          <div class="demo-note" id="authMessage">ใช้บัญชีผู้ใช้ที่สร้างใน Supabase Authentication → Users</div>
         </form>
       </div>
     </div>
@@ -6396,7 +6382,7 @@ border-radius:10px;background:#fff;font-size:15px;
         </div>
         <div class="current-user">
           <div>👤 ผู้ใช้งานปัจจุบัน: <span id="currentUserName">Demo User</span></div>
-          <button class="logout-btn" onclick="logout()">ออกจากระบบ</button>
+          <button class="logout-btn" onclick="logoutSupabase()">ออกจากระบบ</button>
         </div>
       </div>
       <div class="menu-row">
@@ -6887,76 +6873,6 @@ border-radius:10px;background:#fff;font-size:15px;
   </div>
 </section>
 
-
-<section class="section app-page data-management-page" id="data-management">
-  <div class="dm-card">
-    <div class="dm-heading-row">
-      <div>
-        <h3>Data Management</h3>
-        <p>ตรวจสอบไฟล์ Excel 6 Sheets ก่อนนำเข้าฐานข้อมูล Supabase</p>
-      </div>
-      <div class="dm-connection" id="dmConnectionStatus">
-        <span class="dm-dot"></span>
-        <span>กำลังตรวจสอบการเชื่อมต่อ</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="dm-card">
-    <h3>1. เลือกไฟล์ Excel</h3>
-    <div class="dm-upload-area">
-      <input id="dmExcelFile" type="file" accept=".xlsx,.xls" hidden>
-      <button class="btn" type="button" onclick="document.getElementById('dmExcelFile').click()">เลือกไฟล์ Excel</button>
-      <div class="dm-file-name" id="dmFileName">ยังไม่ได้เลือกไฟล์</div>
-    </div>
-    <div class="dm-note">
-      รองรับเฉพาะ Sheets: Farmer, Plot, ProductionHistory, Guarantee, Debt และ Harvest
-    </div>
-  </div>
-
-  <div class="dm-card">
-    <h3>2. ผลการตรวจสอบ</h3>
-    <div class="dm-summary-grid" id="dmSummaryGrid">
-      <div class="dm-sheet"><span>Farmer</span><b>-</b><small>รอตรวจสอบ</small></div>
-      <div class="dm-sheet"><span>Plot</span><b>-</b><small>รอตรวจสอบ</small></div>
-      <div class="dm-sheet"><span>ProductionHistory</span><b>-</b><small>รอตรวจสอบ</small></div>
-      <div class="dm-sheet"><span>Guarantee</span><b>-</b><small>รอตรวจสอบ</small></div>
-      <div class="dm-sheet"><span>Debt</span><b>-</b><small>รอตรวจสอบ</small></div>
-      <div class="dm-sheet"><span>Harvest</span><b>-</b><small>รอตรวจสอบ</small></div>
-    </div>
-    <div id="dmValidationResult" class="dm-validation neutral">กรุณาเลือกไฟล์ Excel</div>
-  </div>
-
-  <div class="dm-card">
-    <h3>3. นำเข้าข้อมูล</h3>
-    <div class="dm-import-actions">
-      <button class="btn secondary" id="dmPreviewBtn" type="button" onclick="CaneDataManager.preview()" disabled>
-        แสดงตัวอย่างข้อมูล
-      </button>
-      <button class="btn" id="dmImportBtn" type="button" onclick="CaneDataManager.importToSupabase()" disabled>
-        Import เข้า Supabase
-      </button>
-    </div>
-    <div class="dm-progress-wrap" id="dmProgressWrap" hidden>
-      <div class="dm-progress"><i id="dmProgressBar"></i></div>
-      <div id="dmProgressText">0%</div>
-    </div>
-    <div class="dm-security-note">
-      การ Import จริงต้องใช้ Supabase Edge Function ฝั่งเซิร์ฟเวอร์ ระบบจะไม่เก็บ Secret Key ไว้ใน HTML
-    </div>
-  </div>
-
-  <div class="dm-card" id="dmPreviewCard" hidden>
-    <h3>ตัวอย่างข้อมูล</h3>
-    <div class="table-responsive">
-      <table class="table dm-preview-table">
-        <thead id="dmPreviewHead"></thead>
-        <tbody id="dmPreviewBody"></tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
 <section class="section app-page" id="promotion"><p class="lead">เตรียมพื้นที่สำหรับแผนส่งเสริมและงบสนับสนุน</p></section>
 
 <section class="section app-page dashboard-page" id="dashboard">
@@ -7048,6 +6964,67 @@ border-radius:10px;background:#fff;font-size:15px;
 
 
 
+
+<section class="section app-page data-management-page" id="data-management">
+  <div class="dm-card">
+    <div class="dm-heading-row">
+      <div>
+        <h3>Data Management</h3>
+        <p>ตรวจสอบไฟล์ Excel 6 Sheets ก่อนนำเข้าฐานข้อมูล Supabase</p>
+      </div>
+      <div class="dm-connection" id="dmConnectionStatus">
+        <span class="dm-dot"></span><span>กำลังตรวจสอบการเชื่อมต่อ</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dm-card">
+    <h3>1. เลือกไฟล์ Excel</h3>
+    <div class="dm-upload-area">
+      <input id="dmExcelFile" type="file" accept=".xlsx,.xls" hidden>
+      <button class="btn" type="button" onclick="document.getElementById('dmExcelFile').click()">เลือกไฟล์ Excel</button>
+      <div class="dm-file-name" id="dmFileName">ยังไม่ได้เลือกไฟล์</div>
+    </div>
+    <div class="dm-note">รองรับ Farmer, Plot, ProductionHistory, Guarantee, Debt และ Harvest</div>
+  </div>
+
+  <div class="dm-card">
+    <h3>2. ผลการตรวจสอบ</h3>
+    <div class="dm-summary-grid" id="dmSummaryGrid">
+      <div class="dm-sheet"><span>Farmer</span><b>-</b><small>รอตรวจสอบ</small></div>
+      <div class="dm-sheet"><span>Plot</span><b>-</b><small>รอตรวจสอบ</small></div>
+      <div class="dm-sheet"><span>ProductionHistory</span><b>-</b><small>รอตรวจสอบ</small></div>
+      <div class="dm-sheet"><span>Guarantee</span><b>-</b><small>รอตรวจสอบ</small></div>
+      <div class="dm-sheet"><span>Debt</span><b>-</b><small>รอตรวจสอบ</small></div>
+      <div class="dm-sheet"><span>Harvest</span><b>-</b><small>รอตรวจสอบ</small></div>
+    </div>
+    <div id="dmValidationResult" class="dm-validation neutral">กรุณาเลือกไฟล์ Excel</div>
+  </div>
+
+  <div class="dm-card">
+    <h3>3. นำเข้าข้อมูล</h3>
+    <div class="dm-import-actions">
+      <button class="btn secondary" id="dmPreviewBtn" type="button" onclick="CaneDataManager.preview()" disabled>แสดงตัวอย่างข้อมูล</button>
+      <button class="btn" id="dmImportBtn" type="button" onclick="CaneDataManager.importToSupabase()" disabled>Import เข้า Supabase</button>
+    </div>
+    <div class="dm-progress-wrap" id="dmProgressWrap" hidden>
+      <div class="dm-progress"><i id="dmProgressBar"></i></div>
+      <div id="dmProgressText">0%</div>
+    </div>
+    <div class="dm-security-note">การ Import ใช้ Edge Function ฝั่งเซิร์ฟเวอร์ และไม่เก็บ Secret Key ใน HTML</div>
+  </div>
+
+  <div class="dm-card" id="dmPreviewCard" hidden>
+    <h3>ตัวอย่างข้อมูล 10 แถวแรก</h3>
+    <div class="table-responsive">
+      <table class="table dm-preview-table">
+        <thead id="dmPreviewHead"></thead>
+        <tbody id="dmPreviewBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 </main>
 
 
@@ -7055,7 +7032,7 @@ border-radius:10px;background:#fff;font-size:15px;
 
   
 <script>
-function handleLogin(event){
+function legacyHandleLogin(event){
   if(event) event.preventDefault();
   const usernameInput = document.getElementById('username');
   const loginName = usernameInput && usernameInput.value.trim() ? usernameInput.value.trim() : 'Demo User';
@@ -7074,7 +7051,7 @@ function openLogin(){
   document.body.classList.remove('logged-in');
   setTimeout(()=>document.getElementById('username')?.focus(), 80);
 }
-function logout(){
+function legacyLogout(){
   const u = document.getElementById('username');
   const p = document.getElementById('password');
   if(u) u.value = '';
@@ -9110,226 +9087,180 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 
 
-<script id="supabase-data-management-script">
+<script id="canenext-supabase-auth">
 (function(){
-  const REQUIRED = {
-    Farmer: ['farmer_code','name','zone','subzone','factory','status'],
-    Plot: ['farmer_code','production_year','project_type','plot_type','plot_id','area_rai','soil_type','variety','irrigation','row_spacing_m'],
-    ProductionHistory: ['farmer_code','production_year','area_rai','contract_ton','delivered_ton','grade'],
-    Guarantee: ['farmer_code','production_year','property_amount','group_amount','total_amount'],
-    Debt: ['farmer_code','old_debt','2568/69_debt','2569/70_debt','2570/71_debt','future_debt','total_debt'],
-    Harvest: ['farmer_code','production_year','harvest_machine','harvest_straight','harvest_station','net_weight_ton','factory']
-  };
+  let client = null;
 
-  const SHEET_ALIASES = {
-    Farmer: ['Farmer','01_Farmer'],
-    Plot: ['Plot','02_Plot'],
-    ProductionHistory: ['ProductionHistory','03_ProductionHistory'],
-    Guarantee: ['Guarantee','04_Guarantee'],
-    Debt: ['Debt','05_Debt'],
-    Harvest: ['Harvest','06_Harvest']
-  };
-
-  let parsed = null;
-  let selectedPreviewSheet = 'Farmer';
-
-  function normalizeHeader(value){
-    return String(value ?? '').trim();
+  function getClient(){
+    if(client) return client;
+    if(!window.supabase?.createClient) throw new Error('โหลด Supabase Library ไม่สำเร็จ');
+    if(!window.CANENEXT_CONFIG?.SUPABASE_URL || !window.CANENEXT_CONFIG?.SUPABASE_PUBLISHABLE_KEY){
+      throw new Error('ไม่พบ config.js');
+    }
+    client = window.supabase.createClient(
+      window.CANENEXT_CONFIG.SUPABASE_URL,
+      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+    );
+    window.caneSupabase = client;
+    return client;
   }
 
-  function findSheet(workbook, logicalName){
-    return SHEET_ALIASES[logicalName].find(name => workbook.SheetNames.includes(name));
-  }
-
-  function setConnection(state, text){
-    const box=document.getElementById('dmConnectionStatus');
+  function setMessage(text,type){
+    const box=document.getElementById('authMessage');
     if(!box) return;
-    box.className='dm-connection '+state;
-    box.querySelector('span:last-child').textContent=text;
+    box.textContent=text;
+    box.classList.remove('auth-error','auth-success');
+    if(type) box.classList.add(type);
   }
 
-  async function initSupabase(){
+  function showApp(user){
+    const screen=document.getElementById('loginScreen');
+    if(screen) screen.classList.add('hidden');
+    document.body.classList.remove('locked');
+    document.body.classList.add('logged-in');
+    const name=document.getElementById('currentUserName');
+    if(name) name.textContent=user?.email || 'ผู้ใช้งาน';
+    if(typeof showMainMenu==='function') showMainMenu(null,'business-partner');
+  }
+
+  function showLogin(){
+    const screen=document.getElementById('loginScreen');
+    if(screen) screen.classList.remove('hidden');
+    document.body.classList.add('locked');
+    document.body.classList.remove('logged-in');
+    setTimeout(()=>document.getElementById('username')?.focus(),80);
+  }
+
+  window.handleLogin = async function(event){
+    if(event) event.preventDefault();
+    const email=document.getElementById('username')?.value.trim() || '';
+    const password=document.getElementById('password')?.value || '';
+    const button=document.querySelector('.login-submit');
+    if(!email || !password){ setMessage('กรุณากรอกอีเมลและรหัสผ่าน','auth-error'); return; }
+
     try{
-      if(!window.CANENEXT_CONFIG?.SUPABASE_URL || !window.CANENEXT_CONFIG?.SUPABASE_PUBLISHABLE_KEY){
-        setConnection('error','ไม่พบ config.js');
-        return null;
-      }
-      if(!window.supabase?.createClient){
-        setConnection('error','โหลด Supabase library ไม่สำเร็จ');
-        return null;
-      }
-      window.caneSupabase = window.supabase.createClient(
-        window.CANENEXT_CONFIG.SUPABASE_URL,
-        window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
-      );
-      const { error } = await window.caneSupabase.from('farmers').select('farmer_code').limit(1);
-      if(error){
-        setConnection('error','เชื่อมต่อได้ แต่ยังไม่มีสิทธิ์อ่านข้อมูล');
-      }else{
-        setConnection('ok','เชื่อมต่อ Supabase สำเร็จ');
-      }
-      return window.caneSupabase;
+      button.disabled=true; button.textContent='กำลังเข้าสู่ระบบ...';
+      const {data,error}=await getClient().auth.signInWithPassword({email,password});
+      if(error) throw error;
+      setMessage('เข้าสู่ระบบสำเร็จ','auth-success');
+      showApp(data.user);
     }catch(err){
-      setConnection('error','เชื่อมต่อ Supabase ไม่สำเร็จ');
-      return null;
-    }
-  }
-
-  function updateSheetCard(index, name, count, ok, message){
-    const cards=document.querySelectorAll('#dmSummaryGrid .dm-sheet');
-    const card=cards[index];
-    if(!card) return;
-    card.className='dm-sheet '+(ok?'ok':'error');
-    card.querySelector('b').textContent=count?.toLocaleString('th-TH') ?? '-';
-    card.querySelector('small').textContent=message;
-  }
-
-  async function parseFile(file){
-    const buffer=await file.arrayBuffer();
-    const workbook=XLSX.read(buffer,{type:'array',cellDates:false});
-    const result={workbook,sheets:{},errors:[]};
-
-    Object.keys(REQUIRED).forEach((logicalName,index)=>{
-      const actualName=findSheet(workbook,logicalName);
-      if(!actualName){
-        result.errors.push(`ไม่พบ Sheet: ${logicalName}`);
-        updateSheetCard(index,logicalName,0,false,'ไม่พบ Sheet');
-        return;
-      }
-      const rows=XLSX.utils.sheet_to_json(workbook.Sheets[actualName],{defval:'',raw:true});
-      const headers=rows.length ? Object.keys(rows[0]).map(normalizeHeader) :
-        XLSX.utils.sheet_to_json(workbook.Sheets[actualName],{header:1,range:0,blankrows:false})[0]?.map(normalizeHeader) || [];
-      const missing=REQUIRED[logicalName].filter(h=>!headers.includes(h));
-      if(missing.length){
-        result.errors.push(`${logicalName}: ขาดคอลัมน์ ${missing.join(', ')}`);
-        updateSheetCard(index,logicalName,rows.length,false,`ขาด ${missing.length} คอลัมน์`);
-      }else{
-        updateSheetCard(index,logicalName,rows.length,true,'พร้อมนำเข้า');
-      }
-      result.sheets[logicalName]={actualName,rows,headers,missing};
-    });
-
-    return result;
-  }
-
-  function showValidation(result){
-    const box=document.getElementById('dmValidationResult');
-    const preview=document.getElementById('dmPreviewBtn');
-    const importBtn=document.getElementById('dmImportBtn');
-    if(result.errors.length){
-      box.className='dm-validation error';
-      box.innerHTML='พบข้อผิดพลาด:<br>'+result.errors.map(x=>'• '+x).join('<br>');
-      preview.disabled=true;
-      importBtn.disabled=true;
-    }else{
-      box.className='dm-validation ok';
-      box.textContent='ตรวจสอบผ่าน: พบข้อมูลครบทั้ง 6 Sheets';
-      preview.disabled=false;
-      // เปิดปุ่ม Import เพื่อเรียก Edge Function; หากยังไม่ได้ deploy จะแจ้งอย่างปลอดภัย
-      importBtn.disabled=false;
-    }
-  }
-
-  function renderPreview(sheetName){
-    if(!parsed?.sheets?.[sheetName]) return;
-    selectedPreviewSheet=sheetName;
-    const data=parsed.sheets[sheetName];
-    const headers=data.headers;
-    const rows=data.rows.slice(0,10);
-    document.getElementById('dmPreviewCard').hidden=false;
-    document.getElementById('dmPreviewHead').innerHTML='<tr>'+headers.map(h=>`<th>${h}</th>`).join('')+'</tr>';
-    document.getElementById('dmPreviewBody').innerHTML=rows.map(row=>
-      '<tr>'+headers.map(h=>`<td>${row[h] ?? ''}</td>`).join('')+'</tr>'
-    ).join('');
-  }
-
-  window.CaneDataManager = {
-    preview(){
-      renderPreview(selectedPreviewSheet);
-    },
-
-    async importToSupabase(){
-      if(!parsed || parsed.errors.length) return;
-      if(!window.caneSupabase){
-        alert('ยังเชื่อมต่อ Supabase ไม่สำเร็จ');
-        return;
-      }
-
-      const wrap=document.getElementById('dmProgressWrap');
-      const bar=document.getElementById('dmProgressBar');
-      const text=document.getElementById('dmProgressText');
-      wrap.hidden=false;
-      bar.style.width='10%';
-      text.textContent='10%';
-
-      // ส่งข้อมูลไป Edge Function เท่านั้น ไม่ใช้ service key ใน Browser
-      const payload={};
-      Object.keys(REQUIRED).forEach(name=>payload[name]=parsed.sheets[name].rows);
-
-      try{
-        const { data, error } = await window.caneSupabase.functions.invoke('import-cane-excel',{
-          body:{sheets:payload}
-        });
-        if(error) throw error;
-        bar.style.width='100%';
-        text.textContent='100%';
-        alert('Import สำเร็จ');
-        console.log('Import result',data);
-      }catch(err){
-        bar.style.width='0%';
-        text.textContent='0%';
-        alert('ยังไม่สามารถ Import ได้ จนกว่าจะ Deploy Edge Function "import-cane-excel" และตั้งค่า Supabase Auth สำหรับ Admin');
-        console.error(err);
-      }
+      console.error(err);
+      setMessage('เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบอีเมลและรหัสผ่าน','auth-error');
+    }finally{
+      button.disabled=false; button.textContent='เข้าสู่ระบบ';
     }
   };
 
-  document.addEventListener('DOMContentLoaded',function(){
-    initSupabase();
-    const input=document.getElementById('dmExcelFile');
-    input?.addEventListener('change',async function(){
-      const file=input.files?.[0];
-      if(!file) return;
-      document.getElementById('dmFileName').textContent=file.name;
-      document.getElementById('dmValidationResult').className='dm-validation neutral';
-      document.getElementById('dmValidationResult').textContent='กำลังตรวจสอบไฟล์...';
-      try{
-        parsed=await parseFile(file);
-        showValidation(parsed);
-      }catch(err){
-        parsed=null;
-        const box=document.getElementById('dmValidationResult');
-        box.className='dm-validation error';
-        box.textContent='อ่านไฟล์ไม่สำเร็จ: '+err.message;
-      }
-    });
+  window.logoutSupabase = async function(){
+    try{ await getClient().auth.signOut(); }
+    finally{
+      const u=document.getElementById('username'), p=document.getElementById('password');
+      if(u) u.value=''; if(p) p.value='';
+      showLogin();
+    }
+  };
+
+  async function restore(){
+    try{
+      const c=getClient();
+      const {data:{session}}=await c.auth.getSession();
+      if(session?.user) showApp(session.user); else showLogin();
+      c.auth.onAuthStateChange((_event,session)=>{
+        if(session?.user) showApp(session.user); else showLogin();
+      });
+    }catch(err){
+      console.error(err); setMessage('ไม่สามารถเชื่อมต่อระบบเข้าสู่ระบบได้','auth-error'); showLogin();
+    }
+  }
+  document.addEventListener('DOMContentLoaded',restore);
+})();
+</script>
+
+
+<script id="canenext-data-management">
+(function(){
+ const REQUIRED={
+  Farmer:['farmer_code','name','zone','subzone','factory','status'],
+  Plot:['farmer_code','production_year','project_type','plot_type','plot_id','area_rai','soil_type','variety','irrigation','row_spacing_m'],
+  ProductionHistory:['farmer_code','production_year','area_rai','contract_ton','delivered_ton','grade'],
+  Guarantee:['farmer_code','production_year','property_amount','group_amount','total_amount'],
+  Debt:['farmer_code','old_debt','2568/69_debt','2569/70_debt','2570/71_debt','future_debt','total_debt'],
+  Harvest:['farmer_code','production_year','harvest_machine','harvest_straight','harvest_station','net_weight_ton','factory']
+ };
+ const ALIASES={
+  Farmer:['Farmer','01_Farmer'],Plot:['Plot','02_Plot'],
+  ProductionHistory:['ProductionHistory','03_ProductionHistory'],
+  Guarantee:['Guarantee','04_Guarantee'],Debt:['Debt','05_Debt'],Harvest:['Harvest','06_Harvest']
+ };
+ let parsed=null;
+
+ function conn(state,text){const e=document.getElementById('dmConnectionStatus');if(!e)return;e.className='dm-connection '+state;e.querySelector('span:last-child').textContent=text}
+ async function testConnection(){
+  try{
+   if(!window.caneSupabase){conn('error','กรุณา Login ก่อน');return}
+   const {error}=await window.caneSupabase.from('farmers').select('farmer_code').limit(1);
+   conn(error?'error':'ok',error?'เชื่อมต่อได้ แต่ยังไม่มีสิทธิ์อ่านข้อมูล':'เชื่อมต่อ Supabase สำเร็จ');
+  }catch(e){conn('error','เชื่อมต่อ Supabase ไม่สำเร็จ')}
+ }
+ function card(i,count,ok,msg){const c=document.querySelectorAll('#dmSummaryGrid .dm-sheet')[i];if(!c)return;c.className='dm-sheet '+(ok?'ok':'error');c.querySelector('b').textContent=Number(count||0).toLocaleString('th-TH');c.querySelector('small').textContent=msg}
+ async function parse(file){
+  const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});
+  const result={sheets:{},errors:[]};
+  Object.keys(REQUIRED).forEach((name,i)=>{
+   const actual=ALIASES[name].find(x=>wb.SheetNames.includes(x));
+   if(!actual){result.errors.push('ไม่พบ Sheet: '+name);card(i,0,false,'ไม่พบ Sheet');return}
+   const rows=XLSX.utils.sheet_to_json(wb.Sheets[actual],{defval:'',raw:true});
+   const headers=rows.length?Object.keys(rows[0]).map(x=>String(x).trim()):[];
+   const missing=REQUIRED[name].filter(h=>!headers.includes(h));
+   if(missing.length){result.errors.push(name+': ขาดคอลัมน์ '+missing.join(', '));card(i,rows.length,false,'ขาด '+missing.length+' คอลัมน์')}
+   else card(i,rows.length,true,'พร้อมนำเข้า');
+   result.sheets[name]={rows,headers,missing};
   });
-
-  // Read helper for future Business Partner integration
-  window.CaneDB = {
-    async getFarmerBundle(farmerCode){
-      if(!window.caneSupabase) throw new Error('Supabase client not initialized');
-      const code=String(farmerCode).trim();
-      const [farmer,plots,history,guarantees,debts,harvests]=await Promise.all([
-        window.caneSupabase.from('farmers').select('*').eq('farmer_code',code).maybeSingle(),
-        window.caneSupabase.from('plots').select('*').eq('farmer_code',code).order('production_year',{ascending:false}),
-        window.caneSupabase.from('production_history').select('*').eq('farmer_code',code).order('production_year',{ascending:false}),
-        window.caneSupabase.from('guarantees').select('*').eq('farmer_code',code).order('production_year',{ascending:false}),
-        window.caneSupabase.from('debt_summary').select('*').eq('farmer_code',code).maybeSingle(),
-        window.caneSupabase.from('harvests').select('*').eq('farmer_code',code).order('production_year',{ascending:false})
-      ]);
-      const errors=[farmer.error,plots.error,history.error,guarantees.error,debts.error,harvests.error].filter(Boolean);
-      if(errors.length) throw errors[0];
-      return {
-        farmer:farmer.data,
-        plots:plots.data||[],
-        productionHistory:history.data||[],
-        guarantees:guarantees.data||[],
-        debt:debts.data,
-        harvests:harvests.data||[]
-      };
-    }
-  };
+  return result;
+ }
+ function validation(){
+  const b=document.getElementById('dmValidationResult'),p=document.getElementById('dmPreviewBtn'),im=document.getElementById('dmImportBtn');
+  if(parsed.errors.length){b.className='dm-validation error';b.innerHTML='พบข้อผิดพลาด:<br>'+parsed.errors.map(x=>'• '+x).join('<br>');p.disabled=true;im.disabled=true}
+  else{b.className='dm-validation ok';b.textContent='ตรวจสอบผ่าน: พบข้อมูลครบทั้ง 6 Sheets';p.disabled=false;im.disabled=false}
+ }
+ window.CaneDataManager={
+  preview(){
+   if(!parsed)return;
+   const sheet=parsed.sheets.Farmer, rows=sheet.rows.slice(0,10);
+   document.getElementById('dmPreviewCard').hidden=false;
+   document.getElementById('dmPreviewHead').innerHTML='<tr>'+sheet.headers.map(h=>'<th>'+h+'</th>').join('')+'</tr>';
+   document.getElementById('dmPreviewBody').innerHTML=rows.map(r=>'<tr>'+sheet.headers.map(h=>'<td>'+(r[h]??'')+'</td>').join('')+'</tr>').join('');
+  },
+  async importToSupabase(){
+   if(!parsed || parsed.errors.length)return;
+   const {data:{session}}=await window.caneSupabase.auth.getSession();
+   if(!session){alert('กรุณา Login ก่อน Import');return}
+   const wrap=document.getElementById('dmProgressWrap'),bar=document.getElementById('dmProgressBar'),text=document.getElementById('dmProgressText');
+   wrap.hidden=false;bar.style.width='10%';text.textContent='10%';
+   const sheets={};Object.keys(REQUIRED).forEach(n=>sheets[n]=parsed.sheets[n].rows);
+   try{
+    const {data,error}=await window.caneSupabase.functions.invoke('import-cane-excel',{body:{sheets}});
+    if(error)throw error;
+    bar.style.width='100%';text.textContent='100%';
+    alert('Import สำเร็จ');
+    console.log(data);
+   }catch(err){
+    bar.style.width='0%';text.textContent='0%';
+    alert('ยัง Import ไม่ได้: กรุณา Deploy Edge Function import-cane-excel ก่อน');
+    console.error(err);
+   }
+  }
+ };
+ document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('dmExcelFile')?.addEventListener('change',async e=>{
+   const f=e.target.files?.[0];if(!f)return;
+   document.getElementById('dmFileName').textContent=f.name;
+   try{parsed=await parse(f);validation()}catch(err){const b=document.getElementById('dmValidationResult');b.className='dm-validation error';b.textContent='อ่านไฟล์ไม่สำเร็จ: '+err.message}
+  });
+  setTimeout(testConnection,500);
+ });
+ window.addEventListener('click',()=>setTimeout(testConnection,100));
 })();
 </script>
 
