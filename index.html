@@ -6331,6 +6331,52 @@ border-radius:10px;background:#fff;font-size:15px;
 @media(max-width:640px){.dm-heading-row{flex-direction:column;align-items:flex-start}.dm-summary-grid{grid-template-columns:1fr}.dm-import-actions{flex-direction:column}.dm-import-actions .btn{width:100%}}
 </style>
 
+
+<style id="canenext-global-farmer-context-style">
+.farmer-context-bar{
+  display:none;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:0 0 18px;
+  padding:12px 14px;
+  background:#F3F8FF;
+  border:1px solid #D5E6F8;
+  border-radius:14px;
+}
+.farmer-context-bar.has-farmer{display:flex}
+.farmer-context-label{
+  color:#5B6F86;
+  font-size:13px;
+  font-weight:600;
+}
+.farmer-context-value{
+  color:#083B73;
+  font-size:14px;
+  font-weight:700;
+}
+.farmer-context-divider{
+  width:1px;
+  height:22px;
+  background:#D5E6F8;
+}
+.farmer-context-change{
+  margin-left:auto;
+  border:1px solid #CFE0F1;
+  background:#fff;
+  color:#0B5CAD;
+  border-radius:999px;
+  padding:7px 12px;
+  font-family:inherit;
+  font-size:13px;
+  cursor:pointer;
+}
+@media(max-width:700px){
+  .farmer-context-divider{display:none}
+  .farmer-context-change{width:100%;margin-left:0}
+}
+</style>
+
 </head>
 <body class="locked">
 
@@ -9720,6 +9766,224 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
   window.addEventListener('click',()=>setTimeout(renderGuaranteeIntegers,100));
+})();
+</script>
+
+
+<script id="canenext-global-farmer-context-script">
+(function(){
+  const TARGET_PAGES=[
+    'real-plots','basic-cost','plot-data','scenario','analytics',
+    'ai-recommendation','dashboard','risk','promotion'
+  ];
+
+  function loadSavedFarmer(){
+    if(window.CANENEXT_CURRENT_FARMER) return window.CANENEXT_CURRENT_FARMER;
+    try{
+      return JSON.parse(localStorage.getItem('canenext_current_farmer')||'null');
+    }catch(e){ return null; }
+  }
+
+  function createContextBar(page){
+    if(!page || page.querySelector(':scope > .farmer-context-bar')) return;
+    const bar=document.createElement('div');
+    bar.className='farmer-context-bar';
+    bar.innerHTML=`
+      <span class="farmer-context-label">รหัสชาวไร่</span>
+      <span class="farmer-context-value" data-farmer-code>-</span>
+      <span class="farmer-context-divider"></span>
+      <span class="farmer-context-label">ชื่อ-สกุล</span>
+      <span class="farmer-context-value" data-farmer-name>-</span>
+      <span class="farmer-context-divider"></span>
+      <span class="farmer-context-label">เขต</span>
+      <span class="farmer-context-value" data-farmer-zone>-</span>
+      <span class="farmer-context-divider"></span>
+      <span class="farmer-context-label">เขตย่อย</span>
+      <span class="farmer-context-value" data-farmer-subzone>-</span>
+      <button class="farmer-context-change" type="button">เปลี่ยนชาวไร่</button>
+    `;
+    bar.querySelector('.farmer-context-change').addEventListener('click',()=>{
+      if(typeof showMainMenu==='function') showMainMenu(null,'business-partner');
+      setTimeout(()=>document.getElementById('bpCode')?.focus(),100);
+    });
+    page.insertBefore(bar,page.firstChild);
+  }
+
+  function renderContext(farmer){
+    TARGET_PAGES.forEach(id=>{
+      const page=document.getElementById(id);
+      if(!page) return;
+      createContextBar(page);
+      const bar=page.querySelector(':scope > .farmer-context-bar');
+      if(!bar) return;
+      bar.classList.toggle('has-farmer',!!farmer);
+      bar.querySelector('[data-farmer-code]').textContent=farmer?.farmer_code||'-';
+      bar.querySelector('[data-farmer-name]').textContent=farmer?.name||'-';
+      bar.querySelector('[data-farmer-zone]').textContent=farmer?.zone||'-';
+      bar.querySelector('[data-farmer-subzone]').textContent=farmer?.subzone||'-';
+    });
+  }
+
+  function setInput(id,value){
+    const el=document.getElementById(id);
+    if(el) el.value=value??'';
+  }
+
+  async function loadFarmerPlots(farmer){
+    if(!farmer?.farmer_code || !window.caneSupabase) return;
+    const {data,error}=await window.caneSupabase
+      .from('plots')
+      .select('*')
+      .eq('farmer_code',farmer.farmer_code)
+      .order('production_year',{ascending:false})
+      .order('plot_id',{ascending:true});
+    if(error){console.error(error);return;}
+
+    window.currentRealPlots=(data||[]).map(row=>({
+      plot_id:row.plot_id,
+      project_name:row.project_type||'-',
+      area:Number(row.area_rai||0),
+      year:row.production_year,
+      crop_type:row.plot_type||'-',
+      variety:row.variety||'-',
+      soil:row.soil_type||'-',
+      water:row.irrigation||'-',
+      status:row.plot_status||'active'
+    }));
+
+    if(typeof window.filterRealPlotsByYear==='function') window.filterRealPlotsByYear();
+    if(typeof window.refreshScenarioRealPlotOptions==='function') window.refreshScenarioRealPlotOptions();
+  }
+
+  window.setCurrentFarmerContext=async function(farmer){
+    if(!farmer) return;
+    window.CANENEXT_CURRENT_FARMER=farmer;
+    localStorage.setItem('canenext_current_farmer',JSON.stringify(farmer));
+
+    setInput('bpCode',farmer.farmer_code);
+    setInput('bpName',farmer.name);
+    setInput('showZone',farmer.zone||'-');
+    setInput('showSubZone',farmer.subzone||'-');
+
+    setInput('realFarmerCode',farmer.farmer_code);
+    setInput('realFarmerName',farmer.name);
+    setInput('realZone',farmer.zone||'-');
+    setInput('realSubzone',farmer.subzone||'-');
+
+    renderContext(farmer);
+    await loadFarmerPlots(farmer);
+  };
+
+  async function resolveFarmerFromBusinessPartner(){
+    if(!window.caneSupabase) return null;
+    const code=(document.getElementById('bpCode')?.value||'').trim();
+    const name=(document.getElementById('bpName')?.value||'').trim();
+    let q=window.caneSupabase.from('farmers').select('*').limit(1);
+    if(code) q=q.eq('farmer_code',code);
+    else if(name) q=q.ilike('name',`%${name}%`);
+    else return null;
+    const {data,error}=await q.maybeSingle();
+    if(error) throw error;
+    return data;
+  }
+
+  // Wrap Business Partner search after all previous scripts have loaded.
+  function wrapSearch(){
+    const original=window.searchBusinessPartner;
+    if(typeof original!=='function' || original.__contextWrapped) return;
+
+    const wrapped=async function(){
+      await original.apply(this,arguments);
+      try{
+        const farmer=await resolveFarmerFromBusinessPartner();
+        if(farmer) await window.setCurrentFarmerContext(farmer);
+      }catch(err){
+        console.error('Farmer context synchronization failed:',err);
+      }
+    };
+    wrapped.__contextWrapped=true;
+    window.searchBusinessPartner=wrapped;
+  }
+
+  // Attach farmer metadata whenever a Scenario is copied.
+  function wrapCopyScenario(){
+    const original=window.copyToScenario;
+    if(typeof original!=='function' || original.__farmerWrapped) return;
+
+    const wrapped=function(){
+      const farmer=loadSavedFarmer();
+      const result=original.apply(this,arguments);
+
+      try{
+        const raw=localStorage.getItem('scenarioDraft');
+        if(raw){
+          const draft=JSON.parse(raw);
+          draft.farmer=farmer ? {
+            farmer_code:farmer.farmer_code,
+            name:farmer.name,
+            zone:farmer.zone,
+            subzone:farmer.subzone
+          } : null;
+          localStorage.setItem('scenarioDraft',JSON.stringify(draft));
+        }
+      }catch(e){}
+      return result;
+    };
+    wrapped.__farmerWrapped=true;
+    window.copyToScenario=wrapped;
+  }
+
+  // Keep farmer context synchronized whenever another menu is opened.
+  function wrapMenu(){
+    const original=window.showMainMenu;
+    if(typeof original!=='function' || original.__farmerContextWrapped) return;
+
+    const wrapped=function(event,pageId){
+      const result=original.apply(this,arguments);
+      const farmer=loadSavedFarmer();
+      renderContext(farmer);
+
+      if(farmer){
+        setInput('realFarmerCode',farmer.farmer_code);
+        setInput('realFarmerName',farmer.name);
+        setInput('realZone',farmer.zone||'-');
+        setInput('realSubzone',farmer.subzone||'-');
+
+        if(pageId==='real-plots' || pageId==='plot-data'){
+          setTimeout(()=>loadFarmerPlots(farmer),80);
+        }
+      }
+      return result;
+    };
+    wrapped.__farmerContextWrapped=true;
+    window.showMainMenu=wrapped;
+  }
+
+  document.addEventListener('DOMContentLoaded',async()=>{
+    TARGET_PAGES.forEach(id=>createContextBar(document.getElementById(id)));
+
+    setTimeout(()=>{
+      wrapSearch();
+      wrapCopyScenario();
+      wrapMenu();
+    },600);
+
+    const saved=loadSavedFarmer();
+    if(saved){
+      await window.setCurrentFarmerContext(saved);
+    }else{
+      renderContext(null);
+    }
+  });
+
+  // Re-wrap if other scripts replace global functions later.
+  window.addEventListener('click',()=>{
+    setTimeout(()=>{
+      wrapSearch();
+      wrapCopyScenario();
+      wrapMenu();
+    },50);
+  });
 })();
 </script>
 
