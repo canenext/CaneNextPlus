@@ -9381,16 +9381,6 @@ document.addEventListener('DOMContentLoaded', function(){
       if(guaranteeRes.error) throw guaranteeRes.error;
       if(debtRes.error) throw debtRes.error;
 
-      const plotsRes = await db.from('plots').select('*')
-        .eq('farmer_code',farmer.farmer_code)
-        .order('production_year',{ascending:false})
-        .order('plot_id',{ascending:true});
-      if(plotsRes.error) throw plotsRes.error;
-
-      window.currentRealPlots=(plotsRes.data||[]).map(mapPlot);
-      if(typeof window.filterRealPlotsByYear==='function') window.filterRealPlotsByYear();
-      if(typeof window.refreshScenarioRealPlotOptions==='function') window.refreshScenarioRealPlotOptions();
-
       window.dispatchEvent(new CustomEvent('canenext:farmer-changed',{detail:farmer}));
 
       const historyBody=document.getElementById('bpHistoryBody');
@@ -9719,7 +9709,132 @@ document.addEventListener('DOMContentLoaded', function(){
     const farmer=savedFarmer();
     window.CANENEXT_CURRENT_FARMER=farmer;
     renderFarmer(farmer);
-    setTimeout(()=>restorePlots(farmer),700);
+    
+  });
+})();
+</script>
+
+
+<script id="canenext-unresponsive-hard-fix">
+(function(){
+  let plotsLoading=false;
+  let loadedFarmerCode=null;
+
+  // Final non-recursive menu function. It deliberately does not call any older wrapper.
+  window.showMainMenu=function(event,pageId){
+    if(event && typeof event.preventDefault==='function') event.preventDefault();
+
+    document.querySelectorAll('.app-page').forEach(page=>{
+      page.classList.toggle('active-page',page.id===pageId);
+    });
+    document.querySelectorAll('.menu-row a').forEach(link=>{
+      link.classList.toggle('active-menu',link.getAttribute('href')==='#'+pageId);
+    });
+
+    window.scrollTo(0,0);
+
+    if(pageId==='basic-cost' && typeof calculateBasicCostTotal==='function'){
+      calculateBasicCostTotal();
+    }
+
+    if(pageId==='real-plots'){
+      setTimeout(()=>window.loadCurrentFarmerPlotsLazy(),0);
+    }
+
+    if(pageId==='plot-data' && typeof window.refreshScenarioRealPlotOptions==='function'){
+      setTimeout(()=>window.refreshScenarioRealPlotOptions(),0);
+    }
+  };
+
+  function currentFarmer(){
+    if(window.CANENEXT_CURRENT_FARMER) return window.CANENEXT_CURRENT_FARMER;
+    try{
+      return JSON.parse(localStorage.getItem('canenext_current_farmer')||'null');
+    }catch(e){
+      return null;
+    }
+  }
+
+  window.loadCurrentFarmerPlotsLazy=async function(){
+    const farmer=currentFarmer();
+    if(!farmer?.farmer_code || !window.caneSupabase || plotsLoading) return;
+    if(loadedFarmerCode===farmer.farmer_code && Array.isArray(window.currentRealPlots)) return;
+
+    plotsLoading=true;
+    const body=document.getElementById('realPlotTableBody');
+    if(body){
+      body.innerHTML='<tr><td colspan="6" style="text-align:center;">กำลังโหลดข้อมูลแปลง...</td></tr>';
+    }
+
+    try{
+      // Safety limit prevents the browser from rendering tens of thousands of rows at once.
+      const {data,error,count}=await window.caneSupabase
+        .from('plots')
+        .select('*',{count:'exact'})
+        .eq('farmer_code',farmer.farmer_code)
+        .order('production_year',{ascending:false})
+        .order('plot_id',{ascending:true})
+        .limit(1000);
+
+      if(error) throw error;
+
+      window.currentRealPlots=(data||[]).map(row=>({
+        plot_id:row.plot_id,
+        project_name:row.project_type||'-',
+        area:Number(row.area_rai||0),
+        year:row.production_year,
+        crop_type:row.plot_type||'-',
+        variety:row.variety||'-',
+        soil:row.soil_type||'-',
+        water:row.irrigation||'-',
+        status:row.plot_status||'active',
+        history:false,
+        actual_cost:false,
+        activity:false
+      }));
+
+      loadedFarmerCode=farmer.farmer_code;
+
+      if(typeof window.filterRealPlotsByYear==='function'){
+        window.filterRealPlotsByYear();
+      }
+      if(typeof window.refreshScenarioRealPlotOptions==='function'){
+        window.refreshScenarioRealPlotOptions();
+      }
+
+      if(count>1000){
+        const notice=document.createElement('div');
+        notice.style.cssText='margin:10px 0;padding:10px 12px;background:#FFF7E6;border:1px solid #F4D79A;border-radius:10px;color:#7A5600;font-size:13px;';
+        notice.textContent='พบข้อมูลแปลง '+Number(count).toLocaleString('th-TH')+' รายการ ระบบแสดงครั้งละ 1,000 รายการเพื่อป้องกันหน้าเว็บค้าง';
+        const table=document.getElementById('realPlotTableBody')?.closest('table');
+        if(table && !table.previousElementSibling?.dataset?.plotLimitNotice){
+          notice.dataset.plotLimitNotice='1';
+          table.parentNode.insertBefore(notice,table);
+        }
+      }
+    }catch(err){
+      console.error('Lazy plot load failed:',err);
+      if(body){
+        body.innerHTML='<tr><td colspan="6" style="text-align:center;color:#C62828;">โหลดข้อมูลแปลงไม่สำเร็จ</td></tr>';
+      }
+    }finally{
+      plotsLoading=false;
+    }
+  };
+
+  // Business Partner search should only load farmer/history/guarantee/debt.
+  // Plot data is loaded only when the real-plots page is opened.
+  window.addEventListener('canenext:farmer-changed',event=>{
+    loadedFarmerCode=null;
+    window.currentRealPlots=[];
+    const farmer=event.detail;
+    if(farmer){
+      const set=(id,value)=>{const el=document.getElementById(id);if(el)el.value=value??'';};
+      set('realFarmerCode',farmer.farmer_code);
+      set('realFarmerName',farmer.name);
+      set('realZone',farmer.zone||'-');
+      set('realSubzone',farmer.subzone||'-');
+    }
   });
 })();
 </script>
