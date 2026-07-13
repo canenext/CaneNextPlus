@@ -1,27 +1,19 @@
-Cane Next+ User Management
+Cane Next+ Direct Excel Import
 
-1) Supabase > SQL Editor
-   เปิด user_management_schema.sql แล้ว Run
+สิ่งที่ต้องทำ:
+1. Supabase > SQL Editor
+   Run ไฟล์ direct_import_policies.sql
+2. ตรวจใน user_profiles ว่าบัญชีของคุณ role=admin และ status=active
+3. อัปโหลด index.html และ config.js ขึ้น GitHub Pages
+4. Login ด้วยบัญชี Admin
+5. Data Management > เลือก Excel > ตรวจสอบ > Import
 
-2) กำหนดบัญชีเดิมให้เป็น Admin
-   update public.user_profiles
-   set role='admin', status='active'
-   where email='อีเมลแอดมินของคุณ';
+ระบบใช้ Upsert:
+- farmers: farmer_code
+- plots: farmer_code + production_year + plot_id
+- production_history: farmer_code + production_year
+- guarantees: farmer_code + production_year
+- debts: farmer_code
+- harvests: farmer_code + production_year
 
-3) Deploy Edge Function:
-   supabase functions deploy manage-users
-
-4) อัปโหลด index.html และ config.js ขึ้น GitHub Pages ในโฟลเดอร์เดียวกัน
-
-5) Login ด้วยบัญชี Admin
-   เมนู "จัดการผู้ใช้งาน" จะแสดงเฉพาะ Admin
-
-Roles:
-- admin: ทุกสิทธิ์
-- manager: ข้อมูลระดับเขต
-- extension: ข้อมูลระดับเขตย่อย
-- viewer: ดูข้อมูลอย่างเดียว
-
-หมายเหตุ:
-Edge Function ใช้ Service Role เฉพาะบน Supabase Server เท่านั้น
-ห้ามใส่ Secret/Service Role Key ใน HTML
+ข้อมูลเดิมจะถูกอัปเดต ข้อมูลใหม่จะถูกเพิ่ม และไม่สร้างรายการซ้ำ
