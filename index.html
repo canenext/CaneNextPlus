@@ -6348,7 +6348,7 @@ border-radius:10px;background:#fff;font-size:15px;
       <div class="login-form-panel">
         <form class="login-card" onsubmit="handleLogin(event)">
           <h2>เข้าสู่ระบบ</h2>
-          <p class="hint">กรอกอีเมลและรหัสผ่านที่สร้างไว้ใน Supabase เพื่อเข้าสู่แพลตฟอร์ม Cane Next Plus+</p>
+          <p class="hint">กรอกอีเมลและรหัสผ่าน เพื่อเข้าสู่แพลตฟอร์ม Cane Next Plus+</p>
           <div class="form-group">
             <label for="username">อีเมล</label>
             <input id="username" type="email" placeholder="กรอกอีเมล" autocomplete="email" required />
@@ -6362,7 +6362,7 @@ border-radius:10px;background:#fff;font-size:15px;
             <a href="#">ลืมรหัสผ่าน?</a>
           </div>
           <button class="btn login-submit" type="submit">เข้าสู่ระบบ</button>
-          <div class="demo-note" id="authMessage">ใช้บัญชีผู้ใช้ที่สร้างใน Supabase Authentication → Users</div>
+          <div class="demo-note" id="authMessage" style="display:none;"></div>
         </form>
       </div>
     </div>
@@ -9576,6 +9576,150 @@ document.addEventListener('DOMContentLoaded', function(){
       e.preventDefault();searchRealPlots();
     }
   });
+})();
+</script>
+
+
+<script id="canenext-farmer-context-fix">
+(function(){
+  const fmtInt = value => Number(value || 0).toLocaleString('th-TH',{
+    maximumFractionDigits:0
+  });
+
+  function setInputValue(id, value){
+    const el=document.getElementById(id);
+    if(el) el.value=value ?? '';
+  }
+
+  function saveCurrentFarmer(farmer){
+    if(!farmer) return;
+    window.CANENEXT_CURRENT_FARMER = farmer;
+    try{
+      localStorage.setItem('canenext_current_farmer', JSON.stringify(farmer));
+    }catch(e){}
+    applyFarmerToOtherMenus(farmer);
+  }
+
+  function applyFarmerToOtherMenus(farmer){
+    // แสดงเฉพาะตัวเลขเขต/เขตย่อย ไม่เติมคำซ้ำ
+    setInputValue('showZone', farmer.zone || '-');
+    setInputValue('showSubZone', farmer.subzone || '-');
+
+    // เมนูข้อมูลแปลงจริง
+    setInputValue('realFarmerCode', farmer.farmer_code || '');
+    setInputValue('realFarmerName', farmer.name || '');
+    setInputValue('realZone', farmer.zone || '-');
+    setInputValue('realSubzone', farmer.subzone || '-');
+
+    // ฟิลด์อื่นที่อาจมีอยู่ในระบบ
+    ['farmerCode','selectedFarmerCode','scenarioFarmerCode','promotionFarmerCode']
+      .forEach(id=>setInputValue(id,farmer.farmer_code || ''));
+    ['farmerName','selectedFarmerName','scenarioFarmerName','promotionFarmerName']
+      .forEach(id=>setInputValue(id,farmer.name || ''));
+    ['farmerZone','selectedZone','scenarioZone','promotionZone']
+      .forEach(id=>setInputValue(id,farmer.zone || ''));
+    ['farmerSubzone','selectedSubzone','scenarioSubzone','promotionSubzone']
+      .forEach(id=>setInputValue(id,farmer.subzone || ''));
+  }
+
+  async function loadPlotsForCurrentFarmer(farmerCode){
+    if(!farmerCode || !window.caneSupabase) return;
+    try{
+      const {data,error}=await window.caneSupabase
+        .from('plots')
+        .select('*')
+        .eq('farmer_code',farmerCode)
+        .order('production_year',{ascending:false})
+        .order('plot_id',{ascending:true});
+      if(error) throw error;
+
+      if(typeof mapPlot === 'function'){
+        window.currentRealPlots=(data||[]).map(mapPlot);
+      }else{
+        window.currentRealPlots=(data||[]).map(row=>({
+          plot_id:row.plot_id,
+          project_name:row.project_type || '-',
+          area:Number(row.area_rai||0),
+          year:row.production_year,
+          crop_type:row.plot_type || '-',
+          variety:row.variety || '-',
+          soil:row.soil_type || '-',
+          water:row.irrigation || '-',
+          status:row.plot_status || 'active'
+        }));
+      }
+
+      if(typeof window.filterRealPlotsByYear==='function'){
+        window.filterRealPlotsByYear();
+      }
+      if(typeof window.refreshScenarioRealPlotOptions==='function'){
+        window.refreshScenarioRealPlotOptions();
+      }
+    }catch(err){
+      console.error('Auto load farmer plots failed:',err);
+    }
+  }
+
+  // ครอบฟังก์ชันค้นหา Business Partner เดิม
+  const originalSearch = window.searchBusinessPartner;
+  window.searchBusinessPartner = async function(){
+    const code=(document.getElementById('bpCode')?.value||'').trim();
+    const name=(document.getElementById('bpName')?.value||'').trim();
+
+    if(typeof originalSearch==='function'){
+      await originalSearch.apply(this,arguments);
+    }
+
+    try{
+      if(!window.caneSupabase) return;
+      let query=window.caneSupabase.from('farmers').select('*').limit(1);
+      if(code) query=query.eq('farmer_code',code);
+      else if(name) query=query.ilike('name',`%${name}%`);
+      else return;
+
+      const {data,error}=await query.maybeSingle();
+      if(error || !data) return;
+
+      saveCurrentFarmer(data);
+      await loadPlotsForCurrentFarmer(data.farmer_code);
+    }catch(err){
+      console.error('Farmer context sync failed:',err);
+    }
+  };
+
+  // ปรับรูปแบบตัวเลขในตารางหลักค้ำประกันเป็นจำนวนเต็ม
+  function renderGuaranteeIntegers(){
+    const sections=[...document.querySelectorAll('#business-partner .bp-section')];
+    const section=sections.find(s=>(s.querySelector('h3')?.textContent||'').trim()==='หลักค้ำประกัน');
+    const body=section?.querySelector('tbody');
+    if(!body) return;
+
+    [...body.rows].forEach(row=>{
+      for(let i=1;i<row.cells.length;i++){
+        const raw=(row.cells[i].textContent||'').replace(/,/g,'').trim();
+        if(raw!=='' && !Number.isNaN(Number(raw))){
+          row.cells[i].textContent=fmtInt(raw);
+        }
+      }
+    });
+  }
+
+  // หลังค้นหา/แสดงตาราง ให้จัดรูปแบบอีกครั้ง
+  const observer=new MutationObserver(()=>renderGuaranteeIntegers());
+  document.addEventListener('DOMContentLoaded',function(){
+    const bp=document.getElementById('business-partner');
+    if(bp) observer.observe(bp,{childList:true,subtree:true});
+
+    try{
+      const saved=JSON.parse(localStorage.getItem('canenext_current_farmer')||'null');
+      if(saved){
+        saveCurrentFarmer(saved);
+        setTimeout(()=>loadPlotsForCurrentFarmer(saved.farmer_code),600);
+      }
+    }catch(e){}
+  });
+
+  window.addEventListener('click',()=>setTimeout(renderGuaranteeIntegers,100));
 })();
 </script>
 
