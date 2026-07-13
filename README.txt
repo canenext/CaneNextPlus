@@ -1,6 +1,15 @@
-Cane Next+ Clean Farmer Menus
+Cane Next+ Real Plot Sort & Filter
 
-- Removed duplicate farmer search from Real Plots: 1
-- Removed duplicate farmer information from Scenario Setup: 1
-- Farmer context continues to come from Business Partner.
-- If no farmer is selected, the system redirects to Business Partner.
+เพิ่ม:
+- กดหัวตารางเพื่อ Sort ได้ทุกคอลัมน์
+- กดครั้งแรกเรียงน้อยไปมาก
+- กดครั้งที่สองเรียงมากไปน้อย
+- กดครั้งที่สามกลับลำดับเดิม
+- Filter โครงการ
+- Filter ประเภทอ้อย
+- Filter สถานะแปลง
+- ล้างตัวกรอง
+- แสดงจำนวนแปลงที่กรอง
+
+อัปโหลด index.html และ config.js ขึ้น GitHub Pages
+แล้วกด Ctrl+F5

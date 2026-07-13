@@ -6256,7 +6256,76 @@ border-radius:10px;background:#fff;font-size:15px;
 .farmer-context-bar .fc-value{color:#083B73;font-weight:700}
 .farmer-context-bar .fc-sep{width:1px;height:20px;background:#D5E6F8}
 </style>
-</head>
+<style id="real-plot-sort-filter-style">
+.real-advanced-filter-row{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(150px,1fr)) auto auto;
+  gap:10px;
+  align-items:end;
+  margin:0 0 14px;
+}
+.real-advanced-filter-row label{
+  display:block;
+  margin-bottom:6px;
+  color:#183F66;
+  font-size:13px;
+  font-weight:700;
+}
+.real-advanced-filter-row select{
+  width:100%;
+  min-height:40px;
+  border:1px solid #CFE0F1;
+  border-radius:10px;
+  padding:8px 10px;
+  font-family:inherit;
+  color:#083B73;
+  background:#fff;
+}
+.real-plot-count{
+  align-self:center;
+  justify-self:end;
+  color:#5B6F86;
+  font-size:13px;
+  font-weight:600;
+  white-space:nowrap;
+}
+.real-sort-btn{
+  width:100%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+  padding:0;
+}
+.real-sort-btn:hover{color:#0B5CAD}
+.real-sort-icon{
+  color:#7B91A8;
+  font-size:12px;
+}
+.real-sort-btn.active .real-sort-icon{color:#0B5CAD}
+@media(max-width:1050px){
+  .real-advanced-filter-row{
+    grid-template-columns:1fr 1fr;
+  }
+  .real-plot-count{
+    justify-self:start;
+  }
+}
+@media(max-width:650px){
+  .real-advanced-filter-row{
+    grid-template-columns:1fr;
+  }
+  .real-advanced-filter-row .btn{
+    width:100%;
+  }
+}
+</style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
@@ -6414,7 +6483,6 @@ border-radius:10px;background:#fff;font-size:15px;
 </div>
 </section>
 <section class="section app-page real-plots-page" id="real-plots">
-
 <div class="real-section">
 <h3>รายการแปลงจริงของชาวไร่</h3>
 <div class="real-filter-row">
@@ -6428,16 +6496,33 @@ border-radius:10px;background:#fff;font-size:15px;
 </select>
 <button class="btn real-year-search-btn" id="realProductionYearSearchBtn" onclick="filterRealPlotsByYear()" type="button">ค้นหา</button>
 </div>
+<div class="real-advanced-filter-row">
+<div>
+<label for="realProjectFilter">โครงการ</label>
+<select id="realProjectFilter"><option value="ALL">ทั้งหมด</option></select>
+</div>
+<div>
+<label for="realCropTypeFilter">ประเภทอ้อย</label>
+<select id="realCropTypeFilter"><option value="ALL">ทั้งหมด</option></select>
+</div>
+<div>
+<label for="realStatusFilter">สถานะแปลง</label>
+<select id="realStatusFilter"><option value="ALL">ทั้งหมด</option></select>
+</div>
+<button class="btn secondary" id="realClearFiltersBtn" type="button">ล้างตัวกรอง</button>
+<div class="real-plot-count" id="realPlotCount">แสดง 0 จาก 0 แปลง</div>
+</div>
+
 <div class="table-responsive">
 <table class="table real-plot-table">
 <thead>
 <tr>
-<th>ปีการผลิต</th>
-<th>โครงการ</th>
-<th>ประเภทอ้อย</th>
-<th>รหัสแปลง</th>
-<th>พื้นที่ (ไร่)</th>
-<th>สถานะแปลง</th>
+<th><button class="real-sort-btn" data-sort-key="year" type="button">ปีการผลิต<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="project_name" type="button">โครงการ<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="crop_type" type="button">ประเภทอ้อย<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="plot_id" type="button">รหัสแปลง<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="area" type="button">พื้นที่ (ไร่)<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="status" type="button">สถานะแปลง<span class="real-sort-icon">↕</span></button></th>
 </tr>
 </thead>
 <tbody id="realPlotTableBody"></tbody>
@@ -6571,7 +6656,6 @@ border-radius:10px;background:#fff;font-size:15px;
     </div>
 </div>
 </div>
-
 <div class="plot-section">
 <h3>รายละเอียดพื้นที่แปลงจำลอง</h3>
 <table class="table form-table">
@@ -9565,6 +9649,150 @@ document.addEventListener('DOMContentLoaded', function(){
       return oldScenarioLoader.apply(this,arguments);
     };
   }
+})();
+</script><script id="real-plot-sort-filter-script">
+(function(){
+  const state={
+    sortKey:null,
+    sortDirection:null
+  };
+
+  function uniqueSorted(values){
+    return [...new Set(values.filter(v=>v!==null && v!==undefined && String(v).trim()!==''))]
+      .sort((a,b)=>String(a).localeCompare(String(b),'th',{numeric:true,sensitivity:'base'}));
+  }
+
+  function fillSelect(id,values){
+    const select=document.getElementById(id);
+    if(!select) return;
+    const previous=select.value;
+    select.innerHTML='<option value="ALL">ทั้งหมด</option>'+
+      uniqueSorted(values).map(v=>`<option value="${String(v).replace(/"/g,'&quot;')}">${v}</option>`).join('');
+    if([...select.options].some(o=>o.value===previous)) select.value=previous;
+  }
+
+  function refreshFilterOptions(){
+    const plots=window.currentRealPlots||[];
+    fillSelect('realProjectFilter',plots.map(p=>p.project_name));
+    fillSelect('realCropTypeFilter',plots.map(p=>p.crop_type));
+    fillSelect('realStatusFilter',plots.map(p=>p.status==='active'?'ใช้งาน':p.status));
+  }
+
+  function compareValues(a,b,key){
+    let av=a[key], bv=b[key];
+    if(key==='area'){
+      av=Number(av||0); bv=Number(bv||0);
+      return av-bv;
+    }
+    return String(av??'').localeCompare(String(bv??''),'th',{
+      numeric:true,
+      sensitivity:'base'
+    });
+  }
+
+  function getFilteredSortedPlots(){
+    const plots=[...(window.currentRealPlots||[])];
+    const year=document.getElementById('realProductionYearFilter')?.value||'ALL';
+    const project=document.getElementById('realProjectFilter')?.value||'ALL';
+    const crop=document.getElementById('realCropTypeFilter')?.value||'ALL';
+    const status=document.getElementById('realStatusFilter')?.value||'ALL';
+
+    let list=plots.filter(p=>
+      (year==='ALL'||p.year===year) &&
+      (project==='ALL'||p.project_name===project) &&
+      (crop==='ALL'||p.crop_type===crop) &&
+      (status==='ALL'||(p.status==='active'?'ใช้งาน':p.status)===status)
+    );
+
+    if(state.sortKey && state.sortDirection){
+      list.sort((a,b)=>{
+        const result=compareValues(a,b,state.sortKey);
+        return state.sortDirection==='asc'?result:-result;
+      });
+    }
+    return list;
+  }
+
+  function updateSortHeaders(){
+    document.querySelectorAll('#real-plots .real-sort-btn').forEach(btn=>{
+      const active=btn.dataset.sortKey===state.sortKey && !!state.sortDirection;
+      btn.classList.toggle('active',active);
+      const icon=btn.querySelector('.real-sort-icon');
+      if(icon){
+        icon.textContent=!active?'↕':state.sortDirection==='asc'?'▲':'▼';
+      }
+    });
+  }
+
+  window.filterRealPlotsByYear=function(){
+    refreshFilterOptions();
+    const list=getFilteredSortedPlots();
+    if(typeof window.renderRealPlotsFromSupabase==='function'){
+      window.renderRealPlotsFromSupabase(list);
+    }
+
+    const count=document.getElementById('realPlotCount');
+    if(count){
+      count.textContent=`แสดง ${list.length.toLocaleString('th-TH')} จาก ${(window.currentRealPlots||[]).length.toLocaleString('th-TH')} แปลง`;
+    }
+
+    if(list.length && typeof window.selectRealPlotFromSupabase==='function'){
+      const originalIndex=(window.currentRealPlots||[]).findIndex(p=>
+        p.plot_id===list[0].plot_id && p.year===list[0].year
+      );
+      if(originalIndex>=0) window.selectRealPlotFromSupabase(originalIndex);
+    }
+    updateSortHeaders();
+  };
+
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('#real-plots .real-sort-btn').forEach(btn=>{
+      btn.addEventListener('click',function(){
+        const key=btn.dataset.sortKey;
+        if(state.sortKey!==key){
+          state.sortKey=key;
+          state.sortDirection='asc';
+        }else if(state.sortDirection==='asc'){
+          state.sortDirection='desc';
+        }else if(state.sortDirection==='desc'){
+          state.sortKey=null;
+          state.sortDirection=null;
+        }else{
+          state.sortDirection='asc';
+        }
+        window.filterRealPlotsByYear();
+      });
+    });
+
+    ['realProjectFilter','realCropTypeFilter','realStatusFilter'].forEach(id=>{
+      document.getElementById(id)?.addEventListener('change',window.filterRealPlotsByYear);
+    });
+
+    document.getElementById('realClearFiltersBtn')?.addEventListener('click',function(){
+      ['realProductionYearFilter','realProjectFilter','realCropTypeFilter','realStatusFilter'].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el) el.value='ALL';
+      });
+      state.sortKey=null;
+      state.sortDirection=null;
+      window.filterRealPlotsByYear();
+    });
+
+    // Populate options if plots were already restored from local context.
+    setTimeout(()=>{
+      refreshFilterOptions();
+      window.filterRealPlotsByYear();
+    },800);
+  });
+
+  window.addEventListener('canenext:farmer-changed',function(){
+    state.sortKey=null;
+    state.sortDirection=null;
+    setTimeout(()=>{
+      refreshFilterOptions();
+      window.filterRealPlotsByYear();
+    },100);
+  });
 })();
 </script></body>
 </html>
