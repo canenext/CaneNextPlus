@@ -6331,6 +6331,115 @@ border-radius:10px;background:#fff;font-size:15px;
 .app-page:not(#risk) .de-ratio,
 .app-page:not(#risk) #deRatio,
 .app-page:not(#risk) #deStatus{display:none!important;}
+</style><style id="balance-layout-after-de-removal">
+/* Balance layouts after D/E removal */
+
+/* Dashboard KPI cards */
+#dashboard .dashboard-kpi-grid,
+#dashboard .dashboard-summary-grid,
+#dashboard .analytics-summary-grid,
+#dashboard .stats,
+#dashboard .metric-grid{
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:14px !important;
+  align-items:stretch !important;
+}
+#dashboard .dashboard-kpi-grid > *,
+#dashboard .dashboard-summary-grid > *,
+#dashboard .analytics-summary-grid > *,
+#dashboard .stats > *,
+#dashboard .metric-grid > *{
+  min-width:0 !important;
+  width:auto !important;
+  height:100% !important;
+}
+
+/* Scenario Analysis result column */
+#scenario .scenario-result-list-v2,
+#scenario .scenario-result-list{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:10px !important;
+}
+#scenario .scenario-result-row,
+#scenario .scenario-result-box{
+  min-height:58px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  padding:11px 13px !important;
+}
+
+/* Analytics cards outside risk */
+#analytics .analytics-summary-grid,
+#ai-recommendation .analytics-summary-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+#analytics .analytics-summary-grid > *,
+#ai-recommendation .analytics-summary-grid > *{
+  height:100% !important;
+  min-width:0 !important;
+}
+
+/* Comparison and summary areas */
+.app-page:not(#risk) .summary-grid,
+.app-page:not(#risk) .result-grid,
+.app-page:not(#risk) .kpi-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr)) !important;
+  gap:14px !important;
+}
+.app-page:not(#risk) .summary-grid > *,
+.app-page:not(#risk) .result-grid > *,
+.app-page:not(#risk) .kpi-grid > *{
+  min-width:0 !important;
+  height:100% !important;
+}
+
+/* Prevent awkward empty space in card rows */
+.app-page:not(#risk) .dashboard-card,
+.app-page:not(#risk) .analytics-kpi,
+.app-page:not(#risk) .metric,
+.app-page:not(#risk) .stat{
+  width:auto !important;
+  min-width:0 !important;
+}
+
+/* Responsive */
+@media(max-width:1250px){
+  #dashboard .dashboard-kpi-grid,
+  #dashboard .dashboard-summary-grid,
+  #dashboard .analytics-summary-grid,
+  #dashboard .stats,
+  #dashboard .metric-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+}
+@media(max-width:900px){
+  #dashboard .dashboard-kpi-grid,
+  #dashboard .dashboard-summary-grid,
+  #dashboard .analytics-summary-grid,
+  #dashboard .stats,
+  #dashboard .metric-grid,
+  #analytics .analytics-summary-grid,
+  #ai-recommendation .analytics-summary-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+@media(max-width:600px){
+  #dashboard .dashboard-kpi-grid,
+  #dashboard .dashboard-summary-grid,
+  #dashboard .analytics-summary-grid,
+  #dashboard .stats,
+  #dashboard .metric-grid,
+  #analytics .analytics-summary-grid,
+  #ai-recommendation .analytics-summary-grid{
+    grid-template-columns:1fr !important;
+  }
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -6685,7 +6794,6 @@ border-radius:10px;background:#fff;font-size:15px;
 <tr><td>วงเงินค้ำประกันรวม</td><td id="totalGuarantee">5,500,000</td></tr>
 <tr><td>งบส่งเสริมที่ใช้ลงทุน</td><td id="promotionBudget">0</td></tr>
 <tr><td>ผลต่าง</td><td id="guaranteeDiff">5,500,000</td></tr>
-
 <tr><td>สถานะ</td><td id="deStatus"><span class="status ok">ปกติ</span></td></tr>
 </tbody>
 </table>
@@ -6770,7 +6878,6 @@ border-radius:10px;background:#fff;font-size:15px;
 <h4>Scenario Comparison</h4>
 <table class="table analytics-table" id="scenarioCompareTable">
 <thead>
-
 </thead>
 <tbody>
 <tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>
@@ -6786,7 +6893,6 @@ border-radius:10px;background:#fff;font-size:15px;
 <div class="dashboard-kpi"><span>🚚 คาดการณ์ผลผลิตอ้อย</span><b id="dashTotalYield">-</b></div>
 <div class="dashboard-kpi"><span>💰 กำไรสุทธิ</span><b id="dashNetProfit">-</b></div>
 <div class="dashboard-kpi"><span>📈 กำไร</span><b id="dashProfitPerRai">-</b></div>
-
 </div>
 <div class="dashboard-alerts" id="dashboardAlerts">
 <div class="dash-alert info">ยังไม่มีข้อมูล Scenario สำหรับสรุป Dashboard</div>
@@ -6795,7 +6901,6 @@ border-radius:10px;background:#fff;font-size:15px;
 <h4>Scenario Ranking</h4>
 <table class="table dashboard-ranking-table">
 <thead>
-
 </thead>
 <tbody id="dashboardRankingBody">
 <tr><td colspan="7">ยังไม่มีข้อมูล Scenario</td></tr>
@@ -6809,7 +6914,6 @@ border-radius:10px;background:#fff;font-size:15px;
 <div class="dash-compare-card"><span>💰 กำไรสูงสุด</span><b id="cmpBestProfit">-</b></div>
 <div class="dash-compare-card"><span>📈 กำไร/ไร่สูงสุด</span><b id="cmpBestProfitPerRai">-</b></div>
 <div class="dash-compare-card"><span>💸 ต้นทุนต่ำสุด</span><b id="cmpLowestCost">-</b></div>
-
 <div class="dash-compare-card"><span>🚰 ระบบน้ำคุ้มค่าที่สุด</span><b id="cmpBestWater">-</b></div>
 </div>
 </div>
