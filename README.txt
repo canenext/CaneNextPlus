@@ -1,10 +1,6 @@
-แก้ Page Unresponsive แบบตัดสาเหตุหลัก
+Cane Next+ Clean Farmer Menus
 
-- Business Partner ไม่โหลด Plot พร้อมการค้นหาอีกต่อไป
-- Plot โหลดเมื่อเปิดเมนูข้อมูลแปลงจริงเท่านั้น
-- จำกัดการแสดงผลสูงสุด 1,000 รายการต่อครั้ง
-- ใช้ showMainMenu เวอร์ชันสุดท้ายที่ไม่เรียก wrapper เดิม
-- ไม่ Query ข้อมูลแปลงซ้ำเมื่อเปิดเมนูเดิม
-- เมื่อเปลี่ยนชาวไร่จึงค่อยโหลดชุดใหม่
-
-อัปโหลด index.html และ config.js แล้วกด Ctrl+F5
+- Removed duplicate farmer search from Real Plots: 1
+- Removed duplicate farmer information from Scenario Setup: 1
+- Farmer context continues to come from Business Partner.
+- If no farmer is selected, the system redirects to Business Partner.
