@@ -9377,8 +9377,22 @@ document.addEventListener('DOMContentLoaded', function(){
    const {data:{session}} = await window.caneSupabase.auth.getSession();
    if(!session){ alert('กรุณา Login ก่อน Import'); return; }
 
-   const profile = window.CANENEXT_CURRENT_PROFILE;
-   if(profile?.role !== 'admin' || profile?.status !== 'active'){
+   const currentUser = session.user;
+   const {data:latestProfile,error:profileError} = await window.caneSupabase
+     .from('user_profiles')
+     .select('*')
+     .ilike('email', currentUser.email)
+     .maybeSingle();
+
+   if(profileError){
+     console.error(profileError);
+     alert('ไม่สามารถตรวจสอบสิทธิ์ผู้ใช้งานได้');
+     return;
+   }
+
+   window.CANENEXT_CURRENT_PROFILE = latestProfile || null;
+
+   if(latestProfile?.role !== 'admin' || latestProfile?.status !== 'active'){
      alert('เฉพาะ Admin ที่เปิดใช้งานเท่านั้นจึงจะ Import ข้อมูลได้');
      return;
    }
@@ -9562,7 +9576,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const {data,error}=await window.caneSupabase
       .from('user_profiles')
       .select('*')
-      .eq('auth_uid',user.id)
+      .ilike('email',user.email)
       .maybeSingle();
     if(error) throw error;
     return data;
@@ -9578,6 +9592,8 @@ document.addEventListener('DOMContentLoaded', function(){
       if(profile?.status==='inactive'){
         alert('บัญชีนี้ถูกปิดการใช้งาน');
         await window.caneSupabase.auth.signOut();
+      } else if(!profile){
+        document.body.classList.remove('is-admin');
       }
     }catch(err){
       console.error('Profile load failed',err);
@@ -9713,6 +9729,25 @@ document.addEventListener('DOMContentLoaded', function(){
   document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>window.CaneUserAdmin.init(),700));
   document.addEventListener('click',()=>setTimeout(applyRole,120));
 })();
+</script>
+
+
+<script id="canenext-admin-email-diagnostic">
+window.CaneAdminDiagnostic = async function(){
+  const {data:{user}} = await window.caneSupabase.auth.getUser();
+  if(!user) return {ok:false,message:'ยังไม่ได้ Login'};
+  const {data,error} = await window.caneSupabase
+    .from('user_profiles')
+    .select('email,role,status')
+    .ilike('email',user.email)
+    .maybeSingle();
+  return {
+    ok:!error && !!data,
+    login_email:user.email,
+    profile:data||null,
+    error:error?.message||null
+  };
+};
 </script>
 
 </body>

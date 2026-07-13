@@ -1,19 +1,18 @@
-Cane Next+ Direct Excel Import
+Cane Next+ Admin Email Authorization Fix
 
-สิ่งที่ต้องทำ:
 1. Supabase > SQL Editor
-   Run ไฟล์ direct_import_policies.sql
-2. ตรวจใน user_profiles ว่าบัญชีของคุณ role=admin และ status=active
-3. อัปโหลด index.html และ config.js ขึ้น GitHub Pages
-4. Login ด้วยบัญชี Admin
-5. Data Management > เลือก Excel > ตรวจสอบ > Import
+   Run admin_email_authorization.sql
 
-ระบบใช้ Upsert:
-- farmers: farmer_code
-- plots: farmer_code + production_year + plot_id
-- production_history: farmer_code + production_year
-- guarantees: farmer_code + production_year
-- debts: farmer_code
-- harvests: farmer_code + production_year
+2. Confirm user_profiles contains:
+   email = wipadas@mitrphol.com
+   role = admin
+   status = active
 
-ข้อมูลเดิมจะถูกอัปเดต ข้อมูลใหม่จะถูกเพิ่ม และไม่สร้างรายการซ้ำ
+3. Upload index.html and config.js to GitHub Pages.
+
+4. Logout, then login again.
+
+5. Open Data Management and Import.
+
+This version checks the signed-in Supabase email against user_profiles.email.
+It no longer depends on auth_uid matching.
