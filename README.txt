@@ -1,18 +1,12 @@
-Cane Next+ Admin Email Authorization Fix
+Cane Next+ Supabase Search Fix
 
-1. Supabase > SQL Editor
-   Run admin_email_authorization.sql
+แก้ไข:
+- Business Partner ค้นหาจาก farmers ตาม farmer_code หรือชื่อ
+- โหลด production_history, guarantees และ debt_summary ตาม farmer_code
+- ข้อมูลแปลงจริงค้นหาจาก plots ตาม farmer_code
+- ตัวกรองปีใช้เฉพาะข้อมูลแปลงของชาวไร่ที่ค้นหา
+- Scenario Setup ใช้ข้อมูลแปลงจริงที่โหลดจาก Supabase
+- รองรับกด Enter เพื่อค้นหา
 
-2. Confirm user_profiles contains:
-   email = wipadas@mitrphol.com
-   role = admin
-   status = active
-
-3. Upload index.html and config.js to GitHub Pages.
-
-4. Logout, then login again.
-
-5. Open Data Management and Import.
-
-This version checks the signed-in Supabase email against user_profiles.email.
-It no longer depends on auth_uid matching.
+อัปโหลด index.html และ config.js ขึ้น GitHub Pages ในโฟลเดอร์เดียวกัน
+จากนั้นกด Ctrl+F5 และ Login ใหม่

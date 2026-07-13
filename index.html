@@ -6331,49 +6331,6 @@ border-radius:10px;background:#fff;font-size:15px;
 @media(max-width:640px){.dm-heading-row{flex-direction:column;align-items:flex-start}.dm-summary-grid{grid-template-columns:1fr}.dm-import-actions{flex-direction:column}.dm-import-actions .btn{width:100%}}
 </style>
 
-
-<style id="canenext-user-admin-style">
-.admin-only-menu{display:none!important}
-body.is-admin .admin-only-menu{display:flex!important}
-
-#user-management{padding-top:18px!important}
-#user-management .um-card{
-  background:#fff;border:1px solid #D9E6F4;border-radius:16px;
-  box-shadow:0 6px 18px rgba(8,59,115,.05);padding:18px;margin-bottom:16px;
-}
-#user-management .um-card>h3,.um-heading h3{
-  margin:0 0 12px!important;color:#0A3D78!important;font-size:18px!important;font-weight:400!important;
-}
-.um-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.um-heading p{margin:0;color:#6B7F93;font-size:14px}
-.um-form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.um-form-grid .form-group{margin-bottom:0}
-.um-form-grid select{
-  width:100%;border:1px solid #cfe0f1;border-radius:16px;padding:14px 16px;
-  font-family:inherit;font-size:15px;color:#083B73;background:#fff
-}
-.um-form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
-.um-message{margin-top:12px;padding:10px 12px;border-radius:10px;display:none;font-size:14px}
-.um-message.ok{display:block;background:#EDF9F2;color:#167248}
-.um-message.error{display:block;background:#FFF1F1;color:#C62828}
-.um-list-toolbar{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}
-.um-list-toolbar .form-group{margin:0;flex:1;max-width:430px}
-.um-user-table th,.um-user-table td{text-align:center!important;vertical-align:middle!important}
-.um-role{display:inline-flex;padding:5px 10px;border-radius:999px;background:#EAF4FF;color:#0B5CAD;font-size:12px;font-weight:700}
-.um-status-active{color:#167248;font-weight:700}
-.um-status-inactive{color:#C62828;font-weight:700}
-.um-actions{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
-.um-actions button{border:1px solid #CFE0F1;background:#fff;color:#0B5CAD;border-radius:999px;padding:6px 10px;font-family:inherit;cursor:pointer}
-.um-actions .danger{color:#C62828;border-color:#F0C8C8}
-@media(max-width:1100px){.um-form-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){
-  .um-heading,.um-list-toolbar{flex-direction:column;align-items:stretch}
-  .um-form-grid{grid-template-columns:1fr}
-  .um-form-actions{flex-direction:column}
-  .um-form-actions .btn{width:100%}
-}
-</style>
-
 </head>
 <body class="locked">
 
@@ -6440,7 +6397,6 @@ body.is-admin .admin-only-menu{display:flex!important}
         <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
         <a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> Promotion</a>
         <a href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
-        <a href="#user-management" class="admin-only-menu" onclick="showMainMenu(event, 'user-management')"><i class="fa-solid fa-users-gear menu-icon"></i> จัดการผู้ใช้งาน</a>
       </div>
     </nav>
   </header>
@@ -7014,7 +6970,7 @@ body.is-admin .admin-only-menu{display:flex!important}
     <div class="dm-heading-row">
       <div>
         <h3>Data Management</h3>
-        <p>ตรวจสอบไฟล์ Excel 6 Sheets ก่อนนำเข้าฐานข้อมูล Supabase</p>
+        <p></p>
       </div>
       <div class="dm-connection" id="dmConnectionStatus">
         <span class="dm-dot"></span><span>กำลังตรวจสอบการเชื่อมต่อ</span>
@@ -7055,7 +7011,7 @@ body.is-admin .admin-only-menu{display:flex!important}
       <div class="dm-progress"><i id="dmProgressBar"></i></div>
       <div id="dmProgressText">0%</div>
     </div>
-    <div class="dm-security-note">Import โดยตรงผ่าน Supabase Auth และ RLS เฉพาะบัญชี Admin พร้อม Upsert เพื่อป้องกันข้อมูลซ้ำ</div>
+    <div class="dm-security-note">การ Import ใช้ Edge Function ฝั่งเซิร์ฟเวอร์ และไม่เก็บ Secret Key ใน HTML</div>
   </div>
 
   <div class="dm-card" id="dmPreviewCard" hidden>
@@ -7064,101 +7020,6 @@ body.is-admin .admin-only-menu{display:flex!important}
       <table class="table dm-preview-table">
         <thead id="dmPreviewHead"></thead>
         <tbody id="dmPreviewBody"></tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-
-<section class="section app-page user-management-page" id="user-management">
-  <div class="um-card">
-    <div class="um-heading">
-      <div>
-        <h3>จัดการผู้ใช้งาน</h3>
-        <p>เพิ่ม แก้ไข และกำหนดสิทธิ์ผู้ใช้งาน Cane Next+</p>
-      </div>
-      <button class="btn" type="button" onclick="CaneUserAdmin.openCreateForm()">+ เพิ่มผู้ใช้งาน</button>
-    </div>
-  </div>
-
-  <div class="um-card" id="umFormCard" hidden>
-    <h3 id="umFormTitle">เพิ่มผู้ใช้งาน</h3>
-    <div class="um-form-grid">
-      <div class="form-group">
-        <label for="umEmail">อีเมล</label>
-        <input id="umEmail" type="email" placeholder="name@example.com">
-      </div>
-      <div class="form-group">
-        <label for="umPassword">รหัสผ่านเริ่มต้น</label>
-        <input id="umPassword" type="password" placeholder="อย่างน้อย 8 ตัวอักษร">
-      </div>
-      <div class="form-group">
-        <label for="umFullName">ชื่อ-สกุล</label>
-        <input id="umFullName" type="text" placeholder="ชื่อผู้ใช้งาน">
-      </div>
-      <div class="form-group">
-        <label for="umEmployeeCode">รหัสพนักงาน</label>
-        <input id="umEmployeeCode" type="text" placeholder="เช่น EMP001">
-      </div>
-      <div class="form-group">
-        <label for="umRole">สิทธิ์ผู้ใช้งาน</label>
-        <select id="umRole">
-          <option value="viewer">Viewer — ดูข้อมูลอย่างเดียว</option>
-          <option value="extension">Extension — นักส่งเสริม</option>
-          <option value="manager">Manager — ผู้จัดการเขต</option>
-          <option value="admin">Admin — ผู้ดูแลระบบ</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="umZone">เขต</label>
-        <input id="umZone" type="text" placeholder="เช่น 05">
-      </div>
-      <div class="form-group">
-        <label for="umSubzone">เขตย่อย</label>
-        <input id="umSubzone" type="text" placeholder="เช่น 05-03">
-      </div>
-      <div class="form-group">
-        <label for="umStatus">สถานะ</label>
-        <select id="umStatus">
-          <option value="active">ใช้งาน</option>
-          <option value="inactive">ปิดใช้งาน</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="um-form-actions">
-      <button class="btn secondary" type="button" onclick="CaneUserAdmin.closeForm()">ยกเลิก</button>
-      <button class="btn" id="umSaveBtn" type="button" onclick="CaneUserAdmin.saveUser()">บันทึกผู้ใช้งาน</button>
-    </div>
-    <div class="um-message" id="umFormMessage"></div>
-  </div>
-
-  <div class="um-card">
-    <div class="um-list-toolbar">
-      <div class="form-group">
-        <label for="umSearch">ค้นหาผู้ใช้งาน</label>
-        <input id="umSearch" type="text" placeholder="ชื่อ อีเมล รหัสพนักงาน เขต..." oninput="CaneUserAdmin.renderUsers()">
-      </div>
-      <button class="btn secondary" type="button" onclick="CaneUserAdmin.loadUsers()">รีเฟรช</button>
-    </div>
-
-    <div class="table-responsive">
-      <table class="table um-user-table">
-        <thead>
-          <tr>
-            <th>รหัสพนักงาน</th>
-            <th>ชื่อ-สกุล</th>
-            <th>อีเมล</th>
-            <th>Role</th>
-            <th>เขต</th>
-            <th>เขตย่อย</th>
-            <th>สถานะ</th>
-            <th>จัดการ</th>
-          </tr>
-        </thead>
-        <tbody id="umUserTableBody">
-          <tr><td colspan="8">กำลังโหลดข้อมูล...</td></tr>
-        </tbody>
       </table>
     </div>
   </div>
@@ -9372,176 +9233,22 @@ document.addEventListener('DOMContentLoaded', function(){
    document.getElementById('dmPreviewBody').innerHTML=rows.map(r=>'<tr>'+sheet.headers.map(h=>'<td>'+(r[h]??'')+'</td>').join('')+'</tr>').join('');
   },
   async importToSupabase(){
-   if(!parsed || parsed.errors.length) return;
-
-   const {data:{session}} = await window.caneSupabase.auth.getSession();
-   if(!session){ alert('กรุณา Login ก่อน Import'); return; }
-
-   const currentUser = session.user;
-   const {data:latestProfile,error:profileError} = await window.caneSupabase
-     .from('user_profiles')
-     .select('*')
-     .ilike('email', currentUser.email)
-     .maybeSingle();
-
-   if(profileError){
-     console.error(profileError);
-     alert('ไม่สามารถตรวจสอบสิทธิ์ผู้ใช้งานได้');
-     return;
-   }
-
-   window.CANENEXT_CURRENT_PROFILE = latestProfile || null;
-
-   if(latestProfile?.role !== 'admin' || latestProfile?.status !== 'active'){
-     alert('เฉพาะ Admin ที่เปิดใช้งานเท่านั้นจึงจะ Import ข้อมูลได้');
-     return;
-   }
-
-   const wrap=document.getElementById('dmProgressWrap');
-   const bar=document.getElementById('dmProgressBar');
-   const text=document.getElementById('dmProgressText');
-   const importBtn=document.getElementById('dmImportBtn');
-
-   const setProgress=(pct,label)=>{
-     wrap.hidden=false;
-     bar.style.width=pct+'%';
-     text.textContent=pct+'%';
-     const box=document.getElementById('dmValidationResult');
-     if(box){
-       box.className='dm-validation neutral';
-       box.textContent=label;
-     }
-   };
-
-   const num=v=>{
-     if(v===null || v===undefined || v==='') return 0;
-     const n=Number(String(v).replace(/,/g,''));
-     return Number.isFinite(n)?n:0;
-   };
-   const txt=v=>String(v??'').trim();
-
-   const chunks=(arr,size=500)=>{
-     const out=[];
-     for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size));
-     return out;
-   };
-
-   async function upsertChunks(table,rows,onConflict){
-     let done=0;
-     for(const batch of chunks(rows,500)){
-       const {error}=await window.caneSupabase
-         .from(table)
-         .upsert(batch,{onConflict,ignoreDuplicates:false});
-       if(error) throw new Error(table+': '+error.message);
-       done+=batch.length;
-     }
-     return done;
-   }
-
+   if(!parsed || parsed.errors.length)return;
+   const {data:{session}}=await window.caneSupabase.auth.getSession();
+   if(!session){alert('กรุณา Login ก่อน Import');return}
+   const wrap=document.getElementById('dmProgressWrap'),bar=document.getElementById('dmProgressBar'),text=document.getElementById('dmProgressText');
+   wrap.hidden=false;bar.style.width='10%';text.textContent='10%';
+   const sheets={};Object.keys(REQUIRED).forEach(n=>sheets[n]=parsed.sheets[n].rows);
    try{
-     importBtn.disabled=true;
-     setProgress(5,'กำลังเตรียมข้อมูล...');
-
-     const farmers=(parsed.sheets.Farmer.rows||[]).map(r=>({
-       farmer_code:txt(r.farmer_code),
-       name:txt(r.name),
-       zone:txt(r.zone)||null,
-       subzone:txt(r.subzone)||null,
-       factory:txt(r.factory)||null,
-       status:txt(r.status)||'active'
-     })).filter(r=>r.farmer_code&&r.name);
-
-     const plots=(parsed.sheets.Plot.rows||[]).map(r=>({
-       farmer_code:txt(r.farmer_code),
-       production_year:txt(r.production_year),
-       project_type:txt(r.project_type)||null,
-       plot_type:txt(r.plot_type)||null,
-       plot_id:txt(r.plot_id),
-       area_rai:num(r.area_rai),
-       soil_type:txt(r.soil_type)||null,
-       variety:txt(r.variety)||null,
-       irrigation:txt(r.irrigation)||null,
-       row_spacing_m:r.row_spacing_m===''||r.row_spacing_m==null?null:num(r.row_spacing_m)
-     })).filter(r=>r.farmer_code&&r.production_year&&r.plot_id);
-
-     const history=(parsed.sheets.ProductionHistory.rows||[]).map(r=>({
-       farmer_code:txt(r.farmer_code),
-       production_year:txt(r.production_year),
-       area_rai:num(r.area_rai),
-       contract_ton:num(r.contract_ton),
-       delivered_ton:num(r.delivered_ton),
-       grade:txt(r.grade)||null
-     })).filter(r=>r.farmer_code&&r.production_year);
-
-     const guarantees=(parsed.sheets.Guarantee.rows||[]).map(r=>({
-       farmer_code:txt(r.farmer_code),
-       production_year:txt(r.production_year),
-       property_amount:num(r.property_amount),
-       group_amount:num(r.group_amount),
-       total_amount:num(r.total_amount)
-     })).filter(r=>r.farmer_code&&r.production_year);
-
-     const debts=(parsed.sheets.Debt.rows||[]).map(r=>({
-       farmer_code:txt(r.farmer_code),
-       old_debt:num(r.old_debt),
-       yearly_debt:{
-         "2568/69":num(r["2568/69_debt"]),
-         "2569/70":num(r["2569/70_debt"]),
-         "2570/71":num(r["2570/71_debt"])
-       },
-       future_debt:num(r.future_debt),
-       total_debt:num(r.total_debt)
-     })).filter(r=>r.farmer_code);
-
-     const harvests=(parsed.sheets.Harvest.rows||[]).map(r=>({
-       farmer_code:txt(r.farmer_code),
-       production_year:txt(r.production_year),
-       harvest_machine:num(r.harvest_machine),
-       harvest_straight:num(r.harvest_straight),
-       harvest_station:num(r.harvest_station),
-       net_weight_ton:num(r.net_weight_ton),
-       factory:txt(r.factory)||null
-     })).filter(r=>r.farmer_code&&r.production_year);
-
-     const result={};
-
-     setProgress(12,'กำลัง Import Farmer...');
-     result.Farmer=await upsertChunks('farmers',farmers,'farmer_code');
-
-     setProgress(28,'กำลัง Import Plot...');
-     result.Plot=await upsertChunks('plots',plots,'farmer_code,production_year,plot_id');
-
-     setProgress(44,'กำลัง Import ProductionHistory...');
-     result.ProductionHistory=await upsertChunks('production_history',history,'farmer_code,production_year');
-
-     setProgress(60,'กำลัง Import Guarantee...');
-     result.Guarantee=await upsertChunks('guarantees',guarantees,'farmer_code,production_year');
-
-     setProgress(76,'กำลัง Import Debt...');
-     result.Debt=await upsertChunks('debts',debts,'farmer_code');
-
-     setProgress(90,'กำลัง Import Harvest...');
-     result.Harvest=await upsertChunks('harvests',harvests,'farmer_code,production_year');
-
-     setProgress(100,'Import สำเร็จครบทั้ง 6 Sheets');
-     const box=document.getElementById('dmValidationResult');
-     if(box){
-       box.className='dm-validation ok';
-       box.innerHTML='Import สำเร็จ<br>'+
-         Object.entries(result).map(([k,v])=>'• '+k+': '+Number(v).toLocaleString('th-TH')+' รายการ').join('<br>');
-     }
-     alert('Import สำเร็จ ข้อมูลเดิมถูกอัปเดต และข้อมูลใหม่ถูกเพิ่มโดยไม่สร้างรายการซ้ำ');
+    const {data,error}=await window.caneSupabase.functions.invoke('import-cane-excel',{body:{sheets}});
+    if(error)throw error;
+    bar.style.width='100%';text.textContent='100%';
+    alert('Import สำเร็จ');
+    console.log(data);
    }catch(err){
-     console.error(err);
-     setProgress(0,'Import ไม่สำเร็จ');
-     const box=document.getElementById('dmValidationResult');
-     if(box){
-       box.className='dm-validation error';
-       box.textContent='Import ไม่สำเร็จ: '+(err.message||err);
-     }
-     alert('Import ไม่สำเร็จ กรุณาตรวจสอบสิทธิ์ Admin และ SQL Policy');
-   }finally{
-     importBtn.disabled=false;
+    bar.style.width='0%';text.textContent='0%';
+    alert('ยัง Import ไม่ได้: กรุณา Deploy Edge Function import-cane-excel ก่อน');
+    console.error(err);
    }
   }
  };
@@ -9558,196 +9265,318 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 
 
-<script id="canenext-user-admin-script">
+<script id="canenext-supabase-search-fix">
 (function(){
-  let profiles=[];
-  let editingId=null;
+  window.currentRealPlots = [];
+  window.currentSelectedRealPlot = null;
 
-  function msg(text,type=''){
-    const el=document.getElementById('umFormMessage');
-    if(!el)return;
-    el.textContent=text;
-    el.className='um-message '+type;
+  const fmt = (value, decimals=2) => Number(value || 0).toLocaleString('th-TH',{
+    minimumFractionDigits:decimals,
+    maximumFractionDigits:decimals
+  });
+
+  const esc = value => String(value ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+  function setInput(id,value){
+    const el=document.getElementById(id);
+    if(el) el.value=value ?? '';
   }
 
-  async function getMyProfile(){
-    const {data:{user}}=await window.caneSupabase.auth.getUser();
-    if(!user) return null;
-    const {data,error}=await window.caneSupabase
-      .from('user_profiles')
-      .select('*')
-      .ilike('email',user.email)
-      .maybeSingle();
+  function findSectionBody(title){
+    const sections=[...document.querySelectorAll('#business-partner .bp-section')];
+    const section=sections.find(s=>(s.querySelector('h3')?.textContent||'').trim()===title);
+    return section?.querySelector('tbody') || null;
+  }
+
+  function emptyRow(body,colspan,message){
+    if(body) body.innerHTML=`<tr><td colspan="${colspan}" style="text-align:center;color:#6B7F93;">${esc(message)}</td></tr>`;
+  }
+
+  async function ensureClient(){
+    if(window.caneSupabase) return window.caneSupabase;
+    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG) throw new Error('ยังไม่สามารถเชื่อมต่อ Supabase ได้');
+    window.caneSupabase=window.supabase.createClient(
+      window.CANENEXT_CONFIG.SUPABASE_URL,
+      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+    );
+    return window.caneSupabase;
+  }
+
+  async function getFarmer(code,name){
+    const db=await ensureClient();
+    let query=db.from('farmers').select('*').limit(1);
+    if(code) query=query.eq('farmer_code',String(code).trim());
+    else if(name) query=query.ilike('name',`%${String(name).trim()}%`);
+    else throw new Error('กรุณากรอกรหัสชาวไร่หรือชื่อ-สกุล');
+    const {data,error}=await query.maybeSingle();
     if(error) throw error;
     return data;
   }
 
-  async function applyRole(){
-    try{
-      if(!window.caneSupabase) return;
-      const profile=await getMyProfile();
-      window.CANENEXT_CURRENT_PROFILE=profile;
-      document.body.classList.toggle('is-admin',profile?.role==='admin' && profile?.status==='active');
+  window.searchBusinessPartner = async function(){
+    const button=document.querySelector('#business-partner .bp-search-btn');
+    const code=(document.getElementById('bpCode')?.value||'').trim();
+    const name=(document.getElementById('bpName')?.value||'').trim();
 
-      if(profile?.status==='inactive'){
-        alert('บัญชีนี้ถูกปิดการใช้งาน');
-        await window.caneSupabase.auth.signOut();
-      } else if(!profile){
-        document.body.classList.remove('is-admin');
+    try{
+      if(button){button.disabled=true;button.textContent='กำลังค้นหา...';}
+      const farmer=await getFarmer(code,name);
+      if(!farmer){
+        alert('ไม่พบข้อมูลชาวไร่');
+        return;
       }
+
+      setInput('bpCode',farmer.farmer_code);
+      setInput('bpName',farmer.name);
+      setInput('showZone',farmer.zone ? `เขต ${farmer.zone}` : '-');
+      setInput('showSubZone',farmer.subzone ? `เขตย่อย ${farmer.subzone}` : '-');
+
+      const db=await ensureClient();
+      const [historyRes,guaranteeRes,debtRes]=await Promise.all([
+        db.from('production_history').select('*')
+          .eq('farmer_code',farmer.farmer_code)
+          .order('production_year',{ascending:false}),
+        db.from('guarantees').select('*')
+          .eq('farmer_code',farmer.farmer_code)
+          .order('production_year',{ascending:false}),
+        db.from('debt_summary').select('*')
+          .eq('farmer_code',farmer.farmer_code)
+          .maybeSingle()
+      ]);
+
+      if(historyRes.error) throw historyRes.error;
+      if(guaranteeRes.error) throw guaranteeRes.error;
+      if(debtRes.error) throw debtRes.error;
+
+      const historyBody=document.getElementById('bpHistoryBody');
+      const history=historyRes.data||[];
+      if(history.length){
+        historyBody.innerHTML=history.map(r=>`
+          <tr>
+            <td>${esc(r.production_year)}</td>
+            <td>${fmt(r.area_rai)}</td>
+            <td>${fmt(r.contract_ton)}</td>
+            <td>${fmt(r.delivered_ton)}</td>
+            <td>${esc(r.grade||'-')}</td>
+          </tr>`).join('');
+      }else emptyRow(historyBody,5,'ไม่พบประวัติการทำอ้อย');
+
+      const guaranteeBody=findSectionBody('หลักค้ำประกัน');
+      const guarantees=guaranteeRes.data||[];
+      if(guarantees.length){
+        guaranteeBody.innerHTML=guarantees.map(r=>`
+          <tr>
+            <td>${esc(r.production_year)}</td>
+            <td>${fmt(r.property_amount)}</td>
+            <td>${fmt(r.group_amount)}</td>
+            <td>${fmt(r.total_amount)}</td>
+          </tr>`).join('');
+      }else emptyRow(guaranteeBody,4,'ไม่พบข้อมูลหลักค้ำประกัน');
+
+      const debtBody=findSectionBody('หนี้สิน');
+      const d=debtRes.data;
+      if(d){
+        debtBody.innerHTML=`
+          <tr>
+            <td>${fmt(d.old_debt)}</td>
+            <td>${fmt(d.debt_2568_69)}</td>
+            <td>${fmt(d.debt_2569_70)}</td>
+            <td>${fmt(d.debt_2570_71)}</td>
+            <td>${fmt(d.future_debt)}</td>
+            <td><strong>${fmt(d.total_debt)}</strong></td>
+          </tr>`;
+      }else emptyRow(debtBody,6,'ไม่พบข้อมูลหนี้สิน');
+
     }catch(err){
-      console.error('Profile load failed',err);
-      document.body.classList.remove('is-admin');
+      console.error('Business Partner search error:',err);
+      alert('ค้นหาข้อมูลไม่สำเร็จ: '+(err.message||err));
+    }finally{
+      if(button){button.disabled=false;button.textContent='ค้นหา';}
     }
+  };
+
+  function mapPlot(row){
+    return {
+      plot_id:row.plot_id,
+      project_name:row.project_type || '-',
+      area:Number(row.area_rai||0),
+      year:row.production_year,
+      crop_type:row.plot_type || '-',
+      variety:row.variety || '-',
+      soil:row.soil_type || '-',
+      water:row.irrigation || '-',
+      status:row.plot_status || 'active',
+      history:false,
+      actual_cost:false,
+      activity:false
+    };
   }
 
-  function formValue(id){return document.getElementById(id)?.value.trim()||''}
-  function setValue(id,v){const e=document.getElementById(id);if(e)e.value=v??''}
+  window.renderRealPlotsFromSupabase=function(list){
+    const body=document.getElementById('realPlotTableBody');
+    if(!body) return;
+    if(!list.length){
+      emptyRow(body,6,'ไม่พบข้อมูลแปลง');
+      return;
+    }
+    body.innerHTML=list.map((p,i)=>`
+      <tr class="real-plot-row" onclick="selectRealPlotFromSupabase(${i})" tabindex="0" role="button">
+        <td>${esc(p.year)}</td>
+        <td>${esc(p.project_name)}</td>
+        <td>${esc(p.crop_type)}</td>
+        <td>${esc(p.plot_id)}</td>
+        <td>${fmt(p.area)}</td>
+        <td><span class="status ${p.status==='active'||p.status==='พร้อมวิเคราะห์'?'ok':'warn'}">${esc(p.status==='active'?'ใช้งาน':p.status)}</span></td>
+      </tr>`).join('');
+  };
 
-  window.CaneUserAdmin={
-    async init(){
-      await applyRole();
-      if(document.body.classList.contains('is-admin')) await this.loadUsers();
-    },
+  window.selectRealPlotFromSupabase=function(index){
+    const p=window.currentRealPlots[index];
+    if(!p) return;
+    window.currentSelectedRealPlot=p;
+    const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
+    set('realDetailPlotId',p.plot_id);
+    set('realDetailArea',fmt(p.area)+' ไร่');
+    set('realDetailYear',p.year);
+    set('realDetailCropType',p.crop_type);
+    set('realDetailVariety',p.variety);
+    set('realDetailSoil',p.soil);
+    set('realDetailWater',p.water);
+    set('realDetailStatus',p.status==='active'?'ใช้งาน':p.status);
+  };
 
-    openCreateForm(){
-      editingId=null;
-      document.getElementById('umFormCard').hidden=false;
-      document.getElementById('umFormTitle').textContent='เพิ่มผู้ใช้งาน';
-      ['umEmail','umPassword','umFullName','umEmployeeCode','umZone','umSubzone'].forEach(id=>setValue(id,''));
-      setValue('umRole','viewer');setValue('umStatus','active');
-      document.getElementById('umEmail').disabled=false;
-      document.getElementById('umPassword').closest('.form-group').style.display='';
-      msg('');
-      document.getElementById('umFormCard').scrollIntoView({behavior:'smooth',block:'start'});
-    },
+  window.searchRealPlots = async function(){
+    const button=document.querySelector('#real-plots .real-search-grid .btn');
+    const code=(document.getElementById('realFarmerCode')?.value||'').trim();
+    if(!code){alert('กรุณากรอกรหัสชาวไร่');return;}
 
-    openEdit(id){
-      const p=profiles.find(x=>x.id===id);
-      if(!p)return;
-      editingId=id;
-      document.getElementById('umFormCard').hidden=false;
-      document.getElementById('umFormTitle').textContent='แก้ไขผู้ใช้งาน';
-      setValue('umEmail',p.email);setValue('umFullName',p.full_name);
-      setValue('umEmployeeCode',p.employee_code);setValue('umRole',p.role);
-      setValue('umZone',p.zone);setValue('umSubzone',p.subzone);setValue('umStatus',p.status);
-      document.getElementById('umEmail').disabled=true;
-      document.getElementById('umPassword').closest('.form-group').style.display='none';
-      msg('');
-    },
-
-    closeForm(){
-      document.getElementById('umFormCard').hidden=true;
-      editingId=null;msg('');
-    },
-
-    async saveUser(){
-      const btn=document.getElementById('umSaveBtn');
-      btn.disabled=true;btn.textContent='กำลังบันทึก...';msg('');
-      try{
-        const profile=window.CANENEXT_CURRENT_PROFILE;
-        if(profile?.role!=='admin') throw new Error('ไม่มีสิทธิ์จัดการผู้ใช้งาน');
-
-        const payload={
-          action: editingId?'update':'create',
-          profile_id:editingId,
-          email:formValue('umEmail'),
-          password:formValue('umPassword'),
-          full_name:formValue('umFullName'),
-          employee_code:formValue('umEmployeeCode'),
-          role:formValue('umRole'),
-          zone:formValue('umZone')||null,
-          subzone:formValue('umSubzone')||null,
-          status:formValue('umStatus')
-        };
-
-        if(!editingId && (!payload.email || !payload.password || !payload.full_name)){
-          throw new Error('กรุณากรอกอีเมล รหัสผ่าน และชื่อ-สกุล');
-        }
-
-        const {data,error}=await window.caneSupabase.functions.invoke('manage-users',{body:payload});
-        if(error) throw error;
-        msg(data?.message||'บันทึกสำเร็จ','ok');
-        await this.loadUsers();
-        setTimeout(()=>this.closeForm(),800);
-      }catch(err){
-        console.error(err);msg(err.message||'บันทึกไม่สำเร็จ','error');
-      }finally{
-        btn.disabled=false;btn.textContent='บันทึกผู้ใช้งาน';
+    try{
+      if(button){button.disabled=true;button.textContent='กำลังค้นหา...';}
+      const farmer=await getFarmer(code,'');
+      if(!farmer){
+        alert('ไม่พบข้อมูลชาวไร่');
+        window.currentRealPlots=[];
+        renderRealPlotsFromSupabase([]);
+        return;
       }
-    },
 
-    async toggleStatus(id,status){
-      if(!confirm(status==='active'?'ปิดการใช้งานผู้ใช้นี้หรือไม่?':'เปิดการใช้งานผู้ใช้นี้หรือไม่?'))return;
-      const {error}=await window.caneSupabase.functions.invoke('manage-users',{
-        body:{action:'status',profile_id:id,status:status==='active'?'inactive':'active'}
-      });
-      if(error){alert('แก้ไขสถานะไม่สำเร็จ');return}
-      await this.loadUsers();
-    },
+      setInput('realFarmerCode',farmer.farmer_code);
+      setInput('realFarmerName',farmer.name);
+      setInput('realZone',farmer.zone?`เขต ${farmer.zone}`:'-');
+      setInput('realSubzone',farmer.subzone?`เขตย่อย ${farmer.subzone}`:'-');
 
-    async resetPassword(id){
-      const password=prompt('กำหนดรหัสผ่านใหม่ (อย่างน้อย 8 ตัวอักษร)');
-      if(!password)return;
-      const {error}=await window.caneSupabase.functions.invoke('manage-users',{
-        body:{action:'reset_password',profile_id:id,password}
-      });
-      if(error){alert('รีเซ็ตรหัสผ่านไม่สำเร็จ');return}
-      alert('รีเซ็ตรหัสผ่านแล้ว');
-    },
+      const db=await ensureClient();
+      const {data,error}=await db.from('plots').select('*')
+        .eq('farmer_code',farmer.farmer_code)
+        .order('production_year',{ascending:false})
+        .order('plot_id',{ascending:true});
+      if(error) throw error;
 
-    async loadUsers(){
-      if(!document.body.classList.contains('is-admin'))return;
-      const {data,error}=await window.caneSupabase.from('user_profiles').select('*').order('created_at',{ascending:false});
-      if(error){console.error(error);return}
-      profiles=data||[];this.renderUsers();
-    },
-
-    renderUsers(){
-      const q=(document.getElementById('umSearch')?.value||'').toLowerCase();
-      const list=profiles.filter(p=>[p.employee_code,p.full_name,p.email,p.role,p.zone,p.subzone].join(' ').toLowerCase().includes(q));
-      const body=document.getElementById('umUserTableBody');
-      if(!body)return;
-      body.innerHTML=list.length?list.map(p=>`
-        <tr>
-          <td>${p.employee_code||'-'}</td>
-          <td>${p.full_name||'-'}</td>
-          <td>${p.email||'-'}</td>
-          <td><span class="um-role">${p.role}</span></td>
-          <td>${p.zone||'-'}</td>
-          <td>${p.subzone||'-'}</td>
-          <td class="${p.status==='active'?'um-status-active':'um-status-inactive'}">${p.status==='active'?'ใช้งาน':'ปิดใช้งาน'}</td>
-          <td><div class="um-actions">
-            <button onclick="CaneUserAdmin.openEdit('${p.id}')">แก้ไข</button>
-            <button onclick="CaneUserAdmin.resetPassword('${p.id}')">รหัสผ่าน</button>
-            <button class="${p.status==='active'?'danger':''}" onclick="CaneUserAdmin.toggleStatus('${p.id}','${p.status}')">${p.status==='active'?'ปิดใช้งาน':'เปิดใช้งาน'}</button>
-          </div></td>
-        </tr>`).join(''):'<tr><td colspan="8">ไม่พบข้อมูลผู้ใช้งาน</td></tr>';
+      window.currentRealPlots=(data||[]).map(mapPlot);
+      filterRealPlotsByYear();
+    }catch(err){
+      console.error('Real plot search error:',err);
+      alert('ค้นหาข้อมูลแปลงไม่สำเร็จ: '+(err.message||err));
+    }finally{
+      if(button){button.disabled=false;button.textContent='ค้นหา';}
     }
   };
 
-  document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>window.CaneUserAdmin.init(),700));
-  document.addEventListener('click',()=>setTimeout(applyRole,120));
-})();
-</script>
+  window.filterRealPlotsByYear=function(){
+    const year=document.getElementById('realProductionYearFilter')?.value||'ALL';
+    const list=year==='ALL'
+      ? window.currentRealPlots
+      : window.currentRealPlots.filter(p=>p.year===year);
 
+    renderRealPlotsFromSupabase(list);
 
-<script id="canenext-admin-email-diagnostic">
-window.CaneAdminDiagnostic = async function(){
-  const {data:{user}} = await window.caneSupabase.auth.getUser();
-  if(!user) return {ok:false,message:'ยังไม่ได้ Login'};
-  const {data,error} = await window.caneSupabase
-    .from('user_profiles')
-    .select('email,role,status')
-    .ilike('email',user.email)
-    .maybeSingle();
-  return {
-    ok:!error && !!data,
-    login_email:user.email,
-    profile:data||null,
-    error:error?.message||null
+    if(list.length){
+      const originalIndex=window.currentRealPlots.findIndex(p=>
+        p.plot_id===list[0].plot_id && p.year===list[0].year
+      );
+      selectRealPlotFromSupabase(originalIndex);
+    }
   };
-};
+
+  // Scenario Setup: use the loaded real-plot dataset from Supabase.
+  window.refreshScenarioRealPlotOptions=function(){
+    const plots=window.currentRealPlots||[];
+    const year=document.getElementById('scenarioSourceYear')?.value||'';
+    const projectSelect=document.getElementById('scenarioSourceProject');
+    const plotSelect=document.getElementById('scenarioSourcePlot');
+    const status=document.getElementById('scenarioSourceStatus');
+    if(!projectSelect||!plotSelect) return;
+
+    const yearPlots=plots.filter(p=>p.year===year);
+    const projects=[...new Set(yearPlots.map(p=>p.project_name).filter(Boolean))];
+    const previous=projectSelect.value;
+    projectSelect.innerHTML='<option value="ALL">ทั้งหมด</option>'+
+      projects.map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');
+    if(projects.includes(previous)) projectSelect.value=previous;
+
+    const filtered=yearPlots.filter(p=>projectSelect.value==='ALL'||p.project_name===projectSelect.value);
+    plotSelect.innerHTML=filtered.length
+      ? filtered.map(p=>`<option value="${esc(p.plot_id)}">${esc(p.plot_id)} — ${esc(p.project_name)}</option>`).join('')
+      : '<option value="">ไม่พบข้อมูลแปลง</option>';
+
+    if(status) status.textContent=filtered.length
+      ? `พบ ${filtered.length} แปลงในปีการผลิต ${year}`
+      : `ไม่พบข้อมูลแปลงในปีการผลิต ${year}`;
+  };
+
+  window.loadScenarioFromRealPlot=function(){
+    const plotId=document.getElementById('scenarioSourcePlot')?.value;
+    const year=document.getElementById('scenarioSourceYear')?.value;
+    const p=(window.currentRealPlots||[]).find(x=>x.plot_id===plotId&&x.year===year);
+    const status=document.getElementById('scenarioSourceStatus');
+    if(!p){
+      if(status) status.textContent='กรุณาค้นหาชาวไร่ในเมนูข้อมูลแปลงจริงก่อน';
+      return;
+    }
+
+    const setValue=(ids,value)=>{
+      for(const id of ids){
+        const el=document.getElementById(id);
+        if(!el) continue;
+        if(el.tagName==='SELECT'){
+          const option=[...el.options].find(o=>o.value===String(value)||o.textContent.trim()===String(value).trim());
+          if(option) el.value=option.value;
+        }else el.value=value??'';
+        el.dispatchEvent(new Event('change',{bubbles:true}));
+        return;
+      }
+    };
+
+    setValue(['plotArea','areaRai','farmArea'],p.area);
+    setValue(['waterSystem','irrigationSystem'],p.water);
+    setValue(['productionYear','plotProductionYear'],p.year);
+    setValue(['cropType','caneType'],p.crop_type);
+    setValue(['caneVariety','variety'],p.variety);
+    setValue(['soilType'],p.soil);
+    setValue(['plotCode','plotId'],p.plot_id);
+    setValue(['projectName','projectType'],p.project_name);
+
+    window.currentScenarioRealPlot=JSON.parse(JSON.stringify(p));
+    if(typeof updatePlotData==='function') updatePlotData();
+    if(status) status.textContent=`โหลดข้อมูลแปลง ${p.plot_id} เรียบร้อยแล้ว`;
+  };
+
+  // Enter key support for both searches.
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    if(e.target?.id==='bpCode'||e.target?.id==='bpName'){
+      e.preventDefault();searchBusinessPartner();
+    }
+    if(e.target?.id==='realFarmerCode'){
+      e.preventDefault();searchRealPlots();
+    }
+  });
+})();
 </script>
 
 </body>
