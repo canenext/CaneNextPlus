@@ -1,24 +1,12 @@
-Cane Next+ Global Farmer Link
+Cane Next+ Stable Farmer Context
 
-ปรับให้ชาวไร่ที่ค้นหาใน Business Partner เป็นข้อมูลกลางของระบบ
+แก้ปัญหา Page Unresponsive:
+- ลบ wrapper ซ้อนของ searchBusinessPartner และ showMainMenu
+- ลบ event click ที่ re-wrap ฟังก์ชันซ้ำไม่สิ้นสุด
+- ใช้ CustomEvent canenext:farmer-changed เพียงครั้งเดียว
+- Query Farmer และ Plot ครั้งเดียวหลังค้นหา Business Partner
+- เมนูอื่นอ่านข้อมูลจาก Context/LocalStorage โดยไม่ค้นหาซ้ำ
+- ปุ่มค้นหากลับเป็นปกติใน finally เสมอ
 
-เมนูที่เชื่อมโยง:
-- ข้อมูลแปลงจริง
-- ต้นทุนพื้นฐาน
-- Scenario Setup
-- Scenario Analysis
-- ระบบวิเคราะห์ข้อมูล
-- AI Recommendation
-- Dashboard
-- วิเคราะห์ความเสี่ยง
-- Promotion
-
-ทุกหน้าจะแสดงแถบข้อมูลชาวไร่คนเดียวกัน:
-รหัส / ชื่อ / เขต / เขตย่อย
-
-ข้อมูลแปลงจริงจะโหลดตาม farmer_code อัตโนมัติ
-Scenario Draft จะบันทึกข้อมูล farmer_code ของชาวไร่ที่เลือก
-ไม่ต้องค้นหาชาวไร่ใหม่ในแต่ละเมนู
-
-อัปโหลด index.html และ config.js ในโฟลเดอร์เดียวกัน
-จากนั้น Ctrl+F5 และ Login ใหม่
+อัปโหลด index.html และ config.js ขึ้น GitHub
+กด Ctrl+F5 แล้ว Login ใหม่
