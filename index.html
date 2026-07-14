@@ -7024,7 +7024,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="2.1.5" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="2.1.6" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7101,8 +7101,95 @@ html:not(.canenext-page-switching) .menu-row{
   opacity:1;
   visibility:visible;
 }
+</style><style id="canenext-admin-menu-stable-style">
+/* Prevent Admin-only menu items from appearing after the sidebar has already painted */
+html.canenext-auth-checking .menu-row{
+  visibility:hidden !important;
+  opacity:0 !important;
+}
+html.canenext-auth-ready .menu-row{
+  visibility:visible !important;
+  opacity:1 !important;
+}
+.menu-row{
+  transition:none !important;
+}
+.menu-row .admin-only-menu{
+  transition:none !important;
+}
 </style></head>
-<body class="locked">
+<body class="locked"><script id="canenext-admin-menu-stable-script">
+(function(){
+  const root=document.documentElement;
+  let readyTimer=null;
+
+  function beginCheck(){
+    root.classList.add('canenext-auth-checking');
+    root.classList.remove('canenext-auth-ready');
+    clearTimeout(readyTimer);
+  }
+
+  function finishCheck(){
+    clearTimeout(readyTimer);
+    readyTimer=setTimeout(()=>{
+      requestAnimationFrame(()=>{
+        requestAnimationFrame(()=>{
+          root.classList.remove('canenext-auth-checking');
+          root.classList.add('canenext-auth-ready');
+        });
+      });
+    },20);
+  }
+
+  async function refreshAndReveal(){
+    beginCheck();
+
+    try{
+      if(window.CaneAdminMenuMaster?.refresh){
+        await window.CaneAdminMenuMaster.refresh();
+      }else if(window.CaneAdminMenuNoFlash?.refresh){
+        await window.CaneAdminMenuNoFlash.refresh();
+      }else if(window.CaneAdminMenuOnly?.refresh){
+        await window.CaneAdminMenuOnly.refresh();
+      }
+
+      if(window.CanePageState?.restore){
+        window.CanePageState.restore();
+      }else if(window.CanePageStateFinal?.restore){
+        window.CanePageStateFinal.restore();
+      }
+    }catch(err){
+      console.error('Admin menu preparation failed:',err);
+    }finally{
+      finishCheck();
+    }
+  }
+
+  // Hide before first paint.
+  beginCheck();
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    setTimeout(refreshAndReveal,40);
+  },{once:true});
+
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){
+      beginCheck();
+    }else{
+      refreshAndReveal();
+    }
+  });
+
+  window.addEventListener('pageshow',refreshAndReveal);
+
+  // Avoid repeated focus/blur flicker. Only refresh when role may have changed.
+  window.addEventListener('canenext:auth-restored',refreshAndReveal);
+
+  window.CaneAdminStableMenu={
+    refresh:refreshAndReveal
+  };
+})();
+</script>
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
 <div class="login-brand-panel">
