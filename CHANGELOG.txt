@@ -1,14 +1,21 @@
 Cane Next+ Master Version
-Version: 3.0.3
-Based on: v3.0.2
-Base index SHA-256: a532f537c5bcf6ab05638fac60ea7d7abbab9d7741b25b812702e96b3d57a88e
-Created: 2026-07-14T10:01:35
+Version: 3.1.0
+Based on: v3.0.3
+Base index SHA-256: d6d562aad5eb6a7cdb4d76ebb8436979a855ef370c8609a1c4d00e1a51b5c7b4
+PDF SHA-256: 5f234a0fb818bfb575da8b1f59c7f82ec3b0b138440059a190ae3cb1652aebe6
+Created: 2026-07-14T12:27:11
 
-FIX
-- Removed three overlapping Admin access/menu scripts.
-- Data Management and User Management now switch synchronously for Admin.
-- Admin role is loaded once and cached; menu clicks do not query Supabase again.
-- Older duplicate click handlers are stopped before they can redirect or redraw.
-- Sidebar and page transitions are disabled during Admin page switching.
-- Sensitive Admin actions remain protected.
-- Non-admin users still cannot see or open the two Admin pages.
+CHANGES
+- Promotion menu now opens the 28-page PDF manual inside the website.
+- Users can scroll continuously through all PDF pages.
+- Browser PDF toolbar provides page navigation, zoom, search, print and download
+  when supported by the browser.
+- Added buttons for Reload, Full-screen/New Tab and Download PDF.
+- Added responsive PDF viewing for desktop, notebook and tablet.
+- Included PDF asset:
+  assets/pdf/promotion_manual_2569_70.pdf
+
+DEPLOY
+Upload the complete folder structure. Do not upload index.html alone.
+The PDF must remain at:
+assets/pdf/promotion_manual_2569_70.pdf

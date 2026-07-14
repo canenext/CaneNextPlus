@@ -7072,7 +7072,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="3.0.3" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.1.0" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7159,6 +7159,116 @@ body.is-admin .menu-row .admin-only-menu{
 body:not(.is-admin) #data-management,
 body:not(.is-admin) #user-management{
   display:none !important;
+}
+</style><style id="canenext-promotion-pdf-style">
+/* Promotion PDF Document Center */
+#promotion.promotion-document-page{
+  padding-top:18px !important;
+}
+#promotion .promotion-document-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:16px;
+}
+#promotion .promotion-document-header h3{
+  margin:0 0 5px !important;
+  color:#0A3D78 !important;
+  font-size:22px !important;
+  font-weight:800 !important;
+}
+#promotion .promotion-document-header p{
+  margin:0;
+  color:#5B6F86;
+  font-size:14px;
+}
+#promotion .promotion-document-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:9px;
+  flex-wrap:wrap;
+}
+#promotion .promotion-document-actions .btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-height:40px;
+  padding:9px 15px;
+  text-decoration:none;
+  box-shadow:none;
+  font-size:13px;
+}
+#promotion .promotion-pdf-card{
+  overflow:hidden;
+  background:#fff;
+  border:1px solid #D5E6F8;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(8,59,115,.07);
+}
+#promotion .promotion-pdf-info{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 14px;
+  color:#355B80;
+  background:#F3F8FF;
+  border-bottom:1px solid #D5E6F8;
+  font-size:12px;
+  font-weight:600;
+}
+#promotion .promotion-pdf-info span{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+}
+#promotion .promotion-pdf-info i{
+  color:#C62828;
+  font-size:16px;
+}
+#promotion .promotion-pdf-frame-wrap{
+  position:relative;
+  width:100%;
+  height:calc(100vh - 245px);
+  min-height:620px;
+  background:#EEF2F6;
+}
+#promotion .promotion-pdf-frame{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#EEF2F6;
+}
+#promotion .promotion-pdf-fallback{
+  display:none;
+  padding:24px;
+  text-align:center;
+  color:#5B6F86;
+}
+#promotion .promotion-pdf-fallback a{
+  color:#0B5CAD;
+  font-weight:800;
+}
+@media(max-width:900px){
+  #promotion .promotion-document-header{
+    flex-direction:column;
+  }
+  #promotion .promotion-document-actions{
+    width:100%;
+    justify-content:flex-start;
+  }
+  #promotion .promotion-pdf-info{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  #promotion .promotion-pdf-frame-wrap{
+    height:calc(100vh - 310px);
+    min-height:520px;
+  }
 }
 </style></head>
 <body class="locked">
@@ -7505,7 +7615,41 @@ body:not(.is-admin) #user-management{
 </table>
 </div>
 </section>
-<section class="section app-page" id="promotion"><p class="lead">เตรียมพื้นที่สำหรับแผนส่งเสริมและงบสนับสนุน</p></section>
+<section class="section app-page promotion-document-page" id="promotion">
+<div class="promotion-document-header">
+<div>
+<h3>หลักเกณฑ์การส่งเสริม</h3>
+<p>คู่มือหลักการและหลักเกณฑ์การส่งเสริม ปี 2569/70</p>
+</div>
+<div class="promotion-document-actions">
+<button class="btn secondary" id="promotionPdfReload" type="button">
+<i class="fa-solid fa-rotate-right"></i> โหลดใหม่
+    </button>
+<a class="btn secondary" href="assets/pdf/promotion_manual_2569_70.pdf" id="promotionPdfOpen" rel="noopener" target="_blank">
+<i class="fa-solid fa-up-right-from-square"></i> เปิดเต็มหน้าจอ
+    </a>
+<a class="btn" download="หลักเกณฑ์ส่งเสริมปี 2569-70.pdf" href="assets/pdf/promotion_manual_2569_70.pdf" id="promotionPdfDownload">
+<i class="fa-solid fa-download"></i> ดาวน์โหลด PDF
+    </a>
+</div>
+</div>
+<div class="promotion-pdf-card">
+<div class="promotion-pdf-info">
+<span><i class="fa-regular fa-file-pdf"></i> เอกสาร 28 หน้า</span>
+<span>เลื่อนขึ้น-ลงเพื่อดูเอกสารแต่ละหน้า</span>
+</div>
+<div class="promotion-pdf-frame-wrap">
+<iframe class="promotion-pdf-frame" id="promotionPdfFrame" loading="eager" src="assets/pdf/promotion_manual_2569_70.pdf#page=1&amp;zoom=page-width&amp;toolbar=1&amp;navpanes=1&amp;scrollbar=1" title="คู่มือหลักเกณฑ์การส่งเสริม ปี 2569/70">
+</iframe>
+<div class="promotion-pdf-fallback">
+      Browser นี้ไม่รองรับการแสดง PDF ภายในหน้าเว็บ
+      <a href="assets/pdf/promotion_manual_2569_70.pdf" rel="noopener" target="_blank">
+        กดเพื่อเปิดเอกสาร
+      </a>
+</div>
+</div>
+</div>
+</section>
 <section class="section app-page dashboard-page" id="dashboard">
 <div class="dashboard-kpi-grid">
 <div class="dashboard-kpi"><span>⭐ Scenario ที่แนะนำ</span><b id="dashRecommended">-</b></div>
@@ -12489,6 +12633,30 @@ document.addEventListener('DOMContentLoaded', function(){
     refresh:loadProfile,
     isAdmin,
     open:renderPage
+  };
+})();
+</script><script id="canenext-promotion-pdf-script">
+(function(){
+  const PDF_URL='assets/pdf/promotion_manual_2569_70.pdf';
+
+  function reloadPromotionPdf(){
+    const frame=document.getElementById('promotionPdfFrame');
+    if(!frame) return;
+
+    frame.src='about:blank';
+    setTimeout(()=>{
+      frame.src=PDF_URL+'#page=1&zoom=page-width&toolbar=1&navpanes=1&scrollbar=1';
+    },30);
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('promotionPdfReload')
+      ?.addEventListener('click',reloadPromotionPdf);
+  });
+
+  window.CanePromotionPdf={
+    reload:reloadPromotionPdf,
+    url:PDF_URL
   };
 })();
 </script></body>
