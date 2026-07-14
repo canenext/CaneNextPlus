@@ -6588,6 +6588,123 @@ border-radius:10px;background:#fff;font-size:15px;
     grid-template-columns:1fr !important;
   }
 }
+</style><style id="canenext-user-management-style">
+.admin-only-menu{display:none!important}
+body.is-admin .admin-only-menu{display:flex!important}
+
+#user-management{padding-top:18px!important}
+#user-management .um-card{
+  background:#fff;
+  border:1px solid #D9E6F4;
+  border-radius:16px;
+  box-shadow:0 6px 18px rgba(8,59,115,.05);
+  padding:18px;
+  margin-bottom:16px;
+}
+#user-management .um-card>h3,
+#user-management .um-heading h3{
+  margin:0!important;
+  color:#0A3D78!important;
+  font-size:22px!important;
+  font-weight:800!important;
+}
+.um-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+.um-form-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.um-form-grid .form-group{margin-bottom:0}
+.um-form-grid select{
+  width:100%;
+  border:1px solid #cfe0f1;
+  border-radius:16px;
+  padding:14px 16px;
+  font-family:inherit;
+  font-size:15px;
+  color:#083B73;
+  background:#fff;
+}
+.um-form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:16px;
+}
+.um-message{
+  display:none;
+  margin-top:12px;
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:14px;
+}
+.um-message.ok{display:block;background:#EDF9F2;color:#167248}
+.um-message.error{display:block;background:#FFF1F1;color:#C62828}
+
+.um-list-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:12px;
+  margin-bottom:14px;
+}
+.um-list-toolbar .form-group{
+  margin:0;
+  width:min(440px,100%);
+}
+.um-user-table{min-width:980px}
+.um-user-table th,
+.um-user-table td{
+  text-align:center!important;
+  vertical-align:middle!important;
+}
+.um-role{
+  display:inline-flex;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#EAF4FF;
+  color:#0B5CAD;
+  font-size:12px;
+  font-weight:800;
+}
+.um-status-active{color:#167248;font-weight:800}
+.um-status-inactive{color:#C62828;font-weight:800}
+.um-actions{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.um-actions button{
+  border:1px solid #CFE0F1;
+  background:#fff;
+  color:#0B5CAD;
+  border-radius:999px;
+  padding:6px 10px;
+  font-family:inherit;
+  cursor:pointer;
+}
+.um-actions .danger{
+  color:#C62828;
+  border-color:#F0C8C8;
+}
+@media(max-width:1100px){
+  .um-form-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+  .um-heading,.um-list-toolbar{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .um-form-grid{grid-template-columns:1fr}
+  .um-form-actions{flex-direction:column}
+  .um-form-actions .btn{width:100%}
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -6650,7 +6767,7 @@ border-radius:10px;background:#fff;font-size:15px;
 <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
 <a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> Promotion</a>
 <a href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
-</div>
+<a class="admin-only-menu" href="#user-management" onclick="showMainMenu(event, 'user-management')"><i class="fa-solid fa-users-gear menu-icon"></i> จัดการผู้ใช้งาน</a></div>
 </nav>
 </header>
 <main class="app-main">
@@ -6922,7 +7039,7 @@ border-radius:10px;background:#fff;font-size:15px;
 <h3>รายละเอียดพื้นที่แปลงจำลอง</h3>
 <table class="table form-table">
 <tbody>
-<tr><th>พื้นที่ปลูก (ไร่)</th><td><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></td><th>รูปแบบการให้น้ำ</th><td><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></td></tr>
+<tr><th>พื้นที่ปลูก (ไร่)</th><td><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></td><th>ระบบน้ำ</th><td><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></td></tr>
 <tr><th>ระยะร่องที่ปลูก</th><td><select class="plot-input" id="rowSpacing"><option value="1.50">1.50 เมตร</option><option selected="" value="1.65">1.65 เมตร</option><option value="1.85">1.85 เมตร</option></select></td><th>จำนวนร่อง</th><td><input class="plot-input readonly calculated-value" id="rowCount" readonly="" type="text"/></td></tr>
 </tbody>
 </table>
@@ -7016,7 +7133,6 @@ border-radius:10px;background:#fff;font-size:15px;
 <b id="lowestCostScenario">-</b>
 <small id="lowestCostValue">-</small>
 </div>
-
 </div>
 <div class="analytics-section">
 <h4>Scenario Comparison</h4>
@@ -7136,6 +7252,93 @@ border-radius:10px;background:#fff;font-size:15px;
 <table class="table dm-preview-table">
 <thead id="dmPreviewHead"></thead>
 <tbody id="dmPreviewBody"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="section app-page user-management-page" id="user-management">
+<div class="um-card">
+<div class="um-heading">
+<h3>จัดการผู้ใช้งาน</h3>
+<button class="btn" id="umOpenCreateBtn" type="button">+ เพิ่มผู้ใช้งาน</button>
+</div>
+</div>
+<div class="um-card" hidden="" id="umFormCard">
+<h3 id="umFormTitle">เพิ่มผู้ใช้งาน</h3>
+<div class="um-form-grid">
+<div class="form-group">
+<label for="umEmail">อีเมล</label>
+<input id="umEmail" placeholder="name@example.com" type="email"/>
+</div>
+<div class="form-group" id="umPasswordGroup">
+<label for="umPassword">รหัสผ่านเริ่มต้น</label>
+<input id="umPassword" placeholder="อย่างน้อย 8 ตัวอักษร" type="password"/>
+</div>
+<div class="form-group">
+<label for="umFullName">ชื่อ-สกุล</label>
+<input id="umFullName" placeholder="ชื่อผู้ใช้งาน" type="text"/>
+</div>
+<div class="form-group">
+<label for="umEmployeeCode">รหัสพนักงาน</label>
+<input id="umEmployeeCode" placeholder="เช่น EMP001" type="text"/>
+</div>
+<div class="form-group">
+<label for="umRole">สิทธิ์ผู้ใช้งาน</label>
+<select id="umRole">
+<option value="viewer">Viewer — ดูข้อมูลอย่างเดียว</option>
+<option value="extension">Extension — นักส่งเสริม</option>
+<option value="manager">Manager — ผู้จัดการเขต</option>
+<option value="admin">Admin — ผู้ดูแลระบบ</option>
+</select>
+</div>
+<div class="form-group">
+<label for="umZone">เขต</label>
+<input id="umZone" placeholder="เช่น 05" type="text"/>
+</div>
+<div class="form-group">
+<label for="umSubzone">เขตย่อย</label>
+<input id="umSubzone" placeholder="เช่น 05-03" type="text"/>
+</div>
+<div class="form-group">
+<label for="umStatus">สถานะ</label>
+<select id="umStatus">
+<option value="active">ใช้งาน</option>
+<option value="inactive">ปิดใช้งาน</option>
+</select>
+</div>
+</div>
+<div class="um-form-actions">
+<button class="btn secondary" id="umCancelBtn" type="button">ยกเลิก</button>
+<button class="btn" id="umSaveBtn" type="button">บันทึกผู้ใช้งาน</button>
+</div>
+<div class="um-message" id="umFormMessage"></div>
+</div>
+<div class="um-card">
+<div class="um-list-toolbar">
+<div class="form-group">
+<label for="umSearch">ค้นหาผู้ใช้งาน</label>
+<input id="umSearch" placeholder="ชื่อ อีเมล รหัสพนักงาน เขต หรือเขตย่อย" type="text"/>
+</div>
+<button class="btn secondary" id="umRefreshBtn" type="button">รีเฟรช</button>
+</div>
+<div class="table-responsive">
+<table class="table um-user-table">
+<thead>
+<tr>
+<th>รหัสพนักงาน</th>
+<th>ชื่อ-สกุล</th>
+<th>อีเมล</th>
+<th>Role</th>
+<th>เขต</th>
+<th>เขตย่อย</th>
+<th>สถานะ</th>
+<th>จัดการ</th>
+</tr>
+</thead>
+<tbody id="umUserTableBody">
+<tr><td colspan="8">กำลังโหลดข้อมูล...</td></tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -7409,7 +7612,7 @@ function renderScenarioCardV2(data){
       <div class="scenario-col">
         <h5 class="scenario-col-title"><i class="fa-solid fa-hand-holding-dollar"></i>ระบบน้ำ / งบลงทุน</h5>
         <div class="scenario-field-v2" style="margin-bottom:12px;">
-          <label>รูปแบบการให้น้ำ</label>
+          <label>ระบบน้ำ</label>
           <select data-key="water">
             <option ${data.water==='ไม่มีระบบน้ำ (น้ำฝน)'?'selected':''}>ไม่มีระบบน้ำ (น้ำฝน)</option>
             <option ${data.water==='ระบบน้ำหยด'?'selected':''}>ระบบน้ำหยด</option>
@@ -9993,6 +10196,290 @@ document.addEventListener('DOMContentLoaded', function(){
 
   document.addEventListener('DOMContentLoaded',cleanDashboard);
   window.addEventListener('canenext:farmer-changed',()=>setTimeout(cleanDashboard,50));
+})();
+</script><script id="canenext-user-management-script">
+(function(){
+  let profiles=[];
+  let editingId=null;
+
+  const $=id=>document.getElementById(id);
+  const value=id=>($(id)?.value||'').trim();
+  const setValue=(id,v)=>{if($(id)) $(id).value=v??''};
+
+  function message(text,type=''){
+    const box=$('umFormMessage');
+    if(!box) return;
+    box.textContent=text;
+    box.className='um-message '+type;
+  }
+
+  async function ensureClient(){
+    if(window.caneSupabase) return window.caneSupabase;
+    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
+      throw new Error('ยังไม่สามารถเชื่อมต่อ Supabase ได้');
+    }
+    window.caneSupabase=window.supabase.createClient(
+      window.CANENEXT_CONFIG.SUPABASE_URL,
+      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+    );
+    return window.caneSupabase;
+  }
+
+  async function getMyProfile(){
+    const db=await ensureClient();
+    const {data:{user},error:userError}=await db.auth.getUser();
+    if(userError || !user) return null;
+
+    const {data,error}=await db
+      .from('user_profiles')
+      .select('*')
+      .ilike('email',user.email)
+      .maybeSingle();
+
+    if(error) throw error;
+    return data;
+  }
+
+  async function applyRole(){
+    try{
+      const profile=await getMyProfile();
+      window.CANENEXT_CURRENT_PROFILE=profile||null;
+      document.body.classList.toggle(
+        'is-admin',
+        profile?.role==='admin' && profile?.status==='active'
+      );
+
+      if(profile?.status==='inactive'){
+        alert('บัญชีนี้ถูกปิดการใช้งาน');
+        await window.caneSupabase.auth.signOut();
+      }
+    }catch(err){
+      console.error('User profile error:',err);
+      document.body.classList.remove('is-admin');
+    }
+  }
+
+  function openCreate(){
+    editingId=null;
+    $('umFormCard').hidden=false;
+    $('umFormTitle').textContent='เพิ่มผู้ใช้งาน';
+
+    ['umEmail','umPassword','umFullName','umEmployeeCode','umZone','umSubzone']
+      .forEach(id=>setValue(id,''));
+
+    setValue('umRole','viewer');
+    setValue('umStatus','active');
+
+    $('umEmail').disabled=false;
+    $('umPasswordGroup').hidden=false;
+    message('');
+    $('umFormCard').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function openEdit(id){
+    const p=profiles.find(x=>x.id===id);
+    if(!p) return;
+
+    editingId=id;
+    $('umFormCard').hidden=false;
+    $('umFormTitle').textContent='แก้ไขผู้ใช้งาน';
+
+    setValue('umEmail',p.email);
+    setValue('umFullName',p.full_name);
+    setValue('umEmployeeCode',p.employee_code);
+    setValue('umRole',p.role);
+    setValue('umZone',p.zone);
+    setValue('umSubzone',p.subzone);
+    setValue('umStatus',p.status);
+
+    $('umEmail').disabled=true;
+    $('umPasswordGroup').hidden=true;
+    message('');
+    $('umFormCard').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function closeForm(){
+    $('umFormCard').hidden=true;
+    editingId=null;
+    message('');
+  }
+
+  async function saveUser(){
+    const button=$('umSaveBtn');
+    button.disabled=true;
+    button.textContent='กำลังบันทึก...';
+    message('');
+
+    try{
+      const profile=window.CANENEXT_CURRENT_PROFILE;
+      if(profile?.role!=='admin' || profile?.status!=='active'){
+        throw new Error('ไม่มีสิทธิ์จัดการผู้ใช้งาน');
+      }
+
+      const payload={
+        action:editingId?'update':'create',
+        profile_id:editingId,
+        email:value('umEmail'),
+        password:value('umPassword'),
+        full_name:value('umFullName'),
+        employee_code:value('umEmployeeCode'),
+        role:value('umRole'),
+        zone:value('umZone')||null,
+        subzone:value('umSubzone')||null,
+        status:value('umStatus')
+      };
+
+      if(!editingId){
+        if(!payload.email || !payload.password || !payload.full_name){
+          throw new Error('กรุณากรอกอีเมล รหัสผ่าน และชื่อ-สกุล');
+        }
+        if(payload.password.length<8){
+          throw new Error('รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร');
+        }
+      }
+
+      const {data,error}=await window.caneSupabase.functions.invoke(
+        'manage-users',
+        {body:payload}
+      );
+
+      if(error) throw error;
+
+      message(data?.message||'บันทึกสำเร็จ','ok');
+      await loadUsers();
+      setTimeout(closeForm,700);
+    }catch(err){
+      console.error(err);
+      message(err.message||'บันทึกไม่สำเร็จ','error');
+    }finally{
+      button.disabled=false;
+      button.textContent='บันทึกผู้ใช้งาน';
+    }
+  }
+
+  async function toggleStatus(id,currentStatus){
+    const next=currentStatus==='active'?'inactive':'active';
+    const label=next==='inactive'?'ปิดการใช้งาน':'เปิดการใช้งาน';
+    if(!confirm(`${label}ผู้ใช้งานนี้หรือไม่?`)) return;
+
+    const {error}=await window.caneSupabase.functions.invoke(
+      'manage-users',
+      {body:{action:'status',profile_id:id,status:next}}
+    );
+
+    if(error){
+      alert('แก้ไขสถานะไม่สำเร็จ');
+      return;
+    }
+    await loadUsers();
+  }
+
+  async function resetPassword(id){
+    const password=prompt('กำหนดรหัสผ่านใหม่ อย่างน้อย 8 ตัวอักษร');
+    if(!password) return;
+    if(password.length<8){
+      alert('รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร');
+      return;
+    }
+
+    const {error}=await window.caneSupabase.functions.invoke(
+      'manage-users',
+      {body:{action:'reset_password',profile_id:id,password}}
+    );
+
+    if(error){
+      alert('รีเซ็ตรหัสผ่านไม่สำเร็จ');
+      return;
+    }
+    alert('รีเซ็ตรหัสผ่านแล้ว');
+  }
+
+  function renderUsers(){
+    const q=(value('umSearch')||'').toLowerCase();
+    const list=profiles.filter(p=>
+      [p.employee_code,p.full_name,p.email,p.role,p.zone,p.subzone]
+        .join(' ')
+        .toLowerCase()
+        .includes(q)
+    );
+
+    const body=$('umUserTableBody');
+    if(!body) return;
+
+    body.innerHTML=list.length
+      ? list.map(p=>`
+        <tr>
+          <td>${p.employee_code||'-'}</td>
+          <td>${p.full_name||'-'}</td>
+          <td>${p.email||'-'}</td>
+          <td><span class="um-role">${p.role}</span></td>
+          <td>${p.zone||'-'}</td>
+          <td>${p.subzone||'-'}</td>
+          <td class="${p.status==='active'?'um-status-active':'um-status-inactive'}">
+            ${p.status==='active'?'ใช้งาน':'ปิดใช้งาน'}
+          </td>
+          <td>
+            <div class="um-actions">
+              <button type="button" onclick="CaneUserAdmin.openEdit('${p.id}')">แก้ไข</button>
+              <button type="button" onclick="CaneUserAdmin.resetPassword('${p.id}')">รหัสผ่าน</button>
+              <button type="button"
+                class="${p.status==='active'?'danger':''}"
+                onclick="CaneUserAdmin.toggleStatus('${p.id}','${p.status}')">
+                ${p.status==='active'?'ปิดใช้งาน':'เปิดใช้งาน'}
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('')
+      : '<tr><td colspan="8">ไม่พบข้อมูลผู้ใช้งาน</td></tr>';
+  }
+
+  async function loadUsers(){
+    if(!document.body.classList.contains('is-admin')) return;
+
+    const db=await ensureClient();
+    const {data,error}=await db
+      .from('user_profiles')
+      .select('*')
+      .order('created_at',{ascending:false});
+
+    if(error){
+      console.error(error);
+      $('umUserTableBody').innerHTML=
+        '<tr><td colspan="8">ไม่สามารถโหลดข้อมูลผู้ใช้งานได้</td></tr>';
+      return;
+    }
+
+    profiles=data||[];
+    renderUsers();
+  }
+
+  window.CaneUserAdmin={
+    openCreate,
+    openEdit,
+    closeForm,
+    saveUser,
+    toggleStatus,
+    resetPassword,
+    loadUsers,
+    renderUsers
+  };
+
+  document.addEventListener('DOMContentLoaded',async()=>{
+    await applyRole();
+
+    $('umOpenCreateBtn')?.addEventListener('click',openCreate);
+    $('umCancelBtn')?.addEventListener('click',closeForm);
+    $('umSaveBtn')?.addEventListener('click',saveUser);
+    $('umRefreshBtn')?.addEventListener('click',loadUsers);
+    $('umSearch')?.addEventListener('input',renderUsers);
+
+    if(document.body.classList.contains('is-admin')){
+      await loadUsers();
+    }
+  });
+
+  window.addEventListener('canenext:farmer-changed',()=>setTimeout(applyRole,50));
 })();
 </script></body>
 </html>
