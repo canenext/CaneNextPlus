@@ -6982,6 +6982,31 @@ body:not(.is-admin) #user-management{
 #plot-data .scenario-area-item #cropType{
   font-weight:400 !important;
 }
+</style><style id="canenext-user-scope-style">
+.user-scope-chip{
+  display:none;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border:1px solid #D7E8FA;
+  border-radius:999px;
+  background:#F3F8FF;
+  color:#0A3D78;
+  font-size:13px;
+  font-weight:700;
+}
+body.logged-in .user-scope-chip{display:inline-flex}
+.user-scope-chip.warning{
+  background:#FFF7E6;
+  border-color:#F2D59B;
+  color:#8A5A00;
+}
+@media(max-width:900px){
+  .user-scope-chip{
+    width:100%;
+    border-radius:14px;
+  }
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -7026,7 +7051,7 @@ body:not(.is-admin) #user-management{
 <small>Smart Sugarcane Management Platform</small>
 </div>
 </div>
-<div class="current-user">
+<div class="user-scope-chip" id="userScopeChip">กำลังตรวจสอบขอบเขตข้อมูล...</div><div class="current-user">
 <div>👤 ผู้ใช้งานปัจจุบัน: <span id="currentUserName">Demo User</span></div>
 <button class="logout-btn" onclick="logoutSupabase()">ออกจากระบบ</button>
 </div>
@@ -11886,6 +11911,122 @@ document.addEventListener('DOMContentLoaded', function(){
     get:()=>safePage(getSavedPage()),
     restore:restorePage,
     clear:()=>localStorage.removeItem(STORAGE_KEY)
+  };
+})();
+</script><script id="canenext-user-scope-script">
+(function(){
+  async function ensureClient(){
+    if(window.caneSupabase) return window.caneSupabase;
+    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
+      throw new Error('ไม่สามารถเชื่อมต่อ Supabase ได้');
+    }
+    window.caneSupabase=window.supabase.createClient(
+      window.CANENEXT_CONFIG.SUPABASE_URL,
+      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+    );
+    return window.caneSupabase;
+  }
+
+  function scopeText(profile){
+    if(!profile) return 'ไม่พบข้อมูลสิทธิ์ผู้ใช้งาน';
+
+    if(profile.role==='admin'){
+      return 'Admin · เข้าถึงข้อมูลทุกเขต';
+    }
+
+    if(profile.role==='manager'){
+      return profile.zone
+        ? `Manager · เขต ${profile.zone}`
+        : 'Manager · ยังไม่ได้กำหนดเขต';
+    }
+
+    if(profile.role==='extension' || profile.role==='viewer'){
+      if(profile.zone && profile.subzone){
+        return `${profile.role} · เขต ${profile.zone} · เขตย่อย ${profile.subzone}`;
+      }
+      if(profile.zone){
+        return `${profile.role} · เขต ${profile.zone} · ทุกเขตย่อย`;
+      }
+      return `${profile.role} · ยังไม่ได้กำหนดเขต`;
+    }
+
+    return `${profile.role||'user'} · ขอบเขตตามที่กำหนด`;
+  }
+
+  function renderScope(profile){
+    const chip=document.getElementById('userScopeChip');
+    if(!chip) return;
+
+    chip.textContent=scopeText(profile);
+    const missingScope=
+      profile &&
+      profile.role!=='admin' &&
+      !String(profile.zone||'').trim();
+
+    chip.classList.toggle('warning',!!missingScope);
+  }
+
+  async function loadProfile(){
+    const db=await ensureClient();
+    const {data:{user},error:userError}=await db.auth.getUser();
+
+    if(userError || !user){
+      window.CANENEXT_CURRENT_PROFILE=null;
+      renderScope(null);
+      return null;
+    }
+
+    const {data:profile,error}=await db
+      .from('user_profiles')
+      .select('id,auth_uid,email,full_name,role,zone,subzone,status')
+      .eq('auth_uid',user.id)
+      .maybeSingle();
+
+    if(error) throw error;
+
+    window.CANENEXT_CURRENT_PROFILE=profile||null;
+    renderScope(profile);
+
+    if(profile?.status==='inactive'){
+      alert('บัญชีนี้ถูกปิดการใช้งาน กรุณาติดต่อผู้ดูแลระบบ');
+      await db.auth.signOut();
+      return null;
+    }
+
+    return profile;
+  }
+
+  // RLS is the real security layer. This only improves the user experience.
+  const originalSearch=window.searchBusinessPartner;
+  if(typeof originalSearch==='function'){
+    window.searchBusinessPartner=async function(){
+      const beforeCode=(document.getElementById('bpCode')?.value||'').trim();
+      await originalSearch.apply(this,arguments);
+
+      const profile=window.CANENEXT_CURRENT_PROFILE;
+      const name=(document.getElementById('bpName')?.value||'').trim();
+
+      if(beforeCode && !name && profile && profile.role!=='admin'){
+        const scope=profile.subzone
+          ? `เขต ${profile.zone} เขตย่อย ${profile.subzone}`
+          : `เขต ${profile.zone||'-'}`;
+
+        console.info(`ไม่พบข้อมูลหรือข้อมูลอยู่นอกขอบเขต ${scope}`);
+      }
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    setTimeout(loadProfile,500);
+  });
+
+  window.addEventListener('focus',()=>{
+    setTimeout(loadProfile,50);
+  });
+
+  window.CaneUserScope={
+    refresh:loadProfile,
+    get:()=>window.CANENEXT_CURRENT_PROFILE||null
   };
 })();
 </script></body>
