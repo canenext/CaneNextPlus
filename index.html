@@ -6714,6 +6714,30 @@ body:not(.is-admin) #user-management{display:none!important}
 .login-options{
   justify-content:flex-start !important;
 }
+</style><style id="real-plots-column-update-style">
+#real-plots .real-plot-table{
+  min-width:1120px !important;
+  width:100% !important;
+}
+#real-plots .real-plot-table th,
+#real-plots .real-plot-table td{
+  text-align:center !important;
+  vertical-align:middle !important;
+}
+#real-plots .real-plot-table th:nth-child(1){min-width:110px}
+#real-plots .real-plot-table th:nth-child(2){min-width:140px}
+#real-plots .real-plot-table th:nth-child(3){min-width:125px}
+#real-plots .real-plot-table th:nth-child(4){min-width:130px}
+#real-plots .real-plot-table th:nth-child(5){min-width:110px}
+#real-plots .real-plot-table th:nth-child(6){min-width:140px}
+#real-plots .real-plot-table th:nth-child(7){min-width:130px}
+#real-plots .real-plot-table th:nth-child(8){min-width:120px}
+</style><style id="real-plots-actions-balance-style">
+#real-plots .real-actions{
+  display:flex !important;
+  justify-content:flex-end !important;
+  margin-top:16px !important;
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -6741,7 +6765,6 @@ body:not(.is-admin) #user-management{display:none!important}
 </div>
 <div class="login-options">
 <label><input type="checkbox"/> จดจำการเข้าสู่ระบบ</label>
-
 </div>
 <button class="btn login-submit" type="submit">เข้าสู่ระบบ</button>
 <div class="demo-note" id="authMessage" style="display:none;"></div>
@@ -6903,54 +6926,13 @@ body:not(.is-admin) #user-management{display:none!important}
 </div>
 <div class="table-responsive">
 <table class="table real-plot-table">
-<thead>
-<tr>
-<th><button class="real-sort-btn" data-sort-key="year" type="button">ปีการผลิต<span class="real-sort-icon">↕</span></button></th>
-<th><button class="real-sort-btn" data-sort-key="project_name" type="button">โครงการ<span class="real-sort-icon">↕</span></button></th>
-<th><button class="real-sort-btn" data-sort-key="crop_type" type="button">ประเภทอ้อย<span class="real-sort-icon">↕</span></button></th>
-<th><button class="real-sort-btn" data-sort-key="plot_id" type="button">รหัสแปลง<span class="real-sort-icon">↕</span></button></th>
-<th><button class="real-sort-btn" data-sort-key="area" type="button">พื้นที่ (ไร่)<span class="real-sort-icon">↕</span></button></th>
-<th><button class="real-sort-btn" data-sort-key="status" type="button">สถานะแปลง<span class="real-sort-icon">↕</span></button></th>
-</tr>
-</thead>
+<thead><tr><th><button class="real-sort-btn" data-sort-key="year" type="button">ปีการผลิต<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="project_name" type="button">โครงการ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="crop_type" type="button">ประเภทอ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="plot_id" type="button">รหัสแปลง<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="area" type="button">พื้นที่ (ไร่)<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="variety" type="button">พันธุ์อ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="water" type="button">ระบบน้ำ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="status" type="button">สถานะแปลง<span class="real-sort-icon">↕</span></button></th></tr></thead>
 <tbody id="realPlotTableBody"></tbody>
 </table>
 </div>
 </div>
-<div class="real-plot-layout">
-<div class="real-section">
-<h3>รายละเอียดแปลง</h3>
-<div class="real-detail-grid">
-<div><span>รหัสแปลง</span><b id="realDetailPlotId">-</b></div>
-<div><span>พื้นที่</span><b id="realDetailArea">-</b></div>
-<div><span>ปีการผลิต</span><b id="realDetailYear">-</b></div>
-<div><span>ประเภทอ้อย</span><b id="realDetailCropType">-</b></div>
-<div><span>พันธุ์อ้อย</span><b id="realDetailVariety">-</b></div>
-<div><span>ประเภทดิน</span><b id="realDetailSoil">-</b></div>
-<div><span>ระบบน้ำ</span><b id="realDetailWater">-</b></div>
-<div><span>สถานะข้อมูล</span><b id="realDetailStatus">-</b></div>
-</div>
-</div>
-<div class="real-section">
-<h3>ความพร้อมสำหรับการวิเคราะห์</h3>
-<div class="readiness-score">
-<div class="readiness-value" id="realReadinessValue">0%</div>
-<div class="readiness-bar"><i id="realReadinessBar"></i></div>
-</div>
-<div class="readiness-list">
-<div><span>พื้นที่แปลง</span><b id="readyArea">-</b></div>
-<div><span>ปีการผลิต</span><b id="readyYear">-</b></div>
-<div><span>พันธุ์อ้อย</span><b id="readyVariety">-</b></div>
-<div><span>ระบบน้ำ</span><b id="readyWater">-</b></div>
-<div><span>ประเภทดิน</span><b id="readySoil">-</b></div>
-<div><span>ผลผลิตย้อนหลัง</span><b id="readyHistory">-</b></div>
-<div><span>ต้นทุนจริง</span><b id="readyCost">-</b></div>
-<div><span>กิจกรรมในแปลง</span><b id="readyActivity">-</b></div>
-</div>
-</div>
-</div>
 <div class="real-actions">
-<button class="btn secondary" onclick="analyzeRealPlot()" type="button">วิเคราะห์แปลง</button>
+
 <button class="btn" onclick="createScenarioFromRealPlot()" type="button">สร้าง Scenario จากแปลงจริง</button>
 </div>
 </section>
@@ -9614,7 +9596,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const body=document.getElementById('realPlotTableBody');
     if(!body) return;
     if(!list.length){
-      emptyRow(body,6,'ไม่พบข้อมูลแปลง');
+      emptyRow(body,8,'ไม่พบข้อมูลแปลง');
       return;
     }
     body.innerHTML=list.map((p,i)=>`
@@ -9624,6 +9606,8 @@ document.addEventListener('DOMContentLoaded', function(){
         <td>${esc(p.crop_type)}</td>
         <td>${esc(p.plot_id)}</td>
         <td>${fmt(p.area)}</td>
+        <td>${esc(p.variety||'-')}</td>
+        <td>${esc(p.water||'-')}</td>
         <td><span class="status ${p.status==='active'||p.status==='พร้อมวิเคราะห์'?'ok':'warn'}">${esc(p.status==='active'?'ใช้งาน':p.status)}</span></td>
       </tr>`).join('');
   };
@@ -9916,7 +9900,7 @@ document.addEventListener('DOMContentLoaded', function(){
     plotsLoading=true;
     const body=document.getElementById('realPlotTableBody');
     if(body){
-      body.innerHTML='<tr><td colspan="6" style="text-align:center;">กำลังโหลดข้อมูลแปลง...</td></tr>';
+      body.innerHTML='<tr><td colspan="8" style="text-align:center;">กำลังโหลดข้อมูลแปลง...</td></tr>';
     }
 
     try{
@@ -9968,7 +9952,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }catch(err){
       console.error('Lazy plot load failed:',err);
       if(body){
-        body.innerHTML='<tr><td colspan="6" style="text-align:center;color:#C62828;">โหลดข้อมูลแปลงไม่สำเร็จ</td></tr>';
+        body.innerHTML='<tr><td colspan="8" style="text-align:center;color:#C62828;">โหลดข้อมูลแปลงไม่สำเร็จ</td></tr>';
       }
     }finally{
       plotsLoading=false;
