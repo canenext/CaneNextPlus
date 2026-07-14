@@ -6748,6 +6748,31 @@ body:not(.is-admin) #user-management{display:none!important}
 #plot-data .scenario-area-table .plot-input{
   max-width:320px !important;
 }
+</style><style id="compact-real-plot-table-style">
+/* Compact real plot table */
+#real-plots .real-plot-table,
+#real-plots table{
+  font-size:13px!important;
+}
+#real-plots .real-plot-table th,
+#real-plots .real-plot-table td,
+#real-plots table th,
+#real-plots table td{
+  padding:6px 8px!important;
+  line-height:1.2!important;
+  white-space:nowrap;
+}
+#real-plots .real-sort-btn{
+  padding:0!important;
+  font-size:13px!important;
+}
+#real-plots .status{
+  padding:2px 8px!important;
+  font-size:11px!important;
+}
+#real-plots .table-responsive{
+  overflow-x:auto;
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -7035,10 +7060,6 @@ body:not(.is-admin) #user-management{display:none!important}
     </div>
 </div>
 </div>
-
-
-
-
 <input id="yieldPerRai" type="hidden" value=""/><div class="plot-section">
 <h3>รายละเอียดพื้นที่แปลงจำลอง</h3>
 <table class="table form-table scenario-area-table"><tbody><tr><th>พื้นที่ปลูก (ไร่)</th><td><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></td></tr><tr><th>ประเภทอ้อย</th><td><select class="plot-input" id="cropType"></select></td></tr><tr><th>รูปแบบการให้น้ำ</th><td><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></td></tr><tr><th>ระยะร่องที่ปลูก</th><td><select class="plot-input" id="rowSpacing"><option value="1.50">1.50 เมตร</option><option selected="" value="1.65">1.65 เมตร</option><option value="1.85">1.85 เมตร</option></select></td></tr></tbody></table>
@@ -7060,7 +7081,6 @@ body:not(.is-admin) #user-management{display:none!important}
 <tr><td>หนี้สินตามปีการผลิตที่เลือก</td><td id="selectedYearDebt">0</td></tr></tbody>
 </table>
 </div>
-
 </section>
 <section class="section app-page scenario-page scenario-v2" id="scenario">
 <div class="scenario-toolbar">
