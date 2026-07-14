@@ -1,26 +1,17 @@
-Cane Next+ User Management
+Cane Next+ Admin-only access fix
 
-เพิ่มให้แล้ว:
-- เมนูจัดการผู้ใช้งาน แสดงเฉพาะ Admin
-- เพิ่มผู้ใช้
-- แก้ไขชื่อ รหัสพนักงาน Role เขต เขตย่อย และสถานะ
-- รีเซ็ตรหัสผ่าน
-- เปิด/ปิดการใช้งาน
-- ค้นหาผู้ใช้
+แก้ไข:
+- Data Management แสดงและเปิดได้เฉพาะ Admin ที่ status=active
+- จัดการผู้ใช้งาน แสดงและเปิดได้เฉพาะ Admin ที่ status=active
+- Extension / Manager / Viewer ถูกส่งกลับไป Business Partner
+- ป้องกันการเรียก Preview, Import และ User Management actions โดยตรงจาก JavaScript
+- ตรวจสิทธิ์ใหม่ทุกครั้งเมื่อ Login/Logout เปลี่ยน
 
-ขั้นตอนติดตั้ง:
-1. Supabase > SQL Editor
-   Run ไฟล์ user_management_schema.sql
+ติดตั้ง:
+1. อัปโหลด index.html และ config.js ขึ้น GitHub Pages
+2. กด Ctrl+F5
+3. Logout แล้ว Login ใหม่
 
-2. กำหนดบัญชีเดิมเป็น Admin:
-   update public.user_profiles
-   set role='admin', status='active'
-   where email='อีเมลแอดมินของคุณ';
-
-3. Deploy Edge Function ชื่อ manage-users
-   ใช้ไฟล์ supabase/functions/manage-users/index.ts
-
-4. อัปโหลด index.html และ config.js ขึ้น GitHub Pages
-
-5. Logout และ Login ใหม่
-   เมนูจัดการผู้ใช้งานจะแสดงเฉพาะ Admin
+ความปลอดภัยฝั่ง Server:
+- manage-users Edge Function ในแพ็กเกจตรวจ role=admin อยู่แล้ว
+- สำหรับ import-cane-excel ต้องตรวจ Admin ใน Edge Function เช่นเดียวกัน หากใช้ Service Role
