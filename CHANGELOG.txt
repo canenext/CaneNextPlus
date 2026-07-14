@@ -1,13 +1,14 @@
 Cane Next+ Master Version
-Version: 3.0.2
-Based on: v3.0.1
-Base index SHA-256: f0e7a2530ac7a5dc08ebf88950a2e21743092b993eccfbcafdca37585898a145
-Created: 2026-07-14T09:55:35
+Version: 3.0.3
+Based on: v3.0.2
+Base index SHA-256: a532f537c5bcf6ab05638fac60ea7d7abbab9d7741b25b812702e96b3d57a88e
+Created: 2026-07-14T10:01:35
 
 FIX
-- Removed the remaining Business Partner flash when returning to the app.
-- The saved menu is now applied in the HEAD before the first browser paint.
-- Business Partner is no longer rendered first and replaced later.
-- No focus, blur, visibilitychange, or pageshow listeners were added.
-- Multi-monitor and multi-window behavior from v3.0.0 remains unchanged.
-- Admin-only page validation remains in place.
+- Removed three overlapping Admin access/menu scripts.
+- Data Management and User Management now switch synchronously for Admin.
+- Admin role is loaded once and cached; menu clicks do not query Supabase again.
+- Older duplicate click handlers are stopped before they can redirect or redraw.
+- Sidebar and page transitions are disabled during Admin page switching.
+- Sensitive Admin actions remain protected.
+- Non-admin users still cannot see or open the two Admin pages.
