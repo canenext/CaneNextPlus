@@ -1,20 +1,13 @@
 Cane Next+ Master Version
-Version: 3.0.1
-Based on: v3.0.0
-Base index SHA-256: 80d7513a1d5901fdabfb70773c2f2b10c0c06c35f45f2443401e5ffb86a39b9a
-Created: 2026-07-14T09:41:13
+Version: 3.0.2
+Based on: v3.0.1
+Base index SHA-256: f0e7a2530ac7a5dc08ebf88950a2e21743092b993eccfbcafdca37585898a145
+Created: 2026-07-14T09:55:35
 
-CHANGES
-- Centralized farmer context for every menu.
-- Before any real search, all menus use:
-  farmer_code 778899
-  farmer_name นาย อ้อยดี มีกำไร
-  zone 8
-  subzone 8888
-- After a successful search or farmer selection, the latest farmer becomes
-  the single current farmer used by all menus.
-- Latest farmer remains active during menu switching and page refresh
-  within the same login session.
-- Farmer context is cleared only on explicit Logout.
-- After the next Login, the default farmer is shown again.
-- Multi-monitor-safe page-state behavior from v3.0.0 remains unchanged.
+FIX
+- Removed the remaining Business Partner flash when returning to the app.
+- The saved menu is now applied in the HEAD before the first browser paint.
+- Business Partner is no longer rendered first and replaced later.
+- No focus, blur, visibilitychange, or pageshow listeners were added.
+- Multi-monitor and multi-window behavior from v3.0.0 remains unchanged.
+- Admin-only page validation remains in place.

@@ -1,7 +1,55 @@
 <!DOCTYPE html>
 
 <html lang="th">
-<head>
+<head><script id="canenext-prepaint-page-script">
+(function(){
+  try{
+    const saved=localStorage.getItem('canenext_active_page_v3') || 'business-partner';
+    document.documentElement.setAttribute('data-canepage',saved);
+    document.documentElement.classList.add('canenext-prepaint');
+  }catch(e){
+    document.documentElement.setAttribute('data-canepage','business-partner');
+    document.documentElement.classList.add('canenext-prepaint');
+  }
+})();
+</script><style id="canenext-prepaint-page-style">
+/* Apply the saved menu before first paint so Business Partner never flashes. */
+html.canenext-prepaint .app-page{
+  display:none !important;
+}
+html.canenext-prepaint[data-canepage="business-partner"] #business-partner,
+html.canenext-prepaint[data-canepage="basic-cost"] #basic-cost,
+html.canenext-prepaint[data-canepage="real-plots"] #real-plots,
+html.canenext-prepaint[data-canepage="plot-data"] #plot-data,
+html.canenext-prepaint[data-canepage="scenario"] #scenario,
+html.canenext-prepaint[data-canepage="analytics"] #analytics,
+html.canenext-prepaint[data-canepage="promotion"] #promotion,
+html.canenext-prepaint[data-canepage="dashboard"] #dashboard,
+html.canenext-prepaint[data-canepage="ai-recommendation"] #ai-recommendation,
+html.canenext-prepaint[data-canepage="data-management"] #data-management,
+html.canenext-prepaint[data-canepage="user-management"] #user-management{
+  display:block !important;
+}
+html.canenext-prepaint .menu-row a{
+  background:#fff !important;
+  color:#123f74 !important;
+}
+html.canenext-prepaint[data-canepage="business-partner"] .menu-row a[href="#business-partner"],
+html.canenext-prepaint[data-canepage="basic-cost"] .menu-row a[href="#basic-cost"],
+html.canenext-prepaint[data-canepage="real-plots"] .menu-row a[href="#real-plots"],
+html.canenext-prepaint[data-canepage="plot-data"] .menu-row a[href="#plot-data"],
+html.canenext-prepaint[data-canepage="scenario"] .menu-row a[href="#scenario"],
+html.canenext-prepaint[data-canepage="analytics"] .menu-row a[href="#analytics"],
+html.canenext-prepaint[data-canepage="promotion"] .menu-row a[href="#promotion"],
+html.canenext-prepaint[data-canepage="dashboard"] .menu-row a[href="#dashboard"],
+html.canenext-prepaint[data-canepage="ai-recommendation"] .menu-row a[href="#ai-recommendation"],
+html.canenext-prepaint[data-canepage="data-management"] .menu-row a[href="#data-management"],
+html.canenext-prepaint[data-canepage="user-management"] .menu-row a[href="#user-management"]{
+  background:#0B5CAD !important;
+  color:#fff !important;
+  border-left:4px solid #083B73 !important;
+}
+</style>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Cane Next Plus+ | Smart Sugarcane Management Platform</title>
@@ -7024,7 +7072,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="3.0.1" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.0.2" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -12568,6 +12616,68 @@ document.addEventListener('DOMContentLoaded', function(){
       sessionStorage.removeItem(SESSION_KEY);
       window.CANENEXT_CURRENT_FARMER=null;
     }
+  };
+})();
+</script><script id="canenext-prepaint-page-finalizer">
+(function(){
+  const KEY='canenext_active_page_v3';
+  const DEFAULT_PAGE='business-partner';
+  const ADMIN_ONLY=new Set(['data-management','user-management']);
+
+  function isAdmin(){
+    const p=window.CANENEXT_CURRENT_PROFILE;
+    return String(p?.role||'').toLowerCase()==='admin' &&
+           String(p?.status||'').toLowerCase()==='active';
+  }
+
+  function safePage(pageId){
+    if(!pageId || !document.getElementById(pageId)) return DEFAULT_PAGE;
+    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
+    return pageId;
+  }
+
+  function apply(pageId){
+    const target=safePage(pageId);
+
+    document.querySelectorAll('.app-page').forEach(page=>{
+      page.classList.toggle('active-page',page.id===target);
+    });
+
+    document.querySelectorAll('.menu-row a[href^="#"]').forEach(link=>{
+      link.classList.toggle('active-menu',link.getAttribute('href')==='#'+target);
+    });
+
+    document.documentElement.setAttribute('data-canepage',target);
+    localStorage.setItem(KEY,target);
+
+    requestAnimationFrame(()=>{
+      document.documentElement.classList.remove('canenext-prepaint');
+    });
+
+    return target;
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    const saved=localStorage.getItem(KEY)||DEFAULT_PAGE;
+
+    // Apply immediately with the available role.
+    apply(saved);
+
+    // Recheck once after Auth/Profile finishes loading.
+    setTimeout(()=>apply(saved),700);
+  });
+
+  // Keep the pre-paint attribute synchronized only on real menu clicks.
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('.menu-row a[href^="#"]');
+    if(!link || !event.isTrusted) return;
+
+    const target=link.getAttribute('href').slice(1);
+    document.documentElement.setAttribute('data-canepage',target);
+  },true);
+
+  window.CanePrepaintPage={
+    apply
   };
 })();
 </script></body>
