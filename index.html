@@ -6705,308 +6705,14 @@ body.is-admin .admin-only-menu{display:flex!important}
   .um-form-actions{flex-direction:column}
   .um-form-actions .btn{width:100%}
 }
-</style><style id="canenext-admin-access-style">
-.admin-only-menu{display:none!important}
-body.is-admin .admin-only-menu{display:flex!important}
-body:not(.is-admin) #data-management,
-body:not(.is-admin) #user-management{display:none!important}
-</style><style id="login-options-after-forgot-remove">
-.login-options{
-  justify-content:flex-start !important;
-}
-</style><style id="real-plots-column-update-style">
-#real-plots .real-plot-table{
-  min-width:1120px !important;
-  width:100% !important;
-}
-#real-plots .real-plot-table th,
-#real-plots .real-plot-table td{
-  text-align:center !important;
-  vertical-align:middle !important;
-}
-#real-plots .real-plot-table th:nth-child(1){min-width:110px}
-#real-plots .real-plot-table th:nth-child(2){min-width:140px}
-#real-plots .real-plot-table th:nth-child(3){min-width:125px}
-#real-plots .real-plot-table th:nth-child(4){min-width:130px}
-#real-plots .real-plot-table th:nth-child(5){min-width:110px}
-#real-plots .real-plot-table th:nth-child(6){min-width:140px}
-#real-plots .real-plot-table th:nth-child(7){min-width:130px}
-#real-plots .real-plot-table th:nth-child(8){min-width:120px}
-</style><style id="real-plots-actions-balance-style">
-#real-plots .real-actions{
-  display:flex !important;
-  justify-content:flex-end !important;
-  margin-top:16px !important;
-}
-</style><style id="scenario-setup-reorder-style">
-#plot-data .scenario-area-table th{
-  width:32% !important;
-}
-#plot-data .scenario-area-table td{
-  text-align:center !important;
-}
-#plot-data .scenario-area-table .plot-input{
-  max-width:320px !important;
-}
-</style><style id="compact-real-plot-table-style">
-/* Compact real plot table */
-#real-plots .real-plot-table,
-#real-plots table{
-  font-size:13px!important;
-}
-#real-plots .real-plot-table th,
-#real-plots .real-plot-table td,
-#real-plots table th,
-#real-plots table td{
-  padding:6px 8px!important;
-  line-height:1.2!important;
-  white-space:nowrap;
-}
-#real-plots .real-sort-btn{
-  padding:0!important;
-  font-size:13px!important;
-}
-#real-plots .status{
-  padding:2px 8px!important;
-  font-size:11px!important;
-}
-#real-plots .table-responsive{
-  overflow-x:auto;
-}
-</style><style id="scenario-area-two-row-style">
-#plot-data .scenario-area-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px 16px;
-}
-#plot-data .scenario-area-item{
-  min-width:0;
-}
-#plot-data .scenario-area-item label{
-  display:block;
-  margin:0 0 6px;
-  color:#183F66;
-  font-size:13px;
-  font-weight:800;
-  line-height:1.25;
-  white-space:normal;
-}
-#plot-data .scenario-area-item input,
-#plot-data .scenario-area-item select{
-  width:100%;
-  max-width:none !important;
-  height:40px;
-}
-@media(max-width:700px){
-  #plot-data .scenario-area-grid{
-    grid-template-columns:1fr;
-  }
-}
-</style><style id="scenario-financial-comparison-final-style">
-#plot-data .compare-table td:first-child{
-  text-align:left !important;
-  font-weight:700;
-}
-#plot-data .compare-table td:last-child{
-  text-align:right !important;
-  font-variant-numeric:tabular-nums;
-}
-#plot-data #totalGuarantee,
-#plot-data #guaranteeDiff,
-#plot-data #deStatus{
-  font-weight:900 !important;
-}
-</style><style id="canenext-admin-menu-visibility-style">
-/* Hide admin menus by default; reveal only after verified active admin login */
-.admin-only-menu{
-  display:none !important;
-}
-body.is-admin .admin-only-menu{
-  display:flex !important;
-}
-body:not(.is-admin) #data-management,
-body:not(.is-admin) #user-management{
-  display:none !important;
-}
-</style><style id="canenext-login-alert-style">
-.login-alert-overlay{
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  display:grid;
-  place-items:center;
-  padding:24px;
-  background:rgba(4,26,54,.38);
-  backdrop-filter:blur(3px);
-}
-.login-alert-overlay[hidden]{display:none!important}
-.login-alert-card{
-  width:min(390px,100%);
-  background:#fff;
-  border:1px solid #F0C8C8;
-  border-radius:22px;
-  padding:26px 24px 22px;
-  text-align:center;
-  box-shadow:0 24px 70px rgba(8,59,115,.22);
-}
-.login-alert-icon{
-  width:52px;
-  height:52px;
-  margin:0 auto 14px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:#FFF0F0;
-  color:#C62828;
-  font-size:28px;
-  font-weight:900;
-}
-.login-alert-card h3{
-  margin:0 0 8px;
-  color:#0A3D78;
-  font-size:22px;
-  font-weight:800;
-}
-.login-alert-card p{
-  margin:0 0 20px;
-  color:#5B6F86;
-  font-size:15px;
-  line-height:1.6;
-}
-.login-alert-card button{
-  min-width:120px;
-  border:0;
-  border-radius:999px;
-  padding:11px 20px;
-  background:#0B5CAD;
-  color:#fff;
-  font-family:inherit;
-  font-size:15px;
-  font-weight:800;
-  cursor:pointer;
-}
-#username.login-error,
-#password.login-error{
-  border-color:#D93A3A!important;
-  box-shadow:0 0 0 4px rgba(217,58,58,.10)!important;
-}
-</style><style id="canenext-crop-type-mode-style">
-#plot-data #cropType:disabled{
-  background:#F3F8FF !important;
-  color:#083B73 !important;
-  font-weight:800 !important;
-  cursor:not-allowed;
-}
-#plot-data .scenario-area-item.crop-type-real::after{
-  content:"ดึงจากแปลงจริงที่เลือก";
-  display:block;
-  margin-top:5px;
-  color:#6B7F93;
-  font-size:11px;
-}
-</style><style id="canenext-realplot-width-final-style">
-/* รายการแปลงจริง: ปรับสัดส่วนคอลัมน์ให้พอดีหน้าจอ ไม่ต้องเลื่อนแนวนอน */
-#real-plots .table-responsive{
-  overflow-x:visible !important;
-}
-#real-plots .real-plot-table{
-  width:100% !important;
-  min-width:0 !important;
-  table-layout:fixed !important;
-  font-size:14px !important;
-}
-#real-plots .real-plot-table th,
-#real-plots .real-plot-table td{
-  padding:7px 5px !important;
-  line-height:1.25 !important;
-  white-space:normal !important;
-  overflow-wrap:anywhere;
-  word-break:normal;
-  text-align:center !important;
-  vertical-align:middle !important;
-}
-#real-plots .real-sort-btn{
-  font-size:14px !important;
-  line-height:1.2 !important;
-  white-space:normal !important;
-}
-#real-plots .real-plot-table th:nth-child(1),
-#real-plots .real-plot-table td:nth-child(1){width:10% !important;min-width:0 !important;}
-#real-plots .real-plot-table th:nth-child(2),
-#real-plots .real-plot-table td:nth-child(2){width:13% !important;min-width:0 !important;}
-#real-plots .real-plot-table th:nth-child(3),
-#real-plots .real-plot-table td:nth-child(3){width:12% !important;min-width:0 !important;}
-#real-plots .real-plot-table th:nth-child(4),
-#real-plots .real-plot-table td:nth-child(4){width:12% !important;min-width:0 !important;}
-#real-plots .real-plot-table th:nth-child(5),
-#real-plots .real-plot-table td:nth-child(5){width:9% !important;min-width:0 !important;}
-#real-plots .real-plot-table th:nth-child(6),
-#real-plots .real-plot-table td:nth-child(6){width:15% !important;min-width:0 !important;}
-#real-plots .real-plot-table th:nth-child(7),
-#real-plots .real-plot-table td:nth-child(7){width:14% !important;min-width:0 !important;}
-#real-plots .real-plot-table th:nth-child(8),
-#real-plots .real-plot-table td:nth-child(8){width:15% !important;min-width:0 !important;}
-#real-plots .status{
-  display:inline-block;
-  max-width:100%;
-  padding:3px 7px !important;
-  font-size:12px !important;
-  white-space:normal !important;
-}
-@media(max-width:1100px){
-  #real-plots .real-plot-table{
-    font-size:13px !important;
-  }
-  #real-plots .real-sort-btn{
-    font-size:13px !important;
-  }
-  #real-plots .real-plot-table th,
-  #real-plots .real-plot-table td{
-    padding:6px 4px !important;
-  }
-}
-</style><style id="canenext-dashboard-sync-style">
-#dashboard .dash-badge{
-  display:inline-block;
-  margin:2px;
-  padding:4px 8px;
-  border-radius:999px;
-  background:#EAF4FF;
-  color:#0B5CAD;
-  font-size:11px;
-  font-weight:800;
-}
-</style><style id="crop-font-fix">
-#plot-data #cropType,
-#plot-data #cropType option,
-#plot-data .scenario-area-item #cropType{
-  font-weight:400 !important;
-}
-</style><style id="canenext-user-scope-style">
-.user-scope-chip{
-  display:none;
-  align-items:center;
-  gap:8px;
-  padding:8px 12px;
-  border:1px solid #D7E8FA;
-  border-radius:999px;
-  background:#F3F8FF;
-  color:#0A3D78;
-  font-size:13px;
-  font-weight:700;
-}
-body.logged-in .user-scope-chip{display:inline-flex}
-.user-scope-chip.warning{
-  background:#FFF7E6;
-  border-color:#F2D59B;
-  color:#8A5A00;
-}
-@media(max-width:900px){
-  .user-scope-chip{
-    width:100%;
-    border-radius:14px;
-  }
-}
+</style><style id="canenext-manager-multizone-style">
+.um-manager-zones-wrap{grid-column:1/-1}
+.um-zone-check-grid{display:grid;grid-template-columns:repeat(8,minmax(54px,1fr));gap:8px}
+.um-zone-check-grid label{display:flex;align-items:center;justify-content:center;gap:6px;min-height:38px;border:1px solid #D5E6F8;border-radius:10px;background:#F7FBFF;color:#083B73;font-size:13px;font-weight:700;cursor:pointer}
+.um-zone-check-grid input{width:15px;height:15px}
+.um-help{display:block;margin-top:6px;color:#6B7F93;font-size:12px}
+@media(max-width:1100px){.um-zone-check-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){.um-zone-check-grid{grid-template-columns:repeat(2,1fr)}}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -7034,6 +6740,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
 </div>
 <div class="login-options">
 <label><input type="checkbox"/> จดจำการเข้าสู่ระบบ</label>
+<a href="#">ลืมรหัสผ่าน?</a>
 </div>
 <button class="btn login-submit" type="submit">เข้าสู่ระบบ</button>
 <div class="demo-note" id="authMessage" style="display:none;"></div>
@@ -7051,7 +6758,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <small>Smart Sugarcane Management Platform</small>
 </div>
 </div>
-<div class="user-scope-chip" id="userScopeChip">กำลังตรวจสอบขอบเขตข้อมูล...</div><div class="current-user">
+<div class="current-user">
 <div>👤 ผู้ใช้งานปัจจุบัน: <span id="currentUserName">Demo User</span></div>
 <button class="logout-btn" onclick="logoutSupabase()">ออกจากระบบ</button>
 </div>
@@ -7066,8 +6773,8 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <a href="#ai-recommendation" onclick="showMainMenu(event, 'ai-recommendation')"><i class="fa-solid fa-robot menu-icon"></i> AI Recommendation</a>
 <a href="#dashboard" onclick="showMainMenu(event, 'dashboard')"><i class="fa-solid fa-gauge-high menu-icon"></i> Dashboard</a>
 <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
-<a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> หลักเกณฑ์การส่งเสริม</a>
-<a class="admin-only-menu" href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
+<a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> Promotion</a>
+<a href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
 <a class="admin-only-menu" href="#user-management" onclick="showMainMenu(event, 'user-management')"><i class="fa-solid fa-users-gear menu-icon"></i> จัดการผู้ใช้งาน</a></div>
 </nav>
 </header>
@@ -7195,12 +6902,54 @@ body.logged-in .user-scope-chip{display:inline-flex}
 </div>
 <div class="table-responsive">
 <table class="table real-plot-table">
-<thead><tr><th><button class="real-sort-btn" data-sort-key="year" type="button">ปีการผลิต<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="project_name" type="button">โครงการ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="crop_type" type="button">ประเภทอ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="plot_id" type="button">รหัสแปลง<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="area" type="button">พื้นที่ (ไร่)<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="variety" type="button">พันธุ์อ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="water" type="button">รูปแบบการให้น้ำ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="status" type="button">สถานะแปลง<span class="real-sort-icon">↕</span></button></th></tr></thead>
+<thead>
+<tr>
+<th><button class="real-sort-btn" data-sort-key="year" type="button">ปีการผลิต<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="project_name" type="button">โครงการ<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="crop_type" type="button">ประเภทอ้อย<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="plot_id" type="button">รหัสแปลง<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="area" type="button">พื้นที่ (ไร่)<span class="real-sort-icon">↕</span></button></th>
+<th><button class="real-sort-btn" data-sort-key="status" type="button">สถานะแปลง<span class="real-sort-icon">↕</span></button></th>
+</tr>
+</thead>
 <tbody id="realPlotTableBody"></tbody>
 </table>
 </div>
 </div>
+<div class="real-plot-layout">
+<div class="real-section">
+<h3>รายละเอียดแปลง</h3>
+<div class="real-detail-grid">
+<div><span>รหัสแปลง</span><b id="realDetailPlotId">-</b></div>
+<div><span>พื้นที่</span><b id="realDetailArea">-</b></div>
+<div><span>ปีการผลิต</span><b id="realDetailYear">-</b></div>
+<div><span>ประเภทอ้อย</span><b id="realDetailCropType">-</b></div>
+<div><span>พันธุ์อ้อย</span><b id="realDetailVariety">-</b></div>
+<div><span>ประเภทดิน</span><b id="realDetailSoil">-</b></div>
+<div><span>ระบบน้ำ</span><b id="realDetailWater">-</b></div>
+<div><span>สถานะข้อมูล</span><b id="realDetailStatus">-</b></div>
+</div>
+</div>
+<div class="real-section">
+<h3>ความพร้อมสำหรับการวิเคราะห์</h3>
+<div class="readiness-score">
+<div class="readiness-value" id="realReadinessValue">0%</div>
+<div class="readiness-bar"><i id="realReadinessBar"></i></div>
+</div>
+<div class="readiness-list">
+<div><span>พื้นที่แปลง</span><b id="readyArea">-</b></div>
+<div><span>ปีการผลิต</span><b id="readyYear">-</b></div>
+<div><span>พันธุ์อ้อย</span><b id="readyVariety">-</b></div>
+<div><span>ระบบน้ำ</span><b id="readyWater">-</b></div>
+<div><span>ประเภทดิน</span><b id="readySoil">-</b></div>
+<div><span>ผลผลิตย้อนหลัง</span><b id="readyHistory">-</b></div>
+<div><span>ต้นทุนจริง</span><b id="readyCost">-</b></div>
+<div><span>กิจกรรมในแปลง</span><b id="readyActivity">-</b></div>
+</div>
+</div>
+</div>
 <div class="real-actions">
+<button class="btn secondary" onclick="analyzeRealPlot()" type="button">วิเคราะห์แปลง</button>
 <button class="btn" onclick="createScenarioFromRealPlot()" type="button">สร้าง Scenario จากแปลงจริง</button>
 </div>
 </section>
@@ -7294,18 +7043,69 @@ body.logged-in .user-scope-chip{display:inline-flex}
     </div>
 </div>
 </div>
-<input id="yieldPerRai" type="hidden" value=""/><div class="plot-section">
+<div class="plot-section">
 <h3>รายละเอียดพื้นที่แปลงจำลอง</h3>
-<div class="scenario-area-grid"><div class="scenario-area-item"><label>พื้นที่ปลูก (ไร่)</label><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></div><div class="scenario-area-item"><label>ประเภทอ้อย</label><select class="plot-input" id="cropType"><option value="อ้อยตุลา">อ้อยตุลา</option><option value="อ้อยตอ 1">อ้อยตอ 1</option><option value="อ้อยตอ 2">อ้อยตอ 2</option><option value="อ้อยตอ 3">อ้อยตอ 3</option><option value="อ้อยตอ 4">อ้อยตอ 4</option></select></div><div class="scenario-area-item"><label>รูปแบบการให้น้ำ</label><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></div><div class="scenario-area-item"><label>ระยะร่องที่ปลูก</label><select class="plot-input" id="rowSpacing"><option value="1.50">1.50 เมตร</option><option selected="" value="1.65">1.65 เมตร</option><option value="1.85">1.85 เมตร</option></select></div></div>
-</div><div class="plot-section">
+<table class="table form-table">
+<tbody>
+<tr><th>พื้นที่ปลูก (ไร่)</th><td><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></td><th>ระบบน้ำ</th><td><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></td></tr>
+<tr><th>ระยะร่องที่ปลูก</th><td><select class="plot-input" id="rowSpacing"><option value="1.50">1.50 เมตร</option><option selected="" value="1.65">1.65 เมตร</option><option value="1.85">1.85 เมตร</option></select></td><th>จำนวนร่อง</th><td><input class="plot-input readonly calculated-value" id="rowCount" readonly="" type="text"/></td></tr>
+</tbody>
+</table>
+</div>
+<div class="plot-section">
 <h3>รายการขอรับส่งเสริม / งบลงทุน</h3>
 <div class="promotion-grid" id="promotionItems"></div>
 <div class="investment-summary"><span>สรุปงบลงทุน</span><strong id="investmentTotal">0</strong><span>บาท</span><button class="btn scenario-copy-btn" onclick="copyToScenario()" type="button">คัดลอกเป็น Scenario</button></div>
-</div><div class="plot-section">
+</div>
+<div class="plot-section">
 <h3>ตารางเปรียบเทียบ รับส่งเสริมโรงงานเทียบวงเงินค้ำประกัน</h3>
 <table class="table compare-table">
 <thead><tr><th>รายการ</th><th>จำนวนเงิน (บาท)</th></tr></thead>
-<tbody><tr><td>หลักทรัพย์ค้ำประกัน</td><td id="assetGuarantee">0</td></tr><tr><td>กลุ่มค้ำประกัน</td><td id="groupGuarantee">0</td></tr><tr><td>วงเงินค้ำประกันรวม</td><td id="totalGuarantee">0</td></tr><tr><td>หนี้สินครบ Due ชำระในปี</td><td id="selectedYearDebt">0</td></tr><tr><td>งบส่งเสริมที่ใช้ลงทุนเพิ่ม</td><td id="promotionBudget">0</td></tr><tr><td>ผลต่างวงเงินค้ำประกัน</td><td id="guaranteeDiff">0</td></tr><tr><td>สถานะ D/E</td><td id="deStatus">0.00</td></tr></tbody>
+<tbody>
+<tr><td>หลักทรัพย์ค้ำประกัน</td><td id="assetGuarantee">2,500,000</td></tr>
+<tr><td>กลุ่มค้ำประกัน</td><td id="groupGuarantee">3,000,000</td></tr>
+<tr><td>วงเงินค้ำประกันรวม</td><td id="totalGuarantee">5,500,000</td></tr>
+<tr><td>งบส่งเสริมที่ใช้ลงทุน</td><td id="promotionBudget">0</td></tr>
+<tr><td>ผลต่าง</td><td id="guaranteeDiff">5,500,000</td></tr>
+<tr><td>สถานะ</td><td id="deStatus"><span class="status ok">ปกติ</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="plot-section">
+<h3>การวิเคราะห์ผลผลิต</h3>
+<table class="table form-table yield-analysis-table">
+<tbody>
+<tr>
+<th>สถานการณ์ฝน</th>
+<td>
+<select class="plot-input" id="rainScenario">
+<option>ภัยแล้ง</option>
+<option>ฝนน้อย</option>
+<option selected="">ฝนเหมาะสม(ปกติ)</option>
+<option>ฝนมาก(น้ำท่วมขัง)</option>
+</select>
+</td>
+<th>น้ำหนักอ้อย/ลำ (กก.)</th>
+<td><input class="plot-input" id="stalkWeight" step="0.01" type="number" value="1.50"/></td>
+</tr>
+<tr>
+<th>จำนวนลำ/เมตร</th>
+<td><input class="plot-input" id="stalkPerMeter" step="0.01" type="number" value="10"/></td>
+<th>จำนวนลำ/ไร่</th>
+<td><input class="plot-input readonly auto-field calculated-value" id="stalkPerRai" readonly="" type="text"/></td>
+</tr>
+</tbody>
+</table>
+</div>
+<input id="yieldPerRai" type="hidden" value=""/>
+<div class="plot-section">
+<h3>รายได้ราคาอ้อยและค่าใช้จ่าย</h3>
+<table class="table form-table">
+<tbody>
+<tr><th>ราคาอ้อยขั้นต้น (บาท/ตัน)</th><td><input class="plot-input" id="baseCanePrice" step="0.01" type="number" value="950"/></td><th>CCS. (%ccs.)</th><td><input class="plot-input" id="ccsValue" step="0.01" type="number" value="13.80"/></td></tr>
+<tr><th>ค่า CCS. (บาท/ตัน)</th><td><input class="plot-input readonly calculated-value" id="ccsPrice" readonly="" type="text"/></td><th>ราคาอ้อยขั้นต้น + CCS. (บาท/ตัน)</th><td><input class="plot-input readonly calculated-value" id="totalCanePrice" readonly="" type="text"/></td></tr>
+<tr><th>ค่าใช้จ่าย (ตัด+ขึ้น+บรรทุก) (บาท/ตัน)</th><td><input class="plot-input" id="harvestCost" step="0.01" type="number" value="400"/></td><th></th><td></td></tr>
+</tbody>
 </table>
 </div>
 </section>
@@ -7498,7 +7298,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <option value="manager">Manager — ผู้จัดการเขต</option>
 <option value="admin">Admin — ผู้ดูแลระบบ</option>
 </select>
-</div>
+</div><div class="form-group um-manager-zones-wrap" hidden="" id="umManagerZonesWrap"><label>เขตที่รับผิดชอบ</label><div class="um-zone-check-grid" id="umManagerZones"><label><input type="checkbox" value="01"/>01</label><label><input type="checkbox" value="02"/>02</label><label><input type="checkbox" value="03"/>03</label><label><input type="checkbox" value="04"/>04</label><label><input type="checkbox" value="05"/>05</label><label><input type="checkbox" value="06"/>06</label><label><input type="checkbox" value="07"/>07</label><label><input type="checkbox" value="08"/>08</label><label><input type="checkbox" value="09"/>09</label><label><input type="checkbox" value="10"/>10</label><label><input type="checkbox" value="11"/>11</label><label><input type="checkbox" value="12"/>12</label><label><input type="checkbox" value="13"/>13</label><label><input type="checkbox" value="14"/>14</label><label><input type="checkbox" value="15"/>15</label><label><input type="checkbox" value="90"/>90</label></div><small class="um-help">เลือกได้มากกว่า 1 เขต สำหรับ Manager</small></div>
 <div class="form-group">
 <label for="umZone">เขต</label>
 <input id="umZone" placeholder="เช่น 05" type="text"/>
@@ -7817,9 +7617,9 @@ function renderScenarioCardV2(data){
         </div>
       </div>
       <div class="scenario-col">
-        <h5 class="scenario-col-title"><i class="fa-solid fa-hand-holding-dollar"></i>รูปแบบการให้น้ำ / งบลงทุน</h5>
+        <h5 class="scenario-col-title"><i class="fa-solid fa-hand-holding-dollar"></i>ระบบน้ำ / งบลงทุน</h5>
         <div class="scenario-field-v2" style="margin-bottom:12px;">
-          <label>รูปแบบการให้น้ำ</label>
+          <label>ระบบน้ำ</label>
           <select data-key="water">
             <option ${data.water==='ไม่มีระบบน้ำ (น้ำฝน)'?'selected':''}>ไม่มีระบบน้ำ (น้ำฝน)</option>
             <option ${data.water==='ระบบน้ำหยด'?'selected':''}>ระบบน้ำหยด</option>
@@ -9813,7 +9613,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const body=document.getElementById('realPlotTableBody');
     if(!body) return;
     if(!list.length){
-      emptyRow(body,8,'ไม่พบข้อมูลแปลง');
+      emptyRow(body,6,'ไม่พบข้อมูลแปลง');
       return;
     }
     body.innerHTML=list.map((p,i)=>`
@@ -9823,8 +9623,6 @@ document.addEventListener('DOMContentLoaded', function(){
         <td>${esc(p.crop_type)}</td>
         <td>${esc(p.plot_id)}</td>
         <td>${fmt(p.area)}</td>
-        <td>${esc(p.variety||'-')}</td>
-        <td>${esc(p.water||'-')}</td>
         <td><span class="status ${p.status==='active'||p.status==='พร้อมวิเคราะห์'?'ok':'warn'}">${esc(p.status==='active'?'ใช้งาน':p.status)}</span></td>
       </tr>`).join('');
   };
@@ -10117,7 +9915,7 @@ document.addEventListener('DOMContentLoaded', function(){
     plotsLoading=true;
     const body=document.getElementById('realPlotTableBody');
     if(body){
-      body.innerHTML='<tr><td colspan="8" style="text-align:center;">กำลังโหลดข้อมูลแปลง...</td></tr>';
+      body.innerHTML='<tr><td colspan="6" style="text-align:center;">กำลังโหลดข้อมูลแปลง...</td></tr>';
     }
 
     try{
@@ -10169,7 +9967,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }catch(err){
       console.error('Lazy plot load failed:',err);
       if(body){
-        body.innerHTML='<tr><td colspan="8" style="text-align:center;color:#C62828;">โหลดข้อมูลแปลงไม่สำเร็จ</td></tr>';
+        body.innerHTML='<tr><td colspan="6" style="text-align:center;color:#C62828;">โหลดข้อมูลแปลงไม่สำเร็จ</td></tr>';
       }
     }finally{
       plotsLoading=false;
@@ -10535,7 +10333,8 @@ document.addEventListener('DOMContentLoaded', function(){
         role:value('umRole'),
         zone:value('umZone')||null,
         subzone:value('umSubzone')||null,
-        status:value('umStatus')
+        status:value('umStatus'),
+        manager_zones: window.CaneManagerZones?.get?.() || []
       };
 
       if(!editingId){
@@ -10690,1344 +10489,53 @@ document.addEventListener('DOMContentLoaded', function(){
 
   window.addEventListener('canenext:farmer-changed',()=>setTimeout(applyRole,50));
 })();
-</script><script id="canenext-admin-access-control">
+</script><script id="canenext-manager-multizone-script">
 (function(){
-  const ADMIN_PAGES=new Set(['data-management','user-management']);
-  let currentProfile=null;
-  let profilePromise=null;
-
-  async function ensureClient(){
-    if(window.caneSupabase) return window.caneSupabase;
-    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
-      throw new Error('ยังไม่สามารถเชื่อมต่อ Supabase ได้');
-    }
-    window.caneSupabase=window.supabase.createClient(
-      window.CANENEXT_CONFIG.SUPABASE_URL,
-      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
-    );
-    return window.caneSupabase;
-  }
-
-  async function loadProfile(force=false){
-    if(currentProfile && !force) return currentProfile;
-    if(profilePromise && !force) return profilePromise;
-
-    profilePromise=(async()=>{
-      const db=await ensureClient();
-      const {data:{user},error:userError}=await db.auth.getUser();
-      if(userError || !user){
-        currentProfile=null;
-        return null;
-      }
-
-      const {data,error}=await db
-        .from('user_profiles')
-        .select('*')
-        .ilike('email',user.email)
-        .maybeSingle();
-
-      if(error) throw error;
-      currentProfile=data||null;
-      window.CANENEXT_CURRENT_PROFILE=currentProfile;
-      return currentProfile;
-    })();
-
-    try{
-      return await profilePromise;
-    }finally{
-      profilePromise=null;
-    }
-  }
-
-  function isActiveAdmin(profile=currentProfile){
-    return profile?.role==='admin' && profile?.status==='active';
-  }
-
-  function applyVisibility(){
-    const admin=isActiveAdmin();
-    document.body.classList.toggle('is-admin',admin);
-
-    document.querySelectorAll('.admin-only-menu').forEach(link=>{
-      link.style.display=admin?'flex':'none';
-      link.setAttribute('aria-hidden',admin?'false':'true');
-      link.tabIndex=admin?0:-1;
-    });
-
-    const dmPage=document.getElementById('data-management');
-    const umPage=document.getElementById('user-management');
-
-    if(!admin){
-      dmPage?.classList.remove('active-page');
-      umPage?.classList.remove('active-page');
-    }
-
-    const dmInput=document.getElementById('dmExcelFile');
-    const dmPreview=document.getElementById('dmPreviewBtn');
-    const dmImport=document.getElementById('dmImportBtn');
-
-    if(dmInput) dmInput.disabled=!admin;
-    if(dmPreview) dmPreview.disabled=!admin || dmPreview.disabled;
-    if(dmImport) dmImport.disabled=!admin || dmImport.disabled;
-  }
-
-  async function requireAdmin(showMessage=true){
-    try{
-      const profile=await loadProfile();
-      const allowed=isActiveAdmin(profile);
-      applyVisibility();
-
-      if(!allowed && showMessage){
-        alert('เมนูนี้สำหรับ Admin เท่านั้น');
-      }
-      return allowed;
-    }catch(err){
-      console.error('Admin permission check failed:',err);
-      applyVisibility();
-      if(showMessage) alert('ไม่สามารถตรวจสอบสิทธิ์ผู้ใช้งานได้');
-      return false;
-    }
-  }
-
-  // Final route guard. This is intentionally the last showMainMenu override.
-  const previousShowMainMenu=window.showMainMenu;
-  window.showMainMenu=async function(event,pageId){
-    if(event && typeof event.preventDefault==='function'){
-      event.preventDefault();
-    }
-
-    if(ADMIN_PAGES.has(pageId)){
-      const allowed=await requireAdmin(true);
-      if(!allowed){
-        if(typeof previousShowMainMenu==='function'){
-          return previousShowMainMenu(null,'business-partner');
-        }
-        return;
-      }
-    }
-
-    if(typeof previousShowMainMenu==='function'){
-      return previousShowMainMenu(event,pageId);
-    }
+  const getZones=()=>[...document.querySelectorAll('#umManagerZones input:checked')].map(x=>x.value);
+  const setZones=zones=>{
+    const s=new Set((zones||[]).map(v=>String(v).padStart(2,'0')));
+    document.querySelectorAll('#umManagerZones input').forEach(cb=>cb.checked=s.has(cb.value));
   };
-
-  // Protect Data Management actions even if called directly from DevTools.
-  if(window.CaneDataManager){
-    const originalPreview=window.CaneDataManager.preview?.bind(window.CaneDataManager);
-    const originalImport=window.CaneDataManager.importToSupabase?.bind(window.CaneDataManager);
-
-    window.CaneDataManager.preview=async function(){
-      if(!(await requireAdmin(true))) return;
-      return originalPreview?.();
-    };
-
-    window.CaneDataManager.importToSupabase=async function(){
-      if(!(await requireAdmin(true))) return;
-      return originalImport?.();
-    };
-  }
-
-  // Protect User Management actions even if called directly.
-  if(window.CaneUserAdmin){
-    ['openCreate','openEdit','saveUser','toggleStatus','resetPassword','loadUsers']
-      .forEach(name=>{
-        const original=window.CaneUserAdmin[name];
-        if(typeof original!=='function') return;
-
-        window.CaneUserAdmin[name]=async function(){
-          if(!(await requireAdmin(true))) return;
-          return original.apply(this,arguments);
-        };
-      });
-  }
-
-  async function initialize(){
-    await loadProfile(true);
-    applyVisibility();
-
-    const db=await ensureClient();
-    db.auth.onAuthStateChange(async()=>{
-      currentProfile=null;
-      await loadProfile(true);
-      applyVisibility();
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded',initialize);
-  window.CaneAccessControl={
-    loadProfile,
-    requireAdmin,
-    isActiveAdmin:()=>isActiveAdmin()
+  const applyRoleUI=()=>{
+    const isManager=document.getElementById('umRole')?.value==='manager';
+    const wrap=document.getElementById('umManagerZonesWrap');
+    if(wrap) wrap.hidden=!isManager;
+    const zone=document.getElementById('umZone');
+    const subzone=document.getElementById('umSubzone');
+    if(zone){zone.disabled=isManager;if(isManager)zone.value='';}
+    if(subzone){subzone.disabled=isManager;if(isManager)subzone.value='';}
   };
-})();
-</script><script id="scenario-year-financial-link-script">
-(function(){
-  function currentFarmer(){
-    if(window.CANENEXT_CURRENT_FARMER) return window.CANENEXT_CURRENT_FARMER;
-    try{return JSON.parse(localStorage.getItem('canenext_current_farmer')||'null')}
-    catch(e){return null}
+  async function fetchZones(profileId){
+    if(!window.caneSupabase||!profileId)return[];
+    const {data,error}=await window.caneSupabase.from('user_zone_access').select('zone').eq('user_id',profileId).order('zone');
+    if(error)throw error;
+    return (data||[]).map(r=>r.zone);
   }
-
-  function selectedYear(){
-    const ids=['scenarioSourceYear','productionYear','plotProductionYear'];
-    for(const id of ids){
-      const el=document.getElementById(id);
-      if(el && el.value) return el.value;
-    }
-    return '';
-  }
-
-  function setMoney(id,value){
-    const el=document.getElementById(id);
-    if(!el) return;
-    el.textContent=Number(value||0).toLocaleString('th-TH',{
-      minimumFractionDigits:0,
-      maximumFractionDigits:0
-    });
-  }
-
-  async function refreshScenarioFinancialComparison(){
-    const farmer=currentFarmer();
-    const year=selectedYear();
-    if(!farmer?.farmer_code || !year || !window.caneSupabase) return;
-
-    try{
-      const [guaranteeRes,debtRes]=await Promise.all([
-        window.caneSupabase
-          .from('guarantees')
-          .select('*')
-          .eq('farmer_code',farmer.farmer_code)
-          .eq('production_year',year)
-          .maybeSingle(),
-        window.caneSupabase
-          .from('debts')
-          .select('*')
-          .eq('farmer_code',farmer.farmer_code)
-          .maybeSingle()
-      ]);
-
-      if(guaranteeRes.error) throw guaranteeRes.error;
-      if(debtRes.error) throw debtRes.error;
-
-      const g=guaranteeRes.data||{};
-      const d=debtRes.data||{};
-      const yearly=d.yearly_debt||{};
-      const debtValue=Number(yearly[year]||0);
-
-      // Existing guarantee display IDs
-      setMoney('propertyGuaranteeAmount',g.property_amount);
-      setMoney('groupGuaranteeAmount',g.group_amount);
-      setMoney('totalGuaranteeAmount',g.total_amount);
-      setMoney('selectedYearDebt',debtValue);
-
-      // Update any existing comparison cells by row label.
-      document.querySelectorAll('#plot-data table tbody tr').forEach(tr=>{
-        const label=(tr.children[0]?.textContent||'').trim();
-        const cell=tr.children[1];
-        if(!cell) return;
-        if(/วงเงิน.*ค้ำประกัน|หลักค้ำประกัน/.test(label) && !/หนี้สิน/.test(label)){
-          cell.textContent=Number(g.total_amount||0).toLocaleString('th-TH',{maximumFractionDigits:0});
-        }
-        if(/หนี้สิน/.test(label)){
-          cell.textContent=debtValue.toLocaleString('th-TH',{maximumFractionDigits:0});
-        }
-      });
-
-      if(typeof updatePlotData==='function') updatePlotData();
-    }catch(err){
-      console.error('Scenario year financial comparison error:',err);
-    }
-  }
-
   document.addEventListener('DOMContentLoaded',()=>{
-    ['scenarioSourceYear','productionYear','plotProductionYear'].forEach(id=>{
-      document.getElementById(id)?.addEventListener('change',refreshScenarioFinancialComparison);
-    });
-    setTimeout(refreshScenarioFinancialComparison,700);
+    document.getElementById('umRole')?.addEventListener('change',applyRoleUI);
+    applyRoleUI();
   });
-
-  window.addEventListener('canenext:farmer-changed',()=>setTimeout(refreshScenarioFinancialComparison,100));
-  window.refreshScenarioFinancialComparison=refreshScenarioFinancialComparison;
-})();
-</script><script id="canenext-scenario-financial-final">
-(function(){
-  let latestGuarantee={property_amount:0,group_amount:0};
-  let latestDebt=0;
-
-  const money=v=>Number(v||0).toLocaleString('th-TH',{
-    minimumFractionDigits:0,
-    maximumFractionDigits:0
-  });
-  const numberFromText=v=>Number(String(v??'').replace(/[^0-9.-]/g,''))||0;
-
-  function currentFarmer(){
-    if(window.CANENEXT_CURRENT_FARMER) return window.CANENEXT_CURRENT_FARMER;
-    try{return JSON.parse(localStorage.getItem('canenext_current_farmer')||'null')}
-    catch(e){return null}
-  }
-
-  function selectedYear(){
-    for(const id of ['scenarioSourceYear','productionYear','plotProductionYear']){
-      const el=document.getElementById(id);
-      if(el?.value) return el.value;
+  const timer=setInterval(()=>{
+    if(!window.CaneUserAdmin)return;
+    clearInterval(timer);
+    const api=window.CaneUserAdmin;
+    if(typeof api.openCreate==='function'){
+      const old=api.openCreate; api.openCreate=function(){const r=old.apply(this,arguments);setZones([]);setTimeout(applyRoleUI,0);return r;};
     }
-    return '';
-  }
-
-  function getInvestment(){
-    return numberFromText(document.getElementById('investmentTotal')?.textContent);
-  }
-
-  function setText(id,value){
-    const el=document.getElementById(id);
-    if(el) el.textContent=value;
-  }
-
-  function calculateAndRender(){
-    const property=Number(latestGuarantee.property_amount||0);
-    const group=Number(latestGuarantee.group_amount||0);
-    const total=property+group;
-    const debt=Number(latestDebt||0);
-    const investment=getInvestment();
-    const obligations=debt+investment;
-    const difference=total-obligations;
-    const de=total>0 ? obligations/total : 0;
-
-    setText('assetGuarantee',money(property));
-    setText('groupGuarantee',money(group));
-    setText('totalGuarantee',money(total));
-    setText('selectedYearDebt',money(debt));
-    setText('promotionBudget',money(investment));
-    setText('guaranteeDiff',money(difference));
-    setText('deStatus',de.toFixed(2));
-
-    const diffEl=document.getElementById('guaranteeDiff');
-    if(diffEl) diffEl.style.color=difference<0?'#C62828':'#083B73';
-
-    const deEl=document.getElementById('deStatus');
-    if(deEl){
-      deEl.style.color=de>1?'#C62828':'#167248';
-      deEl.style.fontWeight='800';
+    if(typeof api.openEdit==='function'){
+      const old=api.openEdit; api.openEdit=async function(id){const r=old.apply(this,arguments);setTimeout(applyRoleUI,0);try{setZones(await fetchZones(id));}catch(e){setZones([]);}return r;};
     }
-
-    window.CANENEXT_SCENARIO_FINANCIAL={
-      production_year:selectedYear(),
-      property_guarantee:property,
-      group_guarantee:group,
-      total_guarantee:total,
-      due_debt:debt,
-      additional_investment:investment,
-      guarantee_difference:difference,
-      de_ratio:de
-    };
-
-    window.dispatchEvent(new CustomEvent('canenext:scenario-financial-updated',{
-      detail:window.CANENEXT_SCENARIO_FINANCIAL
-    }));
-  }
-
-  async function refreshFromSupabase(){
-    const farmer=currentFarmer();
-    const year=selectedYear();
-
-    latestGuarantee={property_amount:0,group_amount:0};
-    latestDebt=0;
-
-    if(!farmer?.farmer_code || !year || !window.caneSupabase){
-      calculateAndRender();
-      return;
-    }
-
-    try{
-      const [gRes,dRes]=await Promise.all([
-        window.caneSupabase.from('guarantees')
-          .select('property_amount,group_amount')
-          .eq('farmer_code',farmer.farmer_code)
-          .eq('production_year',year)
-          .maybeSingle(),
-        window.caneSupabase.from('debts')
-          .select('yearly_debt')
-          .eq('farmer_code',farmer.farmer_code)
-          .maybeSingle()
-      ]);
-
-      if(gRes.error) throw gRes.error;
-      if(dRes.error) throw dRes.error;
-
-      latestGuarantee=gRes.data||{property_amount:0,group_amount:0};
-      const yearly=dRes.data?.yearly_debt||{};
-      latestDebt=Number(yearly[year]||0);
-
-      calculateAndRender();
-    }catch(err){
-      console.error('Scenario financial comparison error:',err);
-      calculateAndRender();
-    }
-  }
-
-  function attach(){
-    ['scenarioSourceYear','productionYear','plotProductionYear'].forEach(id=>{
-      document.getElementById(id)?.addEventListener('change',refreshFromSupabase);
-    });
-
-    const investment=document.getElementById('investmentTotal');
-    if(investment){
-      new MutationObserver(calculateAndRender)
-        .observe(investment,{childList:true,characterData:true,subtree:true});
-    }
-
-    document.getElementById('promotionItems')?.addEventListener('change',()=>{
-      setTimeout(calculateAndRender,30);
-    });
-
-    setTimeout(refreshFromSupabase,700);
-  }
-
-  document.addEventListener('DOMContentLoaded',attach);
-  window.addEventListener('canenext:farmer-changed',()=>setTimeout(refreshFromSupabase,80));
-
-  window.refreshScenarioFinancialComparison=refreshFromSupabase;
-  window.calculateScenarioFinancialComparison=calculateAndRender;
-})();
-</script><script id="canenext-scenario-derived-analysis-final">
-(function(){
-  const parseMetric=text=>Number(String(text||'').replace(/[^0-9.-]/g,''))||0;
-
-  function scenarioRows(){
-    return [...document.querySelectorAll('#scenario .scenario-panel-v2')].map((card,index)=>{
-      const get=key=>card.querySelector(`[data-result="${key}"]`)?.textContent||'-';
-      const nameInput=card.querySelector('[data-key="name"]');
-      const title=(nameInput?.value||card.querySelector('.scenario-title')?.textContent||`Scenario ที่ ${index+1}`).trim();
-
-      return {
-        title,
-        yieldPerRaiText:get('yieldPerRai'),
-        totalYieldText:get('totalYield'),
-        promotionText:get('promotionCost'),
-        revenueText:get('revenue'),
-        totalCostText:get('totalCost'),
-        netProfitText:get('netProfit'),
-        profitPerRaiText:get('profitPerRai'),
-        yieldPerRai:parseMetric(get('yieldPerRai')),
-        totalYield:parseMetric(get('totalYield')),
-        promotion:parseMetric(get('promotionCost')),
-        revenue:parseMetric(get('revenue')),
-        totalCost:parseMetric(get('totalCost')),
-        netProfit:parseMetric(get('netProfit')),
-        profitPerRai:parseMetric(get('profitPerRai'))
+    if(typeof api.saveUser==='function'){
+      const old=api.saveUser; api.saveUser=async function(){
+        const role=document.getElementById('umRole')?.value;
+        const zones=getZones();
+        if(role==='manager'&&!zones.length){alert('กรุณาเลือกอย่างน้อย 1 เขตสำหรับ Manager');return;}
+        window.CANENEXT_MANAGER_ZONES=zones;
+        return old.apply(this,arguments);
       };
-    });
-  }
-
-  function setText(id,value){
-    const el=document.getElementById(id);
-    if(el) el.textContent=value;
-  }
-
-  window.getScenarioAnalyticsData=scenarioRows;
-
-  window.refreshAnalysisTable=function(){
-    const tbody=document.querySelector('#scenarioCompareTable tbody');
-    if(!tbody) return;
-
-    document.querySelectorAll('#scenario .scenario-panel-v2 .scenario-update-btn').forEach(btn=>{
-      try{if(typeof window.updateScenarioV2==='function') window.updateScenarioV2(btn)}catch(e){}
-    });
-
-    const rows=scenarioRows();
-
-    if(!rows.length){
-      tbody.innerHTML='<tr><td colspan="8">ยังไม่มีข้อมูล Scenario</td></tr>';
-      ['bestProfitScenario','bestYieldScenario','lowestCostScenario',
-       'bestProfitValue','bestYieldValue','lowestCostValue'].forEach(id=>setText(id,'-'));
-      return;
     }
-
-    const maxProfit=Math.max(...rows.map(r=>r.netProfit));
-    const maxYield=Math.max(...rows.map(r=>r.totalYield));
-    const minCost=Math.min(...rows.map(r=>r.totalCost));
-
-    tbody.innerHTML=rows.map(r=>`
-      <tr>
-        <td>${r.title}</td>
-        <td>${r.yieldPerRaiText}</td>
-        <td class="${r.totalYield===maxYield?'analytics-highlight-best':''}">${r.totalYieldText}</td>
-        <td>${r.promotionText}</td>
-        <td>${r.revenueText}</td>
-        <td class="${r.totalCost===minCost?'analytics-highlight-best':''}">${r.totalCostText}</td>
-        <td class="${r.netProfit===maxProfit?'analytics-highlight-best':''}">${r.netProfitText}</td>
-        <td>${r.profitPerRaiText}</td>
-      </tr>`).join('');
-
-    const bestProfit=[...rows].sort((a,b)=>b.netProfit-a.netProfit)[0];
-    const bestYield=[...rows].sort((a,b)=>b.totalYield-a.totalYield)[0];
-    const lowestCost=[...rows].sort((a,b)=>a.totalCost-b.totalCost)[0];
-
-    setText('bestProfitScenario',bestProfit.title);
-    setText('bestProfitValue',bestProfit.netProfitText);
-    setText('bestYieldScenario',bestYield.title);
-    setText('bestYieldValue',bestYield.totalYieldText);
-    setText('lowestCostScenario',lowestCost.title);
-    setText('lowestCostValue',lowestCost.totalCostText);
-  };
-
-  window.aiGetScenarioRows=scenarioRows;
-
-  window.refreshAIAdvisor=function(){
-    const content=document.getElementById('aiAdvisorContent');
-    if(!content) return;
-
-    document.querySelectorAll('#scenario .scenario-panel-v2 .scenario-update-btn').forEach(btn=>{
-      try{if(typeof window.updateScenarioV2==='function') window.updateScenarioV2(btn)}catch(e){}
-    });
-
-    const rows=scenarioRows();
-    if(!rows.length){
-      content.className='ai-advisor-empty';
-      content.innerHTML='ยังไม่มีข้อมูล Scenario กรุณาสร้าง Scenario ก่อน';
-      return;
-    }
-
-    const recommended=[...rows].sort((a,b)=>b.netProfit-a.netProfit)[0];
-    const bestYield=[...rows].sort((a,b)=>b.totalYield-a.totalYield)[0];
-    const lowestCost=[...rows].sort((a,b)=>a.totalCost-b.totalCost)[0];
-
-    const yieldAdvice=recommended.yieldPerRai<10
-      ? 'ผลผลิตต่อไร่ยังต่ำกว่าเป้าหมาย ควรทบทวนการจัดการน้ำ ปุ๋ย และวัชพืช'
-      : 'ผลผลิตต่อไร่อยู่ในระดับเหมาะสม ควรรักษามาตรฐานการจัดการแปลง';
-
-    const profitAdvice=recommended.profitPerRai<2000
-      ? 'กำไรต่อไร่ยังต่ำ ควรลดต้นทุนที่ไม่จำเป็นและทบทวนรายการลงทุน'
-      : 'กำไรต่อไร่อยู่ในระดับน่าพิจารณา สามารถใช้เป็นแนวทางหลักได้';
-
-    content.className='ai-advisor-content';
-    content.innerHTML=`
-      <div class="ai-guide">
-        <h5>⭐ Scenario ที่แนะนำ</h5>
-        <ul>
-          <li><strong>${recommended.title}</strong></li>
-          <li>กำไรสุทธิ ${recommended.netProfitText}</li>
-          <li>กำไรต่อไร่ ${recommended.profitPerRaiText}</li>
-          <li>คาดการณ์ผลผลิต ${recommended.totalYieldText}</li>
-        </ul>
-
-        <h5>📊 เปรียบเทียบทางเลือก</h5>
-        <ul>
-          <li>ผลผลิตสูงสุด: <strong>${bestYield.title}</strong> (${bestYield.totalYieldText})</li>
-          <li>ต้นทุนต่ำสุด: <strong>${lowestCost.title}</strong> (${lowestCost.totalCostText})</li>
-          <li>${yieldAdvice}</li>
-          <li>${profitAdvice}</li>
-        </ul>
-
-        <h5>🌱 แนวทางการจัดการ</h5>
-        <ul>
-          <li>ติดตามการเจริญเติบโตและต้นทุนจริงของแปลงเป็นรายเดือน</li>
-          <li>จัดรูปแบบการให้น้ำให้เหมาะสมกับสภาพพื้นที่และสถานการณ์ฝน</li>
-          <li>ใส่ปุ๋ยตามช่วงอายุอ้อย และเฝ้าระวังโรคกับแมลงอย่างสม่ำเสมอ</li>
-        </ul>
-      </div>`;
-  };
-
-  function refreshBoth(){
-    setTimeout(()=>{
-      window.refreshAnalysisTable?.();
-      window.refreshAIAdvisor?.();
-    },60);
-  }
-
-  document.addEventListener('DOMContentLoaded',refreshBoth);
-  document.addEventListener('change',event=>{
-    if(event.target.closest('#scenario')) refreshBoth();
-  });
-  document.addEventListener('input',event=>{
-    if(event.target.closest('#scenario')) refreshBoth();
-  });
-  document.addEventListener('click',event=>{
-    const link=event.target.closest('a[href="#analytics"],a[href="#ai-recommendation"]');
-    if(link) refreshBoth();
-
-    const btn=event.target.closest(
-      '#scenario .scenario-update-btn,#scenario .scenario-add-btn,#scenario .scenario-delete-btn,#scenario .scenario-duplicate-btn'
-    );
-    if(btn) refreshBoth();
-  });
-
-  window.addEventListener('canenext:scenario-financial-updated',refreshBoth);
-})();
-</script><script id="canenext-admin-menu-visibility-script">
-(function(){
-  async function ensureClient(){
-    if(window.caneSupabase) return window.caneSupabase;
-    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
-      throw new Error('ไม่สามารถเชื่อมต่อ Supabase ได้');
-    }
-    window.caneSupabase=window.supabase.createClient(
-      window.CANENEXT_CONFIG.SUPABASE_URL,
-      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
-    );
-    return window.caneSupabase;
-  }
-
-  function applyAdminState(profile){
-    const isAdmin=profile?.role==='admin' && profile?.status==='active';
-    document.body.classList.toggle('is-admin',isAdmin);
-    window.CANENEXT_CURRENT_PROFILE=profile||null;
-
-    document.querySelectorAll('.admin-only-menu').forEach(link=>{
-      link.style.display=isAdmin?'flex':'none';
-      link.setAttribute('aria-hidden',isAdmin?'false':'true');
-      link.tabIndex=isAdmin?0:-1;
-    });
-
-    if(!isAdmin){
-      document.getElementById('data-management')?.classList.remove('active-page');
-      document.getElementById('user-management')?.classList.remove('active-page');
-    }
-    return isAdmin;
-  }
-
-  async function refreshRole(){
-    try{
-      const db=await ensureClient();
-      const {data:{user},error:userError}=await db.auth.getUser();
-
-      if(userError || !user){
-        applyAdminState(null);
-        return false;
-      }
-
-      const {data:profile,error}=await db
-        .from('user_profiles')
-        .select('email,role,status')
-        .ilike('email',user.email)
-        .maybeSingle();
-
-      if(error) throw error;
-      return applyAdminState(profile);
-    }catch(err){
-      console.error('ตรวจสอบสิทธิ์ Admin ไม่สำเร็จ:',err);
-      applyAdminState(null);
-      return false;
-    }
-  }
-
-  const previousShowMainMenu=window.showMainMenu;
-  window.showMainMenu=async function(event,pageId){
-    if(event?.preventDefault) event.preventDefault();
-
-    if(pageId==='data-management' || pageId==='user-management'){
-      const allowed=await refreshRole();
-      if(!allowed){
-        if(typeof previousShowMainMenu==='function'){
-          return previousShowMainMenu(null,'business-partner');
-        }
-        return;
-      }
-    }
-
-    if(typeof previousShowMainMenu==='function'){
-      return previousShowMainMenu(event,pageId);
-    }
-  };
-
-  document.addEventListener('DOMContentLoaded',async()=>{
-    await refreshRole();
-
-    const db=await ensureClient();
-    db.auth.onAuthStateChange(async()=>{
-      await refreshRole();
-    });
-  });
-
-  window.CaneAdminMenuVisibility={
-    refresh:refreshRole
-  };
-})();
-</script>
-<div class="login-alert-overlay" hidden="" id="loginAlertModal">
-<div aria-labelledby="loginAlertTitle" aria-modal="true" class="login-alert-card" role="alertdialog">
-<div class="login-alert-icon">!</div>
-<h3 id="loginAlertTitle">เข้าสู่ระบบไม่สำเร็จ</h3>
-<p id="loginAlertMessage">อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง</p>
-<button id="loginAlertOk" type="button">ตกลง</button>
-</div>
-</div>
-<script id="canenext-login-alert-script">
-(function(){
-  const modal=()=>document.getElementById('loginAlertModal');
-  const messageEl=()=>document.getElementById('loginAlertMessage');
-  const passwordEl=()=>document.getElementById('password');
-  const emailEl=()=>document.getElementById('username');
-
-  function showLoginAlert(message){
-    if(messageEl()) messageEl().textContent=message;
-    modal()?.removeAttribute('hidden');
-
-    emailEl()?.classList.add('login-error');
-    passwordEl()?.classList.add('login-error');
-
-    if(passwordEl()){
-      passwordEl().value='';
-      setTimeout(()=>passwordEl().focus(),60);
-    }
-  }
-
-  function closeLoginAlert(){
-    modal()?.setAttribute('hidden','');
-    emailEl()?.classList.remove('login-error');
-    passwordEl()?.classList.remove('login-error');
-    setTimeout(()=>passwordEl()?.focus(),50);
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    document.getElementById('loginAlertOk')?.addEventListener('click',closeLoginAlert);
-    modal()?.addEventListener('click',event=>{
-      if(event.target===modal()) closeLoginAlert();
-    });
-    document.addEventListener('keydown',event=>{
-      if(event.key==='Escape' && !modal()?.hasAttribute('hidden')) closeLoginAlert();
-    });
-  });
-
-  // Final login handler using Supabase Auth.
-  window.handleLogin=async function(event){
-    if(event?.preventDefault) event.preventDefault();
-
-    const email=(emailEl()?.value||'').trim();
-    const password=passwordEl()?.value||'';
-    const button=document.querySelector('.login-submit');
-
-    if(!email || !password){
-      showLoginAlert('กรุณากรอกอีเมลและรหัสผ่านให้ครบถ้วน');
-      return;
-    }
-
-    try{
-      if(button){
-        button.disabled=true;
-        button.textContent='กำลังเข้าสู่ระบบ...';
-      }
-
-      if(!window.caneSupabase){
-        if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
-          throw new Error('configuration');
-        }
-        window.caneSupabase=window.supabase.createClient(
-          window.CANENEXT_CONFIG.SUPABASE_URL,
-          window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
-        );
-      }
-
-      const {data,error}=await window.caneSupabase.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if(error) throw error;
-
-      // Check profile status before opening the app.
-      const {data:profile,error:profileError}=await window.caneSupabase
-        .from('user_profiles')
-        .select('role,status')
-        .ilike('email',data.user.email)
-        .maybeSingle();
-
-      if(profileError) throw profileError;
-
-      if(profile?.status==='inactive'){
-        await window.caneSupabase.auth.signOut();
-        showLoginAlert('บัญชีผู้ใช้นี้ถูกปิดการใช้งาน กรุณาติดต่อผู้ดูแลระบบ');
-        return;
-      }
-
-      document.getElementById('loginScreen')?.classList.add('hidden');
-      document.body.classList.remove('locked');
-      document.body.classList.add('logged-in');
-
-      const currentUser=document.getElementById('currentUserName');
-      if(currentUser) currentUser.textContent=data.user.email||'ผู้ใช้งาน';
-
-      if(typeof window.showMainMenu==='function'){
-        window.showMainMenu(null,'business-partner');
-      }
-    }catch(err){
-      console.error('Login failed:',err);
-
-      const msg=String(err?.message||'').toLowerCase();
-      if(msg.includes('invalid login credentials')){
-        showLoginAlert('อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง');
-      }else if(msg.includes('email not confirmed')){
-        showLoginAlert('อีเมลนี้ยังไม่ได้ยืนยัน กรุณาติดต่อผู้ดูแลระบบ');
-      }else if(msg.includes('failed to fetch') || msg.includes('network')){
-        showLoginAlert('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ กรุณาตรวจสอบอินเทอร์เน็ต');
-      }else{
-        showLoginAlert('เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
-      }
-    }finally{
-      if(button){
-        button.disabled=false;
-        button.textContent='เข้าสู่ระบบ';
-      }
-    }
-  };
-
-  window.showLoginAlert=showLoginAlert;
-})();
-</script><script id="canenext-crop-type-mode-script">
-(function(){
-  const MANUAL_CROP_TYPES=['อ้อยตุลา','อ้อยตอ 1','อ้อยตอ 2','อ้อยตอ 3','อ้อยตอ 4'];
-  let sourceMode='real';
-
-  function cropSelect(){
-    return document.getElementById('cropType');
-  }
-
-  function cropItem(){
-    return cropSelect()?.closest('.scenario-area-item');
-  }
-
-  function ensureManualOptions(selectedValue=''){
-    const select=cropSelect();
-    if(!select) return;
-
-    select.innerHTML=MANUAL_CROP_TYPES
-      .map(v=>`<option value="${v}">${v}</option>`)
-      .join('');
-
-    if(MANUAL_CROP_TYPES.includes(selectedValue)){
-      select.value=selectedValue;
-    }else{
-      select.value=MANUAL_CROP_TYPES[0];
-    }
-  }
-
-  function findSelectedRealPlot(){
-    const plotId=document.getElementById('scenarioSourcePlot')?.value;
-    const year=document.getElementById('scenarioSourceYear')?.value;
-    return (window.currentRealPlots||[]).find(
-      p=>p.plot_id===plotId && (!year || p.year===year)
-    ) || null;
-  }
-
-  function applyRealPlotCropType(){
-    const select=cropSelect();
-    if(!select) return;
-
-    const plot=findSelectedRealPlot();
-    const cropType=String(plot?.crop_type||'').trim();
-
-    select.innerHTML='';
-    const option=document.createElement('option');
-    option.value=cropType;
-    option.textContent=cropType || 'ไม่พบข้อมูลประเภทอ้อย';
-    select.appendChild(option);
-    select.value=cropType;
-    select.disabled=true;
-    cropItem()?.classList.add('crop-type-real');
-
-    select.dispatchEvent(new Event('change',{bubbles:true}));
-  }
-
-  function applyManualCropType(){
-    const select=cropSelect();
-    if(!select) return;
-
-    const previous=select.value;
-    ensureManualOptions(previous);
-    select.disabled=false;
-    cropItem()?.classList.remove('crop-type-real');
-    select.dispatchEvent(new Event('change',{bubbles:true}));
-  }
-
-  function applyMode(mode){
-    sourceMode=mode==='manual'?'manual':'real';
-    if(sourceMode==='manual') applyManualCropType();
-    else applyRealPlotCropType();
-  }
-
-  // Wrap the final existing source-mode function once.
-  const originalSetMode=window.setScenarioSourceMode;
-  window.setScenarioSourceMode=function(mode){
-    const result=typeof originalSetMode==='function'
-      ? originalSetMode.apply(this,arguments)
-      : undefined;
-
-    applyMode(mode);
-    return result;
-  };
-
-  // Wrap the final real-plot loader once, then force the crop type from that plot.
-  const originalLoad=window.loadScenarioFromRealPlot;
-  window.loadScenarioFromRealPlot=function(){
-    const result=typeof originalLoad==='function'
-      ? originalLoad.apply(this,arguments)
-      : undefined;
-
-    sourceMode='real';
-    applyRealPlotCropType();
-    return result;
-  };
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    document.getElementById('scenarioSourcePlot')
-      ?.addEventListener('change',()=>{
-        if(sourceMode==='real') applyRealPlotCropType();
-      });
-
-    document.getElementById('scenarioSourceYear')
-      ?.addEventListener('change',()=>{
-        if(sourceMode==='real') setTimeout(applyRealPlotCropType,30);
-      });
-
-    document.getElementById('scenarioSourceProject')
-      ?.addEventListener('change',()=>{
-        if(sourceMode==='real') setTimeout(applyRealPlotCropType,30);
-      });
-
-    // Default mode in the page is real plot.
-    setTimeout(()=>applyMode('real'),700);
-  });
-
-  window.CaneScenarioCropType={
-    setMode:applyMode,
-    refreshFromRealPlot:applyRealPlotCropType
-  };
-})();
-</script><script id="canenext-dashboard-sync-script">
-(function(){
-  const parseNumber=text=>Number(String(text||'').replace(/[^0-9.-]/g,''))||0;
-
-  function getScenarioRows(){
-    return [...document.querySelectorAll('#scenario .scenario-panel-v2')].map((card,index)=>{
-      const get=key=>card.querySelector(`[data-result="${key}"]`)?.textContent||'-';
-      const nameInput=card.querySelector('[data-key="name"]');
-      const title=(nameInput?.value || card.querySelector('.scenario-title')?.textContent || `Scenario ที่ ${index+1}`).trim();
-
-      return {
-        title,
-        water:card.querySelector('[data-key="water"]')?.value || '-',
-        yieldPerRaiText:get('yieldPerRai'),
-        totalYieldText:get('totalYield'),
-        promotionText:get('promotionCost'),
-        revenueText:get('revenue'),
-        totalCostText:get('totalCost'),
-        netProfitText:get('netProfit'),
-        profitPerRaiText:get('profitPerRai'),
-        yieldPerRai:parseNumber(get('yieldPerRai')),
-        totalYield:parseNumber(get('totalYield')),
-        promotion:parseNumber(get('promotionCost')),
-        revenue:parseNumber(get('revenue')),
-        totalCost:parseNumber(get('totalCost')),
-        netProfit:parseNumber(get('netProfit')),
-        profitPerRai:parseNumber(get('profitPerRai'))
-      };
-    });
-  }
-
-  function setText(id,value){
-    const el=document.getElementById(id);
-    if(el) el.textContent=value;
-  }
-
-  window.refreshDashboardFromScenario=function(){
-    // Force scenario calculations to update first.
-    document.querySelectorAll('#scenario .scenario-panel-v2 .scenario-update-btn').forEach(btn=>{
-      try{
-        if(typeof window.updateScenarioV2==='function'){
-          window.updateScenarioV2(btn);
-        }
-      }catch(e){}
-    });
-
-    const rows=getScenarioRows();
-    const body=document.getElementById('dashboardRankingBody');
-
-    if(!rows.length){
-      if(body) body.innerHTML='<tr><td colspan="6">ยังไม่มีข้อมูล Scenario</td></tr>';
-
-      [
-        'dashScenario','dashYieldPerRai','dashTotalYield','dashPromotion',
-        'dashNetProfit','dashProfitPerRai','cmpBestProfit','cmpBestYield',
-        'cmpLowestCost','cmpBestWater','cmpRecommended','finRevenue',
-        'finTotalCost','finNetProfit','finProfitPerRai'
-      ].forEach(id=>setText(id,'-'));
-
-      const alerts=document.getElementById('dashboardAlerts');
-      if(alerts){
-        alerts.innerHTML='<div class="dash-alert warn">ยังไม่มีข้อมูล Scenario สำหรับแสดงผล Dashboard</div>';
-      }
-      return;
-    }
-
-    const bestProfit=[...rows].sort((a,b)=>b.netProfit-a.netProfit)[0];
-    const bestYield=[...rows].sort((a,b)=>b.totalYield-a.totalYield)[0];
-    const lowestCost=[...rows].sort((a,b)=>a.totalCost-b.totalCost)[0];
-
-    const recommended=bestProfit;
-
-    setText('dashScenario',recommended.title);
-    setText('dashYieldPerRai',recommended.yieldPerRaiText);
-    setText('dashTotalYield',recommended.totalYieldText);
-    setText('dashPromotion',recommended.promotionText);
-    setText('dashNetProfit',recommended.netProfitText);
-    setText('dashProfitPerRai',recommended.profitPerRaiText);
-
-    setText('cmpBestProfit',`${bestProfit.title} (${bestProfit.netProfitText})`);
-    setText('cmpBestYield',`${bestYield.title} (${bestYield.totalYieldText})`);
-    setText('cmpLowestCost',`${lowestCost.title} (${lowestCost.totalCostText})`);
-    setText('cmpBestWater',recommended.water || '-');
-    setText('cmpRecommended',recommended.title);
-
-    setText('finRevenue',recommended.revenueText);
-    setText('finTotalCost',recommended.totalCostText);
-    setText('finNetProfit',recommended.netProfitText);
-    setText('finProfitPerRai',recommended.profitPerRaiText);
-
-    const maxProfit=Math.max(...rows.map(r=>r.netProfit));
-    const maxYield=Math.max(...rows.map(r=>r.totalYield));
-    const minCost=Math.min(...rows.map(r=>r.totalCost));
-
-    if(body){
-      body.innerHTML=[...rows]
-        .sort((a,b)=>b.netProfit-a.netProfit)
-        .map((r,index)=>{
-          const badges=[];
-          if(r.netProfit===maxProfit) badges.push('<span class="dash-badge">กำไรสูงสุด</span>');
-          if(r.totalYield===maxYield) badges.push('<span class="dash-badge">ผลผลิตสูงสุด</span>');
-          if(r.totalCost===minCost) badges.push('<span class="dash-badge">ต้นทุนต่ำสุด</span>');
-
-          return `
-            <tr>
-              <td>${index+1}</td>
-              <td>${r.title}</td>
-              <td>${r.totalYieldText}</td>
-              <td>${r.netProfitText}</td>
-              <td>${r.profitPerRaiText}</td>
-              <td>${badges.join(' ') || 'ปกติ'}</td>
-            </tr>`;
-        }).join('');
-    }
-
-    const alerts=document.getElementById('dashboardAlerts');
-    if(alerts){
-      alerts.innerHTML=`
-        <div class="dash-alert ok">แนะนำใช้ ${recommended.title} เป็นแนวทางหลัก</div>
-        ${recommended.yieldPerRai<10
-          ? '<div class="dash-alert warn">ผลผลิตต่อไร่ต่ำกว่าเป้าหมาย ควรติดตามการจัดการแปลง</div>'
-          : '<div class="dash-alert ok">ผลผลิตต่อไร่อยู่ในระดับเหมาะสม</div>'}
-        ${recommended.netProfit<0
-          ? '<div class="dash-alert danger">Scenario ที่แนะนำมีผลกำไรติดลบ ควรทบทวนต้นทุนและงบลงทุน</div>'
-          : '<div class="dash-alert ok">Scenario ที่แนะนำมีผลกำไรเป็นบวก</div>'}
-      `;
-    }
-  };
-
-  function refreshSoon(){
-    setTimeout(()=>window.refreshDashboardFromScenario?.(),80);
-  }
-
-  document.addEventListener('DOMContentLoaded',refreshSoon);
-
-  document.addEventListener('change',event=>{
-    if(event.target.closest('#scenario')) refreshSoon();
-  });
-
-  document.addEventListener('input',event=>{
-    if(event.target.closest('#scenario')) refreshSoon();
-  });
-
-  document.addEventListener('click',event=>{
-    const dashboardLink=event.target.closest('a[href="#dashboard"]');
-    if(dashboardLink) refreshSoon();
-
-    const scenarioButton=event.target.closest(
-      '#scenario .scenario-update-btn,#scenario .scenario-add-btn,#scenario .scenario-delete-btn,#scenario .scenario-duplicate-btn'
-    );
-    if(scenarioButton) refreshSoon();
-  });
-
-  window.addEventListener('canenext:scenario-financial-updated',refreshSoon);
-})();
-</script><script id="canenext-realplot-area-crop-sync">
-(function(){
-  function setFieldValue(id,value){
-    const el=document.getElementById(id);
-    if(!el) return;
-    el.value=value ?? '';
-    el.dispatchEvent(new Event('change',{bubbles:true}));
-    el.dispatchEvent(new Event('input',{bubbles:true}));
-  }
-
-  function selectedRealPlot(){
-    const plotId=document.getElementById('scenarioSourcePlot')?.value;
-    const year=document.getElementById('scenarioSourceYear')?.value;
-    return (window.currentRealPlots||[]).find(p=>
-      p.plot_id===plotId && (!year || p.year===year)
-    ) || null;
-  }
-
-  function syncAreaAndCropFromSelectedPlot(){
-    const plot=selectedRealPlot();
-    if(!plot) return;
-
-    setFieldValue('plotArea', Number(plot.area||0).toFixed(2));
-
-    const crop=document.getElementById('cropType');
-    if(crop){
-      const cropValue=String(plot.crop_type||'').trim();
-      crop.innerHTML='';
-      const option=document.createElement('option');
-      option.value=cropValue;
-      option.textContent=cropValue || 'ไม่พบข้อมูลประเภทอ้อย';
-      crop.appendChild(option);
-      crop.value=cropValue;
-      crop.disabled=true;
-      crop.dispatchEvent(new Event('change',{bubbles:true}));
-    }
-
-    if(typeof window.updatePlotData==='function'){
-      window.updatePlotData();
-    }
-  }
-
-  const originalLoad=window.loadScenarioFromRealPlot;
-  window.loadScenarioFromRealPlot=function(){
-    const result=typeof originalLoad==='function'
-      ? originalLoad.apply(this,arguments)
-      : undefined;
-    syncAreaAndCropFromSelectedPlot();
-    return result;
-  };
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    document.getElementById('scenarioSourcePlot')
-      ?.addEventListener('change',syncAreaAndCropFromSelectedPlot);
-
-    document.getElementById('scenarioSourceYear')
-      ?.addEventListener('change',()=>setTimeout(syncAreaAndCropFromSelectedPlot,30));
-
-    document.getElementById('scenarioSourceProject')
-      ?.addEventListener('change',()=>setTimeout(syncAreaAndCropFromSelectedPlot,30));
-  });
-
-  window.syncScenarioAreaAndCropFromSelectedPlot=syncAreaAndCropFromSelectedPlot;
-})();
-</script><script id="canenext-page-state-script">
-(function(){
-  const STORAGE_KEY='canenext_active_page';
-  const DEFAULT_PAGE='business-partner';
-  const ADMIN_ONLY=new Set(['data-management','user-management']);
-
-  function getSavedPage(){
-    return localStorage.getItem(STORAGE_KEY) || DEFAULT_PAGE;
-  }
-
-  function savePage(pageId){
-    if(pageId) localStorage.setItem(STORAGE_KEY,pageId);
-  }
-
-  function isAdmin(){
-    const p=window.CANENEXT_CURRENT_PROFILE;
-    return p?.role==='admin' && p?.status==='active';
-  }
-
-  function safePage(pageId){
-    if(!document.getElementById(pageId)) return DEFAULT_PAGE;
-    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
-    return pageId;
-  }
-
-  function activatePage(pageId){
-    const finalPage=safePage(pageId);
-
-    document.querySelectorAll('.app-page').forEach(page=>{
-      page.classList.toggle('active-page',page.id===finalPage);
-    });
-
-    document.querySelectorAll('.menu-row a').forEach(link=>{
-      link.classList.toggle(
-        'active-menu',
-        link.getAttribute('href')==='#'+finalPage
-      );
-    });
-
-    savePage(finalPage);
-
-    if(finalPage==='real-plots' && typeof window.loadCurrentFarmerPlotsLazy==='function'){
-      setTimeout(()=>window.loadCurrentFarmerPlotsLazy(),0);
-    }
-    if(finalPage==='dashboard' && typeof window.refreshDashboardFromScenario==='function'){
-      setTimeout(()=>window.refreshDashboardFromScenario(),50);
-    }
-    if(finalPage==='analytics' && typeof window.refreshAnalysisTable==='function'){
-      setTimeout(()=>window.refreshAnalysisTable(),50);
-    }
-    if(finalPage==='ai-recommendation' && typeof window.refreshAIAdvisor==='function'){
-      setTimeout(()=>window.refreshAIAdvisor(),50);
-    }
-
-    return finalPage;
-  }
-
-  // Final page-switch function: save current page every time a menu is opened.
-  window.showMainMenu=async function(event,pageId){
-    if(event?.preventDefault) event.preventDefault();
-
-    if(ADMIN_ONLY.has(pageId)){
-      if(window.CaneAdminMenuVisibility?.refresh){
-        await window.CaneAdminMenuVisibility.refresh();
-      }
-      if(!isAdmin()){
-        return activatePage(DEFAULT_PAGE);
-      }
-    }
-
-    return activatePage(pageId);
-  };
-
-  function restorePage(){
-    const page=getSavedPage();
-    activatePage(page);
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    setTimeout(restorePage,900);
-  });
-
-  // Returning to the tab/window must keep the current menu.
-  document.addEventListener('visibilitychange',()=>{
-    if(!document.hidden){
-      setTimeout(restorePage,50);
-    }
-  });
-
-  window.addEventListener('focus',()=>{
-    setTimeout(restorePage,50);
-  });
-
-  // Restore after Supabase refreshes the session/profile.
-  window.addEventListener('canenext:auth-restored',restorePage);
-
-  window.CanePageState={
-    get:()=>safePage(getSavedPage()),
-    restore:restorePage,
-    clear:()=>localStorage.removeItem(STORAGE_KEY)
-  };
-})();
-</script><script id="canenext-user-scope-script">
-(function(){
-  async function ensureClient(){
-    if(window.caneSupabase) return window.caneSupabase;
-    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
-      throw new Error('ไม่สามารถเชื่อมต่อ Supabase ได้');
-    }
-    window.caneSupabase=window.supabase.createClient(
-      window.CANENEXT_CONFIG.SUPABASE_URL,
-      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
-    );
-    return window.caneSupabase;
-  }
-
-  function scopeText(profile){
-    if(!profile) return 'ไม่พบข้อมูลสิทธิ์ผู้ใช้งาน';
-
-    if(profile.role==='admin'){
-      return 'Admin · เข้าถึงข้อมูลทุกเขต';
-    }
-
-    if(profile.role==='manager'){
-      return profile.zone
-        ? `Manager · เขต ${profile.zone}`
-        : 'Manager · ยังไม่ได้กำหนดเขต';
-    }
-
-    if(profile.role==='extension' || profile.role==='viewer'){
-      if(profile.zone && profile.subzone){
-        return `${profile.role} · เขต ${profile.zone} · เขตย่อย ${profile.subzone}`;
-      }
-      if(profile.zone){
-        return `${profile.role} · เขต ${profile.zone} · ทุกเขตย่อย`;
-      }
-      return `${profile.role} · ยังไม่ได้กำหนดเขต`;
-    }
-
-    return `${profile.role||'user'} · ขอบเขตตามที่กำหนด`;
-  }
-
-  function renderScope(profile){
-    const chip=document.getElementById('userScopeChip');
-    if(!chip) return;
-
-    chip.textContent=scopeText(profile);
-    const missingScope=
-      profile &&
-      profile.role!=='admin' &&
-      !String(profile.zone||'').trim();
-
-    chip.classList.toggle('warning',!!missingScope);
-  }
-
-  async function loadProfile(){
-    const db=await ensureClient();
-    const {data:{user},error:userError}=await db.auth.getUser();
-
-    if(userError || !user){
-      window.CANENEXT_CURRENT_PROFILE=null;
-      renderScope(null);
-      return null;
-    }
-
-    const {data:profile,error}=await db
-      .from('user_profiles')
-      .select('id,auth_uid,email,full_name,role,zone,subzone,status')
-      .eq('auth_uid',user.id)
-      .maybeSingle();
-
-    if(error) throw error;
-
-    window.CANENEXT_CURRENT_PROFILE=profile||null;
-    renderScope(profile);
-
-    if(profile?.status==='inactive'){
-      alert('บัญชีนี้ถูกปิดการใช้งาน กรุณาติดต่อผู้ดูแลระบบ');
-      await db.auth.signOut();
-      return null;
-    }
-
-    return profile;
-  }
-
-  // RLS is the real security layer. This only improves the user experience.
-  const originalSearch=window.searchBusinessPartner;
-  if(typeof originalSearch==='function'){
-    window.searchBusinessPartner=async function(){
-      const beforeCode=(document.getElementById('bpCode')?.value||'').trim();
-      await originalSearch.apply(this,arguments);
-
-      const profile=window.CANENEXT_CURRENT_PROFILE;
-      const name=(document.getElementById('bpName')?.value||'').trim();
-
-      if(beforeCode && !name && profile && profile.role!=='admin'){
-        const scope=profile.subzone
-          ? `เขต ${profile.zone} เขตย่อย ${profile.subzone}`
-          : `เขต ${profile.zone||'-'}`;
-
-        console.info(`ไม่พบข้อมูลหรือข้อมูลอยู่นอกขอบเขต ${scope}`);
-      }
-    };
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    setTimeout(loadProfile,500);
-  });
-
-  window.addEventListener('focus',()=>{
-    setTimeout(loadProfile,50);
-  });
-
-  window.CaneUserScope={
-    refresh:loadProfile,
-    get:()=>window.CANENEXT_CURRENT_PROFILE||null
-  };
+    window.CaneManagerZones={get:getZones,set:setZones,applyRoleUI};
+  },100);
 })();
 </script></body>
 </html>
