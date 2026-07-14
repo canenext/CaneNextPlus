@@ -6976,6 +6976,12 @@ body:not(.is-admin) #user-management{
   font-size:11px;
   font-weight:800;
 }
+</style><style id="crop-font-fix">
+#plot-data #cropType,
+#plot-data #cropType option,
+#plot-data .scenario-area-item #cropType{
+  font-weight:400 !important;
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -11779,6 +11785,108 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
   window.syncScenarioAreaAndCropFromSelectedPlot=syncAreaAndCropFromSelectedPlot;
+})();
+</script><script id="canenext-page-state-script">
+(function(){
+  const STORAGE_KEY='canenext_active_page';
+  const DEFAULT_PAGE='business-partner';
+  const ADMIN_ONLY=new Set(['data-management','user-management']);
+
+  function getSavedPage(){
+    return localStorage.getItem(STORAGE_KEY) || DEFAULT_PAGE;
+  }
+
+  function savePage(pageId){
+    if(pageId) localStorage.setItem(STORAGE_KEY,pageId);
+  }
+
+  function isAdmin(){
+    const p=window.CANENEXT_CURRENT_PROFILE;
+    return p?.role==='admin' && p?.status==='active';
+  }
+
+  function safePage(pageId){
+    if(!document.getElementById(pageId)) return DEFAULT_PAGE;
+    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
+    return pageId;
+  }
+
+  function activatePage(pageId){
+    const finalPage=safePage(pageId);
+
+    document.querySelectorAll('.app-page').forEach(page=>{
+      page.classList.toggle('active-page',page.id===finalPage);
+    });
+
+    document.querySelectorAll('.menu-row a').forEach(link=>{
+      link.classList.toggle(
+        'active-menu',
+        link.getAttribute('href')==='#'+finalPage
+      );
+    });
+
+    savePage(finalPage);
+
+    if(finalPage==='real-plots' && typeof window.loadCurrentFarmerPlotsLazy==='function'){
+      setTimeout(()=>window.loadCurrentFarmerPlotsLazy(),0);
+    }
+    if(finalPage==='dashboard' && typeof window.refreshDashboardFromScenario==='function'){
+      setTimeout(()=>window.refreshDashboardFromScenario(),50);
+    }
+    if(finalPage==='analytics' && typeof window.refreshAnalysisTable==='function'){
+      setTimeout(()=>window.refreshAnalysisTable(),50);
+    }
+    if(finalPage==='ai-recommendation' && typeof window.refreshAIAdvisor==='function'){
+      setTimeout(()=>window.refreshAIAdvisor(),50);
+    }
+
+    return finalPage;
+  }
+
+  // Final page-switch function: save current page every time a menu is opened.
+  window.showMainMenu=async function(event,pageId){
+    if(event?.preventDefault) event.preventDefault();
+
+    if(ADMIN_ONLY.has(pageId)){
+      if(window.CaneAdminMenuVisibility?.refresh){
+        await window.CaneAdminMenuVisibility.refresh();
+      }
+      if(!isAdmin()){
+        return activatePage(DEFAULT_PAGE);
+      }
+    }
+
+    return activatePage(pageId);
+  };
+
+  function restorePage(){
+    const page=getSavedPage();
+    activatePage(page);
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    setTimeout(restorePage,900);
+  });
+
+  // Returning to the tab/window must keep the current menu.
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden){
+      setTimeout(restorePage,50);
+    }
+  });
+
+  window.addEventListener('focus',()=>{
+    setTimeout(restorePage,50);
+  });
+
+  // Restore after Supabase refreshes the session/profile.
+  window.addEventListener('canenext:auth-restored',restorePage);
+
+  window.CanePageState={
+    get:()=>safePage(getSavedPage()),
+    restore:restorePage,
+    clear:()=>localStorage.removeItem(STORAGE_KEY)
+  };
 })();
 </script></body>
 </html>
