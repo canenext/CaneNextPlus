@@ -7024,7 +7024,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="2.1.7" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="2.1.9" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -12622,6 +12622,117 @@ document.addEventListener('DOMContentLoaded', function(){
 
   window.CaneAdminPageStable={
     open:renderPage
+  };
+})();
+</script><script id="canenext-farmer-session-memory-script">
+(function(){
+  const SESSION_KEY='canenext_last_farmer_session';
+  const DEFAULT_FARMER={
+    farmer_code:'778899',
+    farmer_name:'นาย อ้อยดี มีกำไร',
+    zone:'8',
+    subzone:'8888'
+  };
+
+  function getSessionFarmer(){
+    try{
+      const raw=sessionStorage.getItem(SESSION_KEY);
+      return raw ? JSON.parse(raw) : null;
+    }catch(e){
+      return null;
+    }
+  }
+
+  function saveSessionFarmer(farmer){
+    if(!farmer?.farmer_code) return;
+    const data={
+      farmer_code:String(farmer.farmer_code||'').trim(),
+      farmer_name:String(farmer.farmer_name||farmer.full_name||'').trim(),
+      zone:String(farmer.zone||'').trim(),
+      subzone:String(farmer.subzone||'').trim()
+    };
+    sessionStorage.setItem(SESSION_KEY,JSON.stringify(data));
+    window.CANENEXT_CURRENT_FARMER=data;
+  }
+
+  function setValue(id,value){
+    const el=document.getElementById(id);
+    if(!el) return;
+    if('value' in el) el.value=value ?? '';
+    else el.textContent=value ?? '';
+  }
+
+  function applyFarmer(farmer){
+    if(!farmer) return;
+
+    const mappings={
+      bpCode:farmer.farmer_code,
+      bpName:farmer.farmer_name,
+      showZone:farmer.zone,
+      showSubZone:farmer.subzone,
+      farmerCode:farmer.farmer_code,
+      farmerName:farmer.farmer_name,
+      zone:farmer.zone,
+      subzone:farmer.subzone
+    };
+
+    Object.entries(mappings).forEach(([id,value])=>setValue(id,value));
+    window.CANENEXT_CURRENT_FARMER=farmer;
+  }
+
+  function initializeFarmer(){
+    const saved=getSessionFarmer();
+    if(saved){
+      applyFarmer(saved);
+    }else{
+      applyFarmer(DEFAULT_FARMER);
+    }
+  }
+
+  // Persist farmer after a successful search/event.
+  window.addEventListener('canenext:farmer-changed',event=>{
+    const detail=event?.detail || window.CANENEXT_CURRENT_FARMER;
+    if(detail?.farmer_code){
+      saveSessionFarmer(detail);
+    }
+  });
+
+  // Also wrap common search function if present.
+  const wrapTimer=setInterval(()=>{
+    const fn=window.searchBusinessPartner;
+    if(typeof fn!=='function') return;
+    clearInterval(wrapTimer);
+
+    window.searchBusinessPartner=async function(){
+      const result=await fn.apply(this,arguments);
+      setTimeout(()=>{
+        const farmer=window.CANENEXT_CURRENT_FARMER;
+        if(farmer?.farmer_code) saveSessionFarmer(farmer);
+      },50);
+      return result;
+    };
+  },100);
+
+  // Clear only when user explicitly logs out.
+  const logoutTimer=setInterval(()=>{
+    const fn=window.logout;
+    if(typeof fn!=='function') return;
+    clearInterval(logoutTimer);
+
+    window.logout=async function(){
+      sessionStorage.removeItem(SESSION_KEY);
+      window.CANENEXT_CURRENT_FARMER=null;
+      return await fn.apply(this,arguments);
+    };
+  },100);
+
+  document.addEventListener('DOMContentLoaded',initializeFarmer);
+
+  window.CaneFarmerSession={
+    get:getSessionFarmer,
+    save:saveSessionFarmer,
+    clear:()=>sessionStorage.removeItem(SESSION_KEY),
+    defaults:DEFAULT_FARMER
   };
 })();
 </script></body>

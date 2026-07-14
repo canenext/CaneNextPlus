@@ -1,13 +1,12 @@
 Cane Next+ Master Version
-Version: 2.1.7
-Based on: v2.1.6
-Base index SHA-256: 48893345225ecd9a519e78e6726a15391a558d33837c74a98791bb26355d0dd0
-Created: 2026-07-14T08:51:57
+Version: 2.1.9
+Based on: v2.1.8
+Base index SHA-256: c300a59adc37c82aad9b0c14adfcb1fe29285a616667da57060f6b6e27ffa809
+Created: 2026-07-14T09:07:33
 
-FIX
-- Admin clicks on Data Management and User Management now switch pages immediately.
-- Removed the repeated async role check during those two menu clicks.
-- Prevented the sidebar from hiding/reappearing when opening Admin pages.
-- Stopped older click handlers from running twice.
-- Disabled transitions/animations for the two Admin pages and sidebar during switching.
-- Existing Admin/non-Admin visibility rules remain unchanged.
+CHANGES
+- Default farmer values appear only when there is no farmer stored in the current login session.
+- After a successful farmer search, the latest farmer is stored in sessionStorage.
+- The latest farmer remains selected while navigating menus, refreshing, minimizing, or reopening the same browser session.
+- Farmer session memory is cleared only when the user logs out.
+- On the next login, the default farmer 778899 / นาย อ้อยดี มีกำไร / เขต 8 / เขตย่อย 8888 is shown again.
