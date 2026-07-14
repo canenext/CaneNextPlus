@@ -7024,7 +7024,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="2.1.6" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="2.1.7" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7116,6 +7116,21 @@ html.canenext-auth-ready .menu-row{
 }
 .menu-row .admin-only-menu{
   transition:none !important;
+}
+</style><style id="canenext-admin-click-stable-style">
+/* Stable Admin menu/page switching */
+.menu-row,
+.menu-row a,
+.app-main,
+.app-page,
+#data-management,
+#user-management{
+  transition:none !important;
+  animation:none !important;
+}
+#data-management,
+#user-management{
+  scroll-margin-top:0 !important;
 }
 </style></head>
 <body class="locked"><script id="canenext-admin-menu-stable-script">
@@ -12528,6 +12543,85 @@ document.addEventListener('DOMContentLoaded', function(){
     remember,
     restore:restoreAndReveal,
     current:()=>lastPage
+  };
+})();
+</script><script id="canenext-admin-click-stable-script">
+(function(){
+  const ADMIN_PAGES=new Set(['data-management','user-management']);
+
+  function isActiveAdmin(){
+    const p=window.CANENEXT_CURRENT_PROFILE;
+    return String(p?.role||'').toLowerCase()==='admin' &&
+           String(p?.status||'').toLowerCase()==='active';
+  }
+
+  function renderPage(pageId){
+    if(ADMIN_PAGES.has(pageId) && !isActiveAdmin()){
+      pageId='business-partner';
+    }
+
+    document.querySelectorAll('.app-page').forEach(page=>{
+      page.classList.toggle('active-page',page.id===pageId);
+    });
+
+    document.querySelectorAll('.menu-row a[href^="#"]').forEach(link=>{
+      link.classList.toggle(
+        'active-menu',
+        link.getAttribute('href')==='#'+pageId
+      );
+    });
+
+    try{
+      localStorage.setItem('canenext_last_user_page',pageId);
+      localStorage.setItem('canenext_active_page',pageId);
+    }catch(e){}
+
+    // Keep the page position steady.
+    window.scrollTo({top:0,left:0,behavior:'auto'});
+    return pageId;
+  }
+
+  // Handle Admin menu clicks before older inline/async handlers run.
+  document.addEventListener('click',event=>{
+    const link=event.target.closest(
+      '.menu-row a[href="#data-management"], .menu-row a[href="#user-management"]'
+    );
+    if(!link) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    const pageId=link.getAttribute('href').slice(1);
+    renderPage(pageId);
+
+    if(pageId==='user-management'){
+      setTimeout(()=>window.CaneUserAdmin?.loadUsers?.(),0);
+    }
+  },true);
+
+  // Final override: Admin page switching uses cached verified role, without
+  // another async role check that hides/reveals the sidebar.
+  const previousShowMainMenu=window.showMainMenu;
+  window.showMainMenu=function(event,pageId){
+    if(event?.preventDefault) event.preventDefault();
+
+    if(ADMIN_PAGES.has(pageId)){
+      if(!isActiveAdmin()){
+        return renderPage('business-partner');
+      }
+      return renderPage(pageId);
+    }
+
+    if(typeof previousShowMainMenu==='function'){
+      return previousShowMainMenu(event,pageId);
+    }
+
+    return renderPage(pageId);
+  };
+
+  window.CaneAdminPageStable={
+    open:renderPage
   };
 })();
 </script></body>

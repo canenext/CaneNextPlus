@@ -1,13 +1,13 @@
 Cane Next+ Master Version
-Version: 2.1.6
-Based on: v2.1.5
-Base index SHA-256: 372dc4033cf7d1d871706742567e80e7e77e541aa7b5a902cb14fc352119d887
-Created: 2026-07-14T08:43:32
+Version: 2.1.7
+Based on: v2.1.6
+Base index SHA-256: 48893345225ecd9a519e78e6726a15391a558d33837c74a98791bb26355d0dd0
+Created: 2026-07-14T08:51:57
 
 FIX
-- Fixed the odd jump/flicker of Data Management and User Management for Admin login.
-- Sidebar remains hidden until both role verification and page restoration are complete.
-- Admin-only menu items appear together with the sidebar, not afterward.
-- Removed visual transitions from sidebar/admin-only menu items during authentication.
-- Non-admin menu behavior remains unchanged.
-- All v2.1.5 functionality and support files remain intact.
+- Admin clicks on Data Management and User Management now switch pages immediately.
+- Removed the repeated async role check during those two menu clicks.
+- Prevented the sidebar from hiding/reappearing when opening Admin pages.
+- Stopped older click handlers from running twice.
+- Disabled transitions/animations for the two Admin pages and sidebar during switching.
+- Existing Admin/non-Admin visibility rules remain unchanged.
