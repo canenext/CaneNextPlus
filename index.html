@@ -6550,6 +6550,44 @@ border-radius:10px;background:#fff;font-size:15px;
     grid-template-columns:1fr !important;
   }
 }
+</style><style id="analytics-final-balanced-style">
+#analytics .analytics-summary-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+#analytics .analytics-kpi{
+  min-width:0 !important;
+  min-height:118px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+#analytics .analytics-table{
+  width:100% !important;
+  min-width:1040px !important;
+  table-layout:auto !important;
+}
+#analytics .analytics-table th,
+#analytics .analytics-table td{
+  text-align:center !important;
+  vertical-align:middle !important;
+}
+#analytics .analytics-table th:nth-child(1){min-width:130px}
+#analytics .analytics-table th:nth-child(2){min-width:115px}
+#analytics .analytics-table th:nth-child(3){min-width:145px}
+#analytics .analytics-table th:nth-child(4){min-width:120px}
+#analytics .analytics-table th:nth-child(5),
+#analytics .analytics-table th:nth-child(6),
+#analytics .analytics-table th:nth-child(7),
+#analytics .analytics-table th:nth-child(8){min-width:125px}
+@media(max-width:850px){
+  #analytics .analytics-summary-grid{
+    grid-template-columns:1fr !important;
+  }
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -6978,19 +7016,14 @@ border-radius:10px;background:#fff;font-size:15px;
 <b id="lowestCostScenario">-</b>
 <small id="lowestCostValue">-</small>
 </div>
-<div class="analytics-kpi risk-kpi">
-<span>⚠️ Scenario ความเสี่ยงสูงสุด</span>
-<b id="highestRiskScenario">-</b>
-<small id="highestRiskValue">-</small>
-</div>
+
 </div>
 <div class="analytics-section">
 <h4>Scenario Comparison</h4>
 <table class="table analytics-table" id="scenarioCompareTable">
-<thead>
-</thead>
+<thead><tr><th>Scenario</th><th>ผลผลิต (ตัน/ไร่)</th><th>คาดการณ์ผลผลิตอ้อย</th><th>งบส่งเสริม</th><th>รายได้</th><th>ต้นทุนรวม</th><th>กำไรสุทธิ</th><th>กำไร/ไร่</th></tr></thead>
 <tbody>
-<tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>
+<tr><td colspan="8">ยังไม่มีข้อมูล Scenario</td></tr>
 </tbody>
 </table>
 </div>
@@ -7539,64 +7572,6 @@ document.addEventListener('input',function(event){
 
 
 function refreshAnalysisTable(){
- const tb=document.querySelector('#scenarioCompareTable tbody');
- if(!tb) return;
- tb.innerHTML='';
- document.querySelectorAll('.scenario-panel-v2').forEach((card,i)=>{
-   const get=(k)=>card.querySelector(`[data-result="${k}"]`)?.textContent||'-';
-   const title=card.querySelector('.scenario-title')?.textContent||`Scenario ${i+1}`;
-   tb.insertAdjacentHTML('beforeend',`
-    <tr>
-      <td>${title}</td>
-      <td>${get('yieldPerRai')}</td>
-      <td>${get('totalYield')}</td>
-      <td>${get('promotionCost')}</td>
-      <td>${get('deRatio')}</td>
-      <td>${get('revenue')}</td>
-      <td>${get('totalCost')}</td>
-      <td>${get('netProfit')}</td>
-      <td>${get('profitPerRai')}</td>
-    </tr>`);
- });
-}
-document.addEventListener('change',()=>setTimeout(refreshAnalysisTable,50));
-document.addEventListener('input',()=>setTimeout(refreshAnalysisTable,50));
-const _oldUpdateAll=window.updateAllScenarios;
-window.updateAllScenarios=function(){
- if(_oldUpdateAll){_oldUpdateAll();}
- refreshAnalysisTable();
-};
-
-
-function parseMetric(text){
-  return Number(String(text || '').replace(/[^0-9.-]/g,'')) || 0;
-}
-function getScenarioAnalyticsData(){
-  return [...document.querySelectorAll('.scenario-panel-v2')].map((card, index) => {
-    const get = key => card.querySelector(`[data-result="${key}"]`)?.textContent || '-';
-    const title = card.querySelector('.scenario-title')?.textContent || `Scenario ที่ ${index+1}`;
-    return {
-      title,
-      yieldPerRaiText:get('yieldPerRai'),
-      totalYieldText:get('totalYield'),
-      promotionText:get('promotionCost'),
-      deText:get('deRatio'),
-      revenueText:get('revenue'),
-      totalCostText:get('totalCost'),
-      netProfitText:get('netProfit'),
-      profitPerRaiText:get('profitPerRai'),
-      yieldPerRai:parseMetric(get('yieldPerRai')),
-      totalYield:parseMetric(get('totalYield')),
-      promotion:parseMetric(get('promotionCost')),
-      de:parseMetric(get('deRatio')),
-      revenue:parseMetric(get('revenue')),
-      totalCost:parseMetric(get('totalCost')),
-      netProfit:parseMetric(get('netProfit')),
-      profitPerRai:parseMetric(get('profitPerRai'))
-    };
-  });
-}
-function refreshAnalysisTable(){
   const tb = document.querySelector('#scenarioCompareTable tbody');
   if(!tb) return;
 
@@ -7607,7 +7582,7 @@ function refreshAnalysisTable(){
   const rows = getScenarioAnalyticsData();
 
   if(rows.length === 0){
-    tb.innerHTML = '<tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>';
+    tb.innerHTML = '<tr><td colspan="8">ยังไม่มีข้อมูล Scenario</td></tr>';
     updateAnalyticsSummary([]);
     return;
   }
@@ -7615,7 +7590,6 @@ function refreshAnalysisTable(){
   const maxProfit = Math.max(...rows.map(r=>r.netProfit));
   const maxYield = Math.max(...rows.map(r=>r.totalYield));
   const minCost = Math.min(...rows.map(r=>r.totalCost));
-  const maxRisk = Math.max(...rows.map(r=>r.de));
 
   tb.innerHTML = rows.map(r => `
     <tr>
@@ -7623,7 +7597,6 @@ function refreshAnalysisTable(){
       <td>${r.yieldPerRaiText}</td>
       <td class="${r.totalYield===maxYield ? 'analytics-highlight-best' : ''}">${r.totalYieldText}</td>
       <td>${r.promotionText}</td>
-      <td class="${r.de===maxRisk ? 'analytics-highlight-risk' : ''}">${r.deText}</td>
       <td>${r.revenueText}</td>
       <td class="${r.totalCost===minCost ? 'analytics-highlight-best' : ''}">${r.totalCostText}</td>
       <td class="${r.netProfit===maxProfit ? 'analytics-highlight-best' : ''}">${r.netProfitText}</td>
@@ -7640,8 +7613,8 @@ function updateAnalyticsSummary(rows){
   };
 
   if(!rows.length){
-    ['bestProfitScenario','bestYieldScenario','lowestCostScenario','highestRiskScenario'].forEach(id=>set(id,'-'));
-    ['bestProfitValue','bestYieldValue','lowestCostValue','highestRiskValue'].forEach(id=>set(id,'-'));
+    ['bestProfitScenario','bestYieldScenario','lowestCostScenario'].forEach(id=>set(id,'-'));
+    ['bestProfitValue','bestYieldValue','lowestCostValue'].forEach(id=>set(id,'-'));
     set('aiRecommendationText','กรุณาสร้าง Scenario เพื่อให้ระบบวิเคราะห์และแนะนำทางเลือกที่เหมาะสม');
     return;
   }
@@ -7649,7 +7622,6 @@ function updateAnalyticsSummary(rows){
   const bestProfit = [...rows].sort((a,b)=>b.netProfit-a.netProfit)[0];
   const bestYield = [...rows].sort((a,b)=>b.totalYield-a.totalYield)[0];
   const lowestCost = [...rows].sort((a,b)=>a.totalCost-b.totalCost)[0];
-  const highestRisk = [...rows].sort((a,b)=>b.de-a.de)[0];
 
   set('bestProfitScenario', bestProfit.title);
   set('bestProfitValue', bestProfit.netProfitText);
@@ -7682,7 +7654,6 @@ function updateAnalyticsSummary(rows){
 <li>แนะนำ <strong>${recommended.title}</strong> เป็นทางเลือกหลัก</li>
 <li>กำไรสุทธิ ${recommended.netProfitText}</li>
 <li>กำไรต่อไร่ ${recommended.profitPerRaiText}</li>
-<li>D/E = ${recommended.deText} (${riskText})</li>
 <li>คาดการณ์ผลผลิต ${recommended.totalYieldText}</li>
 </ul>
 
@@ -7715,7 +7686,6 @@ function updateAnalyticsSummary(rows){
 <ul>
 <li>ความเสี่ยงภัยแล้ง : <strong>${droughtLevel}</strong></li>
 <li>ติดตามพยากรณ์อากาศและวางแผนการใช้น้ำล่วงหน้า</li>
-<li>หาก D/E สูงกว่า 1 ควรทบทวนงบส่งเสริมก่อนอนุมัติ</li>
 </ul>
 
 <h5>⭐ สรุปข้อเสนอแนะ</h5>
@@ -7873,7 +7843,6 @@ function refreshAIAdvisor(){
   const recommended = (safe.length ? safe : rows).sort((a,b)=>b.netProfit-a.netProfit)[0];
   const bestYield = [...rows].sort((a,b)=>b.totalYield-a.totalYield)[0];
   const lowestCost = [...rows].sort((a,b)=>a.totalCost-b.totalCost)[0];
-  const highestRisk = [...rows].sort((a,b)=>b.de-a.de)[0];
 
   const deAdvice = recommended.de > 1
     ? 'D/E เกิน 1 เท่า ควรลดรายการขอรับส่งเสริมที่ไม่จำเป็นก่อน หรือทบทวนวงเงินค้ำประกัน'
