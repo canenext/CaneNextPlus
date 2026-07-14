@@ -6922,7 +6922,7 @@ border-radius:10px;background:#fff;font-size:15px;
 <h3>รายละเอียดพื้นที่แปลงจำลอง</h3>
 <table class="table form-table">
 <tbody>
-<tr><th>พื้นที่ปลูก (ไร่)</th><td><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></td><th>ระบบน้ำ</th><td><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></td></tr>
+<tr><th>พื้นที่ปลูก (ไร่)</th><td><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></td><th>รูปแบบการให้น้ำ</th><td><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></td></tr>
 <tr><th>ระยะร่องที่ปลูก</th><td><select class="plot-input" id="rowSpacing"><option value="1.50">1.50 เมตร</option><option selected="" value="1.65">1.65 เมตร</option><option value="1.85">1.85 เมตร</option></select></td><th>จำนวนร่อง</th><td><input class="plot-input readonly calculated-value" id="rowCount" readonly="" type="text"/></td></tr>
 </tbody>
 </table>
@@ -7409,7 +7409,7 @@ function renderScenarioCardV2(data){
       <div class="scenario-col">
         <h5 class="scenario-col-title"><i class="fa-solid fa-hand-holding-dollar"></i>ระบบน้ำ / งบลงทุน</h5>
         <div class="scenario-field-v2" style="margin-bottom:12px;">
-          <label>ระบบน้ำ</label>
+          <label>รูปแบบการให้น้ำ</label>
           <select data-key="water">
             <option ${data.water==='ไม่มีระบบน้ำ (น้ำฝน)'?'selected':''}>ไม่มีระบบน้ำ (น้ำฝน)</option>
             <option ${data.water==='ระบบน้ำหยด'?'selected':''}>ระบบน้ำหยด</option>
