@@ -7024,7 +7024,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="2.1.4" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="2.1.5" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7089,94 +7089,20 @@ body:not(.can-show-admin-menus) #user-management{
 .current-role-notice{
   display:none !important;
 }
-</style><style id="canenext-page-antiflicker-style">
-/* Prevent Business Partner flash while restoring the last active menu */
-html.canenext-restoring .app-main{
+</style><style id="canenext-page-state-clean-style">
+/* Keep the interface invisible while all focus/session handlers finish. */
+html.canenext-page-switching .app-main,
+html.canenext-page-switching .menu-row{
+  opacity:0 !important;
   visibility:hidden !important;
 }
-html.canenext-restoring .menu-row{
-  visibility:hidden !important;
-}
-html.canenext-restored .app-main,
-html.canenext-restored .menu-row{
-  visibility:visible !important;
+html:not(.canenext-page-switching) .app-main,
+html:not(.canenext-page-switching) .menu-row{
+  opacity:1;
+  visibility:visible;
 }
 </style></head>
-<body class="locked"><script id="canenext-page-antiflicker-script">
-(function(){
-  const root=document.documentElement;
-  const KEY='canenext_last_user_page';
-
-  // Hide before body paints.
-  root.classList.add('canenext-restoring');
-  root.classList.remove('canenext-restored');
-
-  function finishRestore(){
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>{
-        root.classList.remove('canenext-restoring');
-        root.classList.add('canenext-restored');
-      });
-    });
-  }
-
-  function restoreWithoutFlash(){
-    try{
-      const saved=localStorage.getItem(KEY) || 'business-partner';
-
-      document.querySelectorAll('.app-page').forEach(page=>{
-        page.classList.toggle('active-page',page.id===saved);
-      });
-
-      document.querySelectorAll('.menu-row a').forEach(link=>{
-        link.classList.toggle(
-          'active-menu',
-          link.getAttribute('href')==='#'+saved
-        );
-      });
-    }catch(err){
-      console.error('Restore page before paint failed:',err);
-    }finally{
-      finishRestore();
-    }
-  }
-
-  // Run as soon as DOM is ready, before older delayed restore handlers.
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',restoreWithoutFlash,{once:true});
-  }else{
-    restoreWithoutFlash();
-  }
-
-  // When returning from a hidden/minimized tab, hide briefly and restore once.
-  document.addEventListener('visibilitychange',()=>{
-    if(document.hidden) return;
-
-    root.classList.add('canenext-restoring');
-    root.classList.remove('canenext-restored');
-
-    setTimeout(()=>{
-      if(window.CanePageStateFinal?.restore){
-        window.CanePageStateFinal.restore();
-      }else{
-        restoreWithoutFlash();
-        return;
-      }
-      finishRestore();
-    },0);
-  });
-
-  window.addEventListener('pageshow',()=>{
-    root.classList.add('canenext-restoring');
-    root.classList.remove('canenext-restored');
-
-    setTimeout(()=>{
-      window.CanePageStateFinal?.restore?.();
-      finishRestore();
-    },0);
-  });
-})();
-</script>
+<body class="locked">
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
 <div class="login-brand-panel">
@@ -11980,108 +11906,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
   window.syncScenarioAreaAndCropFromSelectedPlot=syncAreaAndCropFromSelectedPlot;
 })();
-</script><script id="canenext-page-state-script">
-(function(){
-  const STORAGE_KEY='canenext_active_page';
-  const DEFAULT_PAGE='business-partner';
-  const ADMIN_ONLY=new Set(['data-management','user-management']);
-
-  function getSavedPage(){
-    return localStorage.getItem(STORAGE_KEY) || DEFAULT_PAGE;
-  }
-
-  function savePage(pageId){
-    if(pageId) localStorage.setItem(STORAGE_KEY,pageId);
-  }
-
-  function isAdmin(){
-    const p=window.CANENEXT_CURRENT_PROFILE;
-    return p?.role==='admin' && p?.status==='active';
-  }
-
-  function safePage(pageId){
-    if(!document.getElementById(pageId)) return DEFAULT_PAGE;
-    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
-    return pageId;
-  }
-
-  function activatePage(pageId){
-    const finalPage=safePage(pageId);
-
-    document.querySelectorAll('.app-page').forEach(page=>{
-      page.classList.toggle('active-page',page.id===finalPage);
-    });
-
-    document.querySelectorAll('.menu-row a').forEach(link=>{
-      link.classList.toggle(
-        'active-menu',
-        link.getAttribute('href')==='#'+finalPage
-      );
-    });
-
-    savePage(finalPage);
-
-    if(finalPage==='real-plots' && typeof window.loadCurrentFarmerPlotsLazy==='function'){
-      setTimeout(()=>window.loadCurrentFarmerPlotsLazy(),0);
-    }
-    if(finalPage==='dashboard' && typeof window.refreshDashboardFromScenario==='function'){
-      setTimeout(()=>window.refreshDashboardFromScenario(),50);
-    }
-    if(finalPage==='analytics' && typeof window.refreshAnalysisTable==='function'){
-      setTimeout(()=>window.refreshAnalysisTable(),50);
-    }
-    if(finalPage==='ai-recommendation' && typeof window.refreshAIAdvisor==='function'){
-      setTimeout(()=>window.refreshAIAdvisor(),50);
-    }
-
-    return finalPage;
-  }
-
-  // Final page-switch function: save current page every time a menu is opened.
-  window.showMainMenu=async function(event,pageId){
-    if(event?.preventDefault) event.preventDefault();
-
-    if(ADMIN_ONLY.has(pageId)){
-      if(window.CaneAdminMenuVisibility?.refresh){
-        await window.CaneAdminMenuVisibility.refresh();
-      }
-      if(!isAdmin()){
-        return activatePage(DEFAULT_PAGE);
-      }
-    }
-
-    return activatePage(pageId);
-  };
-
-  function restorePage(){
-    const page=getSavedPage();
-    activatePage(page);
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    setTimeout(restorePage,900);
-  });
-
-  // Returning to the tab/window must keep the current menu.
-  document.addEventListener('visibilitychange',()=>{
-    if(!document.hidden){
-      setTimeout(restorePage,50);
-    }
-  });
-
-  window.addEventListener('focus',()=>{
-    setTimeout(restorePage,50);
-  });
-
-  // Restore after Supabase refreshes the session/profile.
-  window.addEventListener('canenext:auth-restored',restorePage);
-
-  window.CanePageState={
-    get:()=>safePage(getSavedPage()),
-    restore:restorePage,
-    clear:()=>localStorage.removeItem(STORAGE_KEY)
-  };
-})();
 </script><script id="canenext-user-scope-script">
 (function(){
   async function ensureClient(){
@@ -12473,149 +12297,150 @@ document.addEventListener('DOMContentLoaded', function(){
     setTimeout(applyWaterSourceLabel,40);
   });
 })();
-</script><script id="canenext-page-state-final-script">
+</script><script id="canenext-page-state-clean-script">
 (function(){
   const KEY='canenext_last_user_page';
   const DEFAULT_PAGE='business-partner';
   const ADMIN_ONLY=new Set(['data-management','user-management']);
-  let lastUserPage=localStorage.getItem(KEY)||DEFAULT_PAGE;
-  let internalRestore=false;
-  let observerTimer=null;
+  const root=document.documentElement;
 
-  function isActiveAdmin(){
-    const profile=window.CANENEXT_CURRENT_PROFILE;
-    return String(profile?.role||'').toLowerCase()==='admin' &&
-           String(profile?.status||'').toLowerCase()==='active';
+  let lastPage=localStorage.getItem(KEY)||DEFAULT_PAGE;
+  let returning=false;
+  let revealTimer=null;
+
+  function isAdmin(){
+    const p=window.CANENEXT_CURRENT_PROFILE;
+    return String(p?.role||'').toLowerCase()==='admin' &&
+           String(p?.status||'').toLowerCase()==='active';
   }
 
-  function validPage(pageId){
+  function safe(pageId){
     if(!pageId || !document.getElementById(pageId)) return DEFAULT_PAGE;
-    if(ADMIN_ONLY.has(pageId) && !isActiveAdmin()) return DEFAULT_PAGE;
+    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
     return pageId;
   }
 
-  function activePage(){
-    return document.querySelector('.app-page.active-page')?.id || null;
-  }
-
   function remember(pageId){
-    const valid=validPage(pageId);
-    lastUserPage=valid;
-    localStorage.setItem(KEY,valid);
+    lastPage=safe(pageId);
+    localStorage.setItem(KEY,lastPage);
   }
 
   function render(pageId){
-    const target=validPage(pageId);
-    internalRestore=true;
+    const target=safe(pageId);
 
     document.querySelectorAll('.app-page').forEach(page=>{
       page.classList.toggle('active-page',page.id===target);
     });
 
-    document.querySelectorAll('.menu-row a').forEach(link=>{
+    document.querySelectorAll('.menu-row a[href^="#"]').forEach(link=>{
       link.classList.toggle(
         'active-menu',
         link.getAttribute('href')==='#'+target
       );
     });
 
-    setTimeout(()=>{ internalRestore=false; },30);
-
     if(target==='dashboard'){
-      setTimeout(()=>window.refreshDashboardFromScenario?.(),60);
+      setTimeout(()=>window.refreshDashboardFromScenario?.(),30);
     }else if(target==='analytics'){
-      setTimeout(()=>window.refreshAnalysisTable?.(),60);
+      setTimeout(()=>window.refreshAnalysisTable?.(),30);
     }else if(target==='ai-recommendation'){
-      setTimeout(()=>window.refreshAIAdvisor?.(),60);
+      setTimeout(()=>window.refreshAIAdvisor?.(),30);
     }
 
     return target;
   }
 
-  function restore(){
-    render(lastUserPage || localStorage.getItem(KEY) || DEFAULT_PAGE);
+  function hideForRestore(){
+    returning=true;
+    root.classList.add('canenext-page-switching');
+    clearTimeout(revealTimer);
   }
 
-  // Menu clicks are the authoritative source of the user's chosen page.
-  document.addEventListener('click',event=>{
-    const link=event.target.closest('.menu-row a[href^="#"]');
-    if(!link) return;
+  function restoreAndReveal(){
+    clearTimeout(revealTimer);
 
-    const pageId=link.getAttribute('href').slice(1);
-    if(pageId) remember(pageId);
-  },true);
+    // Wait until older focus/auth listeners have finished trying to open Business Partner.
+    revealTimer=setTimeout(()=>{
+      render(lastPage);
+      requestAnimationFrame(()=>{
+        requestAnimationFrame(()=>{
+          root.classList.remove('canenext-page-switching');
+          returning=false;
+        });
+      });
+    },180);
+  }
 
-  // Wrap the final menu function. Programmatic calls to Business Partner
-  // must not overwrite the user's remembered page.
+  // Final wrapper. Do not execute older programmatic Business Partner redirects.
   const previousShowMainMenu=window.showMainMenu;
   window.showMainMenu=async function(event,pageId){
-    const isRealUserAction=!!event?.isTrusted;
+    const userAction=Boolean(event && event.isTrusted);
+    const requested=safe(pageId);
 
-    if(isRealUserAction){
-      remember(pageId);
+    if(userAction){
+      remember(requested);
+
+      if(typeof previousShowMainMenu==='function'){
+        const result=await previousShowMainMenu(event,requested);
+        render(requested);
+        return result;
+      }
+      return render(requested);
+    }
+
+    // Old scripts call Business Partner after focus/auth restore.
+    // Ignore that call completely when the user was on another page.
+    if(requested===DEFAULT_PAGE && lastPage!==DEFAULT_PAGE){
+      return render(lastPage);
+    }
+
+    if(returning){
+      return render(lastPage);
     }
 
     if(typeof previousShowMainMenu==='function'){
-      const result=await previousShowMainMenu(event,pageId);
-
-      if(!isRealUserAction && pageId===DEFAULT_PAGE && lastUserPage!==DEFAULT_PAGE){
-        setTimeout(restore,20);
-      }else{
-        setTimeout(()=>render(isRealUserAction ? pageId : lastUserPage),20);
-      }
-
+      const result=await previousShowMainMenu(event,requested);
+      render(requested);
       return result;
     }
 
-    return render(isRealUserAction ? pageId : lastUserPage);
+    return render(requested);
   };
 
-  // Detect old scripts that force Business Partner after focus/auth refresh.
-  const root=document.querySelector('.app-main') || document.body;
-  new MutationObserver(()=>{
-    if(internalRestore || document.hidden) return;
+  // Capture genuine sidebar clicks before inline onclick executes.
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('.menu-row a[href^="#"]');
+    if(!link || !event.isTrusted) return;
+    remember(link.getAttribute('href').slice(1));
+  },true);
 
-    clearTimeout(observerTimer);
-    observerTimer=setTimeout(()=>{
-      const current=activePage();
-
-      if(current===DEFAULT_PAGE && lastUserPage!==DEFAULT_PAGE){
-        restore();
-      }else if(current && current!==DEFAULT_PAGE){
-        remember(current);
-      }
-    },35);
-  }).observe(root,{
-    subtree:true,
-    attributes:true,
-    attributeFilter:['class']
-  });
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    setTimeout(restore,1200);
-  });
+  // Initial page paint.
+  hideForRestore();
+  document.addEventListener('DOMContentLoaded',restoreAndReveal,{once:true});
 
   document.addEventListener('visibilitychange',()=>{
     if(document.hidden){
-      const current=activePage();
-      if(current && current!==DEFAULT_PAGE) remember(current);
+      const current=document.querySelector('.app-page.active-page')?.id;
+      if(current) remember(current);
+      hideForRestore();
     }else{
-      setTimeout(restore,80);
+      restoreAndReveal();
     }
   });
 
   window.addEventListener('blur',()=>{
-    const current=activePage();
-    if(current && current!==DEFAULT_PAGE) remember(current);
+    const current=document.querySelector('.app-page.active-page')?.id;
+    if(current) remember(current);
+    hideForRestore();
   });
 
-  window.addEventListener('focus',()=>setTimeout(restore,80));
-  window.addEventListener('pageshow',()=>setTimeout(restore,80));
+  window.addEventListener('focus',restoreAndReveal);
+  window.addEventListener('pageshow',restoreAndReveal);
 
-  window.CanePageStateFinal={
+  window.CanePageState={
     remember,
-    restore,
-    current:()=>lastUserPage
+    restore:restoreAndReveal,
+    current:()=>lastPage
   };
 })();
 </script></body>

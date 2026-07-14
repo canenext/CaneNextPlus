@@ -1,12 +1,13 @@
 Cane Next+ Master Version
-Version: 2.1.4
-Based on: v2.1.3
-Base index SHA-256: 0c7ae450b5a6860ed6f3ccef9c3934612b6769ff32a19c98894a69fb52b9210f
-Created: 2026-07-14T07:56:25
+Version: 2.1.5
+Based on: v2.1.4
+Base index SHA-256: cc5283792605e39b877b294183272a60694b195577093a2ed0740b617b6b9b03
+Created: 2026-07-14T08:29:19
 
 FIX
-- Removed the brief Business Partner flash when restoring the previous menu.
-- App content and sidebar remain hidden only during page restoration.
-- The saved menu is applied before the interface becomes visible.
-- Returning from minimized/folded screen, tab switch, or browser restore no longer flashes Business Partner.
-- All v2.1.3 features and support files remain unchanged.
+- Removed all older page-memory and anti-flicker patches that were competing.
+- Programmatic Business Partner redirects are now ignored when the user was on another menu.
+- The interface stays hidden until all focus/auth handlers have finished.
+- The saved page is rendered before the interface is revealed.
+- This addresses the remaining brief Business Partner flash.
+- All other Master files and functionality remain unchanged.
