@@ -7024,7 +7024,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="2.1.9" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.0.1" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7089,122 +7089,8 @@ body:not(.can-show-admin-menus) #user-management{
 .current-role-notice{
   display:none !important;
 }
-</style><style id="canenext-page-state-clean-style">
-/* Keep the interface invisible while all focus/session handlers finish. */
-html.canenext-page-switching .app-main,
-html.canenext-page-switching .menu-row{
-  opacity:0 !important;
-  visibility:hidden !important;
-}
-html:not(.canenext-page-switching) .app-main,
-html:not(.canenext-page-switching) .menu-row{
-  opacity:1;
-  visibility:visible;
-}
-</style><style id="canenext-admin-menu-stable-style">
-/* Prevent Admin-only menu items from appearing after the sidebar has already painted */
-html.canenext-auth-checking .menu-row{
-  visibility:hidden !important;
-  opacity:0 !important;
-}
-html.canenext-auth-ready .menu-row{
-  visibility:visible !important;
-  opacity:1 !important;
-}
-.menu-row{
-  transition:none !important;
-}
-.menu-row .admin-only-menu{
-  transition:none !important;
-}
-</style><style id="canenext-admin-click-stable-style">
-/* Stable Admin menu/page switching */
-.menu-row,
-.menu-row a,
-.app-main,
-.app-page,
-#data-management,
-#user-management{
-  transition:none !important;
-  animation:none !important;
-}
-#data-management,
-#user-management{
-  scroll-margin-top:0 !important;
-}
 </style></head>
-<body class="locked"><script id="canenext-admin-menu-stable-script">
-(function(){
-  const root=document.documentElement;
-  let readyTimer=null;
-
-  function beginCheck(){
-    root.classList.add('canenext-auth-checking');
-    root.classList.remove('canenext-auth-ready');
-    clearTimeout(readyTimer);
-  }
-
-  function finishCheck(){
-    clearTimeout(readyTimer);
-    readyTimer=setTimeout(()=>{
-      requestAnimationFrame(()=>{
-        requestAnimationFrame(()=>{
-          root.classList.remove('canenext-auth-checking');
-          root.classList.add('canenext-auth-ready');
-        });
-      });
-    },20);
-  }
-
-  async function refreshAndReveal(){
-    beginCheck();
-
-    try{
-      if(window.CaneAdminMenuMaster?.refresh){
-        await window.CaneAdminMenuMaster.refresh();
-      }else if(window.CaneAdminMenuNoFlash?.refresh){
-        await window.CaneAdminMenuNoFlash.refresh();
-      }else if(window.CaneAdminMenuOnly?.refresh){
-        await window.CaneAdminMenuOnly.refresh();
-      }
-
-      if(window.CanePageState?.restore){
-        window.CanePageState.restore();
-      }else if(window.CanePageStateFinal?.restore){
-        window.CanePageStateFinal.restore();
-      }
-    }catch(err){
-      console.error('Admin menu preparation failed:',err);
-    }finally{
-      finishCheck();
-    }
-  }
-
-  // Hide before first paint.
-  beginCheck();
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    setTimeout(refreshAndReveal,40);
-  },{once:true});
-
-  document.addEventListener('visibilitychange',()=>{
-    if(document.hidden){
-      beginCheck();
-    }else{
-      refreshAndReveal();
-    }
-  });
-
-  window.addEventListener('pageshow',refreshAndReveal);
-
-  // Avoid repeated focus/blur flicker. Only refresh when role may have changed.
-  window.addEventListener('canenext:auth-restored',refreshAndReveal);
-
-  window.CaneAdminStableMenu={
-    refresh:refreshAndReveal
-  };
-})();
-</script>
+<body class="locked">
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
 <div class="login-brand-panel">
@@ -7275,19 +7161,19 @@ html.canenext-auth-ready .menu-row{
 <div class="bp-clean-grid">
 <div class="form-group">
 <label for="bpCode">รหัสชาวไร่</label>
-<input id="bpCode" placeholder="เช่น 778899" type="text"/>
+<input id="bpCode" placeholder="เช่น 778899" type="text" value="778899"/>
 </div>
 <div class="form-group">
 <label for="bpName">ชื่อ-สกุล ชาวไร่</label>
-<input id="bpName" placeholder="เช่น นายอ้อยดี มีกำไร" type="text"/>
+<input id="bpName" placeholder="เช่น นายอ้อยดี มีกำไร" type="text" value="นาย อ้อยดี มีกำไร"/>
 </div>
 <div class="form-group">
 <label for="showZone">สังกัดเขต</label>
-<input id="showZone" readonly="" type="text" value="เขต 05"/>
+<input id="showZone" readonly="" type="text" value="8"/>
 </div>
 <div class="form-group">
 <label for="showSubZone">สังกัดเขตย่อย</label>
-<input id="showSubZone" readonly="" type="text" value="เขตย่อย 05-03"/>
+<input id="showSubZone" readonly="" type="text" value="8888"/>
 </div>
 <button class="btn bp-search-btn" onclick="searchBusinessPartner()" type="button">ค้นหา</button>
 </div>
@@ -12399,36 +12285,38 @@ document.addEventListener('DOMContentLoaded', function(){
     setTimeout(applyWaterSourceLabel,40);
   });
 })();
-</script><script id="canenext-page-state-clean-script">
+</script><script id="canenext-page-state-v3-script">
 (function(){
-  const KEY='canenext_last_user_page';
+  const KEY='canenext_active_page_v3';
   const DEFAULT_PAGE='business-partner';
   const ADMIN_ONLY=new Set(['data-management','user-management']);
-  const root=document.documentElement;
 
-  let lastPage=localStorage.getItem(KEY)||DEFAULT_PAGE;
-  let returning=false;
-  let revealTimer=null;
-
-  function isAdmin(){
-    const p=window.CANENEXT_CURRENT_PROFILE;
-    return String(p?.role||'').toLowerCase()==='admin' &&
-           String(p?.status||'').toLowerCase()==='active';
+  function isActiveAdmin(){
+    const profile=window.CANENEXT_CURRENT_PROFILE;
+    return String(profile?.role||'').trim().toLowerCase()==='admin' &&
+           String(profile?.status||'').trim().toLowerCase()==='active';
   }
 
-  function safe(pageId){
-    if(!pageId || !document.getElementById(pageId)) return DEFAULT_PAGE;
-    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
+  function safePage(pageId){
+    if(!pageId || !document.getElementById(pageId)){
+      return DEFAULT_PAGE;
+    }
+
+    if(ADMIN_ONLY.has(pageId) && !isActiveAdmin()){
+      return DEFAULT_PAGE;
+    }
+
     return pageId;
   }
 
-  function remember(pageId){
-    lastPage=safe(pageId);
-    localStorage.setItem(KEY,lastPage);
+  function rememberPage(pageId){
+    const target=safePage(pageId);
+    localStorage.setItem(KEY,target);
+    return target;
   }
 
-  function render(pageId){
-    const target=safe(pageId);
+  function renderPage(pageId){
+    const target=safePage(pageId);
 
     document.querySelectorAll('.app-page').forEach(page=>{
       page.classList.toggle('active-page',page.id===target);
@@ -12452,220 +12340,125 @@ document.addEventListener('DOMContentLoaded', function(){
     return target;
   }
 
-  function hideForRestore(){
-    returning=true;
-    root.classList.add('canenext-page-switching');
-    clearTimeout(revealTimer);
-  }
-
-  function restoreAndReveal(){
-    clearTimeout(revealTimer);
-
-    // Wait until older focus/auth listeners have finished trying to open Business Partner.
-    revealTimer=setTimeout(()=>{
-      render(lastPage);
-      requestAnimationFrame(()=>{
-        requestAnimationFrame(()=>{
-          root.classList.remove('canenext-page-switching');
-          returning=false;
-        });
-      });
-    },180);
-  }
-
-  // Final wrapper. Do not execute older programmatic Business Partner redirects.
-  const previousShowMainMenu=window.showMainMenu;
-  window.showMainMenu=async function(event,pageId){
-    const userAction=Boolean(event && event.isTrusted);
-    const requested=safe(pageId);
-
-    if(userAction){
-      remember(requested);
-
-      if(typeof previousShowMainMenu==='function'){
-        const result=await previousShowMainMenu(event,requested);
-        render(requested);
-        return result;
-      }
-      return render(requested);
-    }
-
-    // Old scripts call Business Partner after focus/auth restore.
-    // Ignore that call completely when the user was on another page.
-    if(requested===DEFAULT_PAGE && lastPage!==DEFAULT_PAGE){
-      return render(lastPage);
-    }
-
-    if(returning){
-      return render(lastPage);
-    }
-
-    if(typeof previousShowMainMenu==='function'){
-      const result=await previousShowMainMenu(event,requested);
-      render(requested);
-      return result;
-    }
-
-    return render(requested);
-  };
-
-  // Capture genuine sidebar clicks before inline onclick executes.
+  // Remember only when the user actually clicks a menu.
   document.addEventListener('click',event=>{
     const link=event.target.closest('.menu-row a[href^="#"]');
     if(!link || !event.isTrusted) return;
-    remember(link.getAttribute('href').slice(1));
-  },true);
-
-  // Initial page paint.
-  hideForRestore();
-  document.addEventListener('DOMContentLoaded',restoreAndReveal,{once:true});
-
-  document.addEventListener('visibilitychange',()=>{
-    if(document.hidden){
-      const current=document.querySelector('.app-page.active-page')?.id;
-      if(current) remember(current);
-      hideForRestore();
-    }else{
-      restoreAndReveal();
-    }
-  });
-
-  window.addEventListener('blur',()=>{
-    const current=document.querySelector('.app-page.active-page')?.id;
-    if(current) remember(current);
-    hideForRestore();
-  });
-
-  window.addEventListener('focus',restoreAndReveal);
-  window.addEventListener('pageshow',restoreAndReveal);
-
-  window.CanePageState={
-    remember,
-    restore:restoreAndReveal,
-    current:()=>lastPage
-  };
-})();
-</script><script id="canenext-admin-click-stable-script">
-(function(){
-  const ADMIN_PAGES=new Set(['data-management','user-management']);
-
-  function isActiveAdmin(){
-    const p=window.CANENEXT_CURRENT_PROFILE;
-    return String(p?.role||'').toLowerCase()==='admin' &&
-           String(p?.status||'').toLowerCase()==='active';
-  }
-
-  function renderPage(pageId){
-    if(ADMIN_PAGES.has(pageId) && !isActiveAdmin()){
-      pageId='business-partner';
-    }
-
-    document.querySelectorAll('.app-page').forEach(page=>{
-      page.classList.toggle('active-page',page.id===pageId);
-    });
-
-    document.querySelectorAll('.menu-row a[href^="#"]').forEach(link=>{
-      link.classList.toggle(
-        'active-menu',
-        link.getAttribute('href')==='#'+pageId
-      );
-    });
-
-    try{
-      localStorage.setItem('canenext_last_user_page',pageId);
-      localStorage.setItem('canenext_active_page',pageId);
-    }catch(e){}
-
-    // Keep the page position steady.
-    window.scrollTo({top:0,left:0,behavior:'auto'});
-    return pageId;
-  }
-
-  // Handle Admin menu clicks before older inline/async handlers run.
-  document.addEventListener('click',event=>{
-    const link=event.target.closest(
-      '.menu-row a[href="#data-management"], .menu-row a[href="#user-management"]'
-    );
-    if(!link) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
 
     const pageId=link.getAttribute('href').slice(1);
-    renderPage(pageId);
-
-    if(pageId==='user-management'){
-      setTimeout(()=>window.CaneUserAdmin?.loadUsers?.(),0);
-    }
+    rememberPage(pageId);
   },true);
 
-  // Final override: Admin page switching uses cached verified role, without
-  // another async role check that hides/reveals the sidebar.
+  // Final page switcher. No focus, blur, visibilitychange or pageshow listeners.
   const previousShowMainMenu=window.showMainMenu;
   window.showMainMenu=function(event,pageId){
     if(event?.preventDefault) event.preventDefault();
 
-    if(ADMIN_PAGES.has(pageId)){
-      if(!isActiveAdmin()){
-        return renderPage('business-partner');
-      }
-      return renderPage(pageId);
-    }
+    const target=event?.isTrusted
+      ? rememberPage(pageId)
+      : safePage(pageId);
 
     if(typeof previousShowMainMenu==='function'){
-      return previousShowMainMenu(event,pageId);
+      try{
+        previousShowMainMenu(event,target);
+      }catch(err){
+        console.error('Previous page switch failed:',err);
+      }
     }
 
-    return renderPage(pageId);
+    return renderPage(target);
   };
 
-  window.CaneAdminPageStable={
-    open:renderPage
+  function restoreSavedPage(){
+    const saved=localStorage.getItem(KEY)||DEFAULT_PAGE;
+    renderPage(saved);
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    // Wait until the session/profile has had a moment to load.
+    setTimeout(restoreSavedPage,700);
+  });
+
+  // Restore once after auth state is ready, without reacting to monitor/tab focus.
+  window.addEventListener('canenext:auth-restored',restoreSavedPage);
+
+  window.CanePageStateV3={
+    remember:rememberPage,
+    restore:restoreSavedPage,
+    current:()=>safePage(localStorage.getItem(KEY)||DEFAULT_PAGE)
   };
 })();
-</script><script id="canenext-farmer-session-memory-script">
+</script><script id="canenext-farmer-session-memory-v3-script">
 (function(){
-  const SESSION_KEY='canenext_last_farmer_session';
-  const DEFAULT_FARMER={
+  const SESSION_KEY='canenext_current_farmer_session_v3';
+
+  const DEFAULT_FARMER=Object.freeze({
     farmer_code:'778899',
     farmer_name:'นาย อ้อยดี มีกำไร',
+    name:'นาย อ้อยดี มีกำไร',
+    full_name:'นาย อ้อยดี มีกำไร',
     zone:'8',
     subzone:'8888'
-  };
+  });
 
-  function getSessionFarmer(){
+  function normalizeFarmer(source={}){
+    const farmerName=String(
+      source.farmer_name ||
+      source.name ||
+      source.full_name ||
+      ''
+    ).trim();
+
+    return {
+      ...source,
+      farmer_code:String(source.farmer_code||'').trim(),
+      farmer_name:farmerName,
+      name:farmerName,
+      full_name:farmerName,
+      zone:String(source.zone||'').trim(),
+      subzone:String(source.subzone||'').trim()
+    };
+  }
+
+  function readSession(){
     try{
       const raw=sessionStorage.getItem(SESSION_KEY);
-      return raw ? JSON.parse(raw) : null;
-    }catch(e){
+      if(!raw) return null;
+
+      const data=normalizeFarmer(JSON.parse(raw));
+      return data.farmer_code ? data : null;
+    }catch(err){
+      console.error('อ่านข้อมูลชาวไร่ล่าสุดไม่สำเร็จ:',err);
       return null;
     }
   }
 
-  function saveSessionFarmer(farmer){
-    if(!farmer?.farmer_code) return;
-    const data={
-      farmer_code:String(farmer.farmer_code||'').trim(),
-      farmer_name:String(farmer.farmer_name||farmer.full_name||'').trim(),
-      zone:String(farmer.zone||'').trim(),
-      subzone:String(farmer.subzone||'').trim()
-    };
-    sessionStorage.setItem(SESSION_KEY,JSON.stringify(data));
-    window.CANENEXT_CURRENT_FARMER=data;
+  function writeSession(source){
+    const farmer=normalizeFarmer(source);
+    if(!farmer.farmer_code) return null;
+
+    sessionStorage.setItem(SESSION_KEY,JSON.stringify(farmer));
+    window.CANENEXT_CURRENT_FARMER=farmer;
+    return farmer;
   }
 
-  function setValue(id,value){
+  function setElement(id,value){
     const el=document.getElementById(id);
     if(!el) return;
-    if('value' in el) el.value=value ?? '';
-    else el.textContent=value ?? '';
+
+    if('value' in el){
+      el.value=value ?? '';
+    }else{
+      el.textContent=value ?? '';
+    }
   }
 
-  function applyFarmer(farmer){
-    if(!farmer) return;
+  function applyToAllMenus(source,{dispatch=true}={}){
+    const farmer=normalizeFarmer(source);
 
-    const mappings={
+    window.CANENEXT_CURRENT_FARMER=farmer;
+
+    const fields={
       bpCode:farmer.farmer_code,
       bpName:farmer.farmer_name,
       showZone:farmer.zone,
@@ -12676,63 +12469,105 @@ document.addEventListener('DOMContentLoaded', function(){
       subzone:farmer.subzone
     };
 
-    Object.entries(mappings).forEach(([id,value])=>setValue(id,value));
-    window.CANENEXT_CURRENT_FARMER=farmer;
-  }
+    Object.entries(fields).forEach(([id,value])=>setElement(id,value));
 
-  function initializeFarmer(){
-    const saved=getSessionFarmer();
-    if(saved){
-      applyFarmer(saved);
-    }else{
-      applyFarmer(DEFAULT_FARMER);
+    document.querySelectorAll('[data-farmer-field]').forEach(el=>{
+      const key=el.getAttribute('data-farmer-field');
+      const value=farmer[key] ?? '';
+
+      if('value' in el) el.value=value;
+      else el.textContent=value;
+    });
+
+    if(dispatch){
+      window.dispatchEvent(new CustomEvent('canenext:farmer-context-ready',{
+        detail:farmer
+      }));
     }
+
+    return farmer;
   }
 
-  // Persist farmer after a successful search/event.
+  function initialize(){
+    const farmer=readSession() || normalizeFarmer(DEFAULT_FARMER);
+    applyToAllMenus(farmer);
+
+    // Broadcast after all older menu scripts have loaded.
+    setTimeout(()=>{
+      window.dispatchEvent(new CustomEvent('canenext:farmer-changed',{
+        detail:farmer
+      }));
+    },250);
+  }
+
+  // Save every successful farmer selection/search as the current session farmer.
   window.addEventListener('canenext:farmer-changed',event=>{
-    const detail=event?.detail || window.CANENEXT_CURRENT_FARMER;
-    if(detail?.farmer_code){
-      saveSessionFarmer(detail);
-    }
+    const candidate=event?.detail || window.CANENEXT_CURRENT_FARMER;
+    const farmer=normalizeFarmer(candidate);
+
+    if(!farmer.farmer_code) return;
+
+    writeSession(farmer);
+    applyToAllMenus(farmer,{dispatch:false});
   });
 
-  // Also wrap common search function if present.
-  const wrapTimer=setInterval(()=>{
-    const fn=window.searchBusinessPartner;
-    if(typeof fn!=='function') return;
-    clearInterval(wrapTimer);
+  // Wrap Business Partner search once so the selected farmer is persisted.
+  const searchTimer=setInterval(()=>{
+    const original=window.searchBusinessPartner;
+    if(typeof original!=='function' || original.__farmerSessionWrapped) return;
 
-    window.searchBusinessPartner=async function(){
-      const result=await fn.apply(this,arguments);
+    clearInterval(searchTimer);
+
+    const wrapped=async function(){
+      const result=await original.apply(this,arguments);
+
       setTimeout(()=>{
-        const farmer=window.CANENEXT_CURRENT_FARMER;
-        if(farmer?.farmer_code) saveSessionFarmer(farmer);
-      },50);
+        const farmer=normalizeFarmer(window.CANENEXT_CURRENT_FARMER||{});
+        if(farmer.farmer_code){
+          writeSession(farmer);
+          applyToAllMenus(farmer,{dispatch:false});
+        }
+      },80);
+
       return result;
     };
+
+    wrapped.__farmerSessionWrapped=true;
+    window.searchBusinessPartner=wrapped;
   },100);
 
-  // Clear only when user explicitly logs out.
+  // Clear the remembered farmer only on explicit logout.
   const logoutTimer=setInterval(()=>{
-    const fn=window.logout;
-    if(typeof fn!=='function') return;
+    const original=window.logoutSupabase;
+    if(typeof original!=='function' || original.__farmerSessionWrapped) return;
+
     clearInterval(logoutTimer);
 
-    window.logout=async function(){
+    const wrapped=async function(){
       sessionStorage.removeItem(SESSION_KEY);
       window.CANENEXT_CURRENT_FARMER=null;
-      return await fn.apply(this,arguments);
+      return await original.apply(this,arguments);
     };
+
+    wrapped.__farmerSessionWrapped=true;
+    window.logoutSupabase=wrapped;
   },100);
 
-  document.addEventListener('DOMContentLoaded',initializeFarmer);
+  document.addEventListener('DOMContentLoaded',initialize);
 
-  window.CaneFarmerSession={
-    get:getSessionFarmer,
-    save:saveSessionFarmer,
-    clear:()=>sessionStorage.removeItem(SESSION_KEY),
-    defaults:DEFAULT_FARMER
+  window.CaneFarmerSessionV3={
+    defaults:DEFAULT_FARMER,
+    get:()=>readSession() || normalizeFarmer(DEFAULT_FARMER),
+    save:farmer=>{
+      const saved=writeSession(farmer);
+      if(saved) applyToAllMenus(saved);
+      return saved;
+    },
+    apply:applyToAllMenus,
+    clear:()=>{
+      sessionStorage.removeItem(SESSION_KEY);
+      window.CANENEXT_CURRENT_FARMER=null;
+    }
   };
 })();
 </script></body>

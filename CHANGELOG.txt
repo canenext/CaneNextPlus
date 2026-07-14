@@ -1,12 +1,20 @@
 Cane Next+ Master Version
-Version: 2.1.9
-Based on: v2.1.8
-Base index SHA-256: c300a59adc37c82aad9b0c14adfcb1fe29285a616667da57060f6b6e27ffa809
-Created: 2026-07-14T09:07:33
+Version: 3.0.1
+Based on: v3.0.0
+Base index SHA-256: 80d7513a1d5901fdabfb70773c2f2b10c0c06c35f45f2443401e5ffb86a39b9a
+Created: 2026-07-14T09:41:13
 
 CHANGES
-- Default farmer values appear only when there is no farmer stored in the current login session.
-- After a successful farmer search, the latest farmer is stored in sessionStorage.
-- The latest farmer remains selected while navigating menus, refreshing, minimizing, or reopening the same browser session.
-- Farmer session memory is cleared only when the user logs out.
-- On the next login, the default farmer 778899 / นาย อ้อยดี มีกำไร / เขต 8 / เขตย่อย 8888 is shown again.
+- Centralized farmer context for every menu.
+- Before any real search, all menus use:
+  farmer_code 778899
+  farmer_name นาย อ้อยดี มีกำไร
+  zone 8
+  subzone 8888
+- After a successful search or farmer selection, the latest farmer becomes
+  the single current farmer used by all menus.
+- Latest farmer remains active during menu switching and page refresh
+  within the same login session.
+- Farmer context is cleared only on explicit Logout.
+- After the next Login, the default farmer is shown again.
+- Multi-monitor-safe page-state behavior from v3.0.0 remains unchanged.
