@@ -1,21 +1,20 @@
 Cane Next+ Master Version
-Version: 2.1.0
-Base file: index.html
-Base SHA-256: 2914bf5b6368a9f29fa9742c33efd0560941c61531e60043bbcaea73d6aa3996
-Created: 2026-07-14T06:49:23
+Version: 2.1.1
+Based on: v2.1.0
+Base index SHA-256: c4ca42575c886d8e2fbf4a8ebc9c46375f728e46c28e85d99678fab69c0bff6b
+Created: 2026-07-14T07:00:00
 
 CHANGES
-- Added multi-zone selection for Manager in User Management.
-- Admin can select multiple zones using checkboxes.
-- Create and edit Manager load/save assigned zones.
-- Manager zone assignments are stored in user_zone_access.
-- Updated manage-users Edge Function to maintain user_zone_access automatically.
-- Updated RLS helper can_access_farmer() to support Manager multi-zone access.
-- Existing Admin-only menu visibility remains unchanged.
+- Added the missing config.js.
+- Preserved index.html from Master v2.1.0 without application changes.
+- Organized SQL under sql/.
+- Preserved manage-users Edge Function.
+- Added installation README.
 
-INSTALL
-1. Run manager_multizone_schema.sql in Supabase SQL Editor.
-2. Replace and deploy Edge Function manage-users using:
-   supabase/functions/manage-users/index.ts
-3. Upload index.html and config.js to GitHub Pages.
-4. Press Ctrl+F5 and log in again.
+FILES
+- index.html
+- config.js
+- README.txt
+- CHANGELOG.txt
+- sql/manager_multizone_schema.sql
+- supabase/functions/manage-users/index.ts
