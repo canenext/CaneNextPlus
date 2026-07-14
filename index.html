@@ -6828,6 +6828,68 @@ body:not(.is-admin) #data-management,
 body:not(.is-admin) #user-management{
   display:none !important;
 }
+</style><style id="canenext-login-alert-style">
+.login-alert-overlay{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:rgba(4,26,54,.38);
+  backdrop-filter:blur(3px);
+}
+.login-alert-overlay[hidden]{display:none!important}
+.login-alert-card{
+  width:min(390px,100%);
+  background:#fff;
+  border:1px solid #F0C8C8;
+  border-radius:22px;
+  padding:26px 24px 22px;
+  text-align:center;
+  box-shadow:0 24px 70px rgba(8,59,115,.22);
+}
+.login-alert-icon{
+  width:52px;
+  height:52px;
+  margin:0 auto 14px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#FFF0F0;
+  color:#C62828;
+  font-size:28px;
+  font-weight:900;
+}
+.login-alert-card h3{
+  margin:0 0 8px;
+  color:#0A3D78;
+  font-size:22px;
+  font-weight:800;
+}
+.login-alert-card p{
+  margin:0 0 20px;
+  color:#5B6F86;
+  font-size:15px;
+  line-height:1.6;
+}
+.login-alert-card button{
+  min-width:120px;
+  border:0;
+  border-radius:999px;
+  padding:11px 20px;
+  background:#0B5CAD;
+  color:#fff;
+  font-family:inherit;
+  font-size:15px;
+  font-weight:800;
+  cursor:pointer;
+}
+#username.login-error,
+#password.login-error{
+  border-color:#D93A3A!important;
+  box-shadow:0 0 0 4px rgba(217,58,58,.10)!important;
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -11162,6 +11224,136 @@ document.addEventListener('DOMContentLoaded', function(){
   window.CaneAdminMenuVisibility={
     refresh:refreshRole
   };
+})();
+</script>
+<div class="login-alert-overlay" hidden="" id="loginAlertModal">
+<div aria-labelledby="loginAlertTitle" aria-modal="true" class="login-alert-card" role="alertdialog">
+<div class="login-alert-icon">!</div>
+<h3 id="loginAlertTitle">เข้าสู่ระบบไม่สำเร็จ</h3>
+<p id="loginAlertMessage">อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง</p>
+<button id="loginAlertOk" type="button">ตกลง</button>
+</div>
+</div>
+<script id="canenext-login-alert-script">
+(function(){
+  const modal=()=>document.getElementById('loginAlertModal');
+  const messageEl=()=>document.getElementById('loginAlertMessage');
+  const passwordEl=()=>document.getElementById('password');
+  const emailEl=()=>document.getElementById('username');
+
+  function showLoginAlert(message){
+    if(messageEl()) messageEl().textContent=message;
+    modal()?.removeAttribute('hidden');
+
+    emailEl()?.classList.add('login-error');
+    passwordEl()?.classList.add('login-error');
+
+    if(passwordEl()){
+      passwordEl().value='';
+      setTimeout(()=>passwordEl().focus(),60);
+    }
+  }
+
+  function closeLoginAlert(){
+    modal()?.setAttribute('hidden','');
+    emailEl()?.classList.remove('login-error');
+    passwordEl()?.classList.remove('login-error');
+    setTimeout(()=>passwordEl()?.focus(),50);
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('loginAlertOk')?.addEventListener('click',closeLoginAlert);
+    modal()?.addEventListener('click',event=>{
+      if(event.target===modal()) closeLoginAlert();
+    });
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape' && !modal()?.hasAttribute('hidden')) closeLoginAlert();
+    });
+  });
+
+  // Final login handler using Supabase Auth.
+  window.handleLogin=async function(event){
+    if(event?.preventDefault) event.preventDefault();
+
+    const email=(emailEl()?.value||'').trim();
+    const password=passwordEl()?.value||'';
+    const button=document.querySelector('.login-submit');
+
+    if(!email || !password){
+      showLoginAlert('กรุณากรอกอีเมลและรหัสผ่านให้ครบถ้วน');
+      return;
+    }
+
+    try{
+      if(button){
+        button.disabled=true;
+        button.textContent='กำลังเข้าสู่ระบบ...';
+      }
+
+      if(!window.caneSupabase){
+        if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
+          throw new Error('configuration');
+        }
+        window.caneSupabase=window.supabase.createClient(
+          window.CANENEXT_CONFIG.SUPABASE_URL,
+          window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+        );
+      }
+
+      const {data,error}=await window.caneSupabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if(error) throw error;
+
+      // Check profile status before opening the app.
+      const {data:profile,error:profileError}=await window.caneSupabase
+        .from('user_profiles')
+        .select('role,status')
+        .ilike('email',data.user.email)
+        .maybeSingle();
+
+      if(profileError) throw profileError;
+
+      if(profile?.status==='inactive'){
+        await window.caneSupabase.auth.signOut();
+        showLoginAlert('บัญชีผู้ใช้นี้ถูกปิดการใช้งาน กรุณาติดต่อผู้ดูแลระบบ');
+        return;
+      }
+
+      document.getElementById('loginScreen')?.classList.add('hidden');
+      document.body.classList.remove('locked');
+      document.body.classList.add('logged-in');
+
+      const currentUser=document.getElementById('currentUserName');
+      if(currentUser) currentUser.textContent=data.user.email||'ผู้ใช้งาน';
+
+      if(typeof window.showMainMenu==='function'){
+        window.showMainMenu(null,'business-partner');
+      }
+    }catch(err){
+      console.error('Login failed:',err);
+
+      const msg=String(err?.message||'').toLowerCase();
+      if(msg.includes('invalid login credentials')){
+        showLoginAlert('อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง');
+      }else if(msg.includes('email not confirmed')){
+        showLoginAlert('อีเมลนี้ยังไม่ได้ยืนยัน กรุณาติดต่อผู้ดูแลระบบ');
+      }else if(msg.includes('failed to fetch') || msg.includes('network')){
+        showLoginAlert('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ กรุณาตรวจสอบอินเทอร์เน็ต');
+      }else{
+        showLoginAlert('เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+      }
+    }finally{
+      if(button){
+        button.disabled=false;
+        button.textContent='เข้าสู่ระบบ';
+      }
+    }
+  };
+
+  window.showLoginAlert=showLoginAlert;
 })();
 </script></body>
 </html>
