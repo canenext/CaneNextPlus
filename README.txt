@@ -1,12 +1,8 @@
-Cane Next+ Crop Type + Real Plot Table Fit
+Cane Next+ Dashboard Scenario Sync
 
-Scenario Setup:
-- ใช้ข้อมูลแปลงจริง: ประเภทอ้อยดึงจากแปลงที่เลือกและแก้ไขไม่ได้
-- สร้าง Scenario ใหม่: เลือกประเภทอ้อยได้
-  อ้อยตุลา, อ้อยตอ 1, อ้อยตอ 2, อ้อยตอ 3, อ้อยตอ 4
-
-ข้อมูลแปลงจริง:
-- ปรับสัดส่วนความกว้างทั้ง 8 คอลัมน์
-- ยกเลิก min-width ที่ทำให้ต้องเลื่อนแนวนอน
-- เพิ่มขนาดตัวอักษรเป็น 14px บน Desktop
-- อนุญาตให้หัวข้อยาวตัดบรรทัดอย่างเหมาะสม
+แก้ไข:
+- Dashboard ดึงข้อมูลจาก Scenario Analysis โดยตรง
+- Refresh เมื่อเปิด Dashboard
+- Refresh เมื่อแก้ไข เพิ่ม ลบ หรือคัดลอก Scenario
+- อัปเดต KPI, Executive Comparison, Financial Summary, Ranking และ Alerts
+- Scenario แนะนำใช้กำไรสุทธิสูงสุด

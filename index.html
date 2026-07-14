@@ -6965,6 +6965,17 @@ body:not(.is-admin) #user-management{
     padding:6px 4px !important;
   }
 }
+</style><style id="canenext-dashboard-sync-style">
+#dashboard .dash-badge{
+  display:inline-block;
+  margin:2px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#EAF4FF;
+  color:#0B5CAD;
+  font-size:11px;
+  font-weight:800;
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -11549,6 +11560,161 @@ document.addEventListener('DOMContentLoaded', function(){
     setMode:applyMode,
     refreshFromRealPlot:applyRealPlotCropType
   };
+})();
+</script><script id="canenext-dashboard-sync-script">
+(function(){
+  const parseNumber=text=>Number(String(text||'').replace(/[^0-9.-]/g,''))||0;
+
+  function getScenarioRows(){
+    return [...document.querySelectorAll('#scenario .scenario-panel-v2')].map((card,index)=>{
+      const get=key=>card.querySelector(`[data-result="${key}"]`)?.textContent||'-';
+      const nameInput=card.querySelector('[data-key="name"]');
+      const title=(nameInput?.value || card.querySelector('.scenario-title')?.textContent || `Scenario ที่ ${index+1}`).trim();
+
+      return {
+        title,
+        water:card.querySelector('[data-key="water"]')?.value || '-',
+        yieldPerRaiText:get('yieldPerRai'),
+        totalYieldText:get('totalYield'),
+        promotionText:get('promotionCost'),
+        revenueText:get('revenue'),
+        totalCostText:get('totalCost'),
+        netProfitText:get('netProfit'),
+        profitPerRaiText:get('profitPerRai'),
+        yieldPerRai:parseNumber(get('yieldPerRai')),
+        totalYield:parseNumber(get('totalYield')),
+        promotion:parseNumber(get('promotionCost')),
+        revenue:parseNumber(get('revenue')),
+        totalCost:parseNumber(get('totalCost')),
+        netProfit:parseNumber(get('netProfit')),
+        profitPerRai:parseNumber(get('profitPerRai'))
+      };
+    });
+  }
+
+  function setText(id,value){
+    const el=document.getElementById(id);
+    if(el) el.textContent=value;
+  }
+
+  window.refreshDashboardFromScenario=function(){
+    // Force scenario calculations to update first.
+    document.querySelectorAll('#scenario .scenario-panel-v2 .scenario-update-btn').forEach(btn=>{
+      try{
+        if(typeof window.updateScenarioV2==='function'){
+          window.updateScenarioV2(btn);
+        }
+      }catch(e){}
+    });
+
+    const rows=getScenarioRows();
+    const body=document.getElementById('dashboardRankingBody');
+
+    if(!rows.length){
+      if(body) body.innerHTML='<tr><td colspan="6">ยังไม่มีข้อมูล Scenario</td></tr>';
+
+      [
+        'dashScenario','dashYieldPerRai','dashTotalYield','dashPromotion',
+        'dashNetProfit','dashProfitPerRai','cmpBestProfit','cmpBestYield',
+        'cmpLowestCost','cmpBestWater','cmpRecommended','finRevenue',
+        'finTotalCost','finNetProfit','finProfitPerRai'
+      ].forEach(id=>setText(id,'-'));
+
+      const alerts=document.getElementById('dashboardAlerts');
+      if(alerts){
+        alerts.innerHTML='<div class="dash-alert warn">ยังไม่มีข้อมูล Scenario สำหรับแสดงผล Dashboard</div>';
+      }
+      return;
+    }
+
+    const bestProfit=[...rows].sort((a,b)=>b.netProfit-a.netProfit)[0];
+    const bestYield=[...rows].sort((a,b)=>b.totalYield-a.totalYield)[0];
+    const lowestCost=[...rows].sort((a,b)=>a.totalCost-b.totalCost)[0];
+
+    const recommended=bestProfit;
+
+    setText('dashScenario',recommended.title);
+    setText('dashYieldPerRai',recommended.yieldPerRaiText);
+    setText('dashTotalYield',recommended.totalYieldText);
+    setText('dashPromotion',recommended.promotionText);
+    setText('dashNetProfit',recommended.netProfitText);
+    setText('dashProfitPerRai',recommended.profitPerRaiText);
+
+    setText('cmpBestProfit',`${bestProfit.title} (${bestProfit.netProfitText})`);
+    setText('cmpBestYield',`${bestYield.title} (${bestYield.totalYieldText})`);
+    setText('cmpLowestCost',`${lowestCost.title} (${lowestCost.totalCostText})`);
+    setText('cmpBestWater',recommended.water || '-');
+    setText('cmpRecommended',recommended.title);
+
+    setText('finRevenue',recommended.revenueText);
+    setText('finTotalCost',recommended.totalCostText);
+    setText('finNetProfit',recommended.netProfitText);
+    setText('finProfitPerRai',recommended.profitPerRaiText);
+
+    const maxProfit=Math.max(...rows.map(r=>r.netProfit));
+    const maxYield=Math.max(...rows.map(r=>r.totalYield));
+    const minCost=Math.min(...rows.map(r=>r.totalCost));
+
+    if(body){
+      body.innerHTML=[...rows]
+        .sort((a,b)=>b.netProfit-a.netProfit)
+        .map((r,index)=>{
+          const badges=[];
+          if(r.netProfit===maxProfit) badges.push('<span class="dash-badge">กำไรสูงสุด</span>');
+          if(r.totalYield===maxYield) badges.push('<span class="dash-badge">ผลผลิตสูงสุด</span>');
+          if(r.totalCost===minCost) badges.push('<span class="dash-badge">ต้นทุนต่ำสุด</span>');
+
+          return `
+            <tr>
+              <td>${index+1}</td>
+              <td>${r.title}</td>
+              <td>${r.totalYieldText}</td>
+              <td>${r.netProfitText}</td>
+              <td>${r.profitPerRaiText}</td>
+              <td>${badges.join(' ') || 'ปกติ'}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    const alerts=document.getElementById('dashboardAlerts');
+    if(alerts){
+      alerts.innerHTML=`
+        <div class="dash-alert ok">แนะนำใช้ ${recommended.title} เป็นแนวทางหลัก</div>
+        ${recommended.yieldPerRai<10
+          ? '<div class="dash-alert warn">ผลผลิตต่อไร่ต่ำกว่าเป้าหมาย ควรติดตามการจัดการแปลง</div>'
+          : '<div class="dash-alert ok">ผลผลิตต่อไร่อยู่ในระดับเหมาะสม</div>'}
+        ${recommended.netProfit<0
+          ? '<div class="dash-alert danger">Scenario ที่แนะนำมีผลกำไรติดลบ ควรทบทวนต้นทุนและงบลงทุน</div>'
+          : '<div class="dash-alert ok">Scenario ที่แนะนำมีผลกำไรเป็นบวก</div>'}
+      `;
+    }
+  };
+
+  function refreshSoon(){
+    setTimeout(()=>window.refreshDashboardFromScenario?.(),80);
+  }
+
+  document.addEventListener('DOMContentLoaded',refreshSoon);
+
+  document.addEventListener('change',event=>{
+    if(event.target.closest('#scenario')) refreshSoon();
+  });
+
+  document.addEventListener('input',event=>{
+    if(event.target.closest('#scenario')) refreshSoon();
+  });
+
+  document.addEventListener('click',event=>{
+    const dashboardLink=event.target.closest('a[href="#dashboard"]');
+    if(dashboardLink) refreshSoon();
+
+    const scenarioButton=event.target.closest(
+      '#scenario .scenario-update-btn,#scenario .scenario-add-btn,#scenario .scenario-delete-btn,#scenario .scenario-duplicate-btn'
+    );
+    if(scenarioButton) refreshSoon();
+  });
+
+  window.addEventListener('canenext:scenario-financial-updated',refreshSoon);
 })();
 </script></body>
 </html>
