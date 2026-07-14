@@ -1,0 +1,16 @@
+Cane Next+ Master Version
+Version: 2.0.1
+Base file: index(51).html
+Base SHA-256: 9d24fc69f6a76feacfa8458654390adbf643f9313d76a1ad84b9b88d03bd74bf
+Created: 2026-07-14T06:40:57
+
+CHANGES
+- Data Management is hidden in the initial HTML.
+- User Management is hidden in the initial HTML.
+- Both menu items appear only when role=admin and status=active.
+- Manager, Extension, Viewer and all other roles never see either menu.
+- No temporary menu flash while the role is loading.
+- Direct navigation to either Admin page is blocked for non-admin users.
+- If an Admin page was saved as the last page, a non-admin user is returned to Business Partner.
+
+No other requested application content was intentionally changed.

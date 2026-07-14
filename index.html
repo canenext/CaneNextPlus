@@ -7007,7 +7007,24 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style></head>
+</style><style id="canenext-admin-menu-master-style">
+/* MASTER: Admin-only menu visibility.
+   Hidden before authentication and for every non-admin account. */
+.menu-row .admin-only-menu{
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+body.can-show-admin-menus .menu-row .admin-only-menu{
+  display:flex !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+}
+body:not(.can-show-admin-menus) #data-management,
+body:not(.can-show-admin-menus) #user-management{
+  display:none !important;
+}
+</style><meta content="2.0.1" name="canenext-version"/></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
@@ -7067,8 +7084,8 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <a href="#dashboard" onclick="showMainMenu(event, 'dashboard')"><i class="fa-solid fa-gauge-high menu-icon"></i> Dashboard</a>
 <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
 <a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> หลักเกณฑ์การส่งเสริม</a>
-<a class="admin-only-menu" href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
-<a class="admin-only-menu" href="#user-management" onclick="showMainMenu(event, 'user-management')"><i class="fa-solid fa-users-gear menu-icon"></i> จัดการผู้ใช้งาน</a></div>
+<a aria-hidden="true" class="admin-only-menu" hidden="" href="#data-management" onclick="showMainMenu(event, 'data-management')" style="display:none !important;" tabindex="-1"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
+<a aria-hidden="true" class="admin-only-menu" hidden="" href="#user-management" onclick="showMainMenu(event, 'user-management')" style="display:none !important;" tabindex="-1"><i class="fa-solid fa-users-gear menu-icon"></i> จัดการผู้ใช้งาน</a></div>
 </nav>
 </header>
 <main class="app-main">
@@ -12027,6 +12044,150 @@ document.addEventListener('DOMContentLoaded', function(){
   window.CaneUserScope={
     refresh:loadProfile,
     get:()=>window.CANENEXT_CURRENT_PROFILE||null
+  };
+})();
+</script><script id="canenext-admin-menu-master-script">
+(function(){
+  const ADMIN_PAGES=new Set(['data-management','user-management']);
+  const ADMIN_LINKS=['#data-management','#user-management'];
+  let currentProfile=null;
+
+  function setMenuVisibility(visible){
+    document.body.classList.toggle('can-show-admin-menus',visible);
+    document.body.classList.toggle('is-admin',visible);
+
+    ADMIN_LINKS.forEach(href=>{
+      const link=document.querySelector(`.menu-row a[href="${href}"]`);
+      if(!link) return;
+
+      if(visible){
+        link.hidden=false;
+        link.removeAttribute('style');
+        link.setAttribute('aria-hidden','false');
+        link.tabIndex=0;
+      }else{
+        link.hidden=true;
+        link.style.setProperty('display','none','important');
+        link.setAttribute('aria-hidden','true');
+        link.tabIndex=-1;
+        link.classList.remove('active-menu');
+      }
+    });
+
+    if(!visible){
+      document.getElementById('data-management')?.classList.remove('active-page');
+      document.getElementById('user-management')?.classList.remove('active-page');
+
+      if(localStorage.getItem('canenext_active_page')==='data-management' ||
+         localStorage.getItem('canenext_active_page')==='user-management'){
+        localStorage.setItem('canenext_active_page','business-partner');
+      }
+    }
+  }
+
+  function isActiveAdmin(profile){
+    return String(profile?.role||'').trim().toLowerCase()==='admin' &&
+           String(profile?.status||'').trim().toLowerCase()==='active';
+  }
+
+  async function ensureClient(){
+    if(window.caneSupabase) return window.caneSupabase;
+    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
+      throw new Error('Supabase client is unavailable');
+    }
+
+    window.caneSupabase=window.supabase.createClient(
+      window.CANENEXT_CONFIG.SUPABASE_URL,
+      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+    );
+    return window.caneSupabase;
+  }
+
+  async function refreshAdminMenuVisibility(){
+    // Hide first so no non-admin account sees a temporary flash.
+    setMenuVisibility(false);
+
+    try{
+      const db=await ensureClient();
+      const {data:{user},error:userError}=await db.auth.getUser();
+
+      if(userError || !user){
+        currentProfile=null;
+        window.CANENEXT_CURRENT_PROFILE=null;
+        return false;
+      }
+
+      const {data:profile,error}=await db
+        .from('user_profiles')
+        .select('id,auth_uid,email,role,status')
+        .eq('auth_uid',user.id)
+        .maybeSingle();
+
+      if(error) throw error;
+
+      currentProfile=profile||null;
+      window.CANENEXT_CURRENT_PROFILE=currentProfile;
+
+      const allowed=isActiveAdmin(currentProfile);
+      setMenuVisibility(allowed);
+      return allowed;
+    }catch(err){
+      console.error('Admin menu visibility check failed:',err);
+      currentProfile=null;
+      setMenuVisibility(false);
+      return false;
+    }
+  }
+
+  // Keep the final route guard after all earlier showMainMenu wrappers.
+  const previousShowMainMenu=window.showMainMenu;
+  window.showMainMenu=async function(event,pageId){
+    if(event?.preventDefault) event.preventDefault();
+
+    if(ADMIN_PAGES.has(pageId)){
+      const allowed=await refreshAdminMenuVisibility();
+      if(!allowed){
+        if(typeof previousShowMainMenu==='function'){
+          return previousShowMainMenu(null,'business-partner');
+        }
+
+        document.querySelectorAll('.app-page').forEach(page=>{
+          page.classList.toggle('active-page',page.id==='business-partner');
+        });
+        return;
+      }
+    }
+
+    if(typeof previousShowMainMenu==='function'){
+      return previousShowMainMenu(event,pageId);
+    }
+  };
+
+  // Hide immediately, before DOMContentLoaded and before any Supabase request.
+  setMenuVisibility(false);
+
+  document.addEventListener('DOMContentLoaded',async()=>{
+    await refreshAdminMenuVisibility();
+
+    try{
+      const db=await ensureClient();
+      db.auth.onAuthStateChange(async()=>{
+        await refreshAdminMenuVisibility();
+      });
+    }catch(err){
+      setMenuVisibility(false);
+    }
+  });
+
+  window.addEventListener('pageshow',refreshAdminMenuVisibility);
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden) refreshAdminMenuVisibility();
+  });
+
+  window.CaneAdminMenuMaster={
+    refresh:refreshAdminMenuVisibility,
+    hide:()=>setMenuVisibility(false),
+    isAdmin:()=>isActiveAdmin(currentProfile)
   };
 })();
 </script></body>
