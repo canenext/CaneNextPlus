@@ -6890,6 +6890,81 @@ body:not(.is-admin) #user-management{
   border-color:#D93A3A!important;
   box-shadow:0 0 0 4px rgba(217,58,58,.10)!important;
 }
+</style><style id="canenext-crop-type-mode-style">
+#plot-data #cropType:disabled{
+  background:#F3F8FF !important;
+  color:#083B73 !important;
+  font-weight:800 !important;
+  cursor:not-allowed;
+}
+#plot-data .scenario-area-item.crop-type-real::after{
+  content:"ดึงจากแปลงจริงที่เลือก";
+  display:block;
+  margin-top:5px;
+  color:#6B7F93;
+  font-size:11px;
+}
+</style><style id="canenext-realplot-width-final-style">
+/* รายการแปลงจริง: ปรับสัดส่วนคอลัมน์ให้พอดีหน้าจอ ไม่ต้องเลื่อนแนวนอน */
+#real-plots .table-responsive{
+  overflow-x:visible !important;
+}
+#real-plots .real-plot-table{
+  width:100% !important;
+  min-width:0 !important;
+  table-layout:fixed !important;
+  font-size:14px !important;
+}
+#real-plots .real-plot-table th,
+#real-plots .real-plot-table td{
+  padding:7px 5px !important;
+  line-height:1.25 !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  text-align:center !important;
+  vertical-align:middle !important;
+}
+#real-plots .real-sort-btn{
+  font-size:14px !important;
+  line-height:1.2 !important;
+  white-space:normal !important;
+}
+#real-plots .real-plot-table th:nth-child(1),
+#real-plots .real-plot-table td:nth-child(1){width:10% !important;min-width:0 !important;}
+#real-plots .real-plot-table th:nth-child(2),
+#real-plots .real-plot-table td:nth-child(2){width:13% !important;min-width:0 !important;}
+#real-plots .real-plot-table th:nth-child(3),
+#real-plots .real-plot-table td:nth-child(3){width:12% !important;min-width:0 !important;}
+#real-plots .real-plot-table th:nth-child(4),
+#real-plots .real-plot-table td:nth-child(4){width:12% !important;min-width:0 !important;}
+#real-plots .real-plot-table th:nth-child(5),
+#real-plots .real-plot-table td:nth-child(5){width:9% !important;min-width:0 !important;}
+#real-plots .real-plot-table th:nth-child(6),
+#real-plots .real-plot-table td:nth-child(6){width:15% !important;min-width:0 !important;}
+#real-plots .real-plot-table th:nth-child(7),
+#real-plots .real-plot-table td:nth-child(7){width:14% !important;min-width:0 !important;}
+#real-plots .real-plot-table th:nth-child(8),
+#real-plots .real-plot-table td:nth-child(8){width:15% !important;min-width:0 !important;}
+#real-plots .status{
+  display:inline-block;
+  max-width:100%;
+  padding:3px 7px !important;
+  font-size:12px !important;
+  white-space:normal !important;
+}
+@media(max-width:1100px){
+  #real-plots .real-plot-table{
+    font-size:13px !important;
+  }
+  #real-plots .real-sort-btn{
+    font-size:13px !important;
+  }
+  #real-plots .real-plot-table th,
+  #real-plots .real-plot-table td{
+    padding:6px 4px !important;
+  }
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -7179,7 +7254,7 @@ body:not(.is-admin) #user-management{
 </div>
 <input id="yieldPerRai" type="hidden" value=""/><div class="plot-section">
 <h3>รายละเอียดพื้นที่แปลงจำลอง</h3>
-<div class="scenario-area-grid"><div class="scenario-area-item"><label>พื้นที่ปลูก (ไร่)</label><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></div><div class="scenario-area-item"><label>ประเภทอ้อย</label><select class="plot-input" id="cropType"></select></div><div class="scenario-area-item"><label>รูปแบบการให้น้ำ</label><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></div><div class="scenario-area-item"><label>ระยะร่องที่ปลูก</label><select class="plot-input" id="rowSpacing"><option value="1.50">1.50 เมตร</option><option selected="" value="1.65">1.65 เมตร</option><option value="1.85">1.85 เมตร</option></select></div></div>
+<div class="scenario-area-grid"><div class="scenario-area-item"><label>พื้นที่ปลูก (ไร่)</label><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></div><div class="scenario-area-item"><label>ประเภทอ้อย</label><select class="plot-input" id="cropType"><option value="อ้อยตุลา">อ้อยตุลา</option><option value="อ้อยตอ 1">อ้อยตอ 1</option><option value="อ้อยตอ 2">อ้อยตอ 2</option><option value="อ้อยตอ 3">อ้อยตอ 3</option><option value="อ้อยตอ 4">อ้อยตอ 4</option></select></div><div class="scenario-area-item"><label>รูปแบบการให้น้ำ</label><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></div><div class="scenario-area-item"><label>ระยะร่องที่ปลูก</label><select class="plot-input" id="rowSpacing"><option value="1.50">1.50 เมตร</option><option selected="" value="1.65">1.65 เมตร</option><option value="1.85">1.85 เมตร</option></select></div></div>
 </div><div class="plot-section">
 <h3>รายการขอรับส่งเสริม / งบลงทุน</h3>
 <div class="promotion-grid" id="promotionItems"></div>
@@ -11354,6 +11429,126 @@ document.addEventListener('DOMContentLoaded', function(){
   };
 
   window.showLoginAlert=showLoginAlert;
+})();
+</script><script id="canenext-crop-type-mode-script">
+(function(){
+  const MANUAL_CROP_TYPES=['อ้อยตุลา','อ้อยตอ 1','อ้อยตอ 2','อ้อยตอ 3','อ้อยตอ 4'];
+  let sourceMode='real';
+
+  function cropSelect(){
+    return document.getElementById('cropType');
+  }
+
+  function cropItem(){
+    return cropSelect()?.closest('.scenario-area-item');
+  }
+
+  function ensureManualOptions(selectedValue=''){
+    const select=cropSelect();
+    if(!select) return;
+
+    select.innerHTML=MANUAL_CROP_TYPES
+      .map(v=>`<option value="${v}">${v}</option>`)
+      .join('');
+
+    if(MANUAL_CROP_TYPES.includes(selectedValue)){
+      select.value=selectedValue;
+    }else{
+      select.value=MANUAL_CROP_TYPES[0];
+    }
+  }
+
+  function findSelectedRealPlot(){
+    const plotId=document.getElementById('scenarioSourcePlot')?.value;
+    const year=document.getElementById('scenarioSourceYear')?.value;
+    return (window.currentRealPlots||[]).find(
+      p=>p.plot_id===plotId && (!year || p.year===year)
+    ) || null;
+  }
+
+  function applyRealPlotCropType(){
+    const select=cropSelect();
+    if(!select) return;
+
+    const plot=findSelectedRealPlot();
+    const cropType=String(plot?.crop_type||'').trim();
+
+    select.innerHTML='';
+    const option=document.createElement('option');
+    option.value=cropType;
+    option.textContent=cropType || 'ไม่พบข้อมูลประเภทอ้อย';
+    select.appendChild(option);
+    select.value=cropType;
+    select.disabled=true;
+    cropItem()?.classList.add('crop-type-real');
+
+    select.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+
+  function applyManualCropType(){
+    const select=cropSelect();
+    if(!select) return;
+
+    const previous=select.value;
+    ensureManualOptions(previous);
+    select.disabled=false;
+    cropItem()?.classList.remove('crop-type-real');
+    select.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+
+  function applyMode(mode){
+    sourceMode=mode==='manual'?'manual':'real';
+    if(sourceMode==='manual') applyManualCropType();
+    else applyRealPlotCropType();
+  }
+
+  // Wrap the final existing source-mode function once.
+  const originalSetMode=window.setScenarioSourceMode;
+  window.setScenarioSourceMode=function(mode){
+    const result=typeof originalSetMode==='function'
+      ? originalSetMode.apply(this,arguments)
+      : undefined;
+
+    applyMode(mode);
+    return result;
+  };
+
+  // Wrap the final real-plot loader once, then force the crop type from that plot.
+  const originalLoad=window.loadScenarioFromRealPlot;
+  window.loadScenarioFromRealPlot=function(){
+    const result=typeof originalLoad==='function'
+      ? originalLoad.apply(this,arguments)
+      : undefined;
+
+    sourceMode='real';
+    applyRealPlotCropType();
+    return result;
+  };
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('scenarioSourcePlot')
+      ?.addEventListener('change',()=>{
+        if(sourceMode==='real') applyRealPlotCropType();
+      });
+
+    document.getElementById('scenarioSourceYear')
+      ?.addEventListener('change',()=>{
+        if(sourceMode==='real') setTimeout(applyRealPlotCropType,30);
+      });
+
+    document.getElementById('scenarioSourceProject')
+      ?.addEventListener('change',()=>{
+        if(sourceMode==='real') setTimeout(applyRealPlotCropType,30);
+      });
+
+    // Default mode in the page is real plot.
+    setTimeout(()=>applyMode('real'),700);
+  });
+
+  window.CaneScenarioCropType={
+    setMode:applyMode,
+    refreshFromRealPlot:applyRealPlotCropType
+  };
 })();
 </script></body>
 </html>
