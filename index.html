@@ -7035,7 +7035,7 @@ body:not(.is-admin) #user-management{
 <a href="#ai-recommendation" onclick="showMainMenu(event, 'ai-recommendation')"><i class="fa-solid fa-robot menu-icon"></i> AI Recommendation</a>
 <a href="#dashboard" onclick="showMainMenu(event, 'dashboard')"><i class="fa-solid fa-gauge-high menu-icon"></i> Dashboard</a>
 <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
-<a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> Promotion</a>
+<a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> หลักเกณฑ์การส่งเสริม</a>
 <a class="admin-only-menu" href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
 <a class="admin-only-menu" href="#user-management" onclick="showMainMenu(event, 'user-management')"><i class="fa-solid fa-users-gear menu-icon"></i> จัดการผู้ใช้งาน</a></div>
 </nav>
@@ -11715,6 +11715,70 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
   window.addEventListener('canenext:scenario-financial-updated',refreshSoon);
+})();
+</script><script id="canenext-realplot-area-crop-sync">
+(function(){
+  function setFieldValue(id,value){
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.value=value ?? '';
+    el.dispatchEvent(new Event('change',{bubbles:true}));
+    el.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+
+  function selectedRealPlot(){
+    const plotId=document.getElementById('scenarioSourcePlot')?.value;
+    const year=document.getElementById('scenarioSourceYear')?.value;
+    return (window.currentRealPlots||[]).find(p=>
+      p.plot_id===plotId && (!year || p.year===year)
+    ) || null;
+  }
+
+  function syncAreaAndCropFromSelectedPlot(){
+    const plot=selectedRealPlot();
+    if(!plot) return;
+
+    setFieldValue('plotArea', Number(plot.area||0).toFixed(2));
+
+    const crop=document.getElementById('cropType');
+    if(crop){
+      const cropValue=String(plot.crop_type||'').trim();
+      crop.innerHTML='';
+      const option=document.createElement('option');
+      option.value=cropValue;
+      option.textContent=cropValue || 'ไม่พบข้อมูลประเภทอ้อย';
+      crop.appendChild(option);
+      crop.value=cropValue;
+      crop.disabled=true;
+      crop.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+
+    if(typeof window.updatePlotData==='function'){
+      window.updatePlotData();
+    }
+  }
+
+  const originalLoad=window.loadScenarioFromRealPlot;
+  window.loadScenarioFromRealPlot=function(){
+    const result=typeof originalLoad==='function'
+      ? originalLoad.apply(this,arguments)
+      : undefined;
+    syncAreaAndCropFromSelectedPlot();
+    return result;
+  };
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('scenarioSourcePlot')
+      ?.addEventListener('change',syncAreaAndCropFromSelectedPlot);
+
+    document.getElementById('scenarioSourceYear')
+      ?.addEventListener('change',()=>setTimeout(syncAreaAndCropFromSelectedPlot,30));
+
+    document.getElementById('scenarioSourceProject')
+      ?.addEventListener('change',()=>setTimeout(syncAreaAndCropFromSelectedPlot,30));
+  });
+
+  window.syncScenarioAreaAndCropFromSelectedPlot=syncAreaAndCropFromSelectedPlot;
 })();
 </script></body>
 </html>

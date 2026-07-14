@@ -1,8 +1,6 @@
-Cane Next+ Dashboard Scenario Sync
+Cane Next+ Update
 
-แก้ไข:
-- Dashboard ดึงข้อมูลจาก Scenario Analysis โดยตรง
-- Refresh เมื่อเปิด Dashboard
-- Refresh เมื่อแก้ไข เพิ่ม ลบ หรือคัดลอก Scenario
-- อัปเดต KPI, Executive Comparison, Financial Summary, Ranking และ Alerts
-- Scenario แนะนำใช้กำไรสุทธิสูงสุด
+- ข้อมูลแปลงจริง: รูปแบบการให้น้ำ -> แหล่งน้ำ
+- Scenario Setup (ใช้ข้อมูลจากแปลงจริง):
+  พื้นที่ปลูก (ไร่) และประเภทอ้อย ดึงจากแปลงที่เลือก
+- Promotion -> หลักเกณฑ์การส่งเสริม
