@@ -1,7 +1,6 @@
-ติดตั้ง:
-1) Run manager_multizone_schema.sql ใน Supabase SQL Editor
-2) Deploy Edge Function manage-users ใหม่ด้วยไฟล์ supabase/functions/manage-users/index.ts
-3) อัปโหลด index.html และ config.js ขึ้น GitHub Pages
-4) Ctrl+F5 และ Login ใหม่
+Cane Next+ Admin Menus No Flash
 
-จากนั้น Admin ไปที่ จัดการผู้ใช้งาน > เลือก Role = manager > ติ๊กหลายเขต > บันทึก
+- Data Management และจัดการผู้ใช้งานถูกซ่อนตั้งแต่ HTML เริ่มโหลด
+- ไม่มีแถบเมนูโผล่ชั่วคราวก่อนตรวจ Role
+- แสดงเฉพาะ role=admin และ status=active
+- Manager, Extension, Viewer และ Role อื่นจะไม่เห็นเมนูเลย
