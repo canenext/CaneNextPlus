@@ -6738,6 +6738,16 @@ body:not(.is-admin) #user-management{display:none!important}
   justify-content:flex-end !important;
   margin-top:16px !important;
 }
+</style><style id="scenario-setup-reorder-style">
+#plot-data .scenario-area-table th{
+  width:32% !important;
+}
+#plot-data .scenario-area-table td{
+  text-align:center !important;
+}
+#plot-data .scenario-area-table .plot-input{
+  max-width:320px !important;
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -6932,7 +6942,6 @@ body:not(.is-admin) #user-management{display:none!important}
 </div>
 </div>
 <div class="real-actions">
-
 <button class="btn" onclick="createScenarioFromRealPlot()" type="button">สร้าง Scenario จากแปลงจริง</button>
 </div>
 </section>
@@ -7026,21 +7035,18 @@ body:not(.is-admin) #user-management{display:none!important}
     </div>
 </div>
 </div>
-<div class="plot-section">
+
+
+
+
+<input id="yieldPerRai" type="hidden" value=""/><div class="plot-section">
 <h3>รายละเอียดพื้นที่แปลงจำลอง</h3>
-<table class="table form-table">
-<tbody>
-<tr><th>พื้นที่ปลูก (ไร่)</th><td><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></td><th>ระบบน้ำ</th><td><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></td></tr>
-<tr><th>ระยะร่องที่ปลูก</th><td><select class="plot-input" id="rowSpacing"><option value="1.50">1.50 เมตร</option><option selected="" value="1.65">1.65 เมตร</option><option value="1.85">1.85 เมตร</option></select></td><th>จำนวนร่อง</th><td><input class="plot-input readonly calculated-value" id="rowCount" readonly="" type="text"/></td></tr>
-</tbody>
-</table>
-</div>
-<div class="plot-section">
+<table class="table form-table scenario-area-table"><tbody><tr><th>พื้นที่ปลูก (ไร่)</th><td><input class="plot-input" id="plotArea" step="0.01" type="number" value="10"/></td></tr><tr><th>ประเภทอ้อย</th><td><select class="plot-input" id="cropType"></select></td></tr><tr><th>รูปแบบการให้น้ำ</th><td><select class="plot-input" id="waterSystem"><option>ไม่มีระบบน้ำ (น้ำฝน)</option><option>ระบบน้ำหยด</option><option>ระบบน้ำราด</option></select></td></tr><tr><th>ระยะร่องที่ปลูก</th><td><select class="plot-input" id="rowSpacing"><option value="1.50">1.50 เมตร</option><option selected="" value="1.65">1.65 เมตร</option><option value="1.85">1.85 เมตร</option></select></td></tr></tbody></table>
+</div><div class="plot-section">
 <h3>รายการขอรับส่งเสริม / งบลงทุน</h3>
 <div class="promotion-grid" id="promotionItems"></div>
 <div class="investment-summary"><span>สรุปงบลงทุน</span><strong id="investmentTotal">0</strong><span>บาท</span><button class="btn scenario-copy-btn" onclick="copyToScenario()" type="button">คัดลอกเป็น Scenario</button></div>
-</div>
-<div class="plot-section">
+</div><div class="plot-section">
 <h3>ตารางเปรียบเทียบ รับส่งเสริมโรงงานเทียบวงเงินค้ำประกัน</h3>
 <table class="table compare-table">
 <thead><tr><th>รายการ</th><th>จำนวนเงิน (บาท)</th></tr></thead>
@@ -7051,46 +7057,10 @@ body:not(.is-admin) #user-management{display:none!important}
 <tr><td>งบส่งเสริมที่ใช้ลงทุน</td><td id="promotionBudget">0</td></tr>
 <tr><td>ผลต่าง</td><td id="guaranteeDiff">5,500,000</td></tr>
 <tr><td>สถานะ</td><td id="deStatus"><span class="status ok">ปกติ</span></td></tr>
-</tbody>
+<tr><td>หนี้สินตามปีการผลิตที่เลือก</td><td id="selectedYearDebt">0</td></tr></tbody>
 </table>
 </div>
-<div class="plot-section">
-<h3>การวิเคราะห์ผลผลิต</h3>
-<table class="table form-table yield-analysis-table">
-<tbody>
-<tr>
-<th>สถานการณ์ฝน</th>
-<td>
-<select class="plot-input" id="rainScenario">
-<option>ภัยแล้ง</option>
-<option>ฝนน้อย</option>
-<option selected="">ฝนเหมาะสม(ปกติ)</option>
-<option>ฝนมาก(น้ำท่วมขัง)</option>
-</select>
-</td>
-<th>น้ำหนักอ้อย/ลำ (กก.)</th>
-<td><input class="plot-input" id="stalkWeight" step="0.01" type="number" value="1.50"/></td>
-</tr>
-<tr>
-<th>จำนวนลำ/เมตร</th>
-<td><input class="plot-input" id="stalkPerMeter" step="0.01" type="number" value="10"/></td>
-<th>จำนวนลำ/ไร่</th>
-<td><input class="plot-input readonly auto-field calculated-value" id="stalkPerRai" readonly="" type="text"/></td>
-</tr>
-</tbody>
-</table>
-</div>
-<input id="yieldPerRai" type="hidden" value=""/>
-<div class="plot-section">
-<h3>รายได้ราคาอ้อยและค่าใช้จ่าย</h3>
-<table class="table form-table">
-<tbody>
-<tr><th>ราคาอ้อยขั้นต้น (บาท/ตัน)</th><td><input class="plot-input" id="baseCanePrice" step="0.01" type="number" value="950"/></td><th>CCS. (%ccs.)</th><td><input class="plot-input" id="ccsValue" step="0.01" type="number" value="13.80"/></td></tr>
-<tr><th>ค่า CCS. (บาท/ตัน)</th><td><input class="plot-input readonly calculated-value" id="ccsPrice" readonly="" type="text"/></td><th>ราคาอ้อยขั้นต้น + CCS. (บาท/ตัน)</th><td><input class="plot-input readonly calculated-value" id="totalCanePrice" readonly="" type="text"/></td></tr>
-<tr><th>ค่าใช้จ่าย (ตัด+ขึ้น+บรรทุก) (บาท/ตัน)</th><td><input class="plot-input" id="harvestCost" step="0.01" type="number" value="400"/></td><th></th><td></td></tr>
-</tbody>
-</table>
-</div>
+
 </section>
 <section class="section app-page scenario-page scenario-v2" id="scenario">
 <div class="scenario-toolbar">
@@ -10641,6 +10611,95 @@ document.addEventListener('DOMContentLoaded', function(){
     requireAdmin,
     isActiveAdmin:()=>isActiveAdmin()
   };
+})();
+</script><script id="scenario-year-financial-link-script">
+(function(){
+  function currentFarmer(){
+    if(window.CANENEXT_CURRENT_FARMER) return window.CANENEXT_CURRENT_FARMER;
+    try{return JSON.parse(localStorage.getItem('canenext_current_farmer')||'null')}
+    catch(e){return null}
+  }
+
+  function selectedYear(){
+    const ids=['scenarioSourceYear','productionYear','plotProductionYear'];
+    for(const id of ids){
+      const el=document.getElementById(id);
+      if(el && el.value) return el.value;
+    }
+    return '';
+  }
+
+  function setMoney(id,value){
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.textContent=Number(value||0).toLocaleString('th-TH',{
+      minimumFractionDigits:0,
+      maximumFractionDigits:0
+    });
+  }
+
+  async function refreshScenarioFinancialComparison(){
+    const farmer=currentFarmer();
+    const year=selectedYear();
+    if(!farmer?.farmer_code || !year || !window.caneSupabase) return;
+
+    try{
+      const [guaranteeRes,debtRes]=await Promise.all([
+        window.caneSupabase
+          .from('guarantees')
+          .select('*')
+          .eq('farmer_code',farmer.farmer_code)
+          .eq('production_year',year)
+          .maybeSingle(),
+        window.caneSupabase
+          .from('debts')
+          .select('*')
+          .eq('farmer_code',farmer.farmer_code)
+          .maybeSingle()
+      ]);
+
+      if(guaranteeRes.error) throw guaranteeRes.error;
+      if(debtRes.error) throw debtRes.error;
+
+      const g=guaranteeRes.data||{};
+      const d=debtRes.data||{};
+      const yearly=d.yearly_debt||{};
+      const debtValue=Number(yearly[year]||0);
+
+      // Existing guarantee display IDs
+      setMoney('propertyGuaranteeAmount',g.property_amount);
+      setMoney('groupGuaranteeAmount',g.group_amount);
+      setMoney('totalGuaranteeAmount',g.total_amount);
+      setMoney('selectedYearDebt',debtValue);
+
+      // Update any existing comparison cells by row label.
+      document.querySelectorAll('#plot-data table tbody tr').forEach(tr=>{
+        const label=(tr.children[0]?.textContent||'').trim();
+        const cell=tr.children[1];
+        if(!cell) return;
+        if(/วงเงิน.*ค้ำประกัน|หลักค้ำประกัน/.test(label) && !/หนี้สิน/.test(label)){
+          cell.textContent=Number(g.total_amount||0).toLocaleString('th-TH',{maximumFractionDigits:0});
+        }
+        if(/หนี้สิน/.test(label)){
+          cell.textContent=debtValue.toLocaleString('th-TH',{maximumFractionDigits:0});
+        }
+      });
+
+      if(typeof updatePlotData==='function') updatePlotData();
+    }catch(err){
+      console.error('Scenario year financial comparison error:',err);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    ['scenarioSourceYear','productionYear','plotProductionYear'].forEach(id=>{
+      document.getElementById(id)?.addEventListener('change',refreshScenarioFinancialComparison);
+    });
+    setTimeout(refreshScenarioFinancialComparison,700);
+  });
+
+  window.addEventListener('canenext:farmer-changed',()=>setTimeout(refreshScenarioFinancialComparison,100));
+  window.refreshScenarioFinancialComparison=refreshScenarioFinancialComparison;
 })();
 </script></body>
 </html>

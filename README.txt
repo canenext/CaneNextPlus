@@ -1,17 +1,17 @@
-Cane Next+ Admin-only access fix
+Cane Next+ Scenario Setup Reordered
 
-แก้ไข:
-- Data Management แสดงและเปิดได้เฉพาะ Admin ที่ status=active
-- จัดการผู้ใช้งาน แสดงและเปิดได้เฉพาะ Admin ที่ status=active
-- Extension / Manager / Viewer ถูกส่งกลับไป Business Partner
-- ป้องกันการเรียก Preview, Import และ User Management actions โดยตรงจาก JavaScript
-- ตรวจสิทธิ์ใหม่ทุกครั้งเมื่อ Login/Logout เปลี่ยน
+เรียงลำดับ:
+1. แหล่งข้อมูลสำหรับสร้าง Scenario
+2. รายละเอียดพื้นที่แปลงจำลอง
+   - พื้นที่ปลูก (ไร่)
+   - ประเภทอ้อย
+   - รูปแบบการให้น้ำ
+   - ระยะร่องที่ปลูก
+3. รายการขอรับส่งเสริม / งบลงทุน
+4. ตารางเปรียบเทียบ รับส่งเสริมโรงงานเทียบวงเงินค้ำประกัน
+   - ดึงวงเงินตามปีการผลิตที่เลือก
+   - เพิ่มหนี้สินตามปีการผลิตที่เลือก
 
-ติดตั้ง:
-1. อัปโหลด index.html และ config.js ขึ้น GitHub Pages
-2. กด Ctrl+F5
-3. Logout แล้ว Login ใหม่
-
-ความปลอดภัยฝั่ง Server:
-- manage-users Edge Function ในแพ็กเกจตรวจ role=admin อยู่แล้ว
-- สำหรับ import-cane-excel ต้องตรวจ Admin ใน Edge Function เช่นเดียวกัน หากใช้ Service Role
+นำออก:
+- การวิเคราะห์ผลผลิต
+- รายได้ราคาอ้อยและค่าใช้จ่าย
