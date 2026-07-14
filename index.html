@@ -7024,7 +7024,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="2.0.1" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="2.1.2" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7074,6 +7074,20 @@ body:not(.can-show-admin-menus) #user-management{
   #user-management .um-zone-check-grid{
     grid-template-columns:repeat(2,1fr);
   }
+}
+</style><style id="canenext-role-notice-hide-style">
+/* Hide role/activity notices shown in the middle of the app after login */
+#userScopeChip,
+.user-scope-chip,
+.login-role-notice,
+.role-notice,
+.role-status-banner,
+.user-role-banner,
+.auth-status-banner,
+.session-status-banner,
+.current-role-card,
+.current-role-notice{
+  display:none !important;
 }
 </style></head>
 <body class="locked">
@@ -12353,6 +12367,136 @@ document.addEventListener('DOMContentLoaded', function(){
       applyRoleUI
     };
   },100);
+})();
+</script><script id="canenext-realplot-water-label-script">
+(function(){
+  function updateRealPlotWaterLabel(){
+    const page=document.getElementById('real-plots');
+    if(!page) return;
+
+    page.querySelectorAll('th').forEach(th=>{
+      const text=(th.textContent||'').trim();
+      if(text==='รูปแบบการให้น้ำ' || text==='ระบบน้ำ'){
+        const btn=th.querySelector('button');
+        if(btn){
+          const icon=btn.querySelector('.real-sort-icon');
+          btn.textContent='แหล่งน้ำ';
+          if(icon) btn.appendChild(icon);
+        }else{
+          th.textContent='แหล่งน้ำ';
+        }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded',updateRealPlotWaterLabel);
+  window.addEventListener('canenext:farmer-changed',()=>setTimeout(updateRealPlotWaterLabel,50));
+})();
+</script><script id="canenext-page-restore-master-script">
+(function(){
+  const KEY='canenext_active_page';
+  const DEFAULT_PAGE='business-partner';
+  const ADMIN_ONLY=new Set(['data-management','user-management']);
+  let restoring=false;
+
+  function currentVisiblePage(){
+    return document.querySelector('.app-page.active-page')?.id || null;
+  }
+
+  function savePage(pageId){
+    if(pageId) localStorage.setItem(KEY,pageId);
+  }
+
+  function isAdmin(){
+    const p=window.CANENEXT_CURRENT_PROFILE;
+    return String(p?.role||'').toLowerCase()==='admin' &&
+           String(p?.status||'').toLowerCase()==='active';
+  }
+
+  function safePage(pageId){
+    if(!pageId || !document.getElementById(pageId)) return DEFAULT_PAGE;
+    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
+    return pageId;
+  }
+
+  function activateDirectly(pageId){
+    const finalPage=safePage(pageId);
+
+    document.querySelectorAll('.app-page').forEach(page=>{
+      page.classList.toggle('active-page',page.id===finalPage);
+    });
+
+    document.querySelectorAll('.menu-row a').forEach(link=>{
+      link.classList.toggle('active-menu',link.getAttribute('href')==='#'+finalPage);
+    });
+
+    savePage(finalPage);
+
+    if(finalPage==='dashboard'){
+      setTimeout(()=>window.refreshDashboardFromScenario?.(),50);
+    }else if(finalPage==='analytics'){
+      setTimeout(()=>window.refreshAnalysisTable?.(),50);
+    }else if(finalPage==='ai-recommendation'){
+      setTimeout(()=>window.refreshAIAdvisor?.(),50);
+    }
+
+    return finalPage;
+  }
+
+  async function restorePage(){
+    if(restoring) return;
+    restoring=true;
+    try{
+      const saved=localStorage.getItem(KEY) || currentVisiblePage() || DEFAULT_PAGE;
+      activateDirectly(saved);
+    }finally{
+      restoring=false;
+    }
+  }
+
+  // Final wrapper: remember every menu opened.
+  const previousShowMainMenu=window.showMainMenu;
+  window.showMainMenu=async function(event,pageId){
+    if(event?.preventDefault) event.preventDefault();
+
+    if(ADMIN_ONLY.has(pageId) && !isAdmin()){
+      pageId=DEFAULT_PAGE;
+    }
+
+    savePage(pageId);
+
+    if(typeof previousShowMainMenu==='function'){
+      const result=await previousShowMainMenu(event,pageId);
+      // Some older wrappers force Business Partner; restore requested page after they finish.
+      setTimeout(()=>activateDirectly(pageId),20);
+      return result;
+    }
+
+    return activateDirectly(pageId);
+  };
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    setTimeout(restorePage,1000);
+  });
+
+  // Keep the same page after folding the screen, switching tabs, minimizing, or returning.
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){
+      savePage(currentVisiblePage());
+    }else{
+      setTimeout(restorePage,50);
+    }
+  });
+
+  window.addEventListener('blur',()=>savePage(currentVisiblePage()));
+  window.addEventListener('focus',()=>setTimeout(restorePage,50));
+  window.addEventListener('pageshow',()=>setTimeout(restorePage,50));
+
+  window.CanePageStateMaster={
+    save:savePage,
+    restore:restorePage,
+    current:()=>safePage(localStorage.getItem(KEY))
+  };
 })();
 </script></body>
 </html>

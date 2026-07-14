@@ -1,20 +1,12 @@
 Cane Next+ Master Version
-Version: 2.1.1
-Based on: v2.1.0
+Version: 2.1.2
+Based on: v2.1.1
 Base index SHA-256: c4ca42575c886d8e2fbf4a8ebc9c46375f728e46c28e85d99678fab69c0bff6b
-Created: 2026-07-14T07:00:00
+Created: 2026-07-14T07:21:07
 
 CHANGES
-- Added the missing config.js.
-- Preserved index.html from Master v2.1.0 without application changes.
-- Organized SQL under sql/.
-- Preserved manage-users Edge Function.
-- Added installation README.
-
-FILES
-- index.html
-- config.js
-- README.txt
-- CHANGELOG.txt
-- sql/manager_multizone_schema.sql
-- supabase/functions/manage-users/index.ts
+- Removed central login role/activity notices such as Admin, Manager, Extension, or Viewer announcements.
+- Real Plot menu column label changed to "แหล่งน้ำ".
+- Current menu is remembered when folding/minimizing the screen, switching tabs, returning to the browser, or refreshing.
+- Admin-only page safety remains unchanged.
+- All support files from v2.1.1 are preserved.
