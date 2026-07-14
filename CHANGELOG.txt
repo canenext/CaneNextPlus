@@ -1,12 +1,14 @@
 Cane Next+ Master Version
-Version: 2.1.2
-Based on: v2.1.1
-Base index SHA-256: c4ca42575c886d8e2fbf4a8ebc9c46375f728e46c28e85d99678fab69c0bff6b
-Created: 2026-07-14T07:21:07
+Version: 2.1.3
+Based on: v2.1.2
+Base index SHA-256: 0620809eeb31b856a0b78ecd01654f314882448c4c0b50b42bcf375e5cd3d84d
+Created: 2026-07-14T07:44:41
 
-CHANGES
-- Removed central login role/activity notices such as Admin, Manager, Extension, or Viewer announcements.
-- Real Plot menu column label changed to "แหล่งน้ำ".
-- Current menu is remembered when folding/minimizing the screen, switching tabs, returning to the browser, or refreshing.
-- Admin-only page safety remains unchanged.
-- All support files from v2.1.1 are preserved.
+FIXES
+- Real Plot column heading is now changed directly to "แหล่งน้ำ".
+- Added a runtime safeguard so scripts cannot restore the old heading.
+- Fixed the current-menu memory when minimizing/folding the screen,
+  switching tabs, restoring the browser, or returning focus.
+- Programmatic redirects to Business Partner no longer overwrite the
+  last menu selected by the user.
+- Existing config, SQL, Edge Function and other Master files are preserved.

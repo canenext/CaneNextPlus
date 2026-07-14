@@ -7024,7 +7024,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="2.1.2" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="2.1.3" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7277,7 +7277,7 @@ body:not(.can-show-admin-menus) #user-management{
 </div>
 <div class="table-responsive">
 <table class="table real-plot-table">
-<thead><tr><th><button class="real-sort-btn" data-sort-key="year" type="button">ปีการผลิต<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="project_name" type="button">โครงการ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="crop_type" type="button">ประเภทอ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="plot_id" type="button">รหัสแปลง<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="area" type="button">พื้นที่ (ไร่)<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="variety" type="button">พันธุ์อ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="water" type="button">รูปแบบการให้น้ำ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="status" type="button">สถานะแปลง<span class="real-sort-icon">↕</span></button></th></tr></thead>
+<thead><tr><th><button class="real-sort-btn" data-sort-key="year" type="button">ปีการผลิต<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="project_name" type="button">โครงการ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="crop_type" type="button">ประเภทอ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="plot_id" type="button">รหัสแปลง<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="area" type="button">พื้นที่ (ไร่)<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="variety" type="button">พันธุ์อ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="water" type="button">แหล่งน้ำ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="status" type="button">สถานะแปลง<span class="real-sort-icon">↕</span></button></th></tr></thead>
 <tbody id="realPlotTableBody"></tbody>
 </table>
 </div>
@@ -12368,134 +12368,168 @@ document.addEventListener('DOMContentLoaded', function(){
     };
   },100);
 })();
-</script><script id="canenext-realplot-water-label-script">
+</script><script id="canenext-realplot-water-label-final-script">
 (function(){
-  function updateRealPlotWaterLabel(){
-    const page=document.getElementById('real-plots');
-    if(!page) return;
+  function applyWaterSourceLabel(){
+    const button=document.querySelector(
+      '#real-plots thead .real-sort-btn[data-sort-key="water"]'
+    );
+    if(!button) return;
 
-    page.querySelectorAll('th').forEach(th=>{
-      const text=(th.textContent||'').trim();
-      if(text==='รูปแบบการให้น้ำ' || text==='ระบบน้ำ'){
-        const btn=th.querySelector('button');
-        if(btn){
-          const icon=btn.querySelector('.real-sort-icon');
-          btn.textContent='แหล่งน้ำ';
-          if(icon) btn.appendChild(icon);
-        }else{
-          th.textContent='แหล่งน้ำ';
-        }
-      }
-    });
+    const icon=button.querySelector('.real-sort-icon');
+    const iconCopy=icon ? icon.cloneNode(true) : null;
+    button.textContent='แหล่งน้ำ';
+    if(iconCopy) button.appendChild(iconCopy);
   }
 
-  document.addEventListener('DOMContentLoaded',updateRealPlotWaterLabel);
-  window.addEventListener('canenext:farmer-changed',()=>setTimeout(updateRealPlotWaterLabel,50));
+  document.addEventListener('DOMContentLoaded',applyWaterSourceLabel);
+  window.addEventListener('canenext:farmer-changed',()=>{
+    setTimeout(applyWaterSourceLabel,40);
+  });
 })();
-</script><script id="canenext-page-restore-master-script">
+</script><script id="canenext-page-state-final-script">
 (function(){
-  const KEY='canenext_active_page';
+  const KEY='canenext_last_user_page';
   const DEFAULT_PAGE='business-partner';
   const ADMIN_ONLY=new Set(['data-management','user-management']);
-  let restoring=false;
+  let lastUserPage=localStorage.getItem(KEY)||DEFAULT_PAGE;
+  let internalRestore=false;
+  let observerTimer=null;
 
-  function currentVisiblePage(){
-    return document.querySelector('.app-page.active-page')?.id || null;
+  function isActiveAdmin(){
+    const profile=window.CANENEXT_CURRENT_PROFILE;
+    return String(profile?.role||'').toLowerCase()==='admin' &&
+           String(profile?.status||'').toLowerCase()==='active';
   }
 
-  function savePage(pageId){
-    if(pageId) localStorage.setItem(KEY,pageId);
-  }
-
-  function isAdmin(){
-    const p=window.CANENEXT_CURRENT_PROFILE;
-    return String(p?.role||'').toLowerCase()==='admin' &&
-           String(p?.status||'').toLowerCase()==='active';
-  }
-
-  function safePage(pageId){
+  function validPage(pageId){
     if(!pageId || !document.getElementById(pageId)) return DEFAULT_PAGE;
-    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
+    if(ADMIN_ONLY.has(pageId) && !isActiveAdmin()) return DEFAULT_PAGE;
     return pageId;
   }
 
-  function activateDirectly(pageId){
-    const finalPage=safePage(pageId);
+  function activePage(){
+    return document.querySelector('.app-page.active-page')?.id || null;
+  }
+
+  function remember(pageId){
+    const valid=validPage(pageId);
+    lastUserPage=valid;
+    localStorage.setItem(KEY,valid);
+  }
+
+  function render(pageId){
+    const target=validPage(pageId);
+    internalRestore=true;
 
     document.querySelectorAll('.app-page').forEach(page=>{
-      page.classList.toggle('active-page',page.id===finalPage);
+      page.classList.toggle('active-page',page.id===target);
     });
 
     document.querySelectorAll('.menu-row a').forEach(link=>{
-      link.classList.toggle('active-menu',link.getAttribute('href')==='#'+finalPage);
+      link.classList.toggle(
+        'active-menu',
+        link.getAttribute('href')==='#'+target
+      );
     });
 
-    savePage(finalPage);
+    setTimeout(()=>{ internalRestore=false; },30);
 
-    if(finalPage==='dashboard'){
-      setTimeout(()=>window.refreshDashboardFromScenario?.(),50);
-    }else if(finalPage==='analytics'){
-      setTimeout(()=>window.refreshAnalysisTable?.(),50);
-    }else if(finalPage==='ai-recommendation'){
-      setTimeout(()=>window.refreshAIAdvisor?.(),50);
+    if(target==='dashboard'){
+      setTimeout(()=>window.refreshDashboardFromScenario?.(),60);
+    }else if(target==='analytics'){
+      setTimeout(()=>window.refreshAnalysisTable?.(),60);
+    }else if(target==='ai-recommendation'){
+      setTimeout(()=>window.refreshAIAdvisor?.(),60);
     }
 
-    return finalPage;
+    return target;
   }
 
-  async function restorePage(){
-    if(restoring) return;
-    restoring=true;
-    try{
-      const saved=localStorage.getItem(KEY) || currentVisiblePage() || DEFAULT_PAGE;
-      activateDirectly(saved);
-    }finally{
-      restoring=false;
-    }
+  function restore(){
+    render(lastUserPage || localStorage.getItem(KEY) || DEFAULT_PAGE);
   }
 
-  // Final wrapper: remember every menu opened.
+  // Menu clicks are the authoritative source of the user's chosen page.
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('.menu-row a[href^="#"]');
+    if(!link) return;
+
+    const pageId=link.getAttribute('href').slice(1);
+    if(pageId) remember(pageId);
+  },true);
+
+  // Wrap the final menu function. Programmatic calls to Business Partner
+  // must not overwrite the user's remembered page.
   const previousShowMainMenu=window.showMainMenu;
   window.showMainMenu=async function(event,pageId){
-    if(event?.preventDefault) event.preventDefault();
+    const isRealUserAction=!!event?.isTrusted;
 
-    if(ADMIN_ONLY.has(pageId) && !isAdmin()){
-      pageId=DEFAULT_PAGE;
+    if(isRealUserAction){
+      remember(pageId);
     }
-
-    savePage(pageId);
 
     if(typeof previousShowMainMenu==='function'){
       const result=await previousShowMainMenu(event,pageId);
-      // Some older wrappers force Business Partner; restore requested page after they finish.
-      setTimeout(()=>activateDirectly(pageId),20);
+
+      if(!isRealUserAction && pageId===DEFAULT_PAGE && lastUserPage!==DEFAULT_PAGE){
+        setTimeout(restore,20);
+      }else{
+        setTimeout(()=>render(isRealUserAction ? pageId : lastUserPage),20);
+      }
+
       return result;
     }
 
-    return activateDirectly(pageId);
+    return render(isRealUserAction ? pageId : lastUserPage);
   };
 
-  document.addEventListener('DOMContentLoaded',()=>{
-    setTimeout(restorePage,1000);
+  // Detect old scripts that force Business Partner after focus/auth refresh.
+  const root=document.querySelector('.app-main') || document.body;
+  new MutationObserver(()=>{
+    if(internalRestore || document.hidden) return;
+
+    clearTimeout(observerTimer);
+    observerTimer=setTimeout(()=>{
+      const current=activePage();
+
+      if(current===DEFAULT_PAGE && lastUserPage!==DEFAULT_PAGE){
+        restore();
+      }else if(current && current!==DEFAULT_PAGE){
+        remember(current);
+      }
+    },35);
+  }).observe(root,{
+    subtree:true,
+    attributes:true,
+    attributeFilter:['class']
   });
 
-  // Keep the same page after folding the screen, switching tabs, minimizing, or returning.
+  document.addEventListener('DOMContentLoaded',()=>{
+    setTimeout(restore,1200);
+  });
+
   document.addEventListener('visibilitychange',()=>{
     if(document.hidden){
-      savePage(currentVisiblePage());
+      const current=activePage();
+      if(current && current!==DEFAULT_PAGE) remember(current);
     }else{
-      setTimeout(restorePage,50);
+      setTimeout(restore,80);
     }
   });
 
-  window.addEventListener('blur',()=>savePage(currentVisiblePage()));
-  window.addEventListener('focus',()=>setTimeout(restorePage,50));
-  window.addEventListener('pageshow',()=>setTimeout(restorePage,50));
+  window.addEventListener('blur',()=>{
+    const current=activePage();
+    if(current && current!==DEFAULT_PAGE) remember(current);
+  });
 
-  window.CanePageStateMaster={
-    save:savePage,
-    restore:restorePage,
-    current:()=>safePage(localStorage.getItem(KEY))
+  window.addEventListener('focus',()=>setTimeout(restore,80));
+  window.addEventListener('pageshow',()=>setTimeout(restore,80));
+
+  window.CanePageStateFinal={
+    remember,
+    restore,
+    current:()=>lastUserPage
   };
 })();
 </script></body>
