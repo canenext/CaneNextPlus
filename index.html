@@ -7072,7 +7072,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="3.2.1" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.2.2" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7287,6 +7287,31 @@ table{min-width:760px}
 #business-partner .search-row,#business-partner .bp-search-row,#plot-data .scenario-area-grid,#scenario .scenario-area-grid,#plot-data .scenario-detail-grid,#scenario .scenario-detail-grid{grid-template-columns:1fr!important}
 .promotion-document-actions .btn,.promotion-document-actions button,.promotion-document-actions a{flex:1 1 calc(50% - 6px)!important;min-width:0!important}
 table{min-width:680px}
+}
+</style><style id="canenext-sidebar-scroll-fix-style">
+@media (orientation:portrait) and (max-width:1100px){
+  .sidebar,.side-menu,nav.sidebar{
+    display:block!important;width:100%!important;max-width:100%!important;
+    overflow-x:auto!important;overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-x:contain!important;touch-action:pan-x!important;
+    scrollbar-width:thin;
+  }
+  .sidebar>.menu-row,.side-menu>.menu-row,nav.sidebar>.menu-row,
+  .sidebar .menu-row,.side-menu .menu-row,nav.sidebar .menu-row{
+    display:inline-flex!important;width:auto!important;min-width:max-content!important;
+    flex:0 0 auto!important;vertical-align:top;
+  }
+  .sidebar .menu-row+.menu-row,.side-menu .menu-row+.menu-row,nav.sidebar .menu-row+.menu-row{
+    margin-left:8px!important;
+  }
+  .sidebar .menu-row a,.side-menu .menu-row a,nav.sidebar .menu-row a{
+    width:auto!important;min-width:max-content!important;white-space:nowrap!important;
+  }
+  .sidebar::-webkit-scrollbar,.side-menu::-webkit-scrollbar,nav.sidebar::-webkit-scrollbar{height:6px}
+  .sidebar::-webkit-scrollbar-thumb,.side-menu::-webkit-scrollbar-thumb,nav.sidebar::-webkit-scrollbar-thumb{
+    background:rgba(11,92,173,.35);border-radius:999px
+  }
 }
 </style></head>
 <body class="locked">
@@ -12716,6 +12741,21 @@ document.addEventListener('DOMContentLoaded', function(){
 (function(){
 function update(){const p=matchMedia('(orientation: portrait)').matches;document.documentElement.classList.toggle('is-portrait',p);document.documentElement.classList.toggle('is-landscape',!p)}
 update();addEventListener('resize',update,{passive:true});addEventListener('orientationchange',()=>setTimeout(update,120),{passive:true});
+})();
+</script><script id="canenext-sidebar-scroll-fix-script">
+(function(){
+  function setup(){
+    const s=document.querySelector('.sidebar')||document.querySelector('.side-menu')||document.querySelector('nav.sidebar');
+    if(!s||s.dataset.scrollReady==='1')return;
+    s.dataset.scrollReady='1';
+    s.addEventListener('wheel',e=>{
+      if(matchMedia('(orientation: portrait) and (max-width: 1100px)').matches && Math.abs(e.deltaY)>Math.abs(e.deltaX)){
+        s.scrollLeft+=e.deltaY;e.preventDefault();
+      }
+    },{passive:false});
+  }
+  document.addEventListener('DOMContentLoaded',setup);
+  addEventListener('orientationchange',()=>setTimeout(setup,150));
 })();
 </script></body>
 </html>

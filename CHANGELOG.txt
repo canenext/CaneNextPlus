@@ -1,14 +1,10 @@
 Cane Next+ Master Version
-Version: 3.2.1
-Based on: v3.2.0
-Created: 2026-07-15T01:10:11
+Version: 3.2.2
+Based on: v3.2.1
+Created: 2026-07-15T01:52:54
 
-PORTRAIT RESPONSIVE FIX
-- Added dedicated portrait layout for iPad, tablet and phone.
-- Sidebar changes to a horizontal touch-scroll menu in portrait mode.
-- Header wraps correctly without overlapping.
-- Main content uses full available width.
-- Forms and grids collapse appropriately.
-- Tables use horizontal scrolling instead of breaking the page.
-- Promotion viewer remains touch-scrollable.
-- Existing landscape layout is preserved.
+FIX
+- Fixed portrait sidebar horizontal scrolling.
+- Added touch momentum scrolling for iPad/tablet.
+- Menu items keep their full width and no longer compress.
+- Added mouse-wheel horizontal scrolling for desktop portrait testing.
