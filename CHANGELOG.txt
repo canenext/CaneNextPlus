@@ -1,10 +1,13 @@
 Cane Next+ Master Version
-Version: 3.2.2
-Based on: v3.2.1
-Created: 2026-07-15T01:52:54
+Version: 3.2.3
+Based on: v3.2.2
+Base index SHA-256: de87c49aaa9d1c5e117f70377eb8853cecc719936a2b99694a717fa3dd73a215
+Created: 2026-07-15T02:01:23
 
 FIX
-- Fixed portrait sidebar horizontal scrolling.
-- Added touch momentum scrolling for iPad/tablet.
-- Menu items keep their full width and no longer compress.
-- Added mouse-wheel horizontal scrolling for desktop portrait testing.
+- Corrected the portrait selector to target .menu-row, which is the actual sidebar.
+- Menu now uses flex row + nowrap + overflow-x:auto in portrait.
+- Removed fixed positioning in portrait.
+- Removed left margin from app content in portrait.
+- Added touch momentum, wheel and mouse-drag support.
+- Landscape layout remains unchanged.
