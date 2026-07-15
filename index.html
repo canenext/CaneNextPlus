@@ -6990,7 +6990,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="4.0.0" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="4.0.1" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7266,19 +7266,26 @@ table{min-width:680px}
     border-radius:999px;
   }
 }
-</style><style id="canenext-navigation-v4-style">
-/* CaneNext Navigation v4: one controller only */
+</style><style id="canenext-navigation-v401-style">
+/* CaneNext Navigation v4.0.1 */
 .app-page{display:none !important;}
 .app-page.active-page{display:block !important;}
-.menu-row a{transition:none !important;animation:none !important;}
+
+.menu-row a{
+  animation:none !important;
+  transition:none !important;
+}
+
 .menu-row .admin-only-menu{
   display:none !important;
   visibility:hidden !important;
 }
+
 body.is-admin .menu-row .admin-only-menu{
   display:flex !important;
   visibility:visible !important;
 }
+
 body:not(.is-admin) #data-management,
 body:not(.is-admin) #user-management{
   display:none !important;
@@ -7333,18 +7340,18 @@ body:not(.is-admin) #user-management{
 </div>
 </div>
 <div class="menu-row">
-<a href="#business-partner" onclick="return window.CaneNavigationV4.open(event, 'business-partner')"><i class="fa-solid fa-users menu-icon"></i> Business Partner</a>
-<a href="#real-plots" onclick="return window.CaneNavigationV4.open(event, 'real-plots')"><i class="fa-solid fa-seedling menu-icon"></i> ข้อมูลแปลงจริง</a>
-<a href="#basic-cost" onclick="return window.CaneNavigationV4.open(event, 'basic-cost')"><i class="fa-solid fa-file-invoice-dollar menu-icon"></i> ต้นทุนพื้นฐาน</a>
-<a href="#plot-data" onclick="return window.CaneNavigationV4.open(event, 'plot-data')"><i class="fa-solid fa-seedling menu-icon"></i> Scenario Setup</a>
-<a href="#scenario" onclick="return window.CaneNavigationV4.open(event, 'scenario')"><i class="fa-solid fa-chart-line menu-icon"></i> Scenario Analysis</a>
-<a href="#analytics" onclick="return window.CaneNavigationV4.open(event, 'analytics')"><i class="fa-solid fa-chart-column menu-icon"></i> ระบบวิเคราะห์ข้อมูล</a>
-<a href="#ai-recommendation" onclick="return window.CaneNavigationV4.open(event, 'ai-recommendation')"><i class="fa-solid fa-robot menu-icon"></i> AI Recommendation</a>
-<a href="#dashboard" onclick="return window.CaneNavigationV4.open(event, 'dashboard')"><i class="fa-solid fa-gauge-high menu-icon"></i> Dashboard</a>
-<a href="#risk" onclick="return window.CaneNavigationV4.open(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
-<a href="#promotion" onclick="return window.CaneNavigationV4.open(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> หลักเกณฑ์การส่งเสริม</a>
-<a aria-hidden="true" class="admin-only-menu" hidden="" href="#data-management" onclick="return window.CaneNavigationV4.open(event, 'data-management')" style="display:none !important;" tabindex="-1"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
-<a aria-hidden="true" class="admin-only-menu" hidden="" href="#user-management" onclick="return window.CaneNavigationV4.open(event, 'user-management')" style="display:none !important;" tabindex="-1"><i class="fa-solid fa-users-gear menu-icon"></i> จัดการผู้ใช้งาน</a></div>
+<a href="#business-partner"><i class="fa-solid fa-users menu-icon"></i> Business Partner</a>
+<a href="#real-plots"><i class="fa-solid fa-seedling menu-icon"></i> ข้อมูลแปลงจริง</a>
+<a href="#basic-cost"><i class="fa-solid fa-file-invoice-dollar menu-icon"></i> ต้นทุนพื้นฐาน</a>
+<a href="#plot-data"><i class="fa-solid fa-seedling menu-icon"></i> Scenario Setup</a>
+<a href="#scenario"><i class="fa-solid fa-chart-line menu-icon"></i> Scenario Analysis</a>
+<a href="#analytics"><i class="fa-solid fa-chart-column menu-icon"></i> ระบบวิเคราะห์ข้อมูล</a>
+<a href="#ai-recommendation"><i class="fa-solid fa-robot menu-icon"></i> AI Recommendation</a>
+<a href="#dashboard"><i class="fa-solid fa-gauge-high menu-icon"></i> Dashboard</a>
+<a href="#risk"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
+<a href="#promotion"><i class="fa-solid fa-handshake-angle menu-icon"></i> หลักเกณฑ์การส่งเสริม</a>
+<a aria-hidden="true" class="admin-only-menu" hidden="" href="#data-management" style="display:none !important;" tabindex="-1"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
+<a aria-hidden="true" class="admin-only-menu" hidden="" href="#user-management" style="display:none !important;" tabindex="-1"><i class="fa-solid fa-users-gear menu-icon"></i> จัดการผู้ใช้งาน</a></div>
 </nav>
 </header>
 <main class="app-main">
@@ -10373,7 +10380,6 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 })();
 </script>
-
 <script id="canenext-redundant-farmer-ui-cleanup">
 (function(){
   function currentFarmer(){
@@ -12303,29 +12309,31 @@ update();addEventListener('resize',update,{passive:true});addEventListener('orie
   window.addEventListener('resize',setupPortraitMenu,{passive:true});
   window.addEventListener('orientationchange',()=>setTimeout(setupPortraitMenu,150),{passive:true});
 })();
-</script><script id="canenext-navigation-v4-script">
+</script><script id="canenext-navigation-v401-script">
 (function(){
-  const STORAGE_KEY='canenext_active_page_v4';
+  const STORAGE_KEY='canenext_active_page_v401';
   const DEFAULT_PAGE='business-partner';
   const ADMIN_PAGES=new Set(['data-management','user-management']);
+
   let profile=null;
 
-  function normalize(value){
-    return String(value||'').trim().toLowerCase();
-  }
+  const normalize=value=>String(value||'').trim().toLowerCase();
 
   function isAdmin(){
-    const p=profile || window.CANENEXT_CURRENT_PROFILE;
-    return normalize(p?.role)==='admin' && normalize(p?.status)==='active';
-  }
-
-  function pageExists(pageId){
-    return Boolean(pageId && document.getElementById(pageId));
+    const current=profile || window.CANENEXT_CURRENT_PROFILE;
+    return normalize(current?.role)==='admin' &&
+           normalize(current?.status)==='active';
   }
 
   function safePage(pageId){
-    if(!pageExists(pageId)) return DEFAULT_PAGE;
-    if(ADMIN_PAGES.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
+    if(!pageId || !document.getElementById(pageId)){
+      return DEFAULT_PAGE;
+    }
+
+    if(ADMIN_PAGES.has(pageId) && !isAdmin()){
+      return DEFAULT_PAGE;
+    }
+
     return pageId;
   }
 
@@ -12347,7 +12355,7 @@ update();addEventListener('resize',update,{passive:true});addEventListener('orie
     });
   }
 
-  function render(pageId, remember=true){
+  function renderPage(pageId, remember=true){
     const target=safePage(pageId);
 
     document.querySelectorAll('.app-page').forEach(page=>{
@@ -12362,7 +12370,9 @@ update();addEventListener('resize',update,{passive:true});addEventListener('orie
     });
 
     if(remember){
-      try{ localStorage.setItem(STORAGE_KEY,target); }catch(e){}
+      try{
+        localStorage.setItem(STORAGE_KEY,target);
+      }catch(e){}
     }
 
     if(target==='basic-cost'){
@@ -12382,38 +12392,62 @@ update();addEventListener('resize',update,{passive:true});addEventListener('orie
     return target;
   }
 
-  function open(event,pageId){
+  function openPage(event,pageId){
     event?.preventDefault?.();
     event?.stopPropagation?.();
-    render(pageId,true);
-    return false;
+    event?.stopImmediatePropagation?.();
+    return renderPage(pageId,true);
   }
+
+  /*
+   * Capture at WINDOW level.
+   * This runs before old document/element click handlers and prevents
+   * legacy scripts from forcing Business Partner after a menu click.
+   */
+  window.addEventListener('click',event=>{
+    const link=event.target?.closest?.('.menu-row a[href^="#"]');
+    if(!link) return;
+
+    const pageId=link.getAttribute('href').slice(1);
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    renderPage(pageId,true);
+  },true);
 
   async function ensureClient(){
     if(window.caneSupabase) return window.caneSupabase;
-    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG) return null;
+
+    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
+      return null;
+    }
 
     window.caneSupabase=window.supabase.createClient(
       window.CANENEXT_CONFIG.SUPABASE_URL,
       window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
     );
+
     return window.caneSupabase;
   }
 
   async function refreshProfile(){
     try{
       const db=await ensureClient();
+
       if(!db){
         updateAdminMenu();
         return null;
       }
 
       const {data:{user}}=await db.auth.getUser();
+
       if(!user){
         profile=null;
         window.CANENEXT_CURRENT_PROFILE=null;
         updateAdminMenu();
-        render(DEFAULT_PAGE,false);
+        renderPage(DEFAULT_PAGE,false);
         return null;
       }
 
@@ -12430,35 +12464,43 @@ update();addEventListener('resize',update,{passive:true});addEventListener('orie
       updateAdminMenu();
 
       const saved=localStorage.getItem(STORAGE_KEY)||DEFAULT_PAGE;
-      render(saved,false);
+      renderPage(saved,false);
+
       return profile;
     }catch(err){
       console.error('Navigation profile load failed:',err);
       profile=null;
       updateAdminMenu();
-      render(DEFAULT_PAGE,false);
+      renderPage(DEFAULT_PAGE,false);
       return null;
     }
   }
 
-  // Replace every legacy global route function with this one.
-  window.showMainMenu=open;
-  window.CaneNavigationV4={
-    open,
-    render,
-    restore:()=>render(localStorage.getItem(STORAGE_KEY)||DEFAULT_PAGE,false),
+  // Replace all legacy programmatic navigation calls.
+  window.showMainMenu=function(event,pageId){
+    return openPage(event,pageId);
+  };
+
+  window.CaneNavigationV401={
+    open:openPage,
+    render:renderPage,
+    restore:()=>renderPage(
+      localStorage.getItem(STORAGE_KEY)||DEFAULT_PAGE,
+      false
+    ),
     refreshProfile,
     isAdmin
   };
 
   document.addEventListener('DOMContentLoaded',async()=>{
-    // Render immediately so every menu works even before Supabase returns.
-    render(localStorage.getItem(STORAGE_KEY)||DEFAULT_PAGE,false);
+    renderPage(localStorage.getItem(STORAGE_KEY)||DEFAULT_PAGE,false);
     await refreshProfile();
 
     try{
       const db=await ensureClient();
-      db?.auth?.onAuthStateChange?.(()=>setTimeout(refreshProfile,0));
+      db?.auth?.onAuthStateChange?.(()=>{
+        setTimeout(refreshProfile,0);
+      });
     }catch(e){}
   });
 })();
