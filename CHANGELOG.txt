@@ -1,21 +1,22 @@
 Cane Next+ Master Version
-Version: 3.1.0
-Based on: v3.0.3
-Base index SHA-256: d6d562aad5eb6a7cdb4d76ebb8436979a855ef370c8609a1c4d00e1a51b5c7b4
+Version: 3.2.0
+Based on: v3.1.0
+Base index SHA-256: a761bdf77e03d512b6afed362724251d625fe50a9fcfeb4699dc6caf1f61060f
 PDF SHA-256: 5f234a0fb818bfb575da8b1f59c7f82ec3b0b138440059a190ae3cb1652aebe6
-Created: 2026-07-14T12:27:11
+Created: 2026-07-14T14:46:08
 
 CHANGES
-- Promotion menu now opens the 28-page PDF manual inside the website.
-- Users can scroll continuously through all PDF pages.
-- Browser PDF toolbar provides page navigation, zoom, search, print and download
-  when supported by the browser.
-- Added buttons for Reload, Full-screen/New Tab and Download PDF.
-- Added responsive PDF viewing for desktop, notebook and tablet.
-- Included PDF asset:
-  assets/pdf/promotion_manual_2569_70.pdf
+- Business Partner farmer code now uses placeholder 778899.
+- Business Partner name now uses placeholder นาย อ้อยดี มีกำไร.
+- Users can type immediately without deleting the sample value.
+- Other menus still show the default farmer context until a real farmer is searched.
+- After search, the latest farmer remains active throughout the login session.
+- Replaced the embedded PDF iframe with a page-by-page image viewer.
+- PDF manual now scrolls correctly on iPad, tablet, Android and desktop.
+- Added touch scrolling and zoom controls.
+- Original PDF remains available for open/download.
 
 DEPLOY
-Upload the complete folder structure. Do not upload index.html alone.
-The PDF must remain at:
+Upload the complete folder structure, including:
 assets/pdf/promotion_manual_2569_70.pdf
+assets/pdf/pages/page-01.jpg through page-28.jpg

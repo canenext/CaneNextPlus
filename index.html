@@ -7072,7 +7072,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="3.1.0" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.2.0" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7160,115 +7160,89 @@ body:not(.is-admin) #data-management,
 body:not(.is-admin) #user-management{
   display:none !important;
 }
-</style><style id="canenext-promotion-pdf-style">
-/* Promotion PDF Document Center */
-#promotion.promotion-document-page{
-  padding-top:18px !important;
-}
+</style><style id="canenext-promotion-pages-style">
+#promotion.promotion-document-page{padding-top:18px!important}
 #promotion .promotion-document-header{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:18px;
-  margin-bottom:16px;
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:18px;margin-bottom:16px
 }
 #promotion .promotion-document-header h3{
-  margin:0 0 5px !important;
-  color:#0A3D78 !important;
-  font-size:22px !important;
-  font-weight:800 !important;
+  margin:0 0 5px!important;color:#0A3D78!important;
+  font-size:22px!important;font-weight:800!important
 }
-#promotion .promotion-document-header p{
-  margin:0;
-  color:#5B6F86;
-  font-size:14px;
-}
+#promotion .promotion-document-header p{margin:0;color:#5B6F86;font-size:14px}
 #promotion .promotion-document-actions{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:9px;
-  flex-wrap:wrap;
+  display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap
 }
 #promotion .promotion-document-actions .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  min-height:40px;
-  padding:9px 15px;
-  text-decoration:none;
-  box-shadow:none;
-  font-size:13px;
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:38px;padding:8px 13px;text-decoration:none;
+  box-shadow:none;font-size:13px
+}
+#promotion .promotion-zoom-value{
+  min-width:52px;text-align:center;color:#0A3D78;font-weight:800;font-size:13px
 }
 #promotion .promotion-pdf-card{
-  overflow:hidden;
-  background:#fff;
-  border:1px solid #D5E6F8;
-  border-radius:18px;
-  box-shadow:0 8px 24px rgba(8,59,115,.07);
+  overflow:hidden;background:#fff;border:1px solid #D5E6F8;
+  border-radius:18px;box-shadow:0 8px 24px rgba(8,59,115,.07)
 }
 #promotion .promotion-pdf-info{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:10px 14px;
-  color:#355B80;
-  background:#F3F8FF;
-  border-bottom:1px solid #D5E6F8;
-  font-size:12px;
-  font-weight:600;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 14px;color:#355B80;background:#F3F8FF;
+  border-bottom:1px solid #D5E6F8;font-size:12px;font-weight:600
 }
-#promotion .promotion-pdf-info span{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-}
-#promotion .promotion-pdf-info i{
-  color:#C62828;
-  font-size:16px;
-}
-#promotion .promotion-pdf-frame-wrap{
-  position:relative;
-  width:100%;
+#promotion .promotion-page-scroll{
   height:calc(100vh - 245px);
   min-height:620px;
-  background:#EEF2F6;
+  overflow-y:auto;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  touch-action:pan-y pan-x;
+  background:#E7EBF0;
+  padding:18px 10px 40px;
 }
-#promotion .promotion-pdf-frame{
-  display:block;
+#promotion .promotion-page-list{
   width:100%;
-  height:100%;
-  border:0;
-  background:#EEF2F6;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
 }
-#promotion .promotion-pdf-fallback{
-  display:none;
-  padding:24px;
-  text-align:center;
-  color:#5B6F86;
+#promotion .promotion-page-item{
+  width:min(100%, 1050px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
-#promotion .promotion-pdf-fallback a{
-  color:#0B5CAD;
+#promotion .promotion-page-label{
+  margin:0 0 7px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#0A3D78;
+  color:#fff;
+  font-size:11px;
   font-weight:800;
 }
+#promotion .promotion-page-image{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#fff;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);
+  user-select:none;
+  -webkit-user-drag:none;
+}
 @media(max-width:900px){
-  #promotion .promotion-document-header{
-    flex-direction:column;
+  #promotion .promotion-document-header{flex-direction:column}
+  #promotion .promotion-document-actions{width:100%;justify-content:flex-start}
+  #promotion .promotion-pdf-info{align-items:flex-start;flex-direction:column}
+  #promotion .promotion-page-scroll{
+    height:calc(100dvh - 300px);
+    min-height:460px;
+    padding:12px 6px 30px;
   }
-  #promotion .promotion-document-actions{
-    width:100%;
-    justify-content:flex-start;
-  }
-  #promotion .promotion-pdf-info{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-  #promotion .promotion-pdf-frame-wrap{
-    height:calc(100vh - 310px);
-    min-height:520px;
-  }
+  #promotion .promotion-page-list{gap:12px}
 }
 </style></head>
 <body class="locked">
@@ -7342,11 +7316,11 @@ body:not(.is-admin) #user-management{
 <div class="bp-clean-grid">
 <div class="form-group">
 <label for="bpCode">รหัสชาวไร่</label>
-<input id="bpCode" placeholder="เช่น 778899" type="text" value="778899"/>
+<input id="bpCode" placeholder="778899" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="bpName">ชื่อ-สกุล ชาวไร่</label>
-<input id="bpName" placeholder="เช่น นายอ้อยดี มีกำไร" type="text" value="นาย อ้อยดี มีกำไร"/>
+<input id="bpName" placeholder="นาย อ้อยดี มีกำไร" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="showZone">สังกัดเขต</label>
@@ -7622,31 +7596,25 @@ body:not(.is-admin) #user-management{
 <p>คู่มือหลักการและหลักเกณฑ์การส่งเสริม ปี 2569/70</p>
 </div>
 <div class="promotion-document-actions">
-<button class="btn secondary" id="promotionPdfReload" type="button">
-<i class="fa-solid fa-rotate-right"></i> โหลดใหม่
-    </button>
-<a class="btn secondary" href="assets/pdf/promotion_manual_2569_70.pdf" id="promotionPdfOpen" rel="noopener" target="_blank">
-<i class="fa-solid fa-up-right-from-square"></i> เปิดเต็มหน้าจอ
+<button class="btn secondary" id="promotionZoomOut" type="button">−</button>
+<span class="promotion-zoom-value" id="promotionZoomValue">100%</span>
+<button class="btn secondary" id="promotionZoomIn" type="button">+</button>
+<button class="btn secondary" id="promotionZoomReset" type="button">พอดีหน้าจอ</button>
+<a class="btn secondary" href="assets/pdf/promotion_manual_2569_70.pdf" rel="noopener" target="_blank">
+      เปิด PDF
     </a>
-<a class="btn" download="หลักเกณฑ์ส่งเสริมปี 2569-70.pdf" href="assets/pdf/promotion_manual_2569_70.pdf" id="promotionPdfDownload">
-<i class="fa-solid fa-download"></i> ดาวน์โหลด PDF
+<a class="btn" download="หลักเกณฑ์ส่งเสริมปี 2569-70.pdf" href="assets/pdf/promotion_manual_2569_70.pdf">
+      ดาวน์โหลด PDF
     </a>
 </div>
 </div>
 <div class="promotion-pdf-card">
 <div class="promotion-pdf-info">
-<span><i class="fa-regular fa-file-pdf"></i> เอกสาร 28 หน้า</span>
+<span>เอกสาร 28 หน้า</span>
 <span>เลื่อนขึ้น-ลงเพื่อดูเอกสารแต่ละหน้า</span>
 </div>
-<div class="promotion-pdf-frame-wrap">
-<iframe class="promotion-pdf-frame" id="promotionPdfFrame" loading="eager" src="assets/pdf/promotion_manual_2569_70.pdf#page=1&amp;zoom=page-width&amp;toolbar=1&amp;navpanes=1&amp;scrollbar=1" title="คู่มือหลักเกณฑ์การส่งเสริม ปี 2569/70">
-</iframe>
-<div class="promotion-pdf-fallback">
-      Browser นี้ไม่รองรับการแสดง PDF ภายในหน้าเว็บ
-      <a href="assets/pdf/promotion_manual_2569_70.pdf" rel="noopener" target="_blank">
-        กดเพื่อเปิดเอกสาร
-      </a>
-</div>
+<div class="promotion-page-scroll" id="promotionPageScroll">
+<div class="promotion-page-list" id="promotionPageList"></div>
 </div>
 </div>
 </section>
@@ -12201,188 +12169,6 @@ document.addEventListener('DOMContentLoaded', function(){
     current:()=>safePage(localStorage.getItem(KEY)||DEFAULT_PAGE)
   };
 })();
-</script><script id="canenext-farmer-session-memory-v3-script">
-(function(){
-  const SESSION_KEY='canenext_current_farmer_session_v3';
-
-  const DEFAULT_FARMER=Object.freeze({
-    farmer_code:'778899',
-    farmer_name:'นาย อ้อยดี มีกำไร',
-    name:'นาย อ้อยดี มีกำไร',
-    full_name:'นาย อ้อยดี มีกำไร',
-    zone:'8',
-    subzone:'8888'
-  });
-
-  function normalizeFarmer(source={}){
-    const farmerName=String(
-      source.farmer_name ||
-      source.name ||
-      source.full_name ||
-      ''
-    ).trim();
-
-    return {
-      ...source,
-      farmer_code:String(source.farmer_code||'').trim(),
-      farmer_name:farmerName,
-      name:farmerName,
-      full_name:farmerName,
-      zone:String(source.zone||'').trim(),
-      subzone:String(source.subzone||'').trim()
-    };
-  }
-
-  function readSession(){
-    try{
-      const raw=sessionStorage.getItem(SESSION_KEY);
-      if(!raw) return null;
-
-      const data=normalizeFarmer(JSON.parse(raw));
-      return data.farmer_code ? data : null;
-    }catch(err){
-      console.error('อ่านข้อมูลชาวไร่ล่าสุดไม่สำเร็จ:',err);
-      return null;
-    }
-  }
-
-  function writeSession(source){
-    const farmer=normalizeFarmer(source);
-    if(!farmer.farmer_code) return null;
-
-    sessionStorage.setItem(SESSION_KEY,JSON.stringify(farmer));
-    window.CANENEXT_CURRENT_FARMER=farmer;
-    return farmer;
-  }
-
-  function setElement(id,value){
-    const el=document.getElementById(id);
-    if(!el) return;
-
-    if('value' in el){
-      el.value=value ?? '';
-    }else{
-      el.textContent=value ?? '';
-    }
-  }
-
-  function applyToAllMenus(source,{dispatch=true}={}){
-    const farmer=normalizeFarmer(source);
-
-    window.CANENEXT_CURRENT_FARMER=farmer;
-
-    const fields={
-      bpCode:farmer.farmer_code,
-      bpName:farmer.farmer_name,
-      showZone:farmer.zone,
-      showSubZone:farmer.subzone,
-      farmerCode:farmer.farmer_code,
-      farmerName:farmer.farmer_name,
-      zone:farmer.zone,
-      subzone:farmer.subzone
-    };
-
-    Object.entries(fields).forEach(([id,value])=>setElement(id,value));
-
-    document.querySelectorAll('[data-farmer-field]').forEach(el=>{
-      const key=el.getAttribute('data-farmer-field');
-      const value=farmer[key] ?? '';
-
-      if('value' in el) el.value=value;
-      else el.textContent=value;
-    });
-
-    if(dispatch){
-      window.dispatchEvent(new CustomEvent('canenext:farmer-context-ready',{
-        detail:farmer
-      }));
-    }
-
-    return farmer;
-  }
-
-  function initialize(){
-    const farmer=readSession() || normalizeFarmer(DEFAULT_FARMER);
-    applyToAllMenus(farmer);
-
-    // Broadcast after all older menu scripts have loaded.
-    setTimeout(()=>{
-      window.dispatchEvent(new CustomEvent('canenext:farmer-changed',{
-        detail:farmer
-      }));
-    },250);
-  }
-
-  // Save every successful farmer selection/search as the current session farmer.
-  window.addEventListener('canenext:farmer-changed',event=>{
-    const candidate=event?.detail || window.CANENEXT_CURRENT_FARMER;
-    const farmer=normalizeFarmer(candidate);
-
-    if(!farmer.farmer_code) return;
-
-    writeSession(farmer);
-    applyToAllMenus(farmer,{dispatch:false});
-  });
-
-  // Wrap Business Partner search once so the selected farmer is persisted.
-  const searchTimer=setInterval(()=>{
-    const original=window.searchBusinessPartner;
-    if(typeof original!=='function' || original.__farmerSessionWrapped) return;
-
-    clearInterval(searchTimer);
-
-    const wrapped=async function(){
-      const result=await original.apply(this,arguments);
-
-      setTimeout(()=>{
-        const farmer=normalizeFarmer(window.CANENEXT_CURRENT_FARMER||{});
-        if(farmer.farmer_code){
-          writeSession(farmer);
-          applyToAllMenus(farmer,{dispatch:false});
-        }
-      },80);
-
-      return result;
-    };
-
-    wrapped.__farmerSessionWrapped=true;
-    window.searchBusinessPartner=wrapped;
-  },100);
-
-  // Clear the remembered farmer only on explicit logout.
-  const logoutTimer=setInterval(()=>{
-    const original=window.logoutSupabase;
-    if(typeof original!=='function' || original.__farmerSessionWrapped) return;
-
-    clearInterval(logoutTimer);
-
-    const wrapped=async function(){
-      sessionStorage.removeItem(SESSION_KEY);
-      window.CANENEXT_CURRENT_FARMER=null;
-      return await original.apply(this,arguments);
-    };
-
-    wrapped.__farmerSessionWrapped=true;
-    window.logoutSupabase=wrapped;
-  },100);
-
-  document.addEventListener('DOMContentLoaded',initialize);
-
-  window.CaneFarmerSessionV3={
-    defaults:DEFAULT_FARMER,
-    get:()=>readSession() || normalizeFarmer(DEFAULT_FARMER),
-    save:farmer=>{
-      const saved=writeSession(farmer);
-      if(saved) applyToAllMenus(saved);
-      return saved;
-    },
-    apply:applyToAllMenus,
-    clear:()=>{
-      sessionStorage.removeItem(SESSION_KEY);
-      window.CANENEXT_CURRENT_FARMER=null;
-    }
-  };
-})();
 </script><script id="canenext-prepaint-page-finalizer">
 (function(){
   const KEY='canenext_active_page_v3';
@@ -12635,29 +12421,252 @@ document.addEventListener('DOMContentLoaded', function(){
     open:renderPage
   };
 })();
-</script><script id="canenext-promotion-pdf-script">
+</script><script id="canenext-farmer-session-memory-v4-script">
 (function(){
-  const PDF_URL='assets/pdf/promotion_manual_2569_70.pdf';
+  const SESSION_KEY='canenext_current_farmer_session_v4';
 
-  function reloadPromotionPdf(){
-    const frame=document.getElementById('promotionPdfFrame');
-    if(!frame) return;
+  const DEFAULT_FARMER=Object.freeze({
+    farmer_code:'778899',
+    farmer_name:'นาย อ้อยดี มีกำไร',
+    name:'นาย อ้อยดี มีกำไร',
+    full_name:'นาย อ้อยดี มีกำไร',
+    zone:'8',
+    subzone:'8888'
+  });
 
-    frame.src='about:blank';
-    setTimeout(()=>{
-      frame.src=PDF_URL+'#page=1&zoom=page-width&toolbar=1&navpanes=1&scrollbar=1';
-    },30);
+  function normalizeFarmer(source={}){
+    const farmerName=String(
+      source.farmer_name ||
+      source.name ||
+      source.full_name ||
+      ''
+    ).trim();
+
+    return {
+      ...source,
+      farmer_code:String(source.farmer_code||'').trim(),
+      farmer_name:farmerName,
+      name:farmerName,
+      full_name:farmerName,
+      zone:String(source.zone||'').trim(),
+      subzone:String(source.subzone||'').trim()
+    };
+  }
+
+  function readSession(){
+    try{
+      const raw=sessionStorage.getItem(SESSION_KEY);
+      if(!raw) return null;
+      const data=normalizeFarmer(JSON.parse(raw));
+      return data.farmer_code ? data : null;
+    }catch(e){
+      return null;
+    }
+  }
+
+  function writeSession(source){
+    const farmer=normalizeFarmer(source);
+    if(!farmer.farmer_code) return null;
+    sessionStorage.setItem(SESSION_KEY,JSON.stringify(farmer));
+    window.CANENEXT_CURRENT_FARMER=farmer;
+    return farmer;
+  }
+
+  function setElement(id,value){
+    const el=document.getElementById(id);
+    if(!el) return;
+    if('value' in el) el.value=value ?? '';
+    else el.textContent=value ?? '';
+  }
+
+  function applyToAllMenus(source,{fillSearch=false,dispatch=true}={}){
+    const farmer=normalizeFarmer(source);
+    window.CANENEXT_CURRENT_FARMER=farmer;
+
+    // Search fields stay empty initially and show placeholders.
+    if(fillSearch){
+      setElement('bpCode',farmer.farmer_code);
+      setElement('bpName',farmer.farmer_name);
+    }else{
+      setElement('bpCode','');
+      setElement('bpName','');
+    }
+
+    // Other menus and display fields always show the current farmer context.
+    const fields={
+      showZone:farmer.zone,
+      showSubZone:farmer.subzone,
+      farmerCode:farmer.farmer_code,
+      farmerName:farmer.farmer_name,
+      zone:farmer.zone,
+      subzone:farmer.subzone
+    };
+
+    Object.entries(fields).forEach(([id,value])=>setElement(id,value));
+
+    document.querySelectorAll('[data-farmer-field]').forEach(el=>{
+      const key=el.getAttribute('data-farmer-field');
+      const value=farmer[key] ?? '';
+      if('value' in el) el.value=value;
+      else el.textContent=value;
+    });
+
+    if(dispatch){
+      window.dispatchEvent(new CustomEvent('canenext:farmer-context-ready',{
+        detail:farmer
+      }));
+    }
+
+    return farmer;
+  }
+
+  function initialize(){
+    const saved=readSession();
+    if(saved){
+      applyToAllMenus(saved,{fillSearch:true});
+    }else{
+      applyToAllMenus(DEFAULT_FARMER,{fillSearch:false});
+    }
+  }
+
+  window.addEventListener('canenext:farmer-changed',event=>{
+    const candidate=event?.detail || window.CANENEXT_CURRENT_FARMER;
+    const farmer=normalizeFarmer(candidate);
+    if(!farmer.farmer_code) return;
+
+    // Ignore the initial default broadcast as a "real search".
+    const isDefault=
+      farmer.farmer_code===DEFAULT_FARMER.farmer_code &&
+      farmer.farmer_name===DEFAULT_FARMER.farmer_name &&
+      !readSession();
+
+    if(isDefault){
+      applyToAllMenus(DEFAULT_FARMER,{fillSearch:false,dispatch:false});
+      return;
+    }
+
+    writeSession(farmer);
+    applyToAllMenus(farmer,{fillSearch:true,dispatch:false});
+  });
+
+  const searchTimer=setInterval(()=>{
+    const original=window.searchBusinessPartner;
+    if(typeof original!=='function' || original.__farmerSessionWrapped) return;
+    clearInterval(searchTimer);
+
+    const wrapped=async function(){
+      const result=await original.apply(this,arguments);
+
+      setTimeout(()=>{
+        const farmer=normalizeFarmer(window.CANENEXT_CURRENT_FARMER||{});
+        if(farmer.farmer_code){
+          writeSession(farmer);
+          applyToAllMenus(farmer,{fillSearch:true,dispatch:false});
+        }
+      },80);
+
+      return result;
+    };
+
+    wrapped.__farmerSessionWrapped=true;
+    window.searchBusinessPartner=wrapped;
+  },100);
+
+  const logoutTimer=setInterval(()=>{
+    const original=window.logoutSupabase;
+    if(typeof original!=='function' || original.__farmerSessionWrapped) return;
+    clearInterval(logoutTimer);
+
+    const wrapped=async function(){
+      sessionStorage.removeItem(SESSION_KEY);
+      window.CANENEXT_CURRENT_FARMER=null;
+      return await original.apply(this,arguments);
+    };
+
+    wrapped.__farmerSessionWrapped=true;
+    window.logoutSupabase=wrapped;
+  },100);
+
+  document.addEventListener('DOMContentLoaded',initialize);
+
+  window.CaneFarmerSessionV4={
+    defaults:DEFAULT_FARMER,
+    get:()=>readSession() || normalizeFarmer(DEFAULT_FARMER),
+    save:farmer=>{
+      const saved=writeSession(farmer);
+      if(saved) applyToAllMenus(saved,{fillSearch:true});
+      return saved;
+    },
+    apply:applyToAllMenus,
+    clear:()=>{
+      sessionStorage.removeItem(SESSION_KEY);
+      window.CANENEXT_CURRENT_FARMER=null;
+    }
+  };
+})();
+</script><script id="canenext-promotion-pages-script">
+(function(){
+  const PAGE_COUNT=28;
+  let zoom=1;
+
+  function buildPages(){
+    const list=document.getElementById('promotionPageList');
+    if(!list || list.childElementCount) return;
+
+    const fragment=document.createDocumentFragment();
+
+    for(let i=1;i<=PAGE_COUNT;i++){
+      const item=document.createElement('div');
+      item.className='promotion-page-item';
+
+      const label=document.createElement('div');
+      label.className='promotion-page-label';
+      label.textContent=`หน้า ${i} / ${PAGE_COUNT}`;
+
+      const img=document.createElement('img');
+      img.className='promotion-page-image';
+      img.loading=i<=2?'eager':'lazy';
+      img.decoding='async';
+      img.alt=`หลักเกณฑ์การส่งเสริม หน้า ${i}`;
+      img.src=`assets/pdf/pages/page-${String(i).padStart(2,'0')}.jpg`;
+
+      item.append(label,img);
+      fragment.appendChild(item);
+    }
+
+    list.appendChild(fragment);
+  }
+
+  function applyZoom(){
+    const list=document.getElementById('promotionPageList');
+    const value=document.getElementById('promotionZoomValue');
+    if(!list) return;
+
+    list.style.width=`${Math.round(zoom*100)}%`;
+    list.style.minWidth=zoom>1?`${Math.round(zoom*100)}%`:'100%';
+    if(value) value.textContent=`${Math.round(zoom*100)}%`;
   }
 
   document.addEventListener('DOMContentLoaded',()=>{
-    document.getElementById('promotionPdfReload')
-      ?.addEventListener('click',reloadPromotionPdf);
+    buildPages();
+
+    document.getElementById('promotionZoomIn')?.addEventListener('click',()=>{
+      zoom=Math.min(2,zoom+0.1);
+      applyZoom();
+    });
+
+    document.getElementById('promotionZoomOut')?.addEventListener('click',()=>{
+      zoom=Math.max(0.6,zoom-0.1);
+      applyZoom();
+    });
+
+    document.getElementById('promotionZoomReset')?.addEventListener('click',()=>{
+      zoom=1;
+      applyZoom();
+    });
   });
 
-  window.CanePromotionPdf={
-    reload:reloadPromotionPdf,
-    url:PDF_URL
-  };
+  window.CanePromotionViewer={build:buildPages};
 })();
 </script></body>
 </html>
