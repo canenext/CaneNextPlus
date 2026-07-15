@@ -1,11 +1,9 @@
 Cane Next+ Master Version
-Version: 3.2.7
-Based on: v3.2.6
-Created: 2026-07-15T08:44:58
+Version: 3.2.8
+Based on: v3.2.7
+Created: 2026-07-15T10:27:14
 
-PORTRAIT MENU GRID
-- Tablet/iPad portrait shows 2 menu items per row.
-- No horizontal scrolling.
-- Hidden Admin menus leave no gaps.
-- Phones under 500px show 1 item per row.
-- Landscape remains unchanged.
+LOGIN CLEANUP
+- Removed the remember-login checkbox.
+- Removed its explanatory text.
+- Supabase session and all other functions remain unchanged.
