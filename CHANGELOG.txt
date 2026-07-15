@@ -1,9 +1,12 @@
 Cane Next+ Master Version
-Version: 3.2.8
-Based on: v3.2.7
-Created: 2026-07-15T10:27:14
+Version: 3.2.9
+Based on: v3.2.8
+Created: 2026-07-15T10:43:26
 
-LOGIN CLEANUP
-- Removed the remember-login checkbox.
-- Removed its explanatory text.
-- Supabase session and all other functions remain unchanged.
+LOGIN MOBILE FIX
+- Login page now uses min-height: 100dvh instead of a fixed height.
+- Enabled vertical scrolling on phone and portrait screens.
+- Login form aligns from the top on short screens.
+- Added bottom safe-area spacing so the Login button is never clipped.
+- Prevented the main portrait layout rules from locking the Login page height.
+- Desktop and post-login layouts remain unchanged.
