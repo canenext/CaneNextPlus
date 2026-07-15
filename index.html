@@ -6990,7 +6990,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.2.9" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.0" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7490,6 +7490,137 @@ table td::before{width:39%!important;font-size:12px!important}
   .auth-card,
   .login-box{
     margin:0 !important;
+  }
+}
+</style><style id="canenext-login-overlay-isolation-style">
+/* Login must be the only visible screen before authentication */
+body:not(.logged-in) > header,
+body:not(.logged-in) > main,
+body:not(.logged-in) > footer,
+body:not(.logged-in) > .app-header,
+body:not(.logged-in) > .app-main,
+body:not(.logged-in) > .footer{
+  display:none !important;
+}
+
+body.locked{
+  width:100% !important;
+  height:100dvh !important;
+  min-height:100dvh !important;
+  overflow:hidden !important;
+}
+
+#loginScreen,
+.login-screen.canenext-login-root{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:99999 !important;
+  width:100% !important;
+  height:100dvh !important;
+  min-height:100dvh !important;
+  max-height:100dvh !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior-y:contain !important;
+  touch-action:pan-y !important;
+  background:#fff !important;
+}
+
+#loginScreen.hidden,
+.login-screen.canenext-login-root.hidden{
+  display:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+@media (orientation:portrait) and (max-width:768px){
+  #loginScreen,
+  .login-screen.canenext-login-root{
+    display:block !important;
+    padding:12px !important;
+  }
+
+  #loginScreen.hidden,
+  .login-screen.canenext-login-root.hidden{
+    display:none !important;
+  }
+
+  #loginScreen .login-shell,
+  .login-screen.canenext-login-root .login-shell{
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    max-width:440px !important;
+    min-height:0 !important;
+    height:auto !important;
+    max-height:none !important;
+    margin:0 auto !important;
+    overflow:visible !important;
+    border-radius:22px !important;
+  }
+
+  #loginScreen .login-brand-panel,
+  .login-screen.canenext-login-root .login-brand-panel{
+    flex:0 0 auto !important;
+    width:100% !important;
+    min-height:0 !important;
+    padding:22px 18px 14px !important;
+    border-right:0 !important;
+    border-bottom:1px solid var(--line) !important;
+  }
+
+  #loginScreen .login-image-space,
+  .login-screen.canenext-login-root .login-image-space{
+    height:180px !important;
+    min-height:180px !important;
+    max-height:180px !important;
+  }
+
+  #loginScreen .login-form-panel,
+  .login-screen.canenext-login-root .login-form-panel{
+    flex:0 0 auto !important;
+    width:100% !important;
+    min-height:0 !important;
+    padding:22px 18px calc(28px + env(safe-area-inset-bottom)) !important;
+    align-items:flex-start !important;
+  }
+
+  #loginScreen .login-card,
+  .login-screen.canenext-login-root .login-card{
+    width:100% !important;
+    max-width:none !important;
+    min-height:0 !important;
+    margin:0 !important;
+  }
+
+  #loginScreen .login-card h2{
+    font-size:28px !important;
+  }
+
+  #loginScreen .login-card .hint{
+    margin-bottom:18px !important;
+  }
+}
+
+@media (orientation:portrait) and (max-height:700px){
+  #loginScreen .login-image-space,
+  .login-screen.canenext-login-root .login-image-space{
+    height:125px !important;
+    min-height:125px !important;
+    max-height:125px !important;
+  }
+
+  #loginScreen .login-brand-panel,
+  .login-screen.canenext-login-root .login-brand-panel{
+    padding-top:14px !important;
+    padding-bottom:10px !important;
+  }
+
+  #loginScreen .login-form-panel,
+  .login-screen.canenext-login-root .login-form-panel{
+    padding-top:16px !important;
   }
 }
 </style></head>
@@ -12862,6 +12993,37 @@ new MutationObserver(()=>labels(root)).observe(root,{subtree:true,childList:true
 
   addEventListener('resize',updateLoginState,{passive:true});
   addEventListener('orientationchange',()=>setTimeout(updateLoginState,150),{passive:true});
+})();
+</script><script id="canenext-login-overlay-isolation-script">
+(function(){
+  function syncLoginScreen(){
+    const screen=document.getElementById('loginScreen');
+    if(!screen) return;
+
+    const loggedIn=document.body.classList.contains('logged-in');
+
+    if(loggedIn){
+      screen.classList.add('hidden');
+      screen.setAttribute('aria-hidden','true');
+      document.body.classList.remove('locked');
+    }else{
+      screen.classList.remove('hidden');
+      screen.setAttribute('aria-hidden','false');
+      document.body.classList.add('locked');
+      screen.scrollTop=0;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    syncLoginScreen();
+
+    new MutationObserver(syncLoginScreen).observe(document.body,{
+      attributes:true,
+      attributeFilter:['class']
+    });
+  });
+
+  window.addEventListener('pageshow',syncLoginScreen);
 })();
 </script></body>
 </html>
