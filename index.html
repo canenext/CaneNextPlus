@@ -7072,7 +7072,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="3.2.3" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.2.4" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7387,6 +7387,24 @@ table{min-width:680px}
     margin-left:184px !important;
     padding:8px !important;
   }
+}
+</style><style id="canenext-admin-role-visibility-final-style">
+/* Final Admin-only menu visibility */
+.menu-row a[href="#data-management"],
+.menu-row a[href="#user-management"]{
+  display:none !important;
+  visibility:hidden !important;
+}
+
+html.can-admin-access .menu-row a[href="#data-management"],
+html.can-admin-access .menu-row a[href="#user-management"]{
+  display:flex !important;
+  visibility:visible !important;
+}
+
+html:not(.can-admin-access) #data-management,
+html:not(.can-admin-access) #user-management{
+  display:none !important;
 }
 </style></head>
 <body class="locked">
@@ -12931,6 +12949,151 @@ update();addEventListener('resize',update,{passive:true});addEventListener('orie
     current:()=>selectedPage,
     restore:()=>render(selectedPage),
     remember
+  };
+})();
+</script><script id="canenext-admin-role-visibility-final-script">
+(function(){
+  const ADMIN_PAGES=new Set(['data-management','user-management']);
+  let profile=null;
+  let ready=false;
+
+  function normalize(value){
+    return String(value||'').trim().toLowerCase();
+  }
+
+  function hasAdminAccess(){
+    return normalize(profile?.role)==='admin' &&
+           normalize(profile?.status)==='active';
+  }
+
+  function applyVisibility(){
+    const allowed=hasAdminAccess();
+
+    document.documentElement.classList.toggle('can-admin-access',allowed);
+    window.CANENEXT_CURRENT_PROFILE=profile;
+
+    document.querySelectorAll(
+      '.menu-row a[href="#data-management"],.menu-row a[href="#user-management"]'
+    ).forEach(link=>{
+      link.hidden=!allowed;
+      link.setAttribute('aria-hidden',allowed?'false':'true');
+      link.tabIndex=allowed?0:-1;
+
+      if(!allowed){
+        link.classList.remove('active-menu');
+      }
+    });
+
+    if(!allowed){
+      document.getElementById('data-management')?.classList.remove('active-page');
+      document.getElementById('user-management')?.classList.remove('active-page');
+
+      const saved=localStorage.getItem('canenext_active_page_v3');
+      if(ADMIN_PAGES.has(saved)){
+        localStorage.setItem('canenext_active_page_v3','business-partner');
+
+        if(window.CaneStablePageLock?.remember){
+          window.CaneStablePageLock.remember('business-partner');
+        }
+        if(window.CaneStablePageLock?.restore){
+          window.CaneStablePageLock.restore();
+        }
+      }
+    }
+
+    return allowed;
+  }
+
+  async function getClient(){
+    if(window.caneSupabase) return window.caneSupabase;
+
+    if(!window.supabase || !window.CANENEXT_CONFIG){
+      throw new Error('Supabase client is not ready');
+    }
+
+    window.caneSupabase=window.supabase.createClient(
+      window.CANENEXT_CONFIG.SUPABASE_URL,
+      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+    );
+
+    return window.caneSupabase;
+  }
+
+  async function refreshProfile(){
+    try{
+      const db=await getClient();
+      const {data:{user}}=await db.auth.getUser();
+
+      if(!user){
+        profile=null;
+        ready=true;
+        return applyVisibility();
+      }
+
+      const {data,error}=await db
+        .from('user_profiles')
+        .select('id,auth_uid,email,role,status')
+        .eq('auth_uid',user.id)
+        .maybeSingle();
+
+      if(error) throw error;
+
+      profile=data||null;
+      ready=true;
+      return applyVisibility();
+    }catch(error){
+      console.error('Admin role check failed:',error);
+      profile=null;
+      ready=true;
+      return applyVisibility();
+    }
+  }
+
+  function guardAdminNavigation(){
+    document.addEventListener('click',event=>{
+      const link=event.target.closest(
+        '.menu-row a[href="#data-management"],.menu-row a[href="#user-management"]'
+      );
+
+      if(!link) return;
+
+      if(!hasAdminAccess()){
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        return;
+      }
+
+      const pageId=link.getAttribute('href').slice(1);
+
+      localStorage.setItem('canenext_active_page_v3',pageId);
+
+      if(window.CaneStablePageLock?.remember){
+        window.CaneStablePageLock.remember(pageId);
+      }
+    },true);
+  }
+
+  document.addEventListener('DOMContentLoaded',async()=>{
+    applyVisibility();
+    guardAdminNavigation();
+    await refreshProfile();
+
+    try{
+      const db=await getClient();
+      db.auth.onAuthStateChange(async()=>{
+        await refreshProfile();
+      });
+    }catch(error){
+      console.error('Auth state listener failed:',error);
+    }
+  });
+
+  window.CaneAdminRoleVisibility={
+    refresh:refreshProfile,
+    isAdmin:hasAdminAccess,
+    isReady:()=>ready,
+    getProfile:()=>profile
   };
 })();
 </script></body>
