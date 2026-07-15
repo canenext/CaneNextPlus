@@ -1,14 +1,15 @@
 Cane Next+ Master Version
-Version: 3.2.4
-Based on: v3.2.3
-Base index SHA-256: 642f86d102f730d14157733b3e53e509fd20075ae9ba31b1268299c50e4b6c71
-Created: 2026-07-15T05:00:34
+Version: 3.2.5
+Based on: v3.2.4
+Base index SHA-256: e4386e7b2b733440314b6f4d2ce4caa74be223184c8d9bbaf95638e6d8ab210b
+Created: 2026-07-15T06:21:46
 
-ADMIN ROLE ACCESS
-- Active users with role=admin can see and open Data Management.
-- Active users with role=admin can see and open User Management.
-- Users with any other role do not see either menu.
-- Inactive users do not receive Admin menu access.
-- Direct access to Admin pages is blocked for non-admin users.
-- If a non-admin session contains a saved Admin page, it is reset to Business Partner.
-- Compatible with the v3.2.3 stable page lock and portrait menu.
+ADMIN NAVIGATION FIX
+- Removed overlapping Admin and page-state scripts that blocked Admin clicks.
+- Added one unified Admin role and navigation controller.
+- Active Admin users can open Data Management and User Management.
+- Non-admin users do not see or access either Admin menu.
+- Added compatibility fallback for alternate user_profiles schemas.
+- Admin pages open directly without redirecting to Business Partner.
+- Selected page remains stable after screen sleep or auth refresh.
+- Added a short hidden route-restoration state to prevent page flashing.
