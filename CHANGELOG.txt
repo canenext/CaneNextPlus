@@ -1,15 +1,12 @@
 Cane Next+ Master Version
-Version: 3.2.5
-Based on: v3.2.4
-Base index SHA-256: e4386e7b2b733440314b6f4d2ce4caa74be223184c8d9bbaf95638e6d8ab210b
-Created: 2026-07-15T06:21:46
+Version: 3.2.6
+Based on: v3.2.5
+Created: 2026-07-15T07:08:16
 
-ADMIN NAVIGATION FIX
-- Removed overlapping Admin and page-state scripts that blocked Admin clicks.
-- Added one unified Admin role and navigation controller.
-- Active Admin users can open Data Management and User Management.
-- Non-admin users do not see or access either Admin menu.
-- Added compatibility fallback for alternate user_profiles schemas.
-- Admin pages open directly without redirecting to Business Partner.
-- Selected page remains stable after screen sleep or auth refresh.
-- Added a short hidden route-restoration state to prevent page flashing.
+PORTRAIT LAYOUT REWORK
+- Removed horizontal page scrolling in portrait mode.
+- Menu becomes a full-width vertical scroll area above content.
+- Cards, forms, filters and grids collapse to one column.
+- Tables become vertical cards with automatic labels.
+- PDF pages flow vertically.
+- Landscape layout remains unchanged.
