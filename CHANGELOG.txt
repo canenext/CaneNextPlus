@@ -1,12 +1,13 @@
 Cane Next+ Master Version
-Version: 3.3.0
-Based on: v3.2.9
-Created: 2026-07-15T11:04:51
+Version: 3.2.9
+Based on: v3.2.8
+Created: 2026-07-15T11:18:23
 
-LOGIN SCREEN ISOLATION FIX
-- The application header, menu, Demo User area and main content are completely hidden before login.
-- Login remains a fixed full-screen overlay with its own vertical scrolling.
-- Mobile users can scroll only inside the Login screen.
-- The underlying demo/application page can no longer appear below the Login form.
-- After successful login, the Login screen is removed from display.
-- Logout restores the isolated Login screen.
+MOBILE LOGIN FIX
+- Login screen can scroll vertically on phone and portrait tablet.
+- The Login button is reachable on short screens.
+- The application behind Login is completely hidden while logged out.
+- Demo User/header/menu will no longer appear below the Login screen.
+- Decorative Login image is hidden on portrait mobile to reduce page height.
+- Added safe-area spacing for iPhone/iPad.
+- Desktop and landscape Login remain unchanged.

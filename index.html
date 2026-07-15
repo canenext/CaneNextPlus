@@ -6990,7 +6990,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.0" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.2.9" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7357,275 +7357,201 @@ table td::before{width:39%!important;font-size:12px!important}
 .menu-row{grid-template-columns:1fr!important;gap:6px!important}
 .menu-row a{min-height:44px!important;padding:9px 10px!important}
 }
-</style><style id="canenext-login-mobile-scroll-style">
-/* Mobile/portrait login scrolling fix */
-.canenext-login-root,
-#loginPage,
-#login-page,
-#loginScreen,
-#login-screen,
-.login-page,
-.login-screen,
-.auth-page,
-.auth-screen{
-  min-height:100dvh !important;
-  height:auto !important;
-  max-height:none !important;
-  overflow-y:auto !important;
-  overflow-x:hidden !important;
-  -webkit-overflow-scrolling:touch !important;
-  overscroll-behavior-y:auto !important;
-  touch-action:pan-y !important;
-  box-sizing:border-box !important;
-}
+</style><style id="canenext-mobile-login-v329-style">
+/* =========================================================
+   Mobile / portrait Login fix
+   - Login page scrolls vertically
+   - Submit button is always reachable
+   - The application behind Login is completely hidden
+   ========================================================= */
 
-@media (orientation:portrait) and (max-width:768px){
-  html,body{
-    min-height:100% !important;
-    height:auto !important;
-    overflow-y:auto !important;
-    overflow-x:hidden !important;
-  }
-
-  body.login-active,
-  body:has(.canenext-login-root:not([hidden])),
-  body:has(#loginPage:not([hidden])),
-  body:has(#login-page:not([hidden])),
-  body:has(.login-page:not([hidden])),
-  body:has(.login-screen:not([hidden])){
-    min-height:100dvh !important;
-    height:auto !important;
-    overflow-y:auto !important;
-    overflow-x:hidden !important;
-    position:static !important;
-  }
-
-  .canenext-login-root,
-  #loginPage,
-  #login-page,
-  #loginScreen,
-  #login-screen,
-  .login-page,
-  .login-screen,
-  .auth-page,
-  .auth-screen{
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:flex-start !important;
-    align-items:center !important;
-    width:100% !important;
-    min-height:100dvh !important;
-    height:auto !important;
-    max-height:none !important;
-    padding:18px 14px 32px !important;
-    overflow-y:auto !important;
-    overflow-x:hidden !important;
-    position:relative !important;
-  }
-
-  .canenext-login-root form,
-  #loginPage form,
-  #login-page form,
-  .login-page form,
-  .login-screen form,
-  .auth-page form,
-  .auth-screen form,
-  .login-card,
-  .auth-card,
-  .login-box{
-    width:100% !important;
-    max-width:420px !important;
-    min-width:0 !important;
-    height:auto !important;
-    max-height:none !important;
-    margin:auto 0 !important;
-    flex:0 0 auto !important;
-    overflow:visible !important;
-  }
-
-  .canenext-login-root input,
-  .canenext-login-root button,
-  #loginPage input,
-  #loginPage button,
-  #login-page input,
-  #login-page button,
-  .login-page input,
-  .login-page button,
-  .login-screen input,
-  .login-screen button{
-    max-width:100% !important;
-  }
-
-  /* Ensure the submit button is never clipped by browser toolbars/safe areas */
-  .canenext-login-root button[type="submit"],
-  #loginPage button[type="submit"],
-  #login-page button[type="submit"],
-  .login-page button[type="submit"],
-  .login-screen button[type="submit"]{
-    margin-bottom:max(12px, env(safe-area-inset-bottom)) !important;
-  }
-}
-
-@media (orientation:portrait) and (max-height:700px){
-  .canenext-login-root,
-  #loginPage,
-  #login-page,
-  #loginScreen,
-  #login-screen,
-  .login-page,
-  .login-screen,
-  .auth-page,
-  .auth-screen{
-    justify-content:flex-start !important;
-    padding-top:12px !important;
-    padding-bottom:36px !important;
-  }
-
-  .canenext-login-root form,
-  #loginPage form,
-  #login-page form,
-  .login-page form,
-  .login-screen form,
-  .login-card,
-  .auth-card,
-  .login-box{
-    margin:0 !important;
-  }
-}
-</style><style id="canenext-login-overlay-isolation-style">
-/* Login must be the only visible screen before authentication */
-body:not(.logged-in) > header,
-body:not(.logged-in) > main,
-body:not(.logged-in) > footer,
-body:not(.logged-in) > .app-header,
-body:not(.logged-in) > .app-main,
-body:not(.logged-in) > .footer{
+/* Never show the application/Demo User behind the Login screen */
+body.locked > :not(#loginScreen):not(script){
   display:none !important;
 }
 
 body.locked{
   width:100% !important;
-  height:100dvh !important;
-  min-height:100dvh !important;
+  height:100% !important;
   overflow:hidden !important;
 }
 
-#loginScreen,
-.login-screen.canenext-login-root{
-  position:fixed !important;
-  inset:0 !important;
-  z-index:99999 !important;
+#loginScreen.login-screen{
   width:100% !important;
   height:100dvh !important;
   min-height:100dvh !important;
-  max-height:100dvh !important;
-  overflow-y:auto !important;
   overflow-x:hidden !important;
+  overflow-y:auto !important;
   -webkit-overflow-scrolling:touch !important;
-  overscroll-behavior-y:contain !important;
-  touch-action:pan-y !important;
-  background:#fff !important;
+  overscroll-behavior:contain !important;
 }
 
-#loginScreen.hidden,
-.login-screen.canenext-login-root.hidden{
-  display:none !important;
-  opacity:0 !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
-}
-
-@media (orientation:portrait) and (max-width:768px){
-  #loginScreen,
-  .login-screen.canenext-login-root{
+/* Tablet and phone portrait */
+@media (orientation:portrait) and (max-width:900px){
+  #loginScreen.login-screen{
+    position:fixed !important;
+    inset:0 !important;
     display:block !important;
-    padding:12px !important;
+    padding:
+      max(14px, env(safe-area-inset-top))
+      12px
+      max(24px, env(safe-area-inset-bottom)) !important;
+    background:#fff !important;
   }
 
-  #loginScreen.hidden,
-  .login-screen.canenext-login-root.hidden{
-    display:none !important;
-  }
-
-  #loginScreen .login-shell,
-  .login-screen.canenext-login-root .login-shell{
+  #loginScreen .login-shell{
     display:flex !important;
     flex-direction:column !important;
     width:100% !important;
-    max-width:440px !important;
+    max-width:520px !important;
     min-height:0 !important;
     height:auto !important;
-    max-height:none !important;
     margin:0 auto !important;
-    overflow:visible !important;
     border-radius:22px !important;
+    overflow:visible !important;
   }
 
-  #loginScreen .login-brand-panel,
-  .login-screen.canenext-login-root .login-brand-panel{
+  #loginScreen .login-brand-panel{
     flex:0 0 auto !important;
     width:100% !important;
     min-height:0 !important;
-    padding:22px 18px 14px !important;
+    padding:20px 20px 12px !important;
     border-right:0 !important;
     border-bottom:1px solid var(--line) !important;
+    gap:8px !important;
   }
 
-  #loginScreen .login-image-space,
-  .login-screen.canenext-login-root .login-image-space{
-    height:180px !important;
-    min-height:180px !important;
-    max-height:180px !important;
+  #loginScreen .login-logo-img{
+    width:54px !important;
+    height:54px !important;
+    margin-bottom:4px !important;
   }
 
-  #loginScreen .login-form-panel,
-  .login-screen.canenext-login-root .login-form-panel{
+  #loginScreen .login-brand-panel h1{
+    margin:0 0 4px !important;
+    font-size:30px !important;
+    line-height:1.08 !important;
+    letter-spacing:-.5px !important;
+  }
+
+  #loginScreen .login-brand-panel .login-tagline{
+    margin:0 !important;
+    font-size:15px !important;
+    line-height:1.35 !important;
+  }
+
+  #loginScreen .login-brand-panel p{
+    font-size:13px !important;
+    line-height:1.5 !important;
+  }
+
+  /* Large decorative photo is unnecessary on phone Login */
+  #loginScreen .login-image-space{
+    display:none !important;
+  }
+
+  #loginScreen .login-form-panel{
     flex:0 0 auto !important;
     width:100% !important;
     min-height:0 !important;
-    padding:22px 18px calc(28px + env(safe-area-inset-bottom)) !important;
-    align-items:flex-start !important;
+    padding:20px !important;
+    display:block !important;
   }
 
-  #loginScreen .login-card,
-  .login-screen.canenext-login-root .login-card{
+  #loginScreen .login-card{
     width:100% !important;
     max-width:none !important;
-    min-height:0 !important;
-    margin:0 !important;
   }
 
   #loginScreen .login-card h2{
-    font-size:28px !important;
+    margin:0 0 5px !important;
+    font-size:26px !important;
+    line-height:1.2 !important;
   }
 
   #loginScreen .login-card .hint{
-    margin-bottom:18px !important;
+    margin:0 0 18px !important;
+    font-size:13px !important;
+    line-height:1.45 !important;
+  }
+
+  #loginScreen .form-group{
+    margin-bottom:13px !important;
+  }
+
+  #loginScreen .form-group label{
+    margin-bottom:6px !important;
+    font-size:13px !important;
+  }
+
+  #loginScreen .form-group input{
+    min-height:46px !important;
+    padding:11px 13px !important;
+    border-radius:13px !important;
+    font-size:16px !important;
+  }
+
+  #loginScreen .login-submit{
+    width:100% !important;
+    min-height:48px !important;
+    margin:4px 0 0 !important;
+    padding:12px 16px !important;
+  }
+
+  #loginScreen .demo-note{
+    display:none !important;
   }
 }
 
-@media (orientation:portrait) and (max-height:700px){
-  #loginScreen .login-image-space,
-  .login-screen.canenext-login-root .login-image-space{
-    height:125px !important;
-    min-height:125px !important;
-    max-height:125px !important;
+/* Short phone screens */
+@media (orientation:portrait) and (max-width:500px), (max-height:700px) and (max-width:900px){
+  #loginScreen.login-screen{
+    padding:
+      max(8px, env(safe-area-inset-top))
+      8px
+      max(18px, env(safe-area-inset-bottom)) !important;
   }
 
-  #loginScreen .login-brand-panel,
-  .login-screen.canenext-login-root .login-brand-panel{
-    padding-top:14px !important;
-    padding-bottom:10px !important;
+  #loginScreen .login-shell{
+    border-radius:18px !important;
   }
 
-  #loginScreen .login-form-panel,
-  .login-screen.canenext-login-root .login-form-panel{
-    padding-top:16px !important;
+  #loginScreen .login-brand-panel{
+    padding:14px 16px 10px !important;
+  }
+
+  #loginScreen .login-logo-img{
+    width:44px !important;
+    height:44px !important;
+  }
+
+  #loginScreen .login-brand-panel h1{
+    font-size:25px !important;
+  }
+
+  #loginScreen .login-brand-panel .login-tagline{
+    font-size:13px !important;
+  }
+
+  #loginScreen .login-brand-panel p{
+    display:none !important;
+  }
+
+  #loginScreen .login-form-panel{
+    padding:15px 16px 18px !important;
+  }
+
+  #loginScreen .login-card h2{
+    font-size:23px !important;
+  }
+
+  #loginScreen .login-card .hint{
+    margin-bottom:13px !important;
   }
 }
 </style></head>
 <body class="locked">
-<section class="login-screen canenext-login-root" id="loginScreen">
+<section class="login-screen" id="loginScreen">
 <div class="login-shell">
 <div class="login-brand-panel">
 <div>
@@ -12953,77 +12879,17 @@ const root=document.querySelector('.app-main')||document.body;
 new MutationObserver(()=>labels(root)).observe(root,{subtree:true,childList:true});
 });
 })();
-</script><script id="canenext-portrait-menu-grid-v327-script">(function(){function a(){document.documentElement.classList.toggle('canenext-portrait-menu-grid',matchMedia('(orientation: portrait) and (max-width: 1100px)').matches)}a();addEventListener('resize',a,{passive:true});addEventListener('orientationchange',()=>setTimeout(a,120),{passive:true})})();</script><script id="canenext-login-mobile-scroll-script">
+</script><script id="canenext-portrait-menu-grid-v327-script">(function(){function a(){document.documentElement.classList.toggle('canenext-portrait-menu-grid',matchMedia('(orientation: portrait) and (max-width: 1100px)').matches)}a();addEventListener('resize',a,{passive:true});addEventListener('orientationchange',()=>setTimeout(a,120),{passive:true})})();</script><script id="canenext-mobile-login-v329-script">
 (function(){
-  function findLoginRoot(){
-    return document.querySelector(
-      '.canenext-login-root,#loginPage,#login-page,#loginScreen,#login-screen,.login-page,.login-screen,.auth-page,.auth-screen'
-    );
-  }
-
-  function updateLoginState(){
-    const root=findLoginRoot();
-    if(!root) return;
-
-    const style=getComputedStyle(root);
-    const visible=!root.hidden &&
-      style.display!=='none' &&
-      style.visibility!=='hidden' &&
-      root.getAttribute('aria-hidden')!=='true';
-
-    document.body.classList.toggle('login-active',visible);
-
-    if(visible){
-      root.style.setProperty('overflow-y','auto','important');
-      root.style.setProperty('height','auto','important');
-      root.style.setProperty('min-height','100dvh','important');
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    updateLoginState();
-
-    const observer=new MutationObserver(updateLoginState);
-    observer.observe(document.body,{
-      subtree:true,
-      attributes:true,
-      attributeFilter:['class','style','hidden','aria-hidden']
-    });
-  });
-
-  addEventListener('resize',updateLoginState,{passive:true});
-  addEventListener('orientationchange',()=>setTimeout(updateLoginState,150),{passive:true});
-})();
-</script><script id="canenext-login-overlay-isolation-script">
-(function(){
-  function syncLoginScreen(){
+  function resetLoginScroll(){
     const screen=document.getElementById('loginScreen');
-    if(!screen) return;
-
-    const loggedIn=document.body.classList.contains('logged-in');
-
-    if(loggedIn){
-      screen.classList.add('hidden');
-      screen.setAttribute('aria-hidden','true');
-      document.body.classList.remove('locked');
-    }else{
-      screen.classList.remove('hidden');
-      screen.setAttribute('aria-hidden','false');
-      document.body.classList.add('locked');
+    if(screen && !screen.classList.contains('hidden')){
       screen.scrollTop=0;
     }
   }
 
-  document.addEventListener('DOMContentLoaded',()=>{
-    syncLoginScreen();
-
-    new MutationObserver(syncLoginScreen).observe(document.body,{
-      attributes:true,
-      attributeFilter:['class']
-    });
-  });
-
-  window.addEventListener('pageshow',syncLoginScreen);
+  document.addEventListener('DOMContentLoaded',resetLoginScroll);
+  window.addEventListener('orientationchange',()=>setTimeout(resetLoginScroll,120),{passive:true});
 })();
 </script></body>
 </html>
