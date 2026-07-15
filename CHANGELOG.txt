@@ -1,12 +1,13 @@
 Cane Next+ Master Version
-Version: 3.2.4
-Based on: v3.2.3
-Base index SHA-256: 978fccb7074b3ce0ac9fca6924b18cd90f0be85d58cb54ed3d7b00a10be83626
-Created: 2026-07-15T02:23:43
+Version: 3.2.5
+Based on: v3.2.4
+Base index SHA-256: 6a8cde6114310c52e34788368531229a963c86277f5e4cf761139219570d63e8
+Created: 2026-07-15T02:47:35
 
 FIX
-- Keeps the current menu after folding/unfolding the screen.
-- Saves the active menu before page freeze/hide.
-- Restores the same menu on pageshow and when the tab becomes visible again.
-- Prevents a temporary Business Partner flash during restoration.
-- Does not use focus/blur listeners, so multi-monitor use remains stable.
+- Removed the fold/unfold restore script that blocked menu interactions.
+- Restored direct clicking for every menu.
+- Added one simple page switcher and one-time page restore.
+- Removed visibilitychange, pagehide and pageshow handlers from the last patch.
+- Portrait horizontal menu scrolling remains unchanged.
+- Current page is still remembered in localStorage.
