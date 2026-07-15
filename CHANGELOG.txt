@@ -1,14 +1,13 @@
 Cane Next+ Master Version
-Version: 4.0.1
-Based on: v4.0.0
-Base index SHA-256: a50eae67d6bbf3339b8b437143d5df9cbf1bdd0d93db14b5a298eae96c130d54
-Created: 2026-07-15T03:53:40
+Version: 4.0.2
+Stable base: v3.2.3
+Base index SHA-256: 978fccb7074b3ce0ac9fca6924b18cd90f0be85d58cb54ed3d7b00a10be83626
+Created: 2026-07-15T04:10:14
 
-CRITICAL NAVIGATION FIX
-- Removed inline onclick navigation from every menu link.
-- Added one Window-level capture handler that runs before all legacy handlers.
-- Legacy click scripts can no longer force the page back to Business Partner.
-- Clicking each menu now immediately activates its matching page.
-- Programmatic showMainMenu calls use the same controller.
-- Admin menu permissions and active menu highlighting remain intact.
-- All v4.0.0 support files and features are preserved.
+NAVIGATION RECOVERY
+- Rolled navigation back to the last confirmed working menu implementation.
+- Removed the v3.2.4–v4.0.1 navigation/restore controllers that blocked clicks.
+- Restored the original showMainMenu behavior used by the application.
+- Added only passive localStorage memory; it does not intercept or override clicks.
+- Portrait horizontal menu scrolling from v3.2.3 remains intact.
+- PDF viewer, farmer placeholders, Supabase config, SQL, and Edge Functions remain intact.
