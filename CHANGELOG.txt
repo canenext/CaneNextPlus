@@ -1,13 +1,10 @@
 Cane Next+ Master Version
-Version: 4.0.3
-Stable base: v3.2.3
-Base index SHA-256: 978fccb7074b3ce0ac9fca6924b18cd90f0be85d58cb54ed3d7b00a10be83626
-Created: 2026-07-15T04:21:13
+Version: 3.2.2
+Based on: v3.2.1
+Created: 2026-07-15T01:52:54
 
-DIRECT MENU FIX
-- Every sidebar link now calls openCanePage() directly.
-- Navigation no longer depends on accumulated showMainMenu wrappers.
-- The selected page receives both active-page and an explicit display:block.
-- All other pages receive display:none.
-- Menu links remain clickable with pointer-events enabled.
-- Existing portrait menu scrolling, PDF viewer, farmer context and support files remain unchanged.
+FIX
+- Fixed portrait sidebar horizontal scrolling.
+- Added touch momentum scrolling for iPad/tablet.
+- Menu items keep their full width and no longer compress.
+- Added mouse-wheel horizontal scrolling for desktop portrait testing.
