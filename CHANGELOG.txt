@@ -1,13 +1,12 @@
 Cane Next+ Master Version
-Version: 3.2.3
-Based on: v3.2.2
-Base index SHA-256: de87c49aaa9d1c5e117f70377eb8853cecc719936a2b99694a717fa3dd73a215
-Created: 2026-07-15T02:01:23
+Version: 3.2.4
+Based on: v3.2.3
+Base index SHA-256: 978fccb7074b3ce0ac9fca6924b18cd90f0be85d58cb54ed3d7b00a10be83626
+Created: 2026-07-15T02:23:43
 
 FIX
-- Corrected the portrait selector to target .menu-row, which is the actual sidebar.
-- Menu now uses flex row + nowrap + overflow-x:auto in portrait.
-- Removed fixed positioning in portrait.
-- Removed left margin from app content in portrait.
-- Added touch momentum, wheel and mouse-drag support.
-- Landscape layout remains unchanged.
+- Keeps the current menu after folding/unfolding the screen.
+- Saves the active menu before page freeze/hide.
+- Restores the same menu on pageshow and when the tab becomes visible again.
+- Prevents a temporary Business Partner flash during restoration.
+- Does not use focus/blur listeners, so multi-monitor use remains stable.

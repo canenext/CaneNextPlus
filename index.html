@@ -7072,7 +7072,7 @@ body:not(.can-show-admin-menus) #data-management,
 body:not(.can-show-admin-menus) #user-management{
   display:none !important;
 }
-</style><meta content="3.2.3" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.2.4" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7370,6 +7370,11 @@ table{min-width:680px}
     background:rgba(11,92,173,.35);
     border-radius:999px;
   }
+}
+</style><style id="canenext-fold-restore-style">
+/* Prevent a temporary Business Partner paint while restoring after screen fold/unfold */
+html.canenext-fold-restoring .app-main{
+  visibility:hidden !important;
 }
 </style></head>
 <body class="locked">
@@ -12867,6 +12872,94 @@ update();addEventListener('resize',update,{passive:true});addEventListener('orie
   document.addEventListener('DOMContentLoaded',setupPortraitMenu);
   window.addEventListener('resize',setupPortraitMenu,{passive:true});
   window.addEventListener('orientationchange',()=>setTimeout(setupPortraitMenu,150),{passive:true});
+})();
+</script><script id="canenext-fold-restore-script">
+(function(){
+  const KEY='canenext_active_page_v3';
+  const DEFAULT_PAGE='business-partner';
+  const ADMIN_ONLY=new Set(['data-management','user-management']);
+  let lastPage=localStorage.getItem(KEY)||DEFAULT_PAGE;
+
+  function isAdmin(){
+    const p=window.CANENEXT_CURRENT_PROFILE;
+    return String(p?.role||'').toLowerCase()==='admin' &&
+           String(p?.status||'').toLowerCase()==='active';
+  }
+
+  function safePage(pageId){
+    if(!pageId || !document.getElementById(pageId)) return DEFAULT_PAGE;
+    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
+    return pageId;
+  }
+
+  function activePage(){
+    return document.querySelector('.app-page.active-page')?.id || null;
+  }
+
+  function remember(pageId){
+    const target=safePage(pageId);
+    lastPage=target;
+    localStorage.setItem(KEY,target);
+    return target;
+  }
+
+  function restore(){
+    const target=safePage(lastPage || localStorage.getItem(KEY) || DEFAULT_PAGE);
+
+    document.querySelectorAll('.app-page').forEach(page=>{
+      page.classList.toggle('active-page',page.id===target);
+    });
+
+    document.querySelectorAll('.menu-row a[href^="#"]').forEach(link=>{
+      link.classList.toggle(
+        'active-menu',
+        link.getAttribute('href')==='#'+target
+      );
+    });
+
+    requestAnimationFrame(()=>{
+      document.documentElement.classList.remove('canenext-fold-restoring');
+    });
+
+    return target;
+  }
+
+  // Remember every real menu click.
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('.menu-row a[href^="#"]');
+    if(!link || !event.isTrusted) return;
+    remember(link.getAttribute('href').slice(1));
+  },true);
+
+  // Save immediately before the browser freezes or hides the page.
+  window.addEventListener('pagehide',()=>{
+    const current=activePage();
+    if(current) remember(current);
+  });
+
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){
+      const current=activePage();
+      if(current) remember(current);
+      return;
+    }
+
+    // Restore only when the tab becomes visible again.
+    document.documentElement.classList.add('canenext-fold-restoring');
+    restore();
+  });
+
+  // Handles iPad/Tablet page cache restore after screen fold/unfold.
+  window.addEventListener('pageshow',()=>{
+    document.documentElement.classList.add('canenext-fold-restoring');
+    restore();
+  });
+
+  window.CaneFoldRestore={
+    remember,
+    restore,
+    current:()=>lastPage
+  };
 })();
 </script></body>
 </html>
