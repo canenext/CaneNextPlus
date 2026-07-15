@@ -1,10 +1,15 @@
 Cane Next+ Master Version
-Version: 3.2.2
-Based on: v3.2.1
-Created: 2026-07-15T01:52:54
+Version: 3.2.3
+Based on: v3.2.2
+Base index SHA-256: de87c49aaa9d1c5e117f70377eb8853cecc719936a2b99694a717fa3dd73a215
+Created: 2026-07-15T04:55:28
 
-FIX
-- Fixed portrait sidebar horizontal scrolling.
-- Added touch momentum scrolling for iPad/tablet.
-- Menu items keep their full width and no longer compress.
-- Added mouse-wheel horizontal scrolling for desktop portrait testing.
+RESPONSE 2 IMPLEMENTATION
+- Portrait mode retains the menu on the left side.
+- The left menu now scrolls vertically by touch on iPad/tablet/phone.
+- Added a visible thin scrollbar for long menu lists.
+- Main content keeps an appropriate left margin in portrait mode.
+- The page genuinely selected by the user is locked as the active page.
+- Automatic session/screen-wake redirects to Business Partner are ignored.
+- If an older script changes the page, the selected page is restored immediately.
+- Landscape layout and other v3.2.2 features remain unchanged.

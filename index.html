@@ -7288,19 +7288,105 @@ table{min-width:760px}
 .promotion-document-actions .btn,.promotion-document-actions button,.promotion-document-actions a{flex:1 1 calc(50% - 6px)!important;min-width:0!important}
 table{min-width:680px}
 }
-</style><style id="canenext-portrait-menu-lock-style">
+</style><style id="canenext-portrait-left-scroll-style">
+/* Portrait solution: retain the left sidebar and make it vertically scrollable */
 @media (orientation:portrait) and (max-width:1100px){
-.sidebar,.side-menu,nav.sidebar{
- overflow-x:hidden!important;
- overflow-y:auto!important;
- white-space:normal!important;
+  .menu-row{
+    position:fixed !important;
+    top:92px !important;
+    left:10px !important;
+    right:auto !important;
+
+    width:220px !important;
+    max-width:220px !important;
+    height:auto !important;
+    max-height:calc(100dvh - 108px) !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+    flex-wrap:nowrap !important;
+    align-items:stretch !important;
+    gap:4px !important;
+
+    margin:0 !important;
+    padding:10px !important;
+
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior-y:contain !important;
+    touch-action:pan-y !important;
+    scrollbar-width:thin;
+    z-index:100 !important;
+  }
+
+  .menu-row a{
+    display:flex !important;
+    flex:0 0 auto !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:auto !important;
+    min-height:42px !important;
+    margin:0 !important;
+    padding:9px 11px !important;
+    white-space:normal !important;
+    line-height:1.25 !important;
+    font-size:13px !important;
+  }
+
+  .menu-row::-webkit-scrollbar{
+    width:6px;
+  }
+
+  .menu-row::-webkit-scrollbar-track{
+    background:transparent;
+  }
+
+  .menu-row::-webkit-scrollbar-thumb{
+    background:rgba(11,92,173,.38);
+    border-radius:999px;
+  }
+
+  .app-main{
+    width:auto !important;
+    max-width:none !important;
+    min-width:0 !important;
+    margin-left:242px !important;
+    padding:12px !important;
+    overflow-x:hidden !important;
+  }
+
+  .header-row{
+    padding-left:0 !important;
+  }
 }
-.sidebar .menu-list,.side-menu .menu-list,.sidebar-menu,.menu-container{
- display:flex!important;
- flex-direction:column!important;
- width:100%!important;
-}
-.menu-row,.menu-row a{display:flex!important;width:100%!important}
+
+/* Narrow phones: use a compact vertically scrollable drawer-width menu */
+@media (orientation:portrait) and (max-width:600px){
+  .menu-row{
+    top:84px !important;
+    left:6px !important;
+    width:172px !important;
+    max-width:172px !important;
+    max-height:calc(100dvh - 96px) !important;
+    padding:7px !important;
+  }
+
+  .menu-row a{
+    min-height:39px !important;
+    padding:8px 9px !important;
+    font-size:12px !important;
+  }
+
+  .menu-row .menu-icon{
+    margin-right:7px !important;
+    font-size:16px !important;
+  }
+
+  .app-main{
+    margin-left:184px !important;
+    padding:8px !important;
+  }
 }
 </style></head>
 <body class="locked">
@@ -12731,22 +12817,121 @@ document.addEventListener('DOMContentLoaded', function(){
 function update(){const p=matchMedia('(orientation: portrait)').matches;document.documentElement.classList.toggle('is-portrait',p);document.documentElement.classList.toggle('is-landscape',!p)}
 update();addEventListener('resize',update,{passive:true});addEventListener('orientationchange',()=>setTimeout(update,120),{passive:true});
 })();
-</script><script id="canenext-page-resume-script">
+</script><script id="canenext-stable-page-lock-script">
 (function(){
-const KEY='canenext_active_page_v3';
-function applySaved(){
- const p=localStorage.getItem(KEY);
- if(!p) return;
- if(window.showMainMenu){
-   try{window.showMainMenu(null,p);}catch(e){}
- }
-}
-document.addEventListener('visibilitychange',()=>{
- if(document.visibilityState==='visible'){
-   requestAnimationFrame(applySaved);
- }
-});
-window.addEventListener('pageshow',applySaved);
+  const KEY='canenext_active_page_v3';
+  const DEFAULT_PAGE='business-partner';
+  const ADMIN_ONLY=new Set(['data-management','user-management']);
+
+  let selectedPage=localStorage.getItem(KEY) || DEFAULT_PAGE;
+  let internalChange=false;
+  let observerTimer=null;
+
+  function isAdmin(){
+    const profile=window.CANENEXT_CURRENT_PROFILE;
+    return String(profile?.role||'').trim().toLowerCase()==='admin' &&
+           String(profile?.status||'').trim().toLowerCase()==='active';
+  }
+
+  function safePage(pageId){
+    if(!pageId || !document.getElementById(pageId)) return DEFAULT_PAGE;
+    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
+    return pageId;
+  }
+
+  function render(pageId){
+    const target=safePage(pageId);
+    internalChange=true;
+
+    document.querySelectorAll('.app-page').forEach(page=>{
+      page.classList.toggle('active-page',page.id===target);
+    });
+
+    document.querySelectorAll('.menu-row a[href^="#"]').forEach(link=>{
+      link.classList.toggle(
+        'active-menu',
+        link.getAttribute('href')==='#'+target
+      );
+    });
+
+    document.documentElement.setAttribute('data-canepage',target);
+
+    requestAnimationFrame(()=>{
+      internalChange=false;
+    });
+
+    return target;
+  }
+
+  function remember(pageId){
+    selectedPage=safePage(pageId);
+    localStorage.setItem(KEY,selectedPage);
+    return selectedPage;
+  }
+
+  // Only a genuine menu click is allowed to change the remembered page.
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('.menu-row a[href^="#"]');
+    if(!link || !event.isTrusted) return;
+
+    remember(link.getAttribute('href').slice(1));
+  },true);
+
+  // Ignore automatic Business Partner redirects caused by session restoration.
+  const previousShowMainMenu=window.showMainMenu;
+  window.showMainMenu=function(event,pageId){
+    if(event?.preventDefault) event.preventDefault();
+
+    const genuineClick=Boolean(event?.isTrusted);
+    const requested=safePage(pageId);
+
+    if(genuineClick){
+      remember(requested);
+    }else if(requested===DEFAULT_PAGE && selectedPage!==DEFAULT_PAGE){
+      return render(selectedPage);
+    }
+
+    if(typeof previousShowMainMenu==='function'){
+      try{
+        previousShowMainMenu(event,genuineClick ? requested : selectedPage);
+      }catch(err){
+        console.error('Previous menu handler failed:',err);
+      }
+    }
+
+    return render(genuineClick ? requested : selectedPage);
+  };
+
+  // If an older script changes the visible page after screen sleep/session refresh,
+  // immediately restore the page genuinely selected by the user.
+  const observeRoot=document.querySelector('.app-main') || document.body;
+
+  new MutationObserver(()=>{
+    if(internalChange) return;
+
+    clearTimeout(observerTimer);
+    observerTimer=setTimeout(()=>{
+      const active=document.querySelector('.app-page.active-page')?.id;
+
+      if(active && active!==selectedPage){
+        render(selectedPage);
+      }
+    },0);
+  }).observe(observeRoot,{
+    subtree:true,
+    attributes:true,
+    attributeFilter:['class']
+  });
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    setTimeout(()=>render(selectedPage),500);
+  });
+
+  window.CaneStablePageLock={
+    current:()=>selectedPage,
+    restore:()=>render(selectedPage),
+    remember
+  };
 })();
 </script></body>
 </html>
