@@ -1,12 +1,11 @@
 Cane Next+ Master Version
-Version: 3.2.6
-Based on: v3.2.5
-Created: 2026-07-15T07:08:16
+Version: 3.2.7
+Based on: v3.2.6
+Created: 2026-07-15T08:44:58
 
-PORTRAIT LAYOUT REWORK
-- Removed horizontal page scrolling in portrait mode.
-- Menu becomes a full-width vertical scroll area above content.
-- Cards, forms, filters and grids collapse to one column.
-- Tables become vertical cards with automatic labels.
-- PDF pages flow vertically.
-- Landscape layout remains unchanged.
+PORTRAIT MENU GRID
+- Tablet/iPad portrait shows 2 menu items per row.
+- No horizontal scrolling.
+- Hidden Admin menus leave no gaps.
+- Phones under 500px show 1 item per row.
+- Landscape remains unchanged.
