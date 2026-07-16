@@ -124,6 +124,16 @@ Created: 2026-07-16T10:21:10
 - Changed result labels 'กำไร บาท/ไร่' and 'กำไร บาท/ตัน' to 'กำไร'.
 
 
-v3.3.26 2026-07-16 11:54:03.284086
-- Blank default farmer fields.
-- Plot detail layout 4 columns.
+v3.3.23
+Created: 2026-07-16T10:38:57
+- Default farmer fields are blank until a farmer is searched.
+
+
+v3.3.24
+Created: 2026-07-16T11:07:29
+- Removed all visible sample farmer placeholders and hard-coded demo farmer values.
+- Farmer code, farmer name, zone and subzone start blank in every menu.
+- A new browser session ignores stale localStorage farmer data.
+- A searched farmer remains available during the current session.
+- Logout clears current farmer and current plot, returning all menus to blank.
+- Farmer context bars display blank values instead of hyphens before search.
