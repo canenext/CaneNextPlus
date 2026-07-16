@@ -74,3 +74,12 @@ Created: 2026-07-16T08:55:45
 - Phone shows 1 card per row.
 - Added icons, labels, numeric input and บาท/ไร่ unit to every card.
 - Existing cost-input classes and save/reset calculations remain unchanged.
+
+
+v3.3.17
+Created: 2026-07-16T09:06:32
+- Replaced Basic Cost Font Awesome icons with self-contained inline SVG icons.
+- Icons no longer depend on Font Awesome, CDN or external font files.
+- Icons display on GitHub Pages, desktop, tablet, iPad and phone.
+- Kept the existing 4-column desktop, 2-column tablet and 1-column phone layout.
+- Existing cost calculations, save and reset functions remain unchanged.
