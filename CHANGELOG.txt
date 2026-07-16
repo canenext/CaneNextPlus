@@ -1,3 +1,8 @@
+v3.3.9
+- เพิ่มรายการวิเคราะห์ความเสี่ยง: หนี้ครบ Due + ส่งเสริมเพิ่ม, D/E และบาท/ตัน
+- ตารางกรณีใช้ยอดหนี้ครบ Due ตามตัวอย่างที่กำหนด
+- ช่องส่งอ้อยแสดงเครื่องหมายคั่นหลักพัน เช่น 1,500
+
 Cane Next+ Master Version
 Version: 3.3.1
 Based on: v3.3.0
@@ -27,3 +32,26 @@ Created: 2026-07-16T02:52:51
 - Removed the D/E explanation text "หนี้สิน / วงเงินค้ำประกันรวม".
 - D/E card now shows only the title "D/E" and the calculated value.
 - Normalized D/E font size, weight, color and line height to match other KPI cards.
+
+v3.3.10
+- ปรับการ์ดรายละเอียดวิเคราะห์ความเสี่ยงเป็น 2 แถว
+- แถวที่ 1 แสดง 5 รายการ: วงเงินค้ำประกันรวม, หนี้สินครบ Due, รับส่งเสริมเพิ่ม, Due + ส่งเสริมเพิ่ม, D/E
+- แถวที่ 2 แสดง 6 รายการ: ยืนยันสัญญาตัน, บาท/ตัน, ราคาอ้อยขั้นต้น, CCS, ราคาอ้อยขั้นต้น + CCS, ค่าใช้จ่าย
+- ซ่อนการ์ดค่า CCS แยก โดยยังคงใช้ค่าดังกล่าวในการคำนวณภายใน
+
+
+v3.3.11
+- จัดข้อความและตัวเลขในการ์ดวิเคราะห์ความเสี่ยงให้อยู่กึ่งกลาง
+- แสดงเครื่องหมายคั่นหลักพันในช่องตัวเลขตั้งแต่ 1,000 ขึ้นไป
+- คงรูปแบบทศนิยมของ CCS และค่าที่ต้องใช้ความละเอียด
+
+
+v3.3.12
+Created: 2026-07-16T08:25:09
+- Reworked plot loading to use the currently selected farmer_code.
+- Farmer search automatically reloads all plots for that farmer.
+- Production-year and advanced filter options are generated from loaded plots.
+- Added loading, empty and error states.
+- Selected plot is shared through currentSelectedRealPlot and canenext:plot-changed.
+- Scenario plot options refresh after plot data loads.
+- Prevented stale requests from replacing data after switching farmers.

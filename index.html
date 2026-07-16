@@ -3614,6 +3614,36 @@ header *,
   /* intentionally left to earlier styles */
 }
 
+
+/* Risk scenario comparison table */
+#risk .risk-scenario-section{margin-top:20px;background:#fff;border:1px solid #dbe7f3;border-radius:16px;padding:18px;box-shadow:0 6px 20px rgba(18,66,112,.06)}
+#risk .risk-scenario-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}
+#risk .risk-scenario-heading h3{margin:0;color:#123b63;font-size:18px}
+#risk .risk-scenario-heading p{margin:5px 0 0;color:#60758a;font-size:13px}
+#risk .risk-scenario-table-wrap{overflow-x:hidden;width:100%}
+#risk .risk-scenario-table{width:100%;min-width:0;margin:0;table-layout:fixed}
+#risk .risk-scenario-table th{white-space:normal;text-align:center;vertical-align:middle;background:#eaf4ff;color:#153b60;font-size:10.5px;line-height:1.2;padding:7px 3px;word-break:break-word}
+#risk .risk-scenario-table td{text-align:right;vertical-align:middle;white-space:nowrap;font-size:11px;padding:6px 3px;overflow:hidden;text-overflow:ellipsis}
+#risk .risk-scenario-table td:first-child,#risk .risk-scenario-table td:nth-child(4),#risk .risk-scenario-table td:last-child{text-align:center}
+#risk .risk-scenario-table th:nth-child(1){width:7%}
+#risk .risk-scenario-table th:nth-child(2){width:10%}
+#risk .risk-scenario-table th:nth-child(3){width:8%}
+#risk .risk-scenario-table th:nth-child(4){width:6%}
+#risk .risk-scenario-table th:nth-child(5){width:14%}
+#risk .risk-scenario-table th:nth-child(6),#risk .risk-scenario-table th:nth-child(7),#risk .risk-scenario-table th:nth-child(8),#risk .risk-scenario-table th:nth-child(9){width:11%}
+#risk .risk-scenario-table th:nth-child(10){width:6%}
+#risk .risk-scenario-ton{width:100%;min-width:0;box-sizing:border-box;text-align:right;border:1px solid #c7d8e8;border-radius:6px;padding:5px 4px;font:inherit}
+#risk .risk-grade{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;font-weight:800;background:#e8f1fb;color:#174d7a}
+#risk .risk-grade.grade-a{background:#dff5e9;color:#147546}
+#risk .risk-grade.grade-b{background:#e3f1ff;color:#1767a5}
+#risk .risk-grade.grade-c{background:#fff4d7;color:#956400}
+#risk .risk-grade.grade-d{background:#ffe8dc;color:#a44a18}
+#risk .risk-grade.grade-f{background:#ffe1e1;color:#b42318}
+#risk .risk-negative{color:#c62828!important;font-weight:800}
+#risk .risk-delete-scenario{border:0;background:#fff0f0;color:#ad2525;border-radius:8px;padding:7px 10px;cursor:pointer;font-weight:700}
+#risk .risk-delete-scenario:hover{background:#ffdede}
+#risk .risk-scenario-note{margin-top:12px;color:#60758a;font-size:12px}
+@media(max-width:700px){#risk .risk-scenario-heading{flex-direction:column}#risk .risk-scenario-heading .btn{width:100%}}
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
 <style id="final-typography-refactor">
@@ -6990,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.3" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.12" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7557,10 +7587,13 @@ body.locked{
 #risk .risk-year-inline label{color:#173B61;font-size:13px;font-weight:800;white-space:nowrap}
 #risk .risk-year-inline select{width:190px;min-height:42px;padding:9px 11px;border:1px solid #C8DDF5;border-radius:12px;background:#fff;color:#173B61;font-size:14px}
 #risk .risk-input-card{padding:18px;border:1px solid #D4E5F8;border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(8,59,115,.06)}
-#risk .risk-input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+#risk .risk-input-rows{display:flex;flex-direction:column;gap:14px}
+#risk .risk-input-grid{display:grid;gap:14px}
+#risk .risk-input-grid-row1{grid-template-columns:repeat(5,minmax(0,1fr))}
+#risk .risk-input-grid-row2{grid-template-columns:repeat(6,minmax(0,1fr))}
 #risk .risk-field{min-width:0;padding:14px;border:1px solid #D5E6F8;border-radius:16px;background:#F8FBFF}
-#risk .risk-field label{display:block;min-height:38px;margin-bottom:7px;color:#173B61;font-size:13px;font-weight:800;line-height:1.35}
-#risk .risk-field input{width:100%;min-height:48px;padding:10px 12px;border:1px solid #C8DDF5;border-radius:13px;background:#fff;color:#173B61;font-size:16px;text-align:right}
+#risk .risk-field label{display:flex;align-items:center;justify-content:center;min-height:38px;margin-bottom:7px;color:#173B61;font-size:13px;font-weight:800;line-height:1.35;text-align:center}
+#risk .risk-field input{width:100%;min-height:48px;padding:10px 12px;border:1px solid #C8DDF5;border-radius:13px;background:#fff;color:#173B61;font-size:16px;text-align:center;font-weight:700}
 #risk .risk-field input:focus{outline:3px solid rgba(12,112,230,.12);border-color:#0C70E6}
 #risk .risk-field input[readonly]{color:#0A478E;font-weight:800;background:#F1F7FF}
 #risk .risk-calculated{background:#F0F7FF}
@@ -7577,14 +7610,14 @@ body.locked{
 #risk .risk-level-card.risk-critical strong{color:#A32020;background:#FFF0F0}
 #risk .risk-summary-card.is-negative strong{color:#C62828}
 @media(max-width:1100px){
-#risk .risk-input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#risk .risk-input-grid-row1,#risk .risk-input-grid-row2{grid-template-columns:repeat(2,minmax(0,1fr))}
 #risk .risk-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:700px){
 #risk .risk-page-header{align-items:stretch;flex-direction:column}
 #risk .risk-year-inline{width:100%;min-width:0;flex-direction:column;align-items:stretch}
 #risk .risk-year-inline select{width:100%}
-#risk .risk-input-grid,#risk .risk-summary-grid{grid-template-columns:1fr}
+#risk .risk-input-grid-row1,#risk .risk-input-grid-row2,#risk .risk-summary-grid{grid-template-columns:1fr}
 #risk .risk-action-row{display:grid;grid-template-columns:1fr}
 #risk .risk-action-row .btn{width:100%}
 }
@@ -7596,6 +7629,16 @@ body.locked{
   line-height:1.25 !important;
   color:#074598 !important;
   font-family:inherit !important;
+}
+</style><style id="canenext-farmer-plots-v3312-style">
+#real-plots .real-plot-loading,
+#real-plots .real-plot-message{
+  padding:18px !important;
+  text-align:center !important;
+  color:#60758D !important;
+}
+#real-plots .real-plot-error{
+  color:#C62828 !important;
 }
 </style></head>
 <body class="locked">
@@ -7692,7 +7735,7 @@ body.locked{
 <th>ปีการผลิต</th>
 <th>พื้นที่ (ไร่)</th>
 <th>ยืนยันสัญญาตัน (ตัน)</th>
-<th>ส่งอ้อย (ตัน)</th>
+<th>ส่งอ้อย<br/>(ตัน)</th>
 <th>เกรด</th>
 </tr>
 </thead>
@@ -8029,7 +8072,8 @@ body.locked{
 </div>
 </div>
 <div class="risk-input-card">
-<div class="risk-input-grid">
+<div class="risk-input-rows">
+<div class="risk-input-grid risk-input-grid-row1">
 <div class="risk-field risk-readonly">
 <label for="riskGuaranteeTotal">วงเงินค้ำประกันรวม (บาท)</label>
 <input id="riskGuaranteeTotal" readonly="" type="text" value="0"/>
@@ -8040,23 +8084,33 @@ body.locked{
 </div>
 <div class="risk-field">
 <label for="riskAdditionalPromotion">ต้องการรับส่งเสริมเพิ่ม (บาท)</label>
-<input id="riskAdditionalPromotion" inputmode="numeric" min="0" step="1" type="number" value="0"/>
+<input id="riskAdditionalPromotion" inputmode="numeric" type="text" value="0"/>
 </div>
+<div class="risk-field risk-calculated">
+<label for="riskTotalObligation">หนี้ครบ Due + ส่งเสริมเพิ่ม (บาท)</label>
+<input id="riskTotalObligation" readonly="" type="text" value="0"/>
+</div>
+<div class="risk-field risk-calculated">
+<label for="riskDERatio">D/E</label>
+<input id="riskDERatio" readonly="" type="text" value="0.00"/>
+</div>
+</div>
+<div class="risk-input-grid risk-input-grid-row2">
 <div class="risk-field risk-readonly">
 <label for="riskContractTon">ยืนยันสัญญาตัน (ตัน)</label>
-<input id="riskContractTon" readonly="" type="text" value="0.00"/>
+<input id="riskContractTon" readonly="" type="text" value="0"/>
+</div>
+<div class="risk-field risk-calculated">
+<label for="riskBahtPerTon">บาท/ตัน</label>
+<input id="riskBahtPerTon" readonly="" type="text" value="0.00"/>
 </div>
 <div class="risk-field">
 <label for="riskBasePrice">ราคาอ้อยขั้นต้น (บาท/ตัน)</label>
-<input id="riskBasePrice" inputmode="decimal" min="0" step="1" type="number" value="950"/>
+<input id="riskBasePrice" inputmode="decimal" type="text" value="950"/>
 </div>
 <div class="risk-field">
 <label for="riskCcs">CCS (% CCS)</label>
 <input id="riskCcs" inputmode="decimal" min="0" step="0.01" type="number" value="13.80"/>
-</div>
-<div class="risk-field risk-calculated">
-<label for="riskCcsValue">ค่า CCS (บาท/ตัน)</label>
-<input id="riskCcsValue" readonly="" type="text" value="216.60"/>
 </div>
 <div class="risk-field risk-calculated">
 <label for="riskTotalCanePrice">ราคาอ้อยขั้นต้น + CCS (บาท/ตัน)</label>
@@ -8064,8 +8118,10 @@ body.locked{
 </div>
 <div class="risk-field">
 <label for="riskHarvestCost">ค่าใช้จ่าย ตัด+ขึ้น+บรรทุก (บาท/ตัน)</label>
-<input id="riskHarvestCost" inputmode="decimal" min="0" step="1" type="number" value="400"/>
+<input id="riskHarvestCost" inputmode="decimal" type="text" value="400"/>
 </div>
+</div>
+<input id="riskCcsValue" type="hidden" value="216.60"/>
 </div>
 <div class="risk-action-row">
 <button class="btn primary" id="riskSaveDefaults" type="button">💾 บันทึกค่าที่กรอก</button>
@@ -8073,39 +8129,32 @@ body.locked{
 </div>
 <div aria-live="polite" class="risk-save-status" id="riskSaveStatus"></div>
 </div>
-<div class="risk-summary-grid">
-<article class="risk-summary-card risk-level-card">
-<span>ระดับความเสี่ยง</span>
-<strong id="riskLevelText">ความเสี่ยงต่ำ</strong>
-</article>
-<article class="risk-summary-card">
-<span>หนี้ครบ Due + ส่งเสริมเพิ่ม (บาท)</span>
-<strong id="riskTotalObligation">0 บาท</strong>
-</article>
-<article class="risk-summary-card">
-<span>D/E</span>
-<strong id="riskDERatio">0.00</strong>
-</article>
-<article class="risk-summary-card">
-<span>บาท/ตัน</span>
-<strong id="riskObligationPerTon">0.00 บาท/ตัน</strong>
-</article>
-<article class="risk-summary-card">
-<span>รายได้ (บาท)</span>
-<strong id="riskRevenue">0.00 บาท</strong>
-</article>
-<article class="risk-summary-card">
-<span>รายจ่าย (บาท)</span>
-<strong id="riskExpense">0.00 บาท</strong>
-</article>
-<article class="risk-summary-card">
-<span>ผลต่างรายได้ (บาท)</span>
-<strong id="riskIncomeDifference">0.00 บาท</strong>
-</article>
-<article class="risk-summary-card risk-net-card">
-<span>กำไรสุทธิ</span>
-<strong id="riskNetProfit">0.00 บาท</strong>
-</article>
+<div class="risk-scenario-section">
+<div class="risk-scenario-heading">
+<div>
+<h3>คาดการณ์ส่งอ้อยเทียบสัญญาตันของชาวไร่</h3>
+</div>
+<button class="btn primary" id="riskAddScenario" type="button">+ เพิ่มกรณี</button>
+</div>
+<div class="table-responsive risk-scenario-table-wrap">
+<table class="table risk-scenario-table">
+<thead>
+<tr>
+<th>กรณี</th>
+<th>ส่งอ้อย<br/>(ตัน)</th>
+<th>% เทียบ<br/>สัญญา</th>
+<th>เกรด</th>
+<th>Due + ส่งเสริม<br/>(บาท)</th>
+<th>รายได้<br/>(บาท)</th>
+<th>รายจ่าย<br/>(บาท)</th>
+<th>ผลต่าง<br/>(บาท)</th>
+<th>กำไรสุทธิ<br/>(บาท)</th>
+<th>จัดการ</th>
+</tr>
+</thead>
+<tbody id="riskScenarioBody"></tbody>
+</table>
+</div>
 </div>
 </section>
 <section class="section app-page ai-recommendation-page" id="ai-recommendation">
@@ -8297,7 +8346,7 @@ function parseThaiNumber(value){
   return Number(String(value || '').replace(/,/g,'').trim()) || 0;
 }
 function formatNumber(value){
-  return Number(value || 0).toLocaleString('th-TH', {maximumFractionDigits:2});
+  return Number(value || 0).toLocaleString('th-TH', {maximumFractionDigits:0});
 }
 function formatInputValue(input){
   const raw = String(input.value || '').replace(/,/g,'').trim();
@@ -8316,7 +8365,7 @@ function calculateBasicCostTotal(){
 }
 function resetBasicCosts(){
   document.querySelectorAll('.cost-input').forEach(input => {
-    input.value = Number(input.dataset.default || 0).toLocaleString('th-TH');
+    input.value = Number(input.dataset.default || 0).toLocaleString('th-TH' ,{maximumFractionDigits:0});
   });
   calculateBasicCostTotal();
 }
@@ -8614,8 +8663,8 @@ function updateScenarioV2(button){
   setInput('totalCanePrice', totalCanePrice, 2);
   setInput('stalkPerRai', stalkPerRai, 2);
 
-  setText('yieldPerRai', `${yieldPerRai.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})} ตัน/ไร่`);
-  setText('totalYield', `${totalYield.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})} ตัน`);
+  setText('yieldPerRai', `${yieldPerRai.toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})} ตัน/ไร่`);
+  setText('totalYield', `${totalYield.toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})} ตัน`);
   setText('promotionCost', `${formatMoney0(promotionCost)} บาท`);
   setText('deRatio', deRatio.toFixed(2));
   setText('waterCost', `${formatMoney0(waterCost)} บาท`);
@@ -9797,7 +9846,7 @@ window.addEventListener("click",()=>setTimeout(apply,80));
         <td>${p.project_name}</td>
         <td>${p.crop_type}</td>
         <td>${p.plot_id}</td>
-        <td>${p.area.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})}</td>
+        <td>${p.area.toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})}</td>
         <td><span class="status ${p.status==='พร้อมวิเคราะห์'?'ok':'warn'}">${p.status}</span></td>
       </tr>
     `).join('');
@@ -9808,7 +9857,7 @@ window.addEventListener("click",()=>setTimeout(apply,80));
     const p=selectedRealPlot;
     const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
     set('realDetailPlotId',p.plot_id);
-    set('realDetailArea',p.area.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' ไร่');
+    set('realDetailArea',p.area.toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})+' ไร่');
     set('realDetailYear',p.year);
     set('realDetailCropType',p.crop_type);
     set('realDetailVariety',p.variety);
@@ -9903,7 +9952,7 @@ window.filterRealPlotsByYear=function(){
 <td>${p.project_name}</td>
 <td>${p.crop_type}</td>
 <td>${p.plot_id}</td>
-<td>${Number(p.area).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})}</td>
+<td>${Number(p.area).toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})}</td>
 <td><span class="status ${p.status==='พร้อมวิเคราะห์'?'ok':'warn'}">${p.status}</span></td>
 </tr>`;
 }).join('');
@@ -9933,8 +9982,8 @@ window.filterRealPlotsByYear=function(){
           <td>${plot.crop_type}</td>
           <td>${plot.plot_id}</td>
           <td>${Number(plot.area).toLocaleString('th-TH',{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
+            minimumFractionDigits:0,
+            maximumFractionDigits:0
           })}</td>
           <td><span class="status ${plot.status === 'พร้อมวิเคราะห์' ? 'ok' : 'warn'}">${plot.status}</span></td>
         </tr>`;
@@ -10288,7 +10337,7 @@ document.addEventListener('DOMContentLoaded', function(){
    conn(error?'error':'ok',error?'เชื่อมต่อได้ แต่ยังไม่มีสิทธิ์อ่านข้อมูล':'เชื่อมต่อ Supabase สำเร็จ');
   }catch(e){conn('error','เชื่อมต่อ Supabase ไม่สำเร็จ')}
  }
- function card(i,count,ok,msg){const c=document.querySelectorAll('#dmSummaryGrid .dm-sheet')[i];if(!c)return;c.className='dm-sheet '+(ok?'ok':'error');c.querySelector('b').textContent=Number(count||0).toLocaleString('th-TH');c.querySelector('small').textContent=msg}
+ function card(i,count,ok,msg){const c=document.querySelectorAll('#dmSummaryGrid .dm-sheet')[i];if(!c)return;c.className='dm-sheet '+(ok?'ok':'error');c.querySelector('b').textContent=Number(count||0).toLocaleString('th-TH' ,{maximumFractionDigits:0});c.querySelector('small').textContent=msg}
  async function parse(file){
   const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});
   const result={sheets:{},errors:[]};
@@ -10863,7 +10912,7 @@ document.addEventListener('DOMContentLoaded', function(){
       if(count>1000){
         const notice=document.createElement('div');
         notice.style.cssText='margin:10px 0;padding:10px 12px;background:#FFF7E6;border:1px solid #F4D79A;border-radius:10px;color:#7A5600;font-size:13px;';
-        notice.textContent='พบข้อมูลแปลง '+Number(count).toLocaleString('th-TH')+' รายการ ระบบแสดงครั้งละ 1,000 รายการเพื่อป้องกันหน้าเว็บค้าง';
+        notice.textContent='พบข้อมูลแปลง '+Number(count).toLocaleString('th-TH' ,{maximumFractionDigits:0})+' รายการ ระบบแสดงครั้งละ 1,000 รายการเพื่อป้องกันหน้าเว็บค้าง';
         const table=document.getElementById('realPlotTableBody')?.closest('table');
         if(table && !table.previousElementSibling?.dataset?.plotLimitNotice){
           notice.dataset.plotLimitNotice='1';
@@ -11010,7 +11059,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     const count=document.getElementById('realPlotCount');
     if(count){
-      count.textContent=`แสดง ${list.length.toLocaleString('th-TH')} จาก ${(window.currentRealPlots||[]).length.toLocaleString('th-TH')} แปลง`;
+      count.textContent=`แสดง ${list.length.toLocaleString('th-TH' ,{maximumFractionDigits:0})} จาก ${(window.currentRealPlots||[]).length.toLocaleString('th-TH' ,{maximumFractionDigits:0})} แปลง`;
     }
 
     if(list.length && typeof window.selectRealPlotFromSupabase==='function'){
@@ -13028,57 +13077,80 @@ new MutationObserver(()=>labels(root)).observe(root,{subtree:true,childList:true
   document.addEventListener('DOMContentLoaded',resetLoginScroll);
   window.addEventListener('orientationchange',()=>setTimeout(resetLoginScroll,120),{passive:true});
 })();
-</script><script id="canenext-risk-v331-script">
+</script><script id="canenext-risk-v332-script">
 (function(){
 const DEFAULTS={additionalPromotion:0,basePrice:950,ccs:13.80,harvestCost:400};
-const PREFIX='canenext_risk_inputs_v331_';
+const PREFIX='canenext_risk_inputs_v332_';
+const SCENARIO_PREFIX='canenext_risk_scenarios_v332_';
 let currentDebt=0,currentContractTon=0,currentGuarantee=0,loading=false;
+let scenarios=[];
 const $=id=>document.getElementById(id);
 const num=v=>Number(String(v??'').replace(/,/g,''))||0;
 const integer=v=>Math.max(0,Math.round(num(v)));
 const money=(v,d=2)=>Number(v||0).toLocaleString('th-TH',{minimumFractionDigits:d,maximumFractionDigits:d});
 function farmer(){return window.CANENEXT_CURRENT_FARMER||window.CaneFarmerSessionV4?.get?.()||null}
 function key(){return PREFIX+(farmer()?.farmer_code||'default')}
+function scenarioKey(){return SCENARIO_PREFIX+(farmer()?.farmer_code||'default')}
 function setVal(id,v){const e=$(id);if(e)e.value=v}
 function setText(id,v){const e=$(id);if(e)e.textContent=v}
+function formatEditable(id,dec=0){const e=$(id);if(!e)return;e.value=money(num(e.value),dec)}
+function rawEditable(id){const e=$(id);if(!e)return;e.value=String(num(e.value)||'')}
 function inputs(){return{additionalPromotion:integer($('riskAdditionalPromotion')?.value),basePrice:Math.max(0,num($('riskBasePrice')?.value)),ccs:Math.max(0,num($('riskCcs')?.value)),harvestCost:Math.max(0,num($('riskHarvestCost')?.value))}}
-function apply(d){setVal('riskAdditionalPromotion',integer(d.additionalPromotion));setVal('riskBasePrice',num(d.basePrice)||950);setVal('riskCcs',(num(d.ccs)||13.8).toFixed(2));setVal('riskHarvestCost',num(d.harvestCost)||400);calc()}
+function apply(d){setVal('riskAdditionalPromotion',money(integer(d.additionalPromotion),0));setVal('riskBasePrice',money(num(d.basePrice)||950,0));setVal('riskCcs',(num(d.ccs)||13.8).toFixed(2));setVal('riskHarvestCost',money(num(d.harvestCost)||400,0));calc()}
 function loadSaved(){try{const s=JSON.parse(localStorage.getItem(key())||'null');apply(s?{...DEFAULTS,...s}:DEFAULTS)}catch{apply(DEFAULTS)}}
-function save(){localStorage.setItem(key(),JSON.stringify(inputs()));setText('riskSaveStatus','บันทึกค่าที่กรอกเรียบร้อยแล้ว');setTimeout(()=>setText('riskSaveStatus',''),2200)}
-function reset(){localStorage.removeItem(key());apply(DEFAULTS);setText('riskSaveStatus','คืนค่าตั้งต้นเรียบร้อยแล้ว');setTimeout(()=>setText('riskSaveStatus',''),2200)}
-function level(perTon,de){
- if(de>1.5||perTon>=1500)return['ความเสี่ยงวิกฤต','risk-critical'];
- if(de>1||perTon>=1000)return['ความเสี่ยงสูง','risk-high'];
- if(de>0.5||perTon>=500)return['ความเสี่ยงปานกลาง','risk-mid'];
- return['ความเสี่ยงต่ำ','risk-low'];
+function save(){localStorage.setItem(key(),JSON.stringify(inputs()));saveScenarios();setText('riskSaveStatus','บันทึกค่าที่กรอกและกรณีเปรียบเทียบเรียบร้อยแล้ว');setTimeout(()=>setText('riskSaveStatus',''),2200)}
+function reset(){localStorage.removeItem(key());localStorage.removeItem(scenarioKey());scenarios=[{tons:currentContractTon||0}];apply(DEFAULTS);renderScenarios();setText('riskSaveStatus','คืนค่าตั้งต้นเรียบร้อยแล้ว');setTimeout(()=>setText('riskSaveStatus',''),2200)}
+function grade(percent,net){if(net<0)return'F';if(percent>=100)return'A';if(percent>=85)return'B';if(percent>=55)return'C';return'D'}
+function saveScenarios(){localStorage.setItem(scenarioKey(),JSON.stringify(scenarios.map(s=>({tons:Math.max(0,num(s.tons))}))))}
+function loadScenarios(){try{const saved=JSON.parse(localStorage.getItem(scenarioKey())||'[]');scenarios=Array.isArray(saved)&&saved.length?saved.map(s=>({tons:Math.max(0,num(s.tons))})):[{tons:currentContractTon||0}]}catch{scenarios=[{tons:currentContractTon||0}]}}
+function scenarioValues(tons){
+ const x=inputs();
+ const ccsValue=Math.max(0,x.ccs-10)*0.06*x.basePrice;
+ const totalPrice=x.basePrice+ccsValue;
+ const obligation=currentDebt;
+ const percent=currentContractTon>0?(tons/currentContractTon)*100:0;
+ const revenue=tons*totalPrice;
+ const expense=tons*x.harvestCost;
+ const diff=revenue-expense;
+ const net=diff-obligation;
+ return{percent,obligation,revenue,expense,diff,net,grade:grade(percent,net)};
+}
+function renderScenarios(){
+ const body=$('riskScenarioBody');if(!body)return;
+ if(!scenarios.length)scenarios=[{tons:currentContractTon||0}];
+ body.innerHTML=scenarios.map((s,i)=>{
+  const v=scenarioValues(Math.max(0,num(s.tons)));
+  const neg=v.net<0?' risk-negative':'';
+  const diffNeg=v.diff<0?' risk-negative':'';
+  return `<tr data-index="${i}">
+   <td><b>กรณีที่ ${i+1}</b></td>
+   <td><input class="risk-scenario-ton" data-action="tons" type="text" inputmode="numeric" value="${money(s.tons,0)}" aria-label="ส่งอ้อย กรณีที่ ${i+1}"></td>
+   <td>${money(v.percent,0)}%</td>
+   <td><span class="risk-grade grade-${v.grade.toLowerCase()}">${v.grade}</span></td>
+   <td>${money(v.obligation,0)}</td>
+   <td>${money(v.revenue,0)}</td>
+   <td>${money(v.expense,0)}</td>
+   <td class="${diffNeg.trim()}">${money(v.diff,0)}</td>
+   <td class="${neg.trim()}">${money(v.net,0)}</td>
+   <td><button class="risk-delete-scenario" data-action="delete" type="button" ${scenarios.length===1?'disabled title="ต้องมีอย่างน้อย 1 กรณี"':''}>ลบ</button></td>
+  </tr>`;
+ }).join('');
+ saveScenarios();
 }
 function calc(){
  const x=inputs();
  const ccsValue=Math.max(0,x.ccs-10)*0.06*x.basePrice;
  const totalPrice=x.basePrice+ccsValue;
  const totalObligation=currentDebt+x.additionalPromotion;
- const de=currentGuarantee>0?totalObligation/currentGuarantee:0;
- const perTon=currentContractTon>0?totalObligation/currentContractTon:0;
- const revenue=currentContractTon*totalPrice;
- const expense=currentContractTon*x.harvestCost;
- const diff=revenue-expense;
- const net=diff-totalObligation;
+ const deRatio=currentGuarantee>0?totalObligation/currentGuarantee:0;
+ const bahtPerTon=currentContractTon>0?totalObligation/currentContractTon:0;
+ setVal('riskTotalObligation',money(totalObligation,0));
+ setVal('riskDERatio',deRatio.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2}));
+ setVal('riskBahtPerTon',money(bahtPerTon,2));
  setVal('riskCcsValue',money(ccsValue,2));
  setVal('riskTotalCanePrice',money(totalPrice,2));
- setText('riskTotalObligation',money(totalObligation,0)+' บาท');
- setText('riskDERatio',de.toFixed(2));
- setText('riskObligationPerTon',money(perTon,2)+' บาท/ตัน');
- setText('riskRevenue',money(revenue,2)+' บาท');
- setText('riskExpense',money(expense,2)+' บาท');
- setText('riskIncomeDifference',money(diff,2)+' บาท');
- setText('riskNetProfit',money(net,2)+' บาท');
- const [label,cls]=level(perTon,de);
- setText('riskLevelText',label);
- const card=document.querySelector('#risk .risk-level-card');
- card?.classList.remove('risk-low','risk-mid','risk-high','risk-critical');card?.classList.add(cls);
- $('riskIncomeDifference')?.closest('.risk-summary-card')?.classList.toggle('is-negative',diff<0);
- $('riskNetProfit')?.closest('.risk-summary-card')?.classList.toggle('is-negative',net<0);
- window.CANENEXT_RISK_ANALYSIS={production_year:$('riskProductionYear')?.value||'',total_guarantee:currentGuarantee,due_debt:currentDebt,additional_promotion:x.additionalPromotion,contract_ton:currentContractTon,base_price:x.basePrice,ccs:x.ccs,ccs_value_per_ton:ccsValue,total_cane_price_per_ton:totalPrice,harvest_cost_per_ton:x.harvestCost,de_ratio:de,obligation_per_ton:perTon,revenue,expense,income_difference:diff,net_profit:net,risk_level:label};
+ renderScenarios();
+ window.CANENEXT_RISK_ANALYSIS={production_year:$('riskProductionYear')?.value||'',total_guarantee:currentGuarantee,due_debt:currentDebt,additional_promotion:x.additionalPromotion,total_obligation:totalObligation,de_ratio:deRatio,baht_per_ton:bahtPerTon,contract_ton:currentContractTon,base_price:x.basePrice,ccs:x.ccs,ccs_value_per_ton:ccsValue,total_cane_price_per_ton:totalPrice,harvest_cost_per_ton:x.harvestCost,scenarios:scenarios.map(s=>({tons:num(s.tons),...scenarioValues(num(s.tons))}))};
 }
 async function client(){if(window.caneSupabase)return window.caneSupabase;if(!window.supabase||!window.CANENEXT_CONFIG)return null;window.caneSupabase=window.supabase.createClient(window.CANENEXT_CONFIG.SUPABASE_URL,window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY);return window.caneSupabase}
 async function years(preferred=''){
@@ -13099,7 +13171,7 @@ async function loadYear(){
  if(loading)return;
  const f=farmer(),y=$('riskProductionYear')?.value||'';
  currentDebt=currentContractTon=currentGuarantee=0;
- if(!f?.farmer_code||!y){setVal('riskGuaranteeTotal','0');setVal('riskDueDebt','0');setVal('riskContractTon','0.00');calc();return}
+ if(!f?.farmer_code||!y){setVal('riskGuaranteeTotal','0');setVal('riskDueDebt','0');setVal('riskContractTon','0');calc();return}
  loading=true;
  try{
   const db=await client();if(!db)return;
@@ -13114,21 +13186,374 @@ async function loadYear(){
   currentDebt=num(d.data?.yearly_debt?.[y]);
   setVal('riskGuaranteeTotal',money(currentGuarantee,0));
   setVal('riskDueDebt',money(currentDebt,0));
-  setVal('riskContractTon',money(currentContractTon,2));
+  setVal('riskContractTon',money(currentContractTon,0));
+  if(scenarios.length===1 && !scenarios[0].tons)scenarios[0].tons=currentContractTon;
   calc();
- }catch(e){console.error('Risk data:',e);setVal('riskGuaranteeTotal','0');setVal('riskDueDebt','0');setVal('riskContractTon','0.00');calc()}
+ }catch(e){console.error('Risk data:',e);setVal('riskGuaranteeTotal','0');setVal('riskDueDebt','0');setVal('riskContractTon','0');calc()}
  finally{loading=false}
 }
 document.addEventListener('DOMContentLoaded',()=>{
- loadSaved();
+ loadSaved();loadScenarios();renderScenarios();
  ['riskAdditionalPromotion','riskBasePrice','riskCcs','riskHarvestCost'].forEach(id=>{$(id)?.addEventListener('input',calc);$(id)?.addEventListener('change',calc)});
+ [['riskAdditionalPromotion',0],['riskBasePrice',0],['riskHarvestCost',0]].forEach(([id,dec])=>{const e=$(id);e?.addEventListener('focus',()=>rawEditable(id));e?.addEventListener('blur',()=>{formatEditable(id,dec);calc()})});
+ $('riskCcs')?.addEventListener('blur',()=>{setVal('riskCcs',money(num($('riskCcs')?.value),2));calc()});
  $('riskProductionYear')?.addEventListener('change',loadYear);
  $('riskSaveDefaults')?.addEventListener('click',save);
  $('riskResetDefaults')?.addEventListener('click',reset);
+ $('riskAddScenario')?.addEventListener('click',()=>{const last=scenarios[scenarios.length-1];scenarios.push({tons:num(last?.tons)||currentContractTon||0});renderScenarios()});
+ $('riskScenarioBody')?.addEventListener('focusin',e=>{if(e.target.dataset.action==='tons')e.target.value=String(integer(e.target.value)||'')});
+ $('riskScenarioBody')?.addEventListener('change',e=>{const row=e.target.closest('tr');if(!row||e.target.dataset.action!=='tons')return;const i=Number(row.dataset.index);scenarios[i].tons=Math.max(0,num(e.target.value));renderScenarios()});
+ $('riskScenarioBody')?.addEventListener('focusout',e=>{const row=e.target.closest('tr');if(!row||e.target.dataset.action!=='tons')return;const i=Number(row.dataset.index);scenarios[i].tons=Math.max(0,num(e.target.value));renderScenarios()});
+ $('riskScenarioBody')?.addEventListener('click',e=>{const btn=e.target.closest('[data-action="delete"]');if(!btn||scenarios.length<=1)return;const row=btn.closest('tr');scenarios.splice(Number(row.dataset.index),1);renderScenarios()});
  setTimeout(()=>years(),700);
 });
-window.addEventListener('canenext:farmer-changed',()=>{const y=$('riskProductionYear')?.value||'';loadSaved();setTimeout(()=>years(y),120)});
-window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset,save};
+window.addEventListener('canenext:farmer-changed',()=>{const y=$('riskProductionYear')?.value||'';loadSaved();loadScenarios();renderScenarios();setTimeout(()=>years(y),120)});
+window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset,save,addScenario:()=>{scenarios.push({tons:currentContractTon||0});renderScenarios()}};
+})();
+</script><script id="canenext-farmer-plots-v3312-script">
+(function(){
+  let requestToken=0;
+  let loadedFarmerCode='';
+  let selectedPlotId='';
+
+  const esc=value=>String(value??'')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+  const fmt=(value,digits=2)=>Number(value||0).toLocaleString('th-TH',{
+    minimumFractionDigits:digits,
+    maximumFractionDigits:digits
+  });
+
+  function currentFarmer(){
+    if(window.CANENEXT_CURRENT_FARMER) return window.CANENEXT_CURRENT_FARMER;
+    try{
+      return JSON.parse(localStorage.getItem('canenext_current_farmer')||'null');
+    }catch(e){
+      return null;
+    }
+  }
+
+  async function ensureClient(){
+    if(window.caneSupabase) return window.caneSupabase;
+    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
+      throw new Error('ยังไม่สามารถเชื่อมต่อ Supabase ได้');
+    }
+    window.caneSupabase=window.supabase.createClient(
+      window.CANENEXT_CONFIG.SUPABASE_URL,
+      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+    );
+    return window.caneSupabase;
+  }
+
+  function mapPlot(row){
+    return {
+      plot_id:row.plot_id ?? row.id ?? '-',
+      project_name:row.project_type ?? row.project_name ?? '-',
+      area:Number(row.area_rai ?? row.area ?? 0),
+      year:row.production_year ?? row.year ?? '-',
+      crop_type:row.plot_type ?? row.crop_type ?? '-',
+      variety:row.variety ?? '-',
+      soil:row.soil_type ?? row.soil ?? '-',
+      water:row.irrigation ?? row.water_source ?? row.water ?? '-',
+      status:row.plot_status ?? row.status ?? 'active',
+      raw:row
+    };
+  }
+
+  function setFarmerFields(farmer){
+    const values={
+      realFarmerCode:farmer?.farmer_code||'',
+      realFarmerName:farmer?.name||farmer?.farmer_name||'',
+      realZone:farmer?.zone||'-',
+      realSubzone:farmer?.subzone||'-'
+    };
+    Object.entries(values).forEach(([id,value])=>{
+      const el=document.getElementById(id);
+      if(el) el.value=value;
+    });
+  }
+
+  function populateYears(plots){
+    const select=document.getElementById('realProductionYearFilter');
+    if(!select) return;
+
+    const previous=select.value;
+    const years=[...new Set(
+      plots.map(plot=>plot.year).filter(year=>year && year!=='-')
+    )].sort((a,b)=>String(b).localeCompare(String(a),'th',{numeric:true}));
+
+    select.innerHTML=
+      years.map(year=>`<option value="${esc(year)}">${esc(year)}</option>`).join('')+
+      '<option value="ALL">ทั้งหมด</option>';
+
+    if(previous && [...select.options].some(option=>option.value===previous)){
+      select.value=previous;
+    }else if(years.length){
+      select.value=years[0];
+    }else{
+      select.value='ALL';
+    }
+  }
+
+  function filteredPlots(){
+    const plots=[...(window.currentRealPlots||[])];
+    const year=document.getElementById('realProductionYearFilter')?.value||'ALL';
+    const project=document.getElementById('realProjectFilter')?.value||'ALL';
+    const crop=document.getElementById('realCropTypeFilter')?.value||'ALL';
+    const status=document.getElementById('realStatusFilter')?.value||'ALL';
+
+    return plots.filter(plot=>
+      (year==='ALL'||plot.year===year) &&
+      (project==='ALL'||plot.project_name===project) &&
+      (crop==='ALL'||plot.crop_type===crop) &&
+      (status==='ALL'||(plot.status==='active'?'ใช้งาน':plot.status)===status)
+    );
+  }
+
+  function fillSelect(id,values){
+    const select=document.getElementById(id);
+    if(!select) return;
+
+    const previous=select.value;
+    const unique=[...new Set(values.filter(v=>v && v!=='-'))]
+      .sort((a,b)=>String(a).localeCompare(String(b),'th',{numeric:true}));
+
+    select.innerHTML='<option value="ALL">ทั้งหมด</option>'+
+      unique.map(value=>`<option value="${esc(value)}">${esc(value)}</option>`).join('');
+
+    if([...select.options].some(option=>option.value===previous)){
+      select.value=previous;
+    }
+  }
+
+  function updateFilterOptions(){
+    const plots=window.currentRealPlots||[];
+    fillSelect('realProjectFilter',plots.map(p=>p.project_name));
+    fillSelect('realCropTypeFilter',plots.map(p=>p.crop_type));
+    fillSelect('realStatusFilter',plots.map(p=>p.status==='active'?'ใช้งาน':p.status));
+  }
+
+  function selectPlotById(plotId){
+    const plot=(window.currentRealPlots||[])
+      .find(item=>String(item.plot_id)===String(plotId));
+    if(!plot) return;
+
+    selectedPlotId=String(plot.plot_id);
+    window.currentSelectedRealPlot=plot;
+    try{
+      sessionStorage.setItem('canenext_current_plot',JSON.stringify(plot));
+    }catch(e){}
+
+    const set=(id,value)=>{
+      const el=document.getElementById(id);
+      if(el) el.textContent=value;
+    };
+
+    set('realDetailPlotId',plot.plot_id);
+    set('realDetailArea',fmt(plot.area,2)+' ไร่');
+    set('realDetailYear',plot.year);
+    set('realDetailCropType',plot.crop_type);
+    set('realDetailVariety',plot.variety);
+    set('realDetailSoil',plot.soil);
+    set('realDetailWater',plot.water);
+    set('realDetailStatus',plot.status==='active'?'ใช้งาน':plot.status);
+
+    document.querySelectorAll('#realPlotTableBody tr[data-plot-id]').forEach(row=>{
+      row.classList.toggle('selected',row.dataset.plotId===selectedPlotId);
+    });
+
+    window.dispatchEvent(new CustomEvent('canenext:plot-changed',{detail:plot}));
+  }
+
+  function render(){
+    const body=document.getElementById('realPlotTableBody');
+    if(!body) return;
+
+    const list=filteredPlots();
+    const count=document.getElementById('realPlotCount');
+    if(count){
+      count.textContent=`แสดง ${list.length.toLocaleString('th-TH')} จาก ${(window.currentRealPlots||[]).length.toLocaleString('th-TH')} แปลง`;
+    }
+
+    if(!list.length){
+      body.innerHTML='<tr><td colspan="8" class="real-plot-message">ไม่พบข้อมูลแปลงตามรหัสชาวไร่และตัวกรองที่เลือก</td></tr>';
+      window.currentSelectedRealPlot=null;
+      return;
+    }
+
+    body.innerHTML=list.map(plot=>`
+      <tr class="real-plot-row${String(plot.plot_id)===selectedPlotId?' selected':''}"
+          data-plot-id="${esc(plot.plot_id)}"
+          tabindex="0" role="button">
+        <td>${esc(plot.year)}</td>
+        <td>${esc(plot.project_name)}</td>
+        <td>${esc(plot.crop_type)}</td>
+        <td>${esc(plot.plot_id)}</td>
+        <td>${fmt(plot.area,2)}</td>
+        <td>${esc(plot.variety)}</td>
+        <td>${esc(plot.water)}</td>
+        <td><span class="status ${plot.status==='active'||plot.status==='พร้อมวิเคราะห์'?'ok':'warn'}">${esc(plot.status==='active'?'ใช้งาน':plot.status)}</span></td>
+      </tr>
+    `).join('');
+
+    const stillVisible=list.some(plot=>String(plot.plot_id)===selectedPlotId);
+    selectPlotById(stillVisible?selectedPlotId:list[0].plot_id);
+  }
+
+  async function loadPlotsForFarmer(farmer,{force=false}={}){
+    const code=String(farmer?.farmer_code||'').trim();
+    const body=document.getElementById('realPlotTableBody');
+
+    setFarmerFields(farmer);
+
+    if(!code){
+      window.currentRealPlots=[];
+      if(body){
+        body.innerHTML='<tr><td colspan="8" class="real-plot-message">กรุณาค้นหาชาวไร่ก่อนดูข้อมูลรายแปลง</td></tr>';
+      }
+      return [];
+    }
+
+    if(!force && loadedFarmerCode===code && Array.isArray(window.currentRealPlots)){
+      render();
+      return window.currentRealPlots;
+    }
+
+    const token=++requestToken;
+    if(body){
+      body.innerHTML='<tr><td colspan="8" class="real-plot-loading">กำลังโหลดข้อมูลรายแปลง...</td></tr>';
+    }
+
+    try{
+      const db=await ensureClient();
+      const {data,error}=await db
+        .from('plots')
+        .select('*')
+        .eq('farmer_code',code)
+        .order('production_year',{ascending:false})
+        .order('plot_id',{ascending:true});
+
+      if(error) throw error;
+      if(token!==requestToken) return [];
+
+      window.currentRealPlots=(data||[]).map(mapPlot);
+      loadedFarmerCode=code;
+      selectedPlotId='';
+
+      populateYears(window.currentRealPlots);
+      updateFilterOptions();
+      render();
+
+      if(typeof window.refreshScenarioRealPlotOptions==='function'){
+        window.refreshScenarioRealPlotOptions();
+      }
+
+      window.dispatchEvent(new CustomEvent('canenext:farmer-plots-loaded',{
+        detail:{
+          farmer_code:code,
+          plots:window.currentRealPlots
+        }
+      }));
+
+      return window.currentRealPlots;
+    }catch(error){
+      console.error('Load farmer plots failed:',error);
+      window.currentRealPlots=[];
+      if(body){
+        body.innerHTML='<tr><td colspan="8" class="real-plot-message real-plot-error">ไม่สามารถโหลดข้อมูลรายแปลงได้</td></tr>';
+      }
+      return [];
+    }
+  }
+
+  window.filterRealPlotsByYear=render;
+  window.renderRealPlotsFromSupabase=()=>render();
+  window.selectRealPlotFromSupabase=index=>{
+    const plot=(window.currentRealPlots||[])[index];
+    if(plot) selectPlotById(plot.plot_id);
+  };
+  window.selectRealPlot=index=>{
+    const plot=(window.currentRealPlots||[])[index];
+    if(plot) selectPlotById(plot.plot_id);
+  };
+  window.searchRealPlots=async()=>{
+    const code=(document.getElementById('realFarmerCode')?.value||'').trim();
+    if(!code){
+      alert('กรุณากรอกรหัสชาวไร่');
+      return;
+    }
+
+    try{
+      const db=await ensureClient();
+      const {data,error}=await db.from('farmers')
+        .select('*')
+        .eq('farmer_code',code)
+        .maybeSingle();
+
+      if(error) throw error;
+      if(!data){
+        alert('ไม่พบข้อมูลชาวไร่');
+        return;
+      }
+
+      window.CANENEXT_CURRENT_FARMER=data;
+      localStorage.setItem('canenext_current_farmer',JSON.stringify(data));
+      window.dispatchEvent(new CustomEvent('canenext:farmer-changed',{detail:data}));
+    }catch(error){
+      console.error(error);
+      alert('ไม่สามารถค้นหาข้อมูลชาวไร่ได้');
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('realPlotTableBody')?.addEventListener('click',event=>{
+      const row=event.target.closest('tr[data-plot-id]');
+      if(row) selectPlotById(row.dataset.plotId);
+    });
+
+    document.getElementById('realPlotTableBody')?.addEventListener('keydown',event=>{
+      const row=event.target.closest('tr[data-plot-id]');
+      if(row && (event.key==='Enter'||event.key===' ')){
+        event.preventDefault();
+        selectPlotById(row.dataset.plotId);
+      }
+    });
+
+    ['realProductionYearFilter','realProjectFilter','realCropTypeFilter','realStatusFilter']
+      .forEach(id=>document.getElementById(id)?.addEventListener('change',render));
+
+    document.getElementById('realClearFiltersBtn')?.addEventListener('click',()=>{
+      ['realProjectFilter','realCropTypeFilter','realStatusFilter']
+        .forEach(id=>{
+          const el=document.getElementById(id);
+          if(el) el.value='ALL';
+        });
+      const year=document.getElementById('realProductionYearFilter');
+      if(year && [...year.options].some(option=>option.value==='ALL')){
+        year.value='ALL';
+      }
+      render();
+    });
+
+    const farmer=currentFarmer();
+    if(farmer) setTimeout(()=>loadPlotsForFarmer(farmer),500);
+  });
+
+  window.addEventListener('canenext:farmer-changed',event=>{
+    loadPlotsForFarmer(event.detail||currentFarmer(),{force:true});
+  });
+
+  window.CaneFarmerPlots={
+    load:loadPlotsForFarmer,
+    refresh:()=>loadPlotsForFarmer(currentFarmer(),{force:true}),
+    render,
+    get:()=>window.currentRealPlots||[],
+    selected:()=>window.currentSelectedRealPlot||null
+  };
 })();
 </script></body>
 </html>
