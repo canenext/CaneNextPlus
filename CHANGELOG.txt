@@ -117,3 +117,8 @@ Created: 2026-07-16T09:57:54
 - Both values display as whole numbers with comma separators.
 - Added กำไร/ตัน to Scenario Comparison table.
 - Highlighted both profitability KPI rows.
+
+
+v3.3.22
+Created: 2026-07-16T10:21:10
+- Changed result labels 'กำไร บาท/ไร่' and 'กำไร บาท/ตัน' to 'กำไร'.
