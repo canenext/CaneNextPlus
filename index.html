@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.12" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.16" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7640,6 +7640,214 @@ body.locked{
 #real-plots .real-plot-error{
   color:#C62828 !important;
 }
+</style><style id="canenext-business-partner-spacing-v3313-style">
+/* Business Partner card spacing alignment */
+#business-partner{
+  padding-bottom:32px !important;
+}
+
+#business-partner > * + *{
+  margin-top:20px !important;
+}
+
+#business-partner .bp-section,
+#business-partner .bp-card,
+#business-partner .section-card,
+#business-partner .content-card,
+#business-partner .table-card{
+  margin:0 !important;
+  padding:18px !important;
+  border:1px solid #D9E6F4 !important;
+  border-radius:16px !important;
+  background:#fff !important;
+  box-shadow:0 6px 18px rgba(8,59,115,.05) !important;
+}
+
+#business-partner .bp-section + .bp-section,
+#business-partner .bp-card + .bp-card,
+#business-partner .section-card + .section-card,
+#business-partner .content-card + .content-card,
+#business-partner .table-card + .table-card{
+  margin-top:20px !important;
+}
+
+#business-partner .bp-section > h3,
+#business-partner .bp-card > h3,
+#business-partner .section-card > h3,
+#business-partner .content-card > h3,
+#business-partner .table-card > h3{
+  margin:0 0 14px !important;
+  padding:0 0 12px !important;
+  border-bottom:1px solid #E5EDF5 !important;
+  color:#0A3D78 !important;
+  line-height:1.35 !important;
+}
+
+#business-partner .bp-section > h3 + *,
+#business-partner .bp-card > h3 + *,
+#business-partner .section-card > h3 + *,
+#business-partner .content-card > h3 + *,
+#business-partner .table-card > h3 + *{
+  margin-top:0 !important;
+}
+
+#business-partner .table-responsive{
+  margin-top:4px !important;
+}
+
+#business-partner .bp-search-row,
+#business-partner .search-row{
+  margin-bottom:0 !important;
+}
+
+@media (orientation:portrait) and (max-width:1100px){
+  #business-partner > * + *{
+    margin-top:16px !important;
+  }
+
+  #business-partner .bp-section,
+  #business-partner .bp-card,
+  #business-partner .section-card,
+  #business-partner .content-card,
+  #business-partner .table-card{
+    padding:15px !important;
+  }
+
+  #business-partner .bp-section + .bp-section,
+  #business-partner .bp-card + .bp-card,
+  #business-partner .section-card + .section-card,
+  #business-partner .content-card + .content-card,
+  #business-partner .table-card + .table-card{
+    margin-top:16px !important;
+  }
+}
+
+@media (max-width:600px){
+  #business-partner .bp-section,
+  #business-partner .bp-card,
+  #business-partner .section-card,
+  #business-partner .content-card,
+  #business-partner .table-card{
+    padding:12px !important;
+    border-radius:14px !important;
+  }
+}
+</style><style id="canenext-basic-cost-4col-style">
+/* Basic Cost: 4-column layout */
+#basic-cost .cost-grid,
+#basic-cost .basic-cost-grid,
+#basic-cost .cost-items,
+#basic-cost .form-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+@media (max-width:1100px){
+ #basic-cost .cost-grid,
+ #basic-cost .basic-cost-grid,
+ #basic-cost .cost-items,
+ #basic-cost .form-grid{
+   grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+ }
+}
+@media (max-width:700px){
+ #basic-cost .cost-grid,
+ #basic-cost .basic-cost-grid,
+ #basic-cost .cost-items,
+ #basic-cost .form-grid{
+   grid-template-columns:1fr !important;
+ }
+}
+</style><style id="canenext-basic-cost-card-v3316-style">
+/* Basic Cost card layout */
+#basic-cost .basic-cost-card-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:14px !important;
+  width:100%;
+  margin-top:16px;
+}
+#basic-cost .basic-cost-item-card{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  min-width:0;
+  min-height:132px;
+  padding:16px;
+  border:1px solid #D7E6F5;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 6px 18px rgba(8,59,115,.05);
+}
+#basic-cost .basic-cost-icon{
+  flex:0 0 42px;
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:#EAF3FF;
+  color:#0A5EB8;
+  font-size:18px;
+}
+#basic-cost .basic-cost-item-body{
+  flex:1 1 auto;
+  min-width:0;
+}
+#basic-cost .basic-cost-item-title{
+  display:block;
+  min-height:40px;
+  margin:0 0 10px;
+  color:#173B61;
+  font-size:13px;
+  font-weight:800;
+  line-height:1.35;
+}
+#basic-cost .basic-cost-input-wrap{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:100%;
+}
+#basic-cost .basic-cost-input-wrap .cost-input{
+  flex:1 1 auto;
+  width:100%;
+  min-width:0;
+  min-height:44px;
+  padding:9px 11px;
+  border:1px solid #C8DDF5;
+  border-radius:12px;
+  background:#F9FCFF;
+  color:#0A3D78;
+  font-size:16px;
+  font-weight:700;
+  text-align:right;
+}
+#basic-cost .basic-cost-input-wrap .cost-input:focus{
+  outline:3px solid rgba(12,112,230,.12);
+  border-color:#0C70E6;
+}
+#basic-cost .basic-cost-unit{
+  flex:0 0 auto;
+  color:#60758D;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+}
+@media(max-width:1100px){
+  #basic-cost .basic-cost-card-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+@media(max-width:700px){
+  #basic-cost .basic-cost-card-grid{
+    grid-template-columns:1fr !important;
+  }
+  #basic-cost .basic-cost-item-card{
+    min-height:0;
+  }
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -7830,9 +8038,6 @@ body.locked{
 </table>
 </div>
 </div>
-<div class="real-actions">
-<button class="btn" onclick="createScenarioFromRealPlot()" type="button">สร้าง Scenario จากแปลงจริง</button>
-</div>
 </section>
 <section class="section app-page basic-cost-page" id="basic-cost">
 <div class="cost-summary-box">
@@ -7846,29 +8051,7 @@ body.locked{
 <button class="btn" onclick="saveBasicCosts()" type="button">บันทึกโครงสร้างต้นทุน</button>
 <button class="btn secondary" onclick="resetBasicCosts()" type="button">คืนค่าตั้งต้น</button>
 </div>
-<table class="table cost-table">
-<thead>
-<tr>
-<th>รายการต้นทุนพื้นฐาน</th>
-<th>บาท/ไร่</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>ค่าเช่าที่</td><td><input class="cost-input" data-default="2200" type="text" value="2,200"/></td></tr>
-<tr><td>ค่าไถเตรียมดิน</td><td><input class="cost-input" data-default="532" type="text" value="532"/></td></tr>
-<tr><td>ค่าพรวน</td><td><input class="cost-input" data-default="320" type="text" value="320"/></td></tr>
-<tr><td>ค่าปลูก</td><td><input class="cost-input" data-default="691" type="text" value="691"/></td></tr>
-<tr><td>ค่าสารกำจัด/ควบคุมวัชพืช</td><td><input class="cost-input" data-default="350" type="text" value="350"/></td></tr>
-<tr><td>ค่าฉีดพ่นสารกำจัด/ควบคุมวัชพืช</td><td><input class="cost-input" data-default="100" type="text" value="100"/></td></tr>
-<tr><td>ค่าพันธุ์อ้อย</td><td><input class="cost-input" data-default="1409" type="text" value="1,409"/></td></tr>
-<tr><td>ปุ๋ยรองพื้น</td><td><input class="cost-input" data-default="1041" type="text" value="1,041"/></td></tr>
-<tr><td>ปุ๋ยแต่งหน้า</td><td><input class="cost-input" data-default="1318" type="text" value="1,318"/></td></tr>
-<tr><td>ค่าใส่ปุ๋ยแต่งหน้า</td><td><input class="cost-input" data-default="250" type="text" value="250"/></td></tr>
-<tr><td>ปุ๋ยเพิ่มผลผลิต</td><td><input class="cost-input" data-default="1611" type="text" value="1,611"/></td></tr>
-<tr><td>ค่าใส่ปุ๋ยเพิ่มผลผลิต</td><td><input class="cost-input" data-default="250" type="text" value="250"/></td></tr>
-<tr><td>ค่าใช้จ่ายอื่น ๆ ในการจัดการไร่</td><td><input class="cost-input" data-default="0" type="text" value="0"/></td></tr>
-</tbody>
-</table>
+<div class="basic-cost-card-grid"><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-map-location-dot"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าเช่าที่</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="2200" type="text" value="2,200"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-tractor"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าไถเตรียมดิน</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="532" type="text" value="532"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-gears"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าพรวน</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="320" type="text" value="320"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-seedling"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าปลูก</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="691" type="text" value="691"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-ban"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าสารกำจัด/ควบคุมวัชพืช</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="350" type="text" value="350"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-spray-can-sparkles"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าฉีดพ่นสารกำจัด/ควบคุมวัชพืช</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="100" type="text" value="100"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-leaf"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าพันธุ์อ้อย</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="1409" type="text" value="1,409"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-flask"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ปุ๋ยรองพื้น</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="1041" type="text" value="1,041"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-flask-vial"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ปุ๋ยแต่งหน้า</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="1318" type="text" value="1,318"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-person-digging"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าใส่ปุ๋ยแต่งหน้า</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="250" type="text" value="250"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-chart-line"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ปุ๋ยเพิ่มผลผลิต</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="1611" type="text" value="1,611"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-person-digging"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าใส่ปุ๋ยเพิ่มผลผลิต</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="250" type="text" value="250"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><i class="fa-solid fa-ellipsis"></i></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าใช้จ่ายอื่น ๆ ในการจัดการไร่</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="0" type="text" value="0"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article></div>
 </section>
 <section class="section app-page plot-page" id="plot-data">
 <div class="scenario-source-panel">

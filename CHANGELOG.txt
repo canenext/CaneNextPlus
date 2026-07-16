@@ -55,3 +55,22 @@ Created: 2026-07-16T08:25:09
 - Selected plot is shared through currentSelectedRealPlot and canenext:plot-changed.
 - Scenario plot options refresh after plot data loads.
 - Prevented stale requests from replacing data after switching farmers.
+
+
+v3.3.13
+Created: 2026-07-16T08:38:05
+- Increased spacing between Business Partner cards.
+- Standardized card padding, border radius, border and shadow to match other menus.
+- Added consistent spacing below section headings.
+- Improved portrait, tablet and phone spacing.
+- No Business Partner data or calculation logic was changed.
+
+
+v3.3.16
+Created: 2026-07-16T08:55:45
+- Converted Basic Cost items from a table into equal-sized cards.
+- Desktop shows 4 cards per row.
+- Tablet shows 2 cards per row.
+- Phone shows 1 card per row.
+- Added icons, labels, numeric input and บาท/ไร่ unit to every card.
+- Existing cost-input classes and save/reset calculations remain unchanged.
