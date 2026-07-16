@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.23" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.24" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7942,19 +7942,19 @@ body.locked{
 <div class="bp-clean-grid">
 <div class="form-group">
 <label for="bpCode">รหัสชาวไร่</label>
-<input id="bpCode" placeholder="778899" type="text" value=""/>
+<input id="bpCode" placeholder="" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="bpName">ชื่อ-สกุล ชาวไร่</label>
-<input id="bpName" placeholder="นาย อ้อยดี มีกำไร" type="text" value=""/>
+<input id="bpName" placeholder="" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="showZone">สังกัดเขต</label>
-<input id="showZone" readonly="" type="text" value="8"/>
+<input id="showZone" readonly="" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="showSubZone">สังกัดเขตย่อย</label>
-<input id="showSubZone" readonly="" type="text" value="8888"/>
+<input id="showSubZone" readonly="" type="text" value=""/>
 </div>
 <button class="btn bp-search-btn" onclick="searchBusinessPartner()" type="button">ค้นหา</button>
 </div>
@@ -8593,10 +8593,10 @@ function searchBusinessPartner(){
     document.getElementById('showZone').value = 'เขต 09';
     document.getElementById('showSubZone').value = 'เขตย่อย 09-02';
   }else{
-    codeInput.value = code || '778899';
-    nameInput.value = name || 'นายอ้อยดี มีกำไร';
-    document.getElementById('showZone').value = 'เขต 05';
-    document.getElementById('showSubZone').value = 'เขตย่อย 05-03';
+    codeInput.value = code || '';
+    nameInput.value = name || '';
+    document.getElementById('showZone').value = '';
+    document.getElementById('showSubZone').value = '';
   }
 }
 document.addEventListener('input', function(event){
@@ -10100,9 +10100,9 @@ window.addEventListener("click",()=>setTimeout(apply,80));
       alert('กรุณากรอกรหัสชาวไร่');
       return;
     }
-    document.getElementById('realFarmerName').value='นายอ้อยดี มีกำไร';
-    document.getElementById('realZone').value='เขต 05';
-    document.getElementById('realSubzone').value='เขตย่อย 05-03';
+    document.getElementById('realFarmerName').value='';
+    document.getElementById('realZone').value='';
+    document.getElementById('realSubzone').value='';
     renderRealPlots();
     selectRealPlot(0);
   };
@@ -13771,6 +13771,107 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     render,
     get:()=>window.currentRealPlots||[],
     selected:()=>window.currentSelectedRealPlot||null
+  };
+})();
+</script><script id="canenext-blank-farmer-state-v3324-script">
+(function(){
+  const SESSION_KEY='canenext_current_farmer_session_v4';
+  const LEGACY_KEY='canenext_current_farmer';
+
+  function validSessionFarmer(){
+    try{
+      const raw=sessionStorage.getItem(SESSION_KEY);
+      if(!raw) return null;
+      const farmer=JSON.parse(raw);
+      return String(farmer?.farmer_code||'').trim() ? farmer : null;
+    }catch(e){
+      return null;
+    }
+  }
+
+  function setValue(id,value=''){
+    const el=document.getElementById(id);
+    if(!el) return;
+    if('value' in el) el.value=value;
+    else el.textContent=value;
+  }
+
+  function blankContextBars(){
+    document.querySelectorAll('.farmer-context-bar').forEach(bar=>{
+      ['code','name','zone','subzone'].forEach(key=>{
+        const el=bar.querySelector(`[data-${key}]`);
+        if(el) el.textContent='';
+      });
+      bar.classList.remove('has-farmer');
+    });
+  }
+
+  function clearFarmerDisplay(){
+    window.CANENEXT_CURRENT_FARMER=null;
+    window.currentSelectedRealPlot=null;
+    window.currentRealPlots=[];
+
+    [
+      'bpCode','bpName','showZone','showSubZone',
+      'realFarmerCode','realFarmerName','realZone','realSubzone'
+    ].forEach(id=>setValue(id,''));
+
+    const bpCode=document.getElementById('bpCode');
+    const bpName=document.getElementById('bpName');
+    if(bpCode) bpCode.placeholder='';
+    if(bpName) bpName.placeholder='';
+
+    blankContextBars();
+
+    const plotBody=document.getElementById('realPlotTableBody');
+    if(plotBody){
+      plotBody.innerHTML='<tr><td colspan="8" style="text-align:center;color:#6B7F93;">กรุณาค้นหาชาวไร่ก่อนดูข้อมูลรายแปลง</td></tr>';
+    }
+
+    const plotCount=document.getElementById('realPlotCount');
+    if(plotCount) plotCount.textContent='แสดง 0 จาก 0 แปลง';
+  }
+
+  // A new browser session must start blank. Old localStorage farmer data
+  // is ignored unless a valid same-session farmer exists.
+  if(!validSessionFarmer()){
+    try{ localStorage.removeItem(LEGACY_KEY); }catch(e){}
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    const saved=validSessionFarmer();
+    if(!saved){
+      clearFarmerDisplay();
+
+      // Re-apply after older initialization scripts finish.
+      setTimeout(clearFarmerDisplay,150);
+      setTimeout(clearFarmerDisplay,700);
+    }
+  });
+
+  // Logout always returns all menus to a blank farmer state.
+  const timer=setInterval(()=>{
+    const original=window.logoutSupabase;
+    if(typeof original!=='function' || original.__blankFarmerWrapped) return;
+    clearInterval(timer);
+
+    const wrapped=async function(){
+      try{
+        sessionStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem('canenext_current_plot');
+        localStorage.removeItem(LEGACY_KEY);
+      }catch(e){}
+      clearFarmerDisplay();
+      return await original.apply(this,arguments);
+    };
+
+    wrapped.__blankFarmerWrapped=true;
+    window.logoutSupabase=wrapped;
+  },100);
+
+  window.CaneBlankFarmerState={
+    clear:clearFarmerDisplay,
+    hasFarmer:()=>Boolean(validSessionFarmer())
   };
 })();
 </script></body>
