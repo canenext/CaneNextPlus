@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.25" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.26" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7892,6 +7892,11 @@ body.locked{
 #plot-data .plot-grid,
 #plot-data .detail-grid{grid-template-columns:1fr!important;}
 }
+</style><style id="plot-detail-grid-v3326">
+#plot-data .plot-detail-grid,#plot-data .detail-grid{
+display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important}
+@media(max-width:900px){#plot-data .plot-detail-grid,#plot-data .detail-grid{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:600px){#plot-data .plot-detail-grid,#plot-data .detail-grid{grid-template-columns:1fr!important}}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -7961,19 +7966,19 @@ body.locked{
 <div class="bp-clean-grid">
 <div class="form-group">
 <label for="bpCode">รหัสชาวไร่</label>
-<input id="bpCode" placeholder="778899" type="text" value=""/>
+<input id="bpCode" placeholder="" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="bpName">ชื่อ-สกุล ชาวไร่</label>
-<input id="bpName" placeholder="นาย อ้อยดี มีกำไร" type="text" value=""/>
+<input id="bpName" placeholder="" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="showZone">สังกัดเขต</label>
-<input id="showZone" readonly="" type="text" value="8"/>
+<input id="showZone" readonly="" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="showSubZone">สังกัดเขตย่อย</label>
-<input id="showSubZone" readonly="" type="text" value="8888"/>
+<input id="showSubZone" readonly="" type="text" value=""/>
 </div>
 <button class="btn bp-search-btn" onclick="searchBusinessPartner()" type="button">ค้นหา</button>
 </div>
@@ -8612,7 +8617,7 @@ function searchBusinessPartner(){
     document.getElementById('showZone').value = 'เขต 09';
     document.getElementById('showSubZone').value = 'เขตย่อย 09-02';
   }else{
-    codeInput.value = code || '778899';
+    codeInput.value = code || '';
     nameInput.value = name || 'นายอ้อยดี มีกำไร';
     document.getElementById('showZone').value = 'เขต 05';
     document.getElementById('showSubZone').value = 'เขตย่อย 05-03';
@@ -12796,10 +12801,10 @@ document.addEventListener('DOMContentLoaded', function(){
   const SESSION_KEY='canenext_current_farmer_session_v4';
 
   const DEFAULT_FARMER=Object.freeze({
-    farmer_code:'778899',
-    farmer_name:'นาย อ้อยดี มีกำไร',
-    name:'นาย อ้อยดี มีกำไร',
-    full_name:'นาย อ้อยดี มีกำไร',
+    farmer_code:'',
+    farmer_name:'',
+    name:'',
+    full_name:'',
     zone:'8',
     subzone:'8888'
   });

@@ -122,3 +122,8 @@ Created: 2026-07-16T09:57:54
 v3.3.22
 Created: 2026-07-16T10:21:10
 - Changed result labels 'กำไร บาท/ไร่' and 'กำไร บาท/ตัน' to 'กำไร'.
+
+
+v3.3.26 2026-07-16 11:54:03.284086
+- Blank default farmer fields.
+- Plot detail layout 4 columns.
