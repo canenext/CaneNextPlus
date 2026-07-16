@@ -122,3 +122,8 @@ Created: 2026-07-16T09:57:54
 v3.3.22
 Created: 2026-07-16T10:21:10
 - Changed result labels 'กำไร บาท/ไร่' and 'กำไร บาท/ตัน' to 'กำไร'.
+
+
+v3.3.23
+Created: 2026-07-16T10:38:57
+- Default farmer fields are blank until a farmer is searched.
