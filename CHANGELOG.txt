@@ -1,13 +1,29 @@
 Cane Next+ Master Version
-Version: 3.2.9
-Based on: v3.2.8
-Created: 2026-07-15T11:18:23
+Version: 3.3.1
+Based on: v3.3.0
+Created: 2026-07-16T02:19:35
 
-MOBILE LOGIN FIX
-- Login screen can scroll vertically on phone and portrait tablet.
-- The Login button is reachable on short screens.
-- The application behind Login is completely hidden while logged out.
-- Demo User/header/menu will no longer appear below the Login screen.
-- Decorative Login image is hidden on portrait mobile to reduce page height.
-- Added safe-area spacing for iPhone/iPad.
-- Desktop and landscape Login remain unchanged.
+RISK ANALYSIS UPDATE
+- Moved production year selector beside the Risk Analysis title.
+- Added total guarantee amount loaded by selected production year.
+- Removed all requested explanatory texts.
+- D/E = due debt / total guarantee amount.
+- Baht/ton = (due debt + additional promotion) / contract tons.
+- Revenue = contract tons × total cane price including CCS.
+- Expense = contract tons × cutting/loading/transport cost.
+- Income difference = revenue - expense.
+- Net profit = income difference - due debt - additional promotion.
+- Kept Save entered values and Reset defaults buttons.
+- Responsive on landscape, portrait, tablet and phone.
+
+
+v3.3.2
+- D/E = (รวมหนี้สินครบ Due + ส่งเสริมเพิ่ม) / วงเงินค้ำประกันรวม
+- ปรับฟอนต์ค่า D/E ให้ใช้รูปแบบเดียวกับ KPI Card อื่น
+
+
+v3.3.3
+Created: 2026-07-16T02:52:51
+- Removed the D/E explanation text "หนี้สิน / วงเงินค้ำประกันรวม".
+- D/E card now shows only the title "D/E" and the calculated value.
+- Normalized D/E font size, weight, color and line height to match other KPI cards.
