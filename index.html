@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.20" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.21" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7861,6 +7861,18 @@ body.locked{
   stroke-linejoin:round !important;
   vector-effect:non-scaling-stroke;
 }
+</style><style id="canenext-scenario-profit-kpi-v3321-style">
+#scenario .scenario-profit-kpi{
+  background:#EAF8F0 !important;
+  border-color:#C7E7D5 !important;
+}
+#scenario .scenario-profit-kpi span{
+  color:#356B4E !important;
+}
+#scenario .scenario-profit-kpi b{
+  color:#167248 !important;
+  font-size:16px !important;
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -8171,9 +8183,9 @@ body.locked{
 <div class="analytics-section">
 <h4>Scenario Comparison</h4>
 <table class="table analytics-table" id="scenarioCompareTable">
-<thead><tr><th>Scenario</th><th>ผลผลิต (ตัน/ไร่)</th><th>คาดการณ์ผลผลิตอ้อย</th><th>งบส่งเสริม</th><th>รายได้</th><th>ต้นทุนรวม</th><th>กำไรสุทธิ</th><th>กำไร/ไร่</th></tr></thead>
+<thead><tr><th>Scenario</th><th>ผลผลิต (ตัน/ไร่)</th><th>คาดการณ์ผลผลิตอ้อย</th><th>งบส่งเสริม</th><th>รายได้</th><th>ต้นทุนรวม</th><th>กำไรสุทธิ</th><th>กำไร/ไร่</th><th>กำไร/ตัน</th></tr></thead>
 <tbody>
-<tr><td colspan="8">ยังไม่มีข้อมูล Scenario</td></tr>
+<tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>
 </tbody>
 </table>
 </div>
@@ -8790,7 +8802,8 @@ function renderScenarioCardV2(data){
           <div class="scenario-result-row"><span>รายได้</span><b data-result="revenue">0.00 บาท</b></div>
           <div class="scenario-result-row"><span>ต้นทุนรวม</span><b data-result="totalCost">0.00 บาท</b></div>
           <div class="scenario-result-row"><span>กำไรสุทธิ</span><b data-result="netProfit">0.00 บาท</b></div>
-          <div class="scenario-result-row"><span>กำไร</span><b data-result="profitPerRai">0.00 บาท/ไร่</b></div>
+          <div class="scenario-result-row scenario-profit-kpi"><span>กำไร บาท/ไร่</span><b data-result="profitPerRai">0 บาท/ไร่</b></div>
+          <div class="scenario-result-row scenario-profit-kpi"><span>กำไร บาท/ตัน</span><b data-result="profitPerTon">0 บาท/ตัน</b></div>
         </div>
       </div>
     </div>
@@ -8842,7 +8855,8 @@ function updateScenarioV2(button){
   const harvestCostTotal = totalYield * d.harvestCost;
   const totalCost = promotionCost + waterCost + harvestCostTotal;
   const netProfit = revenue - totalCost;
-  const profitPerRai = netProfit / d.area;
+  const profitPerRai = d.area > 0 ? netProfit / d.area : 0;
+  const profitPerTon = totalYield > 0 ? netProfit / totalYield : 0;
   const guarantee = 5500000;
   const deRatio = guarantee > 0 ? (promotionCost + waterCost) / guarantee : 0;
 
@@ -8869,6 +8883,7 @@ function updateScenarioV2(button){
   setText('totalCost', `${formatMoney0(totalCost)} บาท`);
   setText('netProfit', `${formatMoney0(netProfit)} บาท`);
   setText('profitPerRai', `${formatMoney0(profitPerRai)} บาท/ไร่`);
+  setText('profitPerTon', `${formatMoney0(profitPerTon)} บาท/ตัน`);
 }
 function updateAllScenarios(){
   document.querySelectorAll('.scenario-panel-v2 .scenario-update-btn').forEach(btn=>updateScenarioV2(btn));
@@ -8941,7 +8956,7 @@ function refreshAnalysisTable(){
   const rows = getScenarioAnalyticsData();
 
   if(rows.length === 0){
-    tb.innerHTML = '<tr><td colspan="8">ยังไม่มีข้อมูล Scenario</td></tr>';
+    tb.innerHTML = '<tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>';
     updateAnalyticsSummary([]);
     return;
   }
@@ -8960,6 +8975,7 @@ function refreshAnalysisTable(){
       <td class="${r.totalCost===minCost ? 'analytics-highlight-best' : ''}">${r.totalCostText}</td>
       <td class="${r.netProfit===maxProfit ? 'analytics-highlight-best' : ''}">${r.netProfitText}</td>
       <td>${r.profitPerRaiText}</td>
+      <td>${r.profitPerTonText}</td>
     </tr>
   `).join('');
 
@@ -9168,6 +9184,7 @@ function aiGetScenarioRows(){
       totalCostText:get('totalCost'),
       netProfitText:get('netProfit'),
       profitPerRaiText:get('profitPerRai'),
+        profitPerTonText:get('profitPerTon'),
       yieldPerRai:aiParseMetric(get('yieldPerRai')),
       totalYield:aiParseMetric(get('totalYield')),
       promotion:aiParseMetric(get('promotionCost')),
@@ -9334,6 +9351,7 @@ function dashboardGetRows(){
       totalCostText:get('totalCost'),
       netProfitText:get('netProfit'),
       profitPerRaiText:get('profitPerRai'),
+        profitPerTonText:get('profitPerTon'),
       yield:dashboardParse(get('yieldPerRai')),
       totalYield:dashboardParse(get('totalYield')),
       promotion:dashboardParse(get('promotionCost')),
@@ -11888,13 +11906,15 @@ document.addEventListener('DOMContentLoaded', function(){
         totalCostText:get('totalCost'),
         netProfitText:get('netProfit'),
         profitPerRaiText:get('profitPerRai'),
+        profitPerTonText:get('profitPerTon'),
         yieldPerRai:parseMetric(get('yieldPerRai')),
         totalYield:parseMetric(get('totalYield')),
         promotion:parseMetric(get('promotionCost')),
         revenue:parseMetric(get('revenue')),
         totalCost:parseMetric(get('totalCost')),
         netProfit:parseMetric(get('netProfit')),
-        profitPerRai:parseMetric(get('profitPerRai'))
+        profitPerRai:parseMetric(get('profitPerRai')),
+        profitPerTon:parseMetric(get('profitPerTon'))
       };
     });
   }
@@ -11917,7 +11937,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const rows=scenarioRows();
 
     if(!rows.length){
-      tbody.innerHTML='<tr><td colspan="8">ยังไม่มีข้อมูล Scenario</td></tr>';
+      tbody.innerHTML='<tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>';
       ['bestProfitScenario','bestYieldScenario','lowestCostScenario',
        'bestProfitValue','bestYieldValue','lowestCostValue'].forEach(id=>setText(id,'-'));
       return;
@@ -11937,6 +11957,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <td class="${r.totalCost===minCost?'analytics-highlight-best':''}">${r.totalCostText}</td>
         <td class="${r.netProfit===maxProfit?'analytics-highlight-best':''}">${r.netProfitText}</td>
         <td>${r.profitPerRaiText}</td>
+        <td>${r.profitPerTonText}</td>
       </tr>`).join('');
 
     const bestProfit=[...rows].sort((a,b)=>b.netProfit-a.netProfit)[0];
@@ -12304,6 +12325,7 @@ document.addEventListener('DOMContentLoaded', function(){
         totalCostText:get('totalCost'),
         netProfitText:get('netProfit'),
         profitPerRaiText:get('profitPerRai'),
+        profitPerTonText:get('profitPerTon'),
         yieldPerRai:parseNumber(get('yieldPerRai')),
         totalYield:parseNumber(get('totalYield')),
         promotion:parseNumber(get('promotionCost')),

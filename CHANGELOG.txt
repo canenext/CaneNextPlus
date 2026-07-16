@@ -106,3 +106,14 @@ v3.3.20
 Created: 2026-07-16T09:49:15
 - Display 'ยืนยันสัญญาตัน (ตัน)' as a whole number (no decimal places).
 - Internal calculations remain unchanged.
+
+
+v3.3.21
+Created: 2026-07-16T09:57:54
+- Added Scenario Analysis result: กำไร บาท/ไร่.
+- Added Scenario Analysis result: กำไร บาท/ตัน.
+- กำไร บาท/ไร่ = กำไรสุทธิ / พื้นที่.
+- กำไร บาท/ตัน = กำไรสุทธิ / คาดการณ์ผลผลิตรวม.
+- Both values display as whole numbers with comma separators.
+- Added กำไร/ตัน to Scenario Comparison table.
+- Highlighted both profitability KPI rows.
