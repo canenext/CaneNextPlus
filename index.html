@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.17" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.20" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -8655,8 +8655,8 @@ function scenarioCostDefaults(){
   ];
 }
 function getIrrigationCostPerRai(water){
-  if(water === 'ระบบน้ำหยด') return 2000;
-  if(water === 'ระบบน้ำราด') return 500;
+  if(water === 'ระบบน้ำหยด') return 600;
+  if(water === 'ระบบน้ำราด') return 300;
   return 0;
 }
 function getScenarioDefault(){
@@ -10724,12 +10724,12 @@ document.addEventListener('DOMContentLoaded', function(){
       if(d){
         debtBody.innerHTML=`
           <tr>
-            <td>${fmt(d.old_debt)}</td>
-            <td>${fmt(d.debt_2568_69)}</td>
-            <td>${fmt(d.debt_2569_70)}</td>
-            <td>${fmt(d.debt_2570_71)}</td>
-            <td>${fmt(d.future_debt)}</td>
-            <td><strong>${fmt(d.total_debt)}</strong></td>
+            <td>${Number(d.old_debt||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td>${Number(d.debt_2568_69||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td>${Number(d.debt_2569_70||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td>${Number(d.debt_2570_71||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td>${Number(d.future_debt||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td><strong>${Number(d.total_debt||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</strong></td>
           </tr>`;
       }else emptyRow(debtBody,6,'ไม่พบข้อมูลหนี้สิน');
 
@@ -13382,7 +13382,7 @@ async function loadYear(){
   currentDebt=num(d.data?.yearly_debt?.[y]);
   setVal('riskGuaranteeTotal',money(currentGuarantee,0));
   setVal('riskDueDebt',money(currentDebt,0));
-  setVal('riskContractTon',money(currentContractTon,0));
+  setVal('riskContractTon',Number(currentContractTon||0).toLocaleString('th-TH',{maximumFractionDigits:0}));
   if(scenarios.length===1 && !scenarios[0].tons)scenarios[0].tons=currentContractTon;
   calc();
  }catch(e){console.error('Risk data:',e);setVal('riskGuaranteeTotal','0');setVal('riskDueDebt','0');setVal('riskContractTon','0');calc()}

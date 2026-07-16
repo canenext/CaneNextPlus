@@ -83,3 +83,26 @@ Created: 2026-07-16T09:06:32
 - Icons display on GitHub Pages, desktop, tablet, iPad and phone.
 - Kept the existing 4-column desktop, 2-column tablet and 1-column phone layout.
 - Existing cost calculations, save and reset functions remain unchanged.
+
+
+v3.3.18
+Created: 2026-07-16T09:30:11
+- Business Partner debt values now display as whole numbers with comma separators.
+- Removed decimal places from old debt, yearly debts, future debt and total debt.
+- Risk Analysis debt and obligation values remain whole-number displays.
+- D/E, baht/ton, CCS, cane price, area and ton values retain their existing decimal formats.
+
+
+v3.3.19
+Created: 2026-07-16T09:37:41
+- Updated irrigation system cost calculation.
+- Drip irrigation: 600 baht/rai.
+- Surface irrigation: 300 baht/rai.
+- No irrigation/rainfed: 0 baht/rai.
+- Scenario water-system costs and total-cost calculations use the updated rates.
+
+
+v3.3.20
+Created: 2026-07-16T09:49:15
+- Display 'ยืนยันสัญญาตัน (ตัน)' as a whole number (no decimal places).
+- Internal calculations remain unchanged.
