@@ -8448,14 +8448,14 @@ body.locked{
 <div class="login-form-panel">
 <form class="login-card" onsubmit="handleLogin(event)">
 <h2>เข้าสู่ระบบ</h2>
-<p class="hint">กรอกอีเมลและรหัสผ่าน เพื่อเข้าสู่แพลตฟอร์ม Cane Next Plus+</p>
+<p class="hint">กรอกUserและPassword เพื่อเข้าสู่แพลตฟอร์ม Cane Next Plus+</p>
 <div class="form-group">
-<label for="username">อีเมล</label>
-<input autocomplete="email" id="username" placeholder="กรอกอีเมล" required="" type="email"/>
+<label for="username">User</label>
+<input autocomplete="email" id="username" placeholder="กรอกUser" required="" type="email"/>
 </div>
 <div class="form-group">
-<label for="password">รหัสผ่าน</label>
-<input autocomplete="current-password" id="password" placeholder="กรอกรหัสผ่าน" required="" type="password"/>
+<label for="password">Password</label>
+<input autocomplete="current-password" id="password" placeholder="กรอกPassword" required="" type="password"/>
 </div>
 <button class="btn login-submit" type="submit">เข้าสู่ระบบ</button>
 <div class="demo-note" id="authMessage" style="display:none;"></div>
@@ -8995,11 +8995,11 @@ body.locked{
 <h3 id="umFormTitle">เพิ่มผู้ใช้งาน</h3>
 <div class="um-form-grid">
 <div class="form-group">
-<label for="umEmail">อีเมล</label>
+<label for="umEmail">User</label>
 <input id="umEmail" placeholder="name@example.com" type="email"/>
 </div>
 <div class="form-group" id="umPasswordGroup">
-<label for="umPassword">รหัสผ่านเริ่มต้น</label>
+<label for="umPassword">Passwordเริ่มต้น</label>
 <input id="umPassword" placeholder="อย่างน้อย 8 ตัวอักษร" type="password"/>
 </div>
 <div class="form-group">
@@ -9078,7 +9078,7 @@ body.locked{
 <div class="um-list-toolbar">
 <div class="form-group">
 <label for="umSearch">ค้นหาผู้ใช้งาน</label>
-<input id="umSearch" placeholder="ชื่อ อีเมล รหัสพนักงาน เขต หรือเขตย่อย" type="text"/>
+<input id="umSearch" placeholder="ชื่อ User รหัสพนักงาน เขต หรือเขตย่อย" type="text"/>
 </div>
 <button class="btn secondary" id="umRefreshBtn" type="button">รีเฟรช</button>
 </div>
@@ -9088,7 +9088,7 @@ body.locked{
 <tr>
 <th>รหัสพนักงาน</th>
 <th>ชื่อ-สกุล</th>
-<th>อีเมล</th>
+<th>User</th>
 <th>Role</th>
 <th>เขต</th>
 <th>เขตย่อย</th>
@@ -11078,7 +11078,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const email=document.getElementById('username')?.value.trim() || '';
     const password=document.getElementById('password')?.value || '';
     const button=document.querySelector('.login-submit');
-    if(!email || !password){ setMessage('กรุณากรอกอีเมลและรหัสผ่าน','auth-error'); return; }
+    if(!email || !password){ setMessage('กรุณากรอกUserและPassword','auth-error'); return; }
 
     try{
       button.disabled=true; button.textContent='กำลังเข้าสู่ระบบ...';
@@ -11088,7 +11088,7 @@ document.addEventListener('DOMContentLoaded', function(){
       showApp(data.user);
     }catch(err){
       console.error(err);
-      setMessage('เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบอีเมลและรหัสผ่าน','auth-error');
+      setMessage('เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบUserและPassword','auth-error');
     }finally{
       button.disabled=false; button.textContent='เข้าสู่ระบบ';
     }
@@ -12098,10 +12098,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
       if(!editingId){
         if(!payload.email || !payload.password || !payload.full_name){
-          throw new Error('กรุณากรอกอีเมล รหัสผ่าน และชื่อ-สกุล');
+          throw new Error('กรุณากรอกUser Password และชื่อ-สกุล');
         }
         if(payload.password.length<8){
-          throw new Error('รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร');
+          throw new Error('Passwordต้องมีอย่างน้อย 8 ตัวอักษร');
         }
       }
 
@@ -12142,10 +12142,10 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   async function resetPassword(id){
-    const password=prompt('กำหนดรหัสผ่านใหม่ อย่างน้อย 8 ตัวอักษร');
+    const password=prompt('กำหนดPasswordใหม่ อย่างน้อย 8 ตัวอักษร');
     if(!password) return;
     if(password.length<8){
-      alert('รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร');
+      alert('Passwordต้องมีอย่างน้อย 8 ตัวอักษร');
       return;
     }
 
@@ -12155,10 +12155,10 @@ document.addEventListener('DOMContentLoaded', function(){
     );
 
     if(error){
-      alert('รีเซ็ตรหัสผ่านไม่สำเร็จ');
+      alert('รีเซ็ตPasswordไม่สำเร็จ');
       return;
     }
-    alert('รีเซ็ตรหัสผ่านแล้ว');
+    alert('รีเซ็ตPasswordแล้ว');
   }
 
   function renderUsers(){
@@ -12188,7 +12188,7 @@ document.addEventListener('DOMContentLoaded', function(){
           <td>
             <div class="um-actions">
               <button type="button" onclick="CaneUserAdmin.openEdit('${p.id}')">แก้ไข</button>
-              <button type="button" onclick="CaneUserAdmin.resetPassword('${p.id}')">รหัสผ่าน</button>
+              <button type="button" onclick="CaneUserAdmin.resetPassword('${p.id}')">Password</button>
               <button type="button"
                 class="${p.status==='active'?'danger':''}"
                 onclick="CaneUserAdmin.toggleStatus('${p.id}','${p.status}')">
@@ -12651,7 +12651,7 @@ document.addEventListener('DOMContentLoaded', function(){
 <div aria-labelledby="loginAlertTitle" aria-modal="true" class="login-alert-card" role="alertdialog">
 <div class="login-alert-icon">!</div>
 <h3 id="loginAlertTitle">เข้าสู่ระบบไม่สำเร็จ</h3>
-<p id="loginAlertMessage">อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง</p>
+<p id="loginAlertMessage">UserหรือPasswordไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง</p>
 <button id="loginAlertOk" type="button">ตกลง</button>
 </div>
 </div>
@@ -12701,7 +12701,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const button=document.querySelector('.login-submit');
 
     if(!email || !password){
-      showLoginAlert('กรุณากรอกอีเมลและรหัสผ่านให้ครบถ้วน');
+      showLoginAlert('กรุณากรอกUserและPasswordให้ครบถ้วน');
       return;
     }
 
@@ -12758,9 +12758,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
       const msg=String(err?.message||'').toLowerCase();
       if(msg.includes('invalid login credentials')){
-        showLoginAlert('อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง');
+        showLoginAlert('UserหรือPasswordไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง');
       }else if(msg.includes('email not confirmed')){
-        showLoginAlert('อีเมลนี้ยังไม่ได้ยืนยัน กรุณาติดต่อผู้ดูแลระบบ');
+        showLoginAlert('Userนี้ยังไม่ได้ยืนยัน กรุณาติดต่อผู้ดูแลระบบ');
       }else if(msg.includes('failed to fetch') || msg.includes('network')){
         showLoginAlert('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ กรุณาตรวจสอบอินเทอร์เน็ต');
       }else{
