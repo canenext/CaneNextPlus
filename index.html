@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.4.8" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.4.7" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -8364,26 +8364,6 @@ body.locked{
   .ai-v347-side{grid-template-columns:1fr}
   .ai-v347-kpi-value{font-size:20px}
 }
-</style><style id="manager-zone-assignment-v348-style">
-/* v3.4.8 Manager zone assignment */
-.um-zone-summary-v348{
-  display:none;
-  margin-top:12px;
-  padding:12px 14px;
-  border:1px solid #D8E6F3;
-  border-radius:12px;
-  background:#F7FBFF;
-  color:#294B6D;
-  font-size:13px;
-  line-height:1.6;
-}
-.um-zone-summary-v348.show{display:block}
-.um-zone-summary-v348 strong{color:#083B73}
-.um-zone-checkbox-v348:disabled + label,
-input[type="checkbox"][data-zone]:disabled + label{
-  opacity:.55;
-  cursor:not-allowed;
-}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -8970,7 +8950,7 @@ input[type="checkbox"][data-zone]:disabled + label{
 <option value="manager">Manager — ผู้จัดการเขต</option>
 <option value="admin">Admin — ผู้ดูแลระบบ</option>
 </select>
-</div><div class="form-group um-manager-zones-wrap" hidden="" id="umManagerZonesWrap"><label>เขตที่รับผิดชอบ</label><div class="um-zone-check-grid" id="umManagerZones"><label><input type="checkbox" value="01"> 01</label><label><input type="checkbox" value="02"> 02</label><label><input type="checkbox" value="03"> 03</label><label><input type="checkbox" value="04"> 04</label><label><input type="checkbox" value="05"> 05</label><label><input type="checkbox" value="06"> 06</label><label><input type="checkbox" value="07"> 07</label><label><input type="checkbox" value="08"> 08</label><label><input type="checkbox" value="09"> 09</label><label><input type="checkbox" value="10"> 10</label><label><input type="checkbox" value="11"> 11</label><label><input type="checkbox" value="12"> 12</label><label><input type="checkbox" value="13"> 13</label><label><input type="checkbox" value="14"> 14</label><label><input type="checkbox" value="15"> 15</label><label><input type="checkbox" value="90"> 90</label></div><small class="um-help">เลือกได้มากกว่า 1 เขตสำหรับ Manager</small></div>
+</div><div class="form-group um-manager-zones-wrap" hidden="" id="umManagerZonesWrap"><label>เขตที่รับผิดชอบ</label><div class="um-zone-check-grid" id="umManagerZones"><label>01</label><label>02</label><label>03</label><label>04</label><label>05</label><label>06</label><label>07</label><label>08</label><label>09</label><label>10</label><label>11</label><label>12</label><label>13</label><label>14</label><label>15</label><label>90</label></div><small class="um-help">เลือกได้มากกว่า 1 เขตสำหรับ Manager</small></div>
 <div class="form-group">
 <label for="umZone">เขต</label>
 <input id="umZone" placeholder="เช่น 05" type="text"/>
@@ -14552,193 +14532,6 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
       </div>
     `;
   };
-})();
-</script><script id="manager-zone-assignment-v348-js">
-(function(){
-  const roleWords = {
-    manager:['manager','ผู้จัดการ'],
-    admin:['admin','administrator','ผู้ดูแลระบบ'],
-    user:['user','staff','เจ้าหน้าที่','นักส่งเสริม']
-  };
-
-  function norm(v){ return String(v||'').trim().toLowerCase(); }
-
-  function detectRoleElement(){
-    const candidates = [
-      '#userRole','#role','#roleSelect','#umRole',
-      'select[name="role"]','select[name="userRole"]',
-      '[data-field="role"] select','.user-role-select'
-    ];
-    for(const s of candidates){
-      const el=document.querySelector(s);
-      if(el) return el;
-    }
-    const selects=[...document.querySelectorAll('select')];
-    return selects.find(s=>{
-      const text=[...s.options].map(o=>norm(o.value+' '+o.textContent)).join(' ');
-      return text.includes('manager')||text.includes('admin')||text.includes('ผู้จัดการ');
-    })||null;
-  }
-
-  function currentRole(roleEl){
-    if(!roleEl) return '';
-    const opt=roleEl.options?.[roleEl.selectedIndex];
-    return norm((roleEl.value||'')+' '+(opt?.textContent||''));
-  }
-
-  function hasRole(role,kind){
-    return roleWords[kind].some(w=>role.includes(w));
-  }
-
-  function zoneCheckboxes(){
-    const explicit=[
-      ...document.querySelectorAll(
-        'input[type="checkbox"][data-zone],'+
-        'input[type="checkbox"][name*="zone"],'+
-        'input[type="checkbox"][id*="zone"],'+
-        '.zone-checkbox input[type="checkbox"],'+
-        '.zone-list input[type="checkbox"],'+
-        '.responsible-zone input[type="checkbox"]'
-      )
-    ];
-    const all=[...document.querySelectorAll('input[type="checkbox"]')];
-    const inferred=all.filter(cb=>{
-      const label=cb.id?document.querySelector(`label[for="${CSS.escape(cb.id)}"]`):null;
-      const text=norm((label?.textContent||'')+' '+(cb.closest('label')?.textContent||'')+' '+(cb.parentElement?.textContent||''));
-      return /เขต\s*(0[1-9]|1[0-5]|90)\b/.test(text) || /\bzone\s*(0[1-9]|1[0-5]|90)\b/.test(text);
-    });
-    return [...new Set([...explicit,...inferred])];
-  }
-
-  function subzoneCheckboxes(){
-    return [...document.querySelectorAll(
-      'input[type="checkbox"][data-subzone],'+
-      'input[type="checkbox"][name*="subzone"],'+
-      'input[type="checkbox"][id*="subzone"],'+
-      '.subzone-checkbox input[type="checkbox"],'+
-      '.subzone-list input[type="checkbox"]'
-    )];
-  }
-
-  function ensureSummary(roleEl,zones){
-    let summary=document.querySelector('.um-zone-summary-v348');
-    if(!summary){
-      summary=document.createElement('div');
-      summary.className='um-zone-summary-v348';
-      const anchor=zones[0]?.closest('.form-group,.field,.input-group,.card,.panel,div') || roleEl?.parentElement;
-      (anchor?.parentElement||roleEl?.parentElement||document.body).appendChild(summary);
-    }
-    return summary;
-  }
-
-  function zoneName(cb){
-    const label=cb.id?document.querySelector(`label[for="${CSS.escape(cb.id)}"]`):null;
-    let text=(label?.textContent||cb.closest('label')?.textContent||cb.parentElement?.textContent||cb.value||'').trim();
-    const match=text.match(/(?:เขต|zone)\s*([0-9]{2})/i);
-    return match ? `เขต ${match[1]}` : text;
-  }
-
-  function updateSummary(roleEl,zones){
-    const summary=ensureSummary(roleEl,zones);
-    const role=currentRole(roleEl);
-    const selected=zones.filter(z=>z.checked).map(zoneName);
-    if(hasRole(role,'admin')){
-      summary.innerHTML='<strong>สิทธิ์การเข้าถึง:</strong> Admin สามารถเข้าถึงทุกเขต';
-      summary.classList.add('show');
-    }else if(hasRole(role,'manager')){
-      summary.innerHTML='<strong>เขตที่รับผิดชอบ:</strong> '+(selected.length?selected.join(', '):'ยังไม่ได้เลือกเขต')+
-        `<br><strong>รวม:</strong> ${selected.length} เขต`;
-      summary.classList.add('show');
-    }else if(hasRole(role,'user')){
-      summary.innerHTML='<strong>เขตที่รับผิดชอบ:</strong> '+(selected[0]||'ยังไม่ได้เลือกเขต');
-      summary.classList.add('show');
-    }else{
-      summary.classList.remove('show');
-    }
-  }
-
-  function applyRoleRules(){
-    const roleEl=detectRoleElement();
-    if(!roleEl) return;
-    const role=currentRole(roleEl);
-    const zones=zoneCheckboxes();
-    const subzones=subzoneCheckboxes();
-
-    if(hasRole(role,'manager')){
-      // Core fix: Manager can select multiple zones.
-      zones.forEach(cb=>{
-        cb.disabled=false;
-        cb.removeAttribute('disabled');
-        cb.classList.add('um-zone-checkbox-v348');
-      });
-      subzones.forEach(cb=>{
-        cb.disabled=false;
-        cb.removeAttribute('disabled');
-      });
-    }else if(hasRole(role,'admin')){
-      zones.forEach(cb=>{ cb.checked=false; cb.disabled=true; });
-      subzones.forEach(cb=>{ cb.checked=false; cb.disabled=true; });
-    }else if(hasRole(role,'user')){
-      zones.forEach(cb=>{
-        cb.disabled=false;
-        cb.removeAttribute('disabled');
-      });
-      // Limit User to one zone, while Manager remains multi-zone.
-      zones.forEach(cb=>{
-        if(!cb.dataset.v348Bound){
-          cb.addEventListener('change',()=>{
-            const current=currentRole(roleEl);
-            if(hasRole(current,'user') && cb.checked){
-              zoneCheckboxes().forEach(other=>{ if(other!==cb) other.checked=false; });
-            }
-            updateSummary(roleEl,zoneCheckboxes());
-          });
-          cb.dataset.v348Bound='1';
-        }
-      });
-      subzones.forEach(cb=>{ cb.disabled=false; cb.removeAttribute('disabled'); });
-    }
-
-    zones.forEach(cb=>{
-      if(!cb.dataset.v348SummaryBound){
-        cb.addEventListener('change',()=>updateSummary(roleEl,zoneCheckboxes()));
-        cb.dataset.v348SummaryBound='1';
-      }
-    });
-
-    updateSummary(roleEl,zones);
-  }
-
-  function boot(){
-    const roleEl=detectRoleElement();
-    if(roleEl && !roleEl.dataset.v348RoleBound){
-      roleEl.addEventListener('change',()=>setTimeout(applyRoleRules,0));
-      roleEl.dataset.v348RoleBound='1';
-    }
-    applyRoleRules();
-
-    // Re-apply after user form/modal content is rendered or an existing user is loaded.
-    const root=document.querySelector('#user-management,.user-management-page,[data-page="user-management"],body');
-    if(root && !root.dataset.v348Observed){
-      const obs=new MutationObserver(()=>applyRoleRules());
-      obs.observe(root,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled','checked','value']});
-      root.dataset.v348Observed='1';
-    }
-  }
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',boot);
-  }else{
-    boot();
-  }
-
-  document.addEventListener('click',e=>{
-    const text=norm(e.target?.textContent);
-    if(text.includes('จัดการผู้ใช้งาน')||text.includes('user management')||text.includes('แก้ไขผู้ใช้')||text.includes('เพิ่มผู้ใช้')){
-      setTimeout(boot,80);
-      setTimeout(applyRoleRules,250);
-    }
-  });
 })();
 </script></body>
 </html>
