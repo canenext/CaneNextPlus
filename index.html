@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.4.5" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.4.6" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -8161,7 +8161,7 @@ body.locked{
 .ai-decision-kicker{
   font-size:12px;
   font-weight:800;
-  opacity:.82;
+  opacity:1;color:#EAF4FF;
   margin-bottom:8px;
 }
 .ai-decision-card h4{
@@ -8170,11 +8170,11 @@ body.locked{
   font-size:21px !important;
   font-weight:900 !important;
 }
-.ai-decision-card p{
+.ai-decision-card p{color:#FFF !important;
   margin:0;
   line-height:1.65;
   font-size:14px;
-  opacity:.95;
+  opacity:1;color:#FFF;
 }
 .ai-decision-amount{
   display:block;
@@ -14491,25 +14491,6 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
             </div>
           </div>
 
-          <div class="ai-panel">
-            <div class="ai-panel-head"><i class="fa-solid fa-shield-halved"></i> วิเคราะห์ความเสี่ยง</div>
-            <div class="ai-panel-body">
-              <div class="ai-risk-line">
-                <div class="ai-risk-name">ผลผลิต</div>
-                <div class="ai-risk-bar"><div class="ai-risk-fill" style="width:${yieldRisk[1]}%"></div></div>
-                <div class="ai-risk-level">${yieldRisk[0]}</div>
-              </div>
-              <div class="ai-risk-line">
-                <div class="ai-risk-name">หนี้และ D/E</div>
-                <div class="ai-risk-bar"><div class="ai-risk-fill" style="width:${debtRisk[1]}%"></div></div>
-                <div class="ai-risk-level">${debtRisk[0]}</div>
-              </div>
-              <div class="ai-risk-line">
-                <div class="ai-risk-name">กำไรและต้นทุน</div>
-                <div class="ai-risk-bar"><div class="ai-risk-fill" style="width:${profitRisk[1]}%"></div></div>
-                <div class="ai-risk-level">${profitRisk[0]}</div>
-              </div>
-            </div>
           </div>
 
           <div class="ai-panel">
