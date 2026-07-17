@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.4.6" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.4.8" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -8050,295 +8050,339 @@ body.locked{
 </style>
 <style>
 #dashboard, .dashboard-page, [data-page="dashboard"], [data-menu="dashboard"], a[href*="dashboard"]{display:none!important;}
-</style><style id="ai-recommendation-center-v345">
-#ai-recommendation.ai-center-page{
-  padding-top:16px !important;
+</style><style id="ai-recommendation-v347-style">
+#ai-recommendation.ai-v347-page{
+  padding-top:14px!important;
 }
-.ai-center-header{
+.ai-v347-header{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
-  gap:20px;
+  gap:18px;
   padding:22px 24px;
   margin-bottom:18px;
-  background:linear-gradient(135deg,#F7FBFF 0%,#EDF6FF 100%);
-  border:1px solid #CFE0F1;
+  border:1px solid #D6E5F3;
   border-radius:20px;
+  background:linear-gradient(135deg,#F8FBFF 0%,#EEF6FF 100%);
 }
-.ai-center-eyebrow{
+.ai-v347-eyebrow{
   display:flex;
   align-items:center;
   gap:8px;
   color:#0B5CAD;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.02em;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.04em;
   margin-bottom:7px;
 }
-.ai-center-header h3{
-  margin:0 0 7px !important;
-  color:#083B73 !important;
-  font-size:25px !important;
-  font-weight:900 !important;
+.ai-v347-header h3{
+  margin:0 0 7px!important;
+  color:#083B73!important;
+  font-size:24px!important;
+  font-weight:900!important;
 }
-.ai-center-header p{
+.ai-v347-header p{
   margin:0;
   color:#5B6F86;
   font-size:14px;
   line-height:1.6;
 }
-.ai-center-status{
+.ai-v347-ready{
   display:flex;
   align-items:center;
   gap:8px;
-  color:#46617E;
-  font-size:13px;
-  font-weight:700;
-  white-space:nowrap;
   padding:8px 12px;
-  background:#fff;
   border:1px solid #D5E6F8;
   border-radius:999px;
+  background:#fff;
+  color:#46617E;
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
 }
-.ai-status-dot{
+.ai-v347-ready .dot{
   width:9px;height:9px;border-radius:50%;
-  background:#22A06B;
-  box-shadow:0 0 0 4px rgba(34,160,107,.12);
+  background:#1FA971;
+  box-shadow:0 0 0 4px rgba(31,169,113,.12);
 }
-.ai-center-layout{
+.ai-v347-empty{
+  padding:42px 24px;
+  text-align:center;
+  border:1px dashed #BFD3E7;
+  border-radius:18px;
+  background:#F8FBFF;
+  color:#5B6F86;
+  font-weight:700;
+}
+.ai-v347-layout{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 320px;
+  grid-template-columns:minmax(0,1fr) 340px;
   gap:18px;
   align-items:start;
 }
-.ai-center-main{
+.ai-v347-main{
   display:grid;
   gap:16px;
 }
-.ai-center-side{
+.ai-v347-side{
   display:grid;
   gap:16px;
   position:sticky;
   top:16px;
 }
-.ai-hero-grid{
+.ai-v347-kpis{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:12px;
 }
-.ai-metric-card{
-  background:#fff;
-  border:1px solid #D5E6F8;
-  border-radius:16px;
-  padding:15px 16px;
+.ai-v347-kpi{
   min-width:0;
+  padding:16px;
+  border:1px solid #D8E6F3;
+  border-radius:16px;
+  background:#fff;
 }
-.ai-metric-label{
-  color:#5B6F86;
+.ai-v347-kpi-label{
+  color:#667A90;
   font-size:12px;
-  font-weight:700;
-  margin-bottom:8px;
+  font-weight:800;
+  margin-bottom:7px;
 }
-.ai-metric-value{
+.ai-v347-kpi-value{
   color:#083B73;
   font-size:22px;
   font-weight:900;
-  line-height:1.2;
+  line-height:1.25;
   overflow-wrap:anywhere;
 }
-.ai-metric-note{
+.ai-v347-kpi-note{
   margin-top:6px;
-  color:#6E8298;
+  color:#7A8EA3;
   font-size:12px;
-  line-height:1.45;
+  line-height:1.4;
 }
-.ai-decision-card{
-  background:linear-gradient(135deg,#0B5CAD,#083B73);
-  color:#fff;
-  border-radius:20px;
-  padding:20px;
-}
-.ai-decision-kicker{
-  font-size:12px;
-  font-weight:800;
-  opacity:1;color:#EAF4FF;
-  margin-bottom:8px;
-}
-.ai-decision-card h4{
-  margin:0 0 10px !important;
-  color:#fff !important;
-  font-size:21px !important;
-  font-weight:900 !important;
-}
-.ai-decision-card p{color:#FFF !important;
-  margin:0;
-  line-height:1.65;
-  font-size:14px;
-  opacity:1;color:#FFF;
-}
-.ai-decision-amount{
-  display:block;
-  margin-top:14px;
-  font-size:27px;
-  font-weight:900;
-}
-.ai-confidence{
-  margin-top:15px;
-  display:grid;
-  grid-template-columns:1fr auto;
-  align-items:center;
-  gap:10px;
-  font-size:12px;
-  font-weight:700;
-}
-.ai-confidence-track{
-  grid-column:1/-1;
-  height:7px;
-  border-radius:999px;
-  background:rgba(255,255,255,.2);
+.ai-v347-panel{
   overflow:hidden;
-}
-.ai-confidence-fill{
-  height:100%;
-  border-radius:999px;
-  background:#fff;
-}
-.ai-panel{
-  background:#fff;
-  border:1px solid #D5E6F8;
+  border:1px solid #D8E6F3;
   border-radius:18px;
-  overflow:hidden;
+  background:#fff;
 }
-.ai-panel-head{
+.ai-v347-panel-head{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
   padding:14px 17px;
-  background:#F5F9FE;
-  border-bottom:1px solid #E1ECF7;
+  border-bottom:1px solid #E5EEF7;
+  background:#F6FAFE;
   color:#083B73;
-  font-size:16px;
+  font-size:15px;
   font-weight:900;
 }
-.ai-panel-body{
+.ai-v347-panel-body{
   padding:16px 18px;
 }
-.ai-recommend-grid{
+.ai-v347-summary-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
 }
-.ai-recommend-item{
-  border:1px solid #E0EBF6;
-  border-radius:14px;
+.ai-v347-summary-item{
   padding:14px;
+  border:1px solid #E1EBF5;
+  border-radius:14px;
   background:#fff;
 }
-.ai-recommend-item strong{
+.ai-v347-summary-item strong{
   display:block;
-  color:#083B73;
-  font-size:14px;
   margin-bottom:6px;
+  color:#083B73;
+  font-size:13px;
 }
-.ai-recommend-item p{
+.ai-v347-summary-item p{
   margin:0;
   color:#46617E;
   font-size:13px;
   line-height:1.6;
 }
-.ai-risk-line{
-  display:grid;
-  grid-template-columns:140px minmax(0,1fr) auto;
-  gap:12px;
-  align-items:center;
-  padding:10px 0;
-  border-bottom:1px solid #EDF2F7;
+.ai-v347-decision{
+  padding:20px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#0B5CAD 0%,#083B73 100%);
+  color:#fff;
 }
-.ai-risk-line:last-child{border-bottom:0}
-.ai-risk-name{color:#46617E;font-size:13px;font-weight:700}
-.ai-risk-bar{height:8px;background:#EDF3F8;border-radius:999px;overflow:hidden}
-.ai-risk-fill{height:100%;border-radius:999px;background:#0B5CAD}
-.ai-risk-level{font-size:12px;font-weight:900;color:#083B73}
-.ai-action-list{
+.ai-v347-decision .caption{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.04em;
+  color:#D9EDFF;
+  margin-bottom:8px;
+}
+.ai-v347-decision h4{
+  margin:0 0 10px!important;
+  color:#fff!important;
+  font-size:21px!important;
+  font-weight:900!important;
+}
+.ai-v347-decision p{
+  margin:0;
+  color:#fff!important;
+  font-size:13px;
+  line-height:1.65;
+}
+.ai-v347-decision .amount{
+  display:block;
+  margin-top:14px;
+  color:#fff;
+  font-size:26px;
+  font-weight:900;
+}
+.ai-v347-progress{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+  margin-top:15px;
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+}
+.ai-v347-progress-track{
+  grid-column:1/-1;
+  height:7px;
+  overflow:hidden;
+  border-radius:999px;
+  background:rgba(255,255,255,.22);
+}
+.ai-v347-progress-fill{
+  height:100%;
+  border-radius:999px;
+  background:#fff;
+}
+.ai-v347-actions{
   display:grid;
   gap:10px;
 }
-.ai-action-item{
+.ai-v347-action{
   display:grid;
   grid-template-columns:24px minmax(0,1fr);
   gap:10px;
   align-items:start;
   padding:11px 12px;
-  border:1px solid #E0EBF6;
+  border:1px solid #E1EBF5;
   border-radius:12px;
   background:#fff;
 }
-.ai-action-item input{
+.ai-v347-action input{
   margin-top:2px;
-  width:17px;height:17px;
+  width:17px;
+  height:17px;
 }
-.ai-action-item label{
+.ai-v347-action label{
   color:#294B6D;
   font-size:13px;
   line-height:1.55;
-  cursor:pointer;
 }
-.ai-scenario-table{
+.ai-v347-table-wrap{
   width:100%;
-  border-collapse:collapse;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.ai-v347-table{
+  width:100%;
   min-width:720px;
+  border-collapse:collapse;
 }
-.ai-scenario-table th,
-.ai-scenario-table td{
-  padding:10px 12px !important;
-  border-bottom:1px solid #E5EDF5;
+.ai-v347-table th,
+.ai-v347-table td{
+  padding:10px 12px!important;
+  border-bottom:1px solid #E8EFF6;
   text-align:right;
-  font-size:13px;
   white-space:nowrap;
+  font-size:13px;
 }
-.ai-scenario-table th:first-child,
-.ai-scenario-table td:first-child{text-align:left}
-.ai-scenario-table th{
-  background:#F5F9FE;
+.ai-v347-table th:first-child,
+.ai-v347-table td:first-child{
+  text-align:left;
+}
+.ai-v347-table th{
+  background:#F6FAFE;
   color:#083B73;
   font-weight:900;
 }
-.ai-best-row{background:#F1F8FF}
-.ai-badge{
+.ai-v347-recommended{
+  background:#F0F7FF;
+}
+.ai-v347-badge{
   display:inline-flex;
   align-items:center;
-  padding:4px 8px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:900;
   margin-left:6px;
+  padding:3px 7px;
+  border-radius:999px;
+  background:#E7F7EF;
+  color:#137A50;
+  font-size:10px;
+  font-weight:900;
 }
-.ai-badge.safe{background:#E8F7F0;color:#137A50}
-.ai-badge.warn{background:#FFF4D9;color:#9A6500}
-.ai-advisor-empty{
-  background:#F7FBFF !important;
-  border:1px dashed #BFD3E7 !important;
-  border-radius:18px !important;
-  padding:40px 24px !important;
-  text-align:center !important;
-  color:#5B6F86 !important;
-  font-weight:700 !important;
+.ai-v347-mini{
+  display:grid;
+  gap:9px;
+}
+.ai-v347-mini-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:center;
+  padding-bottom:9px;
+  border-bottom:1px solid #EDF2F7;
+}
+.ai-v347-mini-row:last-child{
+  padding-bottom:0;
+  border-bottom:0;
+}
+.ai-v347-mini-row span:first-child{
+  color:#60758A;
+  font-size:12px;
+  font-weight:700;
+}
+.ai-v347-mini-row span:last-child{
+  color:#083B73;
+  font-size:13px;
+  font-weight:900;
+  text-align:right;
 }
 @media(max-width:1100px){
-  .ai-center-layout{grid-template-columns:1fr}
-  .ai-center-side{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
-  .ai-hero-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ai-v347-layout{grid-template-columns:1fr}
+  .ai-v347-side{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ai-v347-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:700px){
-  .ai-center-header{display:block;padding:18px}
-  .ai-center-status{margin-top:14px;width:max-content;max-width:100%;white-space:normal}
-  .ai-center-header h3{font-size:22px !important}
-  .ai-hero-grid,
-  .ai-recommend-grid,
-  .ai-center-side{grid-template-columns:1fr}
-  .ai-risk-line{grid-template-columns:110px minmax(0,1fr);gap:8px}
-  .ai-risk-level{grid-column:2;text-align:right}
-  .ai-metric-value{font-size:20px}
+  .ai-v347-header{display:block;padding:18px}
+  .ai-v347-ready{margin-top:14px;width:max-content;max-width:100%;white-space:normal}
+  .ai-v347-header h3{font-size:21px!important}
+  .ai-v347-kpis,
+  .ai-v347-summary-grid,
+  .ai-v347-side{grid-template-columns:1fr}
+  .ai-v347-kpi-value{font-size:20px}
+}
+</style><style id="manager-zone-assignment-v348-style">
+/* v3.4.8 Manager zone assignment */
+.um-zone-summary-v348{
+  display:none;
+  margin-top:12px;
+  padding:12px 14px;
+  border:1px solid #D8E6F3;
+  border-radius:12px;
+  background:#F7FBFF;
+  color:#294B6D;
+  font-size:13px;
+  line-height:1.6;
+}
+.um-zone-summary-v348.show{display:block}
+.um-zone-summary-v348 strong{color:#083B73}
+.um-zone-checkbox-v348:disabled + label,
+input[type="checkbox"][data-zone]:disabled + label{
+  opacity:.55;
+  cursor:not-allowed;
 }
 </style></head>
 <body class="locked">
@@ -8821,17 +8865,22 @@ body.locked{
 </div>
 </div>
 </section>
-<section class="section app-page ai-recommendation-page ai-center-page" id="ai-recommendation"><div class="ai-center-header">
+<section class="section app-page ai-recommendation-page ai-v347-page" id="ai-recommendation">
+<div class="ai-v347-header">
 <div>
-<div class="ai-center-eyebrow"><i class="fa-solid fa-robot"></i> AI Decision Support Center</div>
-<h3>AI Recommendation</h3>
-<p>วิเคราะห์ข้อมูล Scenario เพื่อช่วยวางแผนการส่งเสริม ผลผลิต ต้นทุน กำไร และความเสี่ยง</p>
+<div class="ai-v347-eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> AI RECOMMENDATION</div>
+<h3>ศูนย์ช่วยตัดสินใจด้านการส่งเสริม</h3>
+<p>สรุปข้อมูลสำคัญจาก Scenario Analysis เพื่อช่วยเลือกแนวทางที่เหมาะสมที่สุด</p>
 </div>
-<div class="ai-center-status">
-<span class="ai-status-dot"></span>
-<span>พร้อมวิเคราะห์เมื่อมีข้อมูล Scenario</span>
+<div class="ai-v347-ready">
+<span class="dot"></span>
+<span>พร้อมวิเคราะห์เมื่อมี Scenario</span>
 </div>
-</div><div class="ai-advisor-empty" id="aiAdvisorContent">กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติจากข้อมูล Scenario Analysis</div></section>
+</div>
+<div class="ai-v347-empty" id="aiAdvisorContent">
+  กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติ
+</div>
+</section>
 <section class="section app-page data-management-page" id="data-management">
 <div class="dm-card">
 <div class="dm-heading-row">
@@ -11960,8 +12009,9 @@ document.addEventListener('DOMContentLoaded', function(){
         full_name:value('umFullName'),
         employee_code:value('umEmployeeCode'),
         role:value('umRole'),
-        zone:value('umZone')||null,
-        subzone:value('umSubzone')||null,
+        zones:(window.CANENEXT_MANAGER_ZONES||[]),
+        zone:(String(value('umRole')).toLowerCase()==='manager'?null:(value('umZone')||null)),
+        subzone:(String(value('umRole')).toLowerCase()==='manager'?null:(value('umSubzone')||null)),
         status:value('umStatus'),
         manager_zones: window.CaneManagerZones?.get?.() || []
       };
@@ -14345,60 +14395,37 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
   });
 })();
 </script>
-<script id="ai-recommendation-center-v345-js">
+<script id="ai-recommendation-v347-js">
 (function(){
-  function num(text){
-    return Number(String(text||'').replace(/[^0-9.-]/g,''))||0;
-  }
-  function money(v){
-    return Number(v||0).toLocaleString('th-TH',{maximumFractionDigits:0})+' บาท';
-  }
-  function dec(v){
-    return Number(v||0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
-  }
-  function rows(){
-    return [...document.querySelectorAll('.scenario-panel-v2')].map((card,index)=>{
+  function n(v){return Number(String(v||'').replace(/[^0-9.-]/g,''))||0}
+  function money(v){return Number(v||0).toLocaleString('th-TH',{maximumFractionDigits:0})+' บาท'}
+  function dec(v){return Number(v||0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function scenarios(){
+    return [...document.querySelectorAll('.scenario-panel-v2')].map((card,i)=>{
       const get=k=>card.querySelector(`[data-result="${k}"]`)?.textContent||'-';
-      const title=card.querySelector('.scenario-title')?.textContent||`Scenario ที่ ${index+1}`;
-      const water=card.querySelector('[data-key="water"]')?.value||'-';
       return {
-        title,water,
-        yieldText:get('yieldPerRai'),
-        totalYieldText:get('totalYield'),
-        promotionText:get('promotionCost'),
-        deText:get('deRatio'),
-        netProfitText:get('netProfit'),
-        profitPerRaiText:get('profitPerRai'),
+        title:card.querySelector('.scenario-title')?.textContent||`Scenario ที่ ${i+1}`,
+        yield:n(get('yieldPerRai')),
+        totalYield:get('totalYield'),
+        totalCost:n(get('totalCost')),
         totalCostText:get('totalCost'),
-        yield:num(get('yieldPerRai')),
-        totalYield:num(get('totalYield')),
-        promotion:num(get('promotionCost')),
-        de:num(get('deRatio')),
-        netProfit:num(get('netProfit')),
-        profitPerRai:num(get('profitPerRai')),
-        totalCost:num(get('totalCost'))
-      };
-    });
+        netProfit:n(get('netProfit')),
+        netProfitText:get('netProfit'),
+        profitPerRai:n(get('profitPerRai')),
+        profitPerRaiText:get('profitPerRai'),
+        de:n(get('deRatio')),
+        deText:get('deRatio'),
+        promotionText:get('promotionCost'),
+        water:card.querySelector('[data-key="water"]')?.value||'-'
+      }
+    })
   }
-  function riskLabel(value,low,high){
-    if(value<=low) return ['ต่ำ',28];
-    if(value<=high) return ['ปานกลาง',58];
-    return ['สูง',88];
+  function action(id,text){
+    return `<div class="ai-v347-action"><input type="checkbox" id="${id}"><label for="${id}">${text}</label></div>`
   }
-  function getFarmer(){
-    const f=window.CANENEXT_CURRENT_FARMER||{};
-    return f.name||f.farmer_name||document.getElementById('bpName')?.value||'ยังไม่ได้เลือกชาวไร่';
-  }
-  function actionItem(id,text){
-    return `<div class="ai-action-item">
-      <input type="checkbox" id="${id}">
-      <label for="${id}">${text}</label>
-    </div>`;
-  }
-
   window.refreshAIAdvisor=function(){
-    const content=document.getElementById('aiAdvisorContent');
-    if(!content) return;
+    const box=document.getElementById('aiAdvisorContent');
+    if(!box)return;
 
     if(typeof window.updateScenarioV2==='function'){
       document.querySelectorAll('.scenario-panel-v2 .scenario-update-btn').forEach(btn=>{
@@ -14406,109 +14433,81 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
       });
     }
 
-    const data=rows();
+    const data=scenarios();
     if(!data.length){
-      content.className='ai-advisor-empty';
-      content.innerHTML='<i class="fa-solid fa-wand-magic-sparkles" style="font-size:26px;color:#0B5CAD;margin-bottom:12px"></i><br>ยังไม่มีข้อมูล Scenario<br><span style="font-size:13px;font-weight:500">กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติ</span>';
+      box.className='ai-v347-empty';
+      box.innerHTML='<i class="fa-solid fa-robot" style="font-size:26px;color:#0B5CAD;margin-bottom:12px"></i><br>ยังไม่มีข้อมูล Scenario<br><span style="font-size:13px;font-weight:500">กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติ</span>';
       return;
     }
 
-    const safe=data.filter(r=>r.de<=1);
+    const safe=data.filter(x=>x.de<=1);
     const recommended=[...(safe.length?safe:data)].sort((a,b)=>b.netProfit-a.netProfit)[0];
     const bestYield=[...data].sort((a,b)=>b.yield-a.yield)[0];
     const lowestCost=[...data].sort((a,b)=>a.totalCost-b.totalCost)[0];
-    const highestRisk=[...data].sort((a,b)=>b.de-a.de)[0];
+    const confidence=Math.max(60,Math.min(96,Math.round(84+(recommended.de<=1?7:-10)+(recommended.netProfit>0?5:-12))));
+    const score=Math.max(0,Math.min(100,Math.round(72+(recommended.de<=1?10:-12)+(recommended.netProfit>0?8:-10))));
+    const priority=recommended.de>1?'สูง':recommended.yield<10?'ปานกลาง':'ปกติ';
 
-    const confidence=Math.max(62,Math.min(96,
-      Math.round(82 + (recommended.de<=1?7:-8) + (recommended.netProfit>0?5:-10))
-    ));
-    const overallScore=Math.max(0,Math.min(100,
-      Math.round(70 + Math.min(recommended.profitPerRai/500,15) + (recommended.de<=1?10:-12))
-    ));
-    const priority=recommended.de>1||recommended.netProfit<0?'สูง':recommended.yield<10?'ปานกลาง':'ปกติ';
-    const yieldRisk=riskLabel(recommended.yield<10?80:recommended.yield<12?50:25,30,65);
-    const debtRisk=riskLabel(recommended.de*70,35,70);
-    const profitRisk=riskLabel(recommended.netProfit<0?90:recommended.profitPerRai<2000?60:25,35,70);
+    const financeText=recommended.de>1
+      ? 'ควรทบทวนวงเงินค้ำประกันและลดรายการส่งเสริมที่ไม่จำเป็นก่อนอนุมัติ'
+      : 'สามารถพิจารณาส่งเสริมตามแผนได้ โดยควบคุมวงเงินไม่ให้เกินกรอบที่กำหนด';
 
-    const investmentAdvice=recommended.de>1
-      ? 'ควรลดรายการส่งเสริมที่ไม่จำเป็น และทบทวนวงเงินค้ำประกันก่อนอนุมัติ'
-      : recommended.netProfit>0
-        ? 'สามารถพิจารณาส่งเสริมตาม Scenario ที่แนะนำ โดยควบคุมงบไม่ให้เกินกรอบ'
-        : 'ยังไม่ควรเพิ่มวงเงินส่งเสริมจนกว่าจะปรับต้นทุนและผลตอบแทนให้เหมาะสม';
+    const yieldText=recommended.yield<10
+      ? 'ผลผลิตต่ำกว่าเป้าหมาย ควรเร่งติดตามน้ำ ปุ๋ย และสภาพแปลง'
+      : 'ผลผลิตอยู่ในระดับเหมาะสม ควรรักษามาตรฐานและติดตามผลจริงต่อเนื่อง';
 
-    const waterAdvice=recommended.water&&recommended.water!=='-'
-      ? `รูปแบบการให้น้ำของแผนที่แนะนำคือ ${recommended.water} ควรติดตามความชื้นและต้นทุนจริง`
-      : 'ควรประเมินแหล่งน้ำและความเสี่ยงฝนทิ้งช่วงก่อนเลือกระบบน้ำ';
-
-    content.className='';
-    content.innerHTML=`
-      <div class="ai-center-layout">
-        <div class="ai-center-main">
-          <div class="ai-hero-grid">
-            <div class="ai-metric-card">
-              <div class="ai-metric-label">AI Score</div>
-              <div class="ai-metric-value">${overallScore}/100</div>
-              <div class="ai-metric-note">คะแนนความเหมาะสมโดยรวม</div>
+    box.className='';
+    box.innerHTML=`
+      <div class="ai-v347-layout">
+        <div class="ai-v347-main">
+          <div class="ai-v347-kpis">
+            <div class="ai-v347-kpi">
+              <div class="ai-v347-kpi-label">AI Score</div>
+              <div class="ai-v347-kpi-value">${score}/100</div>
+              <div class="ai-v347-kpi-note">คะแนนความเหมาะสมโดยรวม</div>
             </div>
-            <div class="ai-metric-card">
-              <div class="ai-metric-label">ระดับความสำคัญ</div>
-              <div class="ai-metric-value">${priority}</div>
-              <div class="ai-metric-note">ใช้กำหนดลำดับการติดตาม</div>
+            <div class="ai-v347-kpi">
+              <div class="ai-v347-kpi-label">ระดับความสำคัญ</div>
+              <div class="ai-v347-kpi-value">${priority}</div>
+              <div class="ai-v347-kpi-note">ใช้กำหนดลำดับการติดตาม</div>
             </div>
-            <div class="ai-metric-card">
-              <div class="ai-metric-label">ผลผลิตคาดการณ์</div>
-              <div class="ai-metric-value">${dec(recommended.yield)} ตัน/ไร่</div>
-              <div class="ai-metric-note">${recommended.title}</div>
+            <div class="ai-v347-kpi">
+              <div class="ai-v347-kpi-label">ผลผลิตคาดการณ์</div>
+              <div class="ai-v347-kpi-value">${dec(recommended.yield)} ตัน/ไร่</div>
+              <div class="ai-v347-kpi-note">${recommended.title}</div>
             </div>
-            <div class="ai-metric-card">
-              <div class="ai-metric-label">กำไรต่อไร่</div>
-              <div class="ai-metric-value">${money(recommended.profitPerRai)}</div>
-              <div class="ai-metric-note">กำไรสุทธิ ${money(recommended.netProfit)}</div>
+            <div class="ai-v347-kpi">
+              <div class="ai-v347-kpi-label">กำไรต่อไร่</div>
+              <div class="ai-v347-kpi-value">${money(recommended.profitPerRai)}</div>
+              <div class="ai-v347-kpi-note">กำไรสุทธิ ${money(recommended.netProfit)}</div>
             </div>
           </div>
 
-          <div class="ai-panel">
-            <div class="ai-panel-head"><i class="fa-solid fa-lightbulb"></i> คำแนะนำหลัก</div>
-            <div class="ai-panel-body">
-              <div class="ai-recommend-grid">
-                <div class="ai-recommend-item">
-                  <strong>Scenario ที่เหมาะสม</strong>
-                  <p>เลือก <b>${recommended.title}</b> เป็นแนวทางหลัก เพราะให้ผลตอบแทนเหมาะสมภายใต้ระดับ D/E ปัจจุบัน</p>
-                </div>
-                <div class="ai-recommend-item">
-                  <strong>การส่งเสริมและวงเงิน</strong>
-                  <p>${investmentAdvice}</p>
-                </div>
-                <div class="ai-recommend-item">
-                  <strong>การจัดการผลผลิต</strong>
-                  <p>${recommended.yield<10?'ผลผลิตต่ำกว่าเป้าหมาย ควรเร่งจัดการน้ำ วัชพืช และปุ๋ยตามช่วงอายุอ้อย':'ผลผลิตอยู่ในเกณฑ์ดี ควรรักษามาตรฐานและติดตามผลจริงรายเดือน'}</p>
-                </div>
-                <div class="ai-recommend-item">
-                  <strong>ระบบน้ำ</strong>
-                  <p>${waterAdvice}</p>
-                </div>
+          <div class="ai-v347-panel">
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-lightbulb"></i> สรุปคำแนะนำ</div>
+            <div class="ai-v347-panel-body">
+              <div class="ai-v347-summary-grid">
+                <div class="ai-v347-summary-item"><strong>Scenario ที่แนะนำ</strong><p>ใช้ <b>${recommended.title}</b> เป็นแผนหลัก เนื่องจากให้ผลตอบแทนเหมาะสมที่สุด</p></div>
+                <div class="ai-v347-summary-item"><strong>การส่งเสริมและวงเงิน</strong><p>${financeText}</p></div>
+                <div class="ai-v347-summary-item"><strong>ผลผลิตและการจัดการแปลง</strong><p>${yieldText}</p></div>
+                <div class="ai-v347-summary-item"><strong>รูปแบบการให้น้ำ</strong><p>${recommended.water&&recommended.water!=='-'?`ควรใช้รูปแบบ ${recommended.water} และติดตามต้นทุนจริง`:'ควรประเมินแหล่งน้ำก่อนเลือกระบบน้ำ'}</p></div>
               </div>
             </div>
           </div>
 
-          </div>
-
-          <div class="ai-panel">
-            <div class="ai-panel-head"><i class="fa-solid fa-table-list"></i> เปรียบเทียบ Scenario</div>
-            <div class="table-responsive">
-              <table class="ai-scenario-table">
-                <thead><tr>
-                  <th>Scenario</th><th>ผลผลิต/ไร่</th><th>ต้นทุนรวม</th>
-                  <th>กำไรสุทธิ</th><th>กำไร/ไร่</th><th>D/E</th>
-                </tr></thead>
+          <div class="ai-v347-panel">
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-table-list"></i> เปรียบเทียบ Scenario</div>
+            <div class="ai-v347-table-wrap">
+              <table class="ai-v347-table">
+                <thead><tr><th>Scenario</th><th>ผลผลิต/ไร่</th><th>ต้นทุนรวม</th><th>กำไรสุทธิ</th><th>กำไร/ไร่</th><th>D/E</th></tr></thead>
                 <tbody>
-                  ${data.map(r=>`<tr class="${r.title===recommended.title?'ai-best-row':''}">
-                    <td>${r.title}${r.title===recommended.title?'<span class="ai-badge safe">แนะนำ</span>':''}</td>
-                    <td>${dec(r.yield)}</td>
-                    <td>${r.totalCostText}</td>
-                    <td>${r.netProfitText}</td>
-                    <td>${r.profitPerRaiText}</td>
-                    <td>${r.deText}${r.de>1?'<span class="ai-badge warn">เสี่ยง</span>':''}</td>
+                  ${data.map(x=>`<tr class="${x.title===recommended.title?'ai-v347-recommended':''}">
+                    <td>${x.title}${x.title===recommended.title?'<span class="ai-v347-badge">แนะนำ</span>':''}</td>
+                    <td>${dec(x.yield)}</td>
+                    <td>${x.totalCostText}</td>
+                    <td>${x.netProfitText}</td>
+                    <td>${x.profitPerRaiText}</td>
+                    <td>${x.deText}</td>
                   </tr>`).join('')}
                 </tbody>
               </table>
@@ -14516,47 +14515,229 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
           </div>
         </div>
 
-        <aside class="ai-center-side">
-          <div class="ai-decision-card">
-            <div class="ai-decision-kicker">NEXT BEST ACTION · ${getFarmer()}</div>
-            <h4>ใช้ ${recommended.title} เป็นแผนหลัก</h4>
-            <p>พิจารณาอนุมัติภายใต้กรอบวงเงิน และติดตามผลผลิตจริงเทียบแผนเป็นระยะ</p>
-            <span class="ai-decision-amount">${recommended.promotionText}</span>
-            <div class="ai-confidence">
+        <aside class="ai-v347-side">
+          <div class="ai-v347-decision">
+            <div class="caption">NEXT BEST ACTION</div>
+            <h4>เลือก ${recommended.title}</h4>
+            <p>อนุมัติภายใต้กรอบวงเงิน และติดตามผลผลิตจริงเทียบแผนเป็นระยะ</p>
+            <span class="amount">${recommended.promotionText}</span>
+            <div class="ai-v347-progress">
               <span>AI Confidence</span><span>${confidence}%</span>
-              <div class="ai-confidence-track"><div class="ai-confidence-fill" style="width:${confidence}%"></div></div>
+              <div class="ai-v347-progress-track"><div class="ai-v347-progress-fill" style="width:${confidence}%"></div></div>
             </div>
           </div>
 
-          <div class="ai-panel">
-            <div class="ai-panel-head"><i class="fa-solid fa-list-check"></i> Action Plan</div>
-            <div class="ai-panel-body">
-              <div class="ai-action-list">
-                ${actionItem('aiAct1','ตรวจสอบ D/E และวงเงินค้ำประกันก่อนอนุมัติ')}
-                ${actionItem('aiAct2','ยืนยันรายการส่งเสริมที่จำเป็นต่อการเพิ่มผลผลิต')}
-                ${actionItem('aiAct3','ติดตามการให้น้ำและความชื้นของแปลง')}
-                ${actionItem('aiAct4','ติดตามผลผลิตจริงเทียบ Scenario ทุกเดือน')}
-                ${actionItem('aiAct5','ประเมินต้นทุนและกำไรก่อนปิดฤดูผลิต')}
+          <div class="ai-v347-panel">
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-list-check"></i> Action Plan</div>
+            <div class="ai-v347-panel-body">
+              <div class="ai-v347-actions">
+                ${action('ai347a1','ตรวจสอบ D/E และวงเงินค้ำประกันก่อนอนุมัติ')}
+                ${action('ai347a2','ยืนยันรายการส่งเสริมที่จำเป็น')}
+                ${action('ai347a3','ติดตามผลผลิตจริงเทียบแผน')}
+                ${action('ai347a4','ประเมินต้นทุนและกำไรระหว่างฤดู')}
               </div>
             </div>
           </div>
 
-          <div class="ai-panel">
-            <div class="ai-panel-head"><i class="fa-solid fa-ranking-star"></i> จุดเปรียบเทียบ</div>
-            <div class="ai-panel-body" style="font-size:13px;line-height:1.8;color:#46617E">
-              <div><b>ผลผลิตสูงสุด:</b> ${bestYield.title}</div>
-              <div><b>ต้นทุนต่ำสุด:</b> ${lowestCost.title}</div>
-              <div><b>ความเสี่ยงสูงสุด:</b> ${highestRisk.title}</div>
+          <div class="ai-v347-panel">
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-chart-simple"></i> จุดเปรียบเทียบ</div>
+            <div class="ai-v347-panel-body">
+              <div class="ai-v347-mini">
+                <div class="ai-v347-mini-row"><span>ผลผลิตสูงสุด</span><span>${bestYield.title}</span></div>
+                <div class="ai-v347-mini-row"><span>ต้นทุนต่ำสุด</span><span>${lowestCost.title}</span></div>
+                <div class="ai-v347-mini-row"><span>Scenario แนะนำ</span><span>${recommended.title}</span></div>
+              </div>
             </div>
           </div>
         </aside>
       </div>
     `;
   };
+})();
+</script><script id="manager-zone-assignment-v348-js">
+(function(){
+  const roleWords = {
+    manager:['manager','ผู้จัดการ'],
+    admin:['admin','administrator','ผู้ดูแลระบบ'],
+    user:['user','staff','เจ้าหน้าที่','นักส่งเสริม']
+  };
 
-  document.addEventListener('DOMContentLoaded',()=>{
-    if(document.getElementById('ai-recommendation')?.classList.contains('active-page')){
-      setTimeout(window.refreshAIAdvisor,120);
+  function norm(v){ return String(v||'').trim().toLowerCase(); }
+
+  function detectRoleElement(){
+    const candidates = [
+      '#userRole','#role','#roleSelect','#umRole',
+      'select[name="role"]','select[name="userRole"]',
+      '[data-field="role"] select','.user-role-select'
+    ];
+    for(const s of candidates){
+      const el=document.querySelector(s);
+      if(el) return el;
+    }
+    const selects=[...document.querySelectorAll('select')];
+    return selects.find(s=>{
+      const text=[...s.options].map(o=>norm(o.value+' '+o.textContent)).join(' ');
+      return text.includes('manager')||text.includes('admin')||text.includes('ผู้จัดการ');
+    })||null;
+  }
+
+  function currentRole(roleEl){
+    if(!roleEl) return '';
+    const opt=roleEl.options?.[roleEl.selectedIndex];
+    return norm((roleEl.value||'')+' '+(opt?.textContent||''));
+  }
+
+  function hasRole(role,kind){
+    return roleWords[kind].some(w=>role.includes(w));
+  }
+
+  function zoneCheckboxes(){
+    const explicit=[
+      ...document.querySelectorAll(
+        'input[type="checkbox"][data-zone],'+
+        'input[type="checkbox"][name*="zone"],'+
+        'input[type="checkbox"][id*="zone"],'+
+        '.zone-checkbox input[type="checkbox"],'+
+        '.zone-list input[type="checkbox"],'+
+        '.responsible-zone input[type="checkbox"]'
+      )
+    ];
+    const all=[...document.querySelectorAll('input[type="checkbox"]')];
+    const inferred=all.filter(cb=>{
+      const label=cb.id?document.querySelector(`label[for="${CSS.escape(cb.id)}"]`):null;
+      const text=norm((label?.textContent||'')+' '+(cb.closest('label')?.textContent||'')+' '+(cb.parentElement?.textContent||''));
+      return /เขต\s*(0[1-9]|1[0-5]|90)\b/.test(text) || /\bzone\s*(0[1-9]|1[0-5]|90)\b/.test(text);
+    });
+    return [...new Set([...explicit,...inferred])];
+  }
+
+  function subzoneCheckboxes(){
+    return [...document.querySelectorAll(
+      'input[type="checkbox"][data-subzone],'+
+      'input[type="checkbox"][name*="subzone"],'+
+      'input[type="checkbox"][id*="subzone"],'+
+      '.subzone-checkbox input[type="checkbox"],'+
+      '.subzone-list input[type="checkbox"]'
+    )];
+  }
+
+  function ensureSummary(roleEl,zones){
+    let summary=document.querySelector('.um-zone-summary-v348');
+    if(!summary){
+      summary=document.createElement('div');
+      summary.className='um-zone-summary-v348';
+      const anchor=zones[0]?.closest('.form-group,.field,.input-group,.card,.panel,div') || roleEl?.parentElement;
+      (anchor?.parentElement||roleEl?.parentElement||document.body).appendChild(summary);
+    }
+    return summary;
+  }
+
+  function zoneName(cb){
+    const label=cb.id?document.querySelector(`label[for="${CSS.escape(cb.id)}"]`):null;
+    let text=(label?.textContent||cb.closest('label')?.textContent||cb.parentElement?.textContent||cb.value||'').trim();
+    const match=text.match(/(?:เขต|zone)\s*([0-9]{2})/i);
+    return match ? `เขต ${match[1]}` : text;
+  }
+
+  function updateSummary(roleEl,zones){
+    const summary=ensureSummary(roleEl,zones);
+    const role=currentRole(roleEl);
+    const selected=zones.filter(z=>z.checked).map(zoneName);
+    if(hasRole(role,'admin')){
+      summary.innerHTML='<strong>สิทธิ์การเข้าถึง:</strong> Admin สามารถเข้าถึงทุกเขต';
+      summary.classList.add('show');
+    }else if(hasRole(role,'manager')){
+      summary.innerHTML='<strong>เขตที่รับผิดชอบ:</strong> '+(selected.length?selected.join(', '):'ยังไม่ได้เลือกเขต')+
+        `<br><strong>รวม:</strong> ${selected.length} เขต`;
+      summary.classList.add('show');
+    }else if(hasRole(role,'user')){
+      summary.innerHTML='<strong>เขตที่รับผิดชอบ:</strong> '+(selected[0]||'ยังไม่ได้เลือกเขต');
+      summary.classList.add('show');
+    }else{
+      summary.classList.remove('show');
+    }
+  }
+
+  function applyRoleRules(){
+    const roleEl=detectRoleElement();
+    if(!roleEl) return;
+    const role=currentRole(roleEl);
+    const zones=zoneCheckboxes();
+    const subzones=subzoneCheckboxes();
+
+    if(hasRole(role,'manager')){
+      // Core fix: Manager can select multiple zones.
+      zones.forEach(cb=>{
+        cb.disabled=false;
+        cb.removeAttribute('disabled');
+        cb.classList.add('um-zone-checkbox-v348');
+      });
+      subzones.forEach(cb=>{
+        cb.disabled=false;
+        cb.removeAttribute('disabled');
+      });
+    }else if(hasRole(role,'admin')){
+      zones.forEach(cb=>{ cb.checked=false; cb.disabled=true; });
+      subzones.forEach(cb=>{ cb.checked=false; cb.disabled=true; });
+    }else if(hasRole(role,'user')){
+      zones.forEach(cb=>{
+        cb.disabled=false;
+        cb.removeAttribute('disabled');
+      });
+      // Limit User to one zone, while Manager remains multi-zone.
+      zones.forEach(cb=>{
+        if(!cb.dataset.v348Bound){
+          cb.addEventListener('change',()=>{
+            const current=currentRole(roleEl);
+            if(hasRole(current,'user') && cb.checked){
+              zoneCheckboxes().forEach(other=>{ if(other!==cb) other.checked=false; });
+            }
+            updateSummary(roleEl,zoneCheckboxes());
+          });
+          cb.dataset.v348Bound='1';
+        }
+      });
+      subzones.forEach(cb=>{ cb.disabled=false; cb.removeAttribute('disabled'); });
+    }
+
+    zones.forEach(cb=>{
+      if(!cb.dataset.v348SummaryBound){
+        cb.addEventListener('change',()=>updateSummary(roleEl,zoneCheckboxes()));
+        cb.dataset.v348SummaryBound='1';
+      }
+    });
+
+    updateSummary(roleEl,zones);
+  }
+
+  function boot(){
+    const roleEl=detectRoleElement();
+    if(roleEl && !roleEl.dataset.v348RoleBound){
+      roleEl.addEventListener('change',()=>setTimeout(applyRoleRules,0));
+      roleEl.dataset.v348RoleBound='1';
+    }
+    applyRoleRules();
+
+    // Re-apply after user form/modal content is rendered or an existing user is loaded.
+    const root=document.querySelector('#user-management,.user-management-page,[data-page="user-management"],body');
+    if(root && !root.dataset.v348Observed){
+      const obs=new MutationObserver(()=>applyRoleRules());
+      obs.observe(root,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled','checked','value']});
+      root.dataset.v348Observed='1';
+    }
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',boot);
+  }else{
+    boot();
+  }
+
+  document.addEventListener('click',e=>{
+    const text=norm(e.target?.textContent);
+    if(text.includes('จัดการผู้ใช้งาน')||text.includes('user management')||text.includes('แก้ไขผู้ใช้')||text.includes('เพิ่มผู้ใช้')){
+      setTimeout(boot,80);
+      setTimeout(applyRoleRules,250);
     }
   });
 })();
