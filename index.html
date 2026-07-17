@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.4.0" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.4.1" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7893,256 +7893,160 @@ body.locked{
 #plot-data .detail-grid{grid-template-columns:1fr!important;}
 }
 </style>
-<style id="canenext-v340-responsive-fix">
-/* ---------- Global responsive safety ---------- */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
+
+
+<style id="canenext-v341-stability-responsive">
+/* Real plot table: keep true table structure at every screen size */
+#real-plots .table-responsive{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  -webkit-overflow-scrolling:touch;
 }
-*, *::before, *::after {
-  box-sizing: border-box;
+#real-plots .real-plot-table{
+  display:table !important;
+  width:100% !important;
+  min-width:940px !important;
+  table-layout:auto !important;
+  border-collapse:collapse !important;
 }
-table {
-  max-width: 100%;
+#real-plots .real-plot-table thead{
+  display:table-header-group !important;
 }
-.table-responsive,
-.table-wrap,
-.table-container,
-.real-plot-table-wrap,
-.loan-compare-table-wrap {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+#real-plots .real-plot-table tbody{
+  display:table-row-group !important;
+}
+#real-plots .real-plot-table tr{
+  display:table-row !important;
+  width:auto !important;
+}
+#real-plots .real-plot-table th,
+#real-plots .real-plot-table td{
+  display:table-cell !important;
+  position:static !important;
+  width:auto !important;
+  min-width:105px !important;
+  max-width:none !important;
+  padding:10px 12px !important;
+  white-space:nowrap !important;
+  word-break:keep-all !important;
+  overflow-wrap:normal !important;
+  writing-mode:horizontal-tb !important;
+  line-height:1.35 !important;
+  vertical-align:middle !important;
+}
+#real-plots .real-plot-table th::before,
+#real-plots .real-plot-table td::before,
+#real-plots .real-plot-table th::after,
+#real-plots .real-plot-table td::after{
+  content:none !important;
+  display:none !important;
+}
+#real-plots .real-sort-btn{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:5px !important;
+  width:auto !important;
+  min-width:0 !important;
+  white-space:nowrap !important;
+  word-break:keep-all !important;
+  writing-mode:horizontal-tb !important;
+  line-height:1.25 !important;
+}
+#real-plots .real-sort-icon{
+  flex:0 0 auto !important;
 }
 
-/* ---------- Real plots ---------- */
-#real-plots .table-responsive,
-#real-plots .table-wrap,
-#real-plots .table-container,
-#real-plots .real-plot-table-wrap {
-  display: block;
-  width: 100%;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch;
+/* Guarantee comparison: always render as a clean two-column table */
+#plot-data .compare-table{
+  display:table !important;
+  width:100% !important;
+  table-layout:fixed !important;
+  border-collapse:separate !important;
+  border-spacing:0 !important;
+}
+#plot-data .compare-table thead{
+  display:table-header-group !important;
+}
+#plot-data .compare-table tbody{
+  display:table-row-group !important;
+}
+#plot-data .compare-table tr{
+  display:table-row !important;
+}
+#plot-data .compare-table th,
+#plot-data .compare-table td{
+  display:table-cell !important;
+  position:static !important;
+  width:auto !important;
+  min-width:0 !important;
+  height:auto !important;
+  padding:13px 14px !important;
+  white-space:normal !important;
+  word-break:normal !important;
+  overflow-wrap:break-word !important;
+  writing-mode:horizontal-tb !important;
+  line-height:1.45 !important;
+  vertical-align:middle !important;
+}
+#plot-data .compare-table th::before,
+#plot-data .compare-table td::before,
+#plot-data .compare-table th::after,
+#plot-data .compare-table td::after{
+  content:none !important;
+  display:none !important;
+}
+#plot-data .compare-table th:first-child,
+#plot-data .compare-table td:first-child{
+  width:62% !important;
+  text-align:left !important;
+}
+#plot-data .compare-table th:last-child,
+#plot-data .compare-table td:last-child{
+  width:38% !important;
+  text-align:right !important;
+  white-space:nowrap !important;
+  font-variant-numeric:tabular-nums;
 }
 
-#real-plots table {
-  width: 100%;
-  min-width: 980px;
-  table-layout: auto !important;
-  border-collapse: collapse;
-}
-
-#real-plots th,
-#real-plots td {
-  min-width: 96px;
-  max-width: none;
-  white-space: normal !important;
-  word-break: normal !important;
-  overflow-wrap: anywhere;
-  line-height: 1.35;
-  vertical-align: middle;
-}
-
-#real-plots th:first-child,
-#real-plots td:first-child {
-  min-width: 120px;
-}
-
-#real-plots .real-sort-btn {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  max-width: 100%;
-  white-space: normal !important;
-  line-height: 1.25;
-  text-align: center;
-  padding: 6px 4px;
-}
-
-#real-plots .real-sort-icon {
-  flex: 0 0 auto;
-}
-
-/* ---------- Loan / guarantee comparison cards ---------- */
-#risk-analysis .comparison-card,
-#risk-analysis .compare-card,
-#risk-analysis .loan-card,
-#risk-analysis .guarantee-card,
-#risk-analysis .summary-card,
-#risk-analysis .metric-card,
-#promotion .comparison-card,
-#promotion .compare-card,
-#promotion .loan-card,
-#promotion .guarantee-card,
-#promotion .summary-card,
-#promotion .metric-card {
-  min-width: 0 !important;
-  overflow: hidden;
-}
-
-#risk-analysis .comparison-card h3,
-#risk-analysis .compare-card h3,
-#risk-analysis .loan-card h3,
-#risk-analysis .guarantee-card h3,
-#risk-analysis .summary-card h3,
-#risk-analysis .metric-card h3,
-#promotion .comparison-card h3,
-#promotion .compare-card h3,
-#promotion .loan-card h3,
-#promotion .guarantee-card h3,
-#promotion .summary-card h3,
-#promotion .metric-card h3,
-#risk-analysis .comparison-card .card-title,
-#risk-analysis .compare-card .card-title,
-#risk-analysis .loan-card .card-title,
-#risk-analysis .guarantee-card .card-title,
-#risk-analysis .summary-card .card-title,
-#risk-analysis .metric-card .card-title,
-#promotion .comparison-card .card-title,
-#promotion .compare-card .card-title,
-#promotion .loan-card .card-title,
-#promotion .guarantee-card .card-title,
-#promotion .summary-card .card-title,
-#promotion .metric-card .card-title {
-  position: static !important;
-  min-height: 56px;
-  display: flex !important;
-  align-items: center;
-  white-space: normal !important;
-  word-break: normal !important;
-  overflow-wrap: anywhere;
-  line-height: 1.35 !important;
-  padding: 12px 16px !important;
-  margin: 0 !important;
-}
-
-/* generic card header fallback for this section */
-#risk-analysis [class*="card"] > :first-child,
-#promotion [class*="card"] > :first-child {
-  max-width: 100%;
-}
-
-/* ---------- Tablet portrait ---------- */
-@media (max-width: 1024px) {
-  #real-plots table {
-    min-width: 900px;
-    font-size: 13px;
-  }
-
-  #real-plots th,
-  #real-plots td {
-    padding: 8px 10px !important;
-  }
-
-  #risk-analysis .comparison-grid,
-  #risk-analysis .compare-grid,
-  #risk-analysis .summary-grid,
-  #promotion .comparison-grid,
-  #promotion .compare-grid,
-  #promotion .summary-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+@media(max-width:1024px){
+  #real-plots .real-plot-table{
+    min-width:900px !important;
+    font-size:13px !important;
   }
 }
-
-/* ---------- Phone portrait ---------- */
-@media (max-width: 767px) {
-  .content,
-  main,
-  .page-content,
-  .section-content {
-    min-width: 0 !important;
-    max-width: 100% !important;
+@media(max-width:767px){
+  #real-plots .table-responsive{
+    border:1px solid #D9E6F4 !important;
+    border-radius:14px !important;
+  }
+  #real-plots .real-plot-table{
+    min-width:860px !important;
+    font-size:12px !important;
+  }
+  #real-plots .real-plot-table th,
+  #real-plots .real-plot-table td{
+    min-width:96px !important;
+    padding:8px 9px !important;
   }
 
-  #real-plots table {
-    min-width: 820px;
-    font-size: 12px;
+  #plot-data .compare-table{
+    font-size:14px !important;
   }
-
-  #real-plots th,
-  #real-plots td {
-    min-width: 88px;
-    padding: 7px 8px !important;
+  #plot-data .compare-table th,
+  #plot-data .compare-table td{
+    padding:12px 10px !important;
   }
-
-  #real-plots th:first-child,
-  #real-plots td:first-child {
-    min-width: 110px;
+  #plot-data .compare-table th:first-child,
+  #plot-data .compare-table td:first-child{
+    width:60% !important;
   }
-
-  #risk-analysis .comparison-grid,
-  #risk-analysis .compare-grid,
-  #risk-analysis .summary-grid,
-  #promotion .comparison-grid,
-  #promotion .compare-grid,
-  #promotion .summary-grid {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-  }
-
-  #risk-analysis .comparison-card h3,
-  #risk-analysis .compare-card h3,
-  #risk-analysis .loan-card h3,
-  #risk-analysis .guarantee-card h3,
-  #risk-analysis .summary-card h3,
-  #risk-analysis .metric-card h3,
-  #promotion .comparison-card h3,
-  #promotion .compare-card h3,
-  #promotion .loan-card h3,
-  #promotion .guarantee-card h3,
-  #promotion .summary-card h3,
-  #promotion .metric-card h3,
-  #risk-analysis .comparison-card .card-title,
-  #risk-analysis .compare-card .card-title,
-  #risk-analysis .loan-card .card-title,
-  #risk-analysis .guarantee-card .card-title,
-  #risk-analysis .summary-card .card-title,
-  #risk-analysis .metric-card .card-title,
-  #promotion .comparison-card .card-title,
-  #promotion .compare-card .card-title,
-  #promotion .loan-card .card-title,
-  #promotion .guarantee-card .card-title,
-  #promotion .summary-card .card-title,
-  #promotion .metric-card .card-title {
-    min-height: 64px;
-    font-size: 16px !important;
-    padding: 14px 16px !important;
-  }
-
-  #risk-analysis .comparison-card,
-  #risk-analysis .compare-card,
-  #risk-analysis .loan-card,
-  #risk-analysis .guarantee-card,
-  #risk-analysis .summary-card,
-  #risk-analysis .metric-card,
-  #promotion .comparison-card,
-  #promotion .compare-card,
-  #promotion .loan-card,
-  #promotion .guarantee-card,
-  #promotion .summary-card,
-  #promotion .metric-card {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  #risk-analysis .comparison-card .value-row,
-  #risk-analysis .compare-card .value-row,
-  #risk-analysis .loan-card .value-row,
-  #risk-analysis .guarantee-card .value-row,
-  #risk-analysis .summary-card .value-row,
-  #risk-analysis .metric-card .value-row,
-  #promotion .comparison-card .value-row,
-  #promotion .compare-card .value-row,
-  #promotion .loan-card .value-row,
-  #promotion .guarantee-card .value-row,
-  #promotion .summary-card .value-row,
-  #promotion .metric-card .value-row {
-    display: grid !important;
-    grid-template-columns: minmax(0,1fr) auto;
-    gap: 12px;
-    align-items: center;
+  #plot-data .compare-table th:last-child,
+  #plot-data .compare-table td:last-child{
+    width:40% !important;
   }
 }
 </style>
@@ -13705,6 +13609,8 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
   let requestToken=0;
   let loadedFarmerCode='';
   let selectedPlotId='';
+  let realSortKey='';
+  let realSortDirection='';
 
   const esc=value=>String(value??'')
     .replace(/&/g,'&amp;')
@@ -13789,6 +13695,34 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     }
   }
 
+  function compareRealPlotValues(a,b,key){
+    let av=a?.[key];
+    let bv=b?.[key];
+
+    if(key==='area'){
+      av=Number(av||0);
+      bv=Number(bv||0);
+      return av-bv;
+    }
+
+    return String(av??'').localeCompare(String(bv??''),'th',{
+      numeric:true,
+      sensitivity:'base'
+    });
+  }
+
+  function updateRealSortHeaders(){
+    document.querySelectorAll('#real-plots .real-sort-btn').forEach(btn=>{
+      const active=btn.dataset.sortKey===realSortKey && !!realSortDirection;
+      btn.classList.toggle('active',active);
+      const icon=btn.querySelector('.real-sort-icon');
+      if(icon) icon.textContent=!active?'↕':realSortDirection==='asc'?'▲':'▼';
+      btn.setAttribute('aria-sort',
+        !active?'none':realSortDirection==='asc'?'ascending':'descending'
+      );
+    });
+  }
+
   function filteredPlots(){
     const plots=[...(window.currentRealPlots||[])];
     const year=document.getElementById('realProductionYearFilter')?.value||'ALL';
@@ -13796,12 +13730,20 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     const crop=document.getElementById('realCropTypeFilter')?.value||'ALL';
     const status=document.getElementById('realStatusFilter')?.value||'ALL';
 
-    return plots.filter(plot=>
+    const list=plots.filter(plot=>
       (year==='ALL'||plot.year===year) &&
       (project==='ALL'||plot.project_name===project) &&
       (crop==='ALL'||plot.crop_type===crop) &&
       (status==='ALL'||(plot.status==='active'?'ใช้งาน':plot.status)===status)
     );
+
+    if(realSortKey && realSortDirection){
+      list.sort((a,b)=>{
+        const result=compareRealPlotValues(a,b,realSortKey);
+        return realSortDirection==='asc'?result:-result;
+      });
+    }
+    return list;
   }
 
   function fillSelect(id,values){
@@ -13864,6 +13806,7 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     if(!body) return;
 
     const list=filteredPlots();
+    updateRealSortHeaders();
     const count=document.getElementById('realPlotCount');
     if(count){
       count.textContent=`แสดง ${list.length.toLocaleString('th-TH')} จาก ${(window.currentRealPlots||[]).length.toLocaleString('th-TH')} แปลง`;
@@ -13933,6 +13876,8 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
       window.currentRealPlots=(data||[]).map(mapPlot);
       loadedFarmerCode=code;
       selectedPlotId='';
+      realSortKey='';
+      realSortDirection='';
 
       populateYears(window.currentRealPlots);
       updateFilterOptions();
@@ -13959,6 +13904,30 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
       return [];
     }
   }
+
+  document.addEventListener('click',event=>{
+    const btn=event.target.closest('#real-plots .real-sort-btn');
+    if(!btn) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const key=btn.dataset.sortKey||'';
+    if(!key) return;
+
+    if(realSortKey!==key){
+      realSortKey=key;
+      realSortDirection='asc';
+    }else if(realSortDirection==='asc'){
+      realSortDirection='desc';
+    }else if(realSortDirection==='desc'){
+      realSortKey='';
+      realSortDirection='';
+    }else{
+      realSortDirection='asc';
+    }
+    render();
+  });
 
   window.filterRealPlotsByYear=render;
   window.renderRealPlotsFromSupabase=()=>render();
@@ -14092,6 +14061,5 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
   });
 })();
 </script>
-
 </body>
 </html>

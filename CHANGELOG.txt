@@ -136,3 +136,10 @@ v3.4.0
 - Sort headers wrap correctly without collapsing into one-character lines.
 - Loan/guarantee comparison cards now use flexible multi-line headers.
 - Improved phone and tablet portrait responsive spacing and typography.
+
+
+v3.4.1
+- Removed broad responsive patch that caused text overlap.
+- Restored true table structure for real plots on mobile/tablet.
+- Restored two-column comparison table without duplicated pseudo labels.
+- Fixed real plot sorting on desktop: ascending, descending, reset.
