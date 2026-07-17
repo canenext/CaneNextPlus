@@ -7020,58 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.4.7" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
-#user-management .um-manager-zones-wrap{
-  grid-column:1 / -1;
-}
-#user-management .um-zone-check-grid{
-  display:grid;
-  grid-template-columns:repeat(8,minmax(54px,1fr));
-  gap:8px;
-}
-#user-management .um-zone-check-grid label{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  min-height:40px;
-  margin:0;
-  border:1px solid #D5E6F8;
-  border-radius:10px;
-  background:#F7FBFF;
-  color:#083B73;
-  font-size:13px;
-  font-weight:700;
-  cursor:pointer;
-  user-select:none;
-}
-#user-management .um-zone-check-grid label:has(input:checked){
-  background:#EAF4FF;
-  border-color:#0B5CAD;
-  color:#0B5CAD;
-}
-#user-management .um-zone-check-grid input{
-  width:15px;
-  height:15px;
-  margin:0;
-}
-#user-management .um-help{
-  display:block;
-  margin-top:7px;
-  color:#6B7F93;
-  font-size:12px;
-}
-@media(max-width:1100px){
-  #user-management .um-zone-check-grid{
-    grid-template-columns:repeat(4,1fr);
-  }
-}
-@media(max-width:600px){
-  #user-management .um-zone-check-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-</style><style id="canenext-role-notice-hide-style">
+</style><meta content="3.5.0" name="canenext-version"/><style id="canenext-role-notice-hide-style">
 /* Hide role/activity notices shown in the middle of the app after login */
 #userScopeChip,
 .user-scope-chip,
@@ -8364,6 +8313,125 @@ body.locked{
   .ai-v347-side{grid-template-columns:1fr}
   .ai-v347-kpi-value{font-size:20px}
 }
+</style><style id="canenext-manager-multizone-v350-style">
+#user-management .um-manager-zones-wrap{
+  grid-column:1 / -1;
+  padding:15px;
+  border:1px solid #D9E7F4;
+  border-radius:15px;
+  background:#F9FCFF;
+}
+#user-management .um-mz-title{
+  display:block;
+  margin:0 0 10px;
+  color:#173F68;
+  font-weight:900;
+}
+#user-management .um-required{color:#D93025}
+#user-management .um-mz-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+#user-management .um-mz-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+#user-management .um-mz-tool{
+  min-height:36px;
+  padding:7px 12px;
+  font-size:12px;
+}
+#user-management .um-mz-count{
+  flex:0 0 auto;
+  padding:7px 11px;
+  border:1px solid #CFE1F3;
+  border-radius:999px;
+  background:#FFFFFF;
+  color:#0B5CAD;
+  font-size:12px;
+  font-weight:900;
+}
+#user-management .um-zone-check-grid{
+  display:grid;
+  grid-template-columns:repeat(8,minmax(75px,1fr));
+  gap:8px;
+}
+#user-management .um-zone-check-grid label{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-height:42px;
+  margin:0;
+  padding:8px;
+  border:1px solid #D5E6F8;
+  border-radius:11px;
+  background:#FFFFFF;
+  color:#234B72;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  user-select:none;
+  transition:.15s ease;
+}
+#user-management .um-zone-check-grid label:hover{
+  border-color:#7EB3E7;
+  background:#F2F8FF;
+}
+#user-management .um-zone-check-grid label.is-selected{
+  border-color:#0B5CAD;
+  background:#E7F2FF;
+  color:#064E96;
+  box-shadow:inset 0 0 0 1px rgba(11,92,173,.08);
+}
+#user-management .um-zone-check-grid input{
+  width:16px;
+  height:16px;
+  margin:0;
+  accent-color:#0B5CAD;
+}
+#user-management .um-help{
+  display:block;
+  margin-top:9px;
+  color:#6B7F93;
+  font-size:12px;
+}
+#user-management .um-mz-error{
+  margin-top:8px;
+  color:#C62828;
+  font-size:12px;
+  font-weight:800;
+}
+#user-management .um-zone-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+  min-width:120px;
+}
+#user-management .um-zone-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:30px;
+  padding:3px 7px;
+  border:1px solid #CFE1F3;
+  border-radius:999px;
+  background:#EEF6FF;
+  color:#0B5CAD;
+  font-size:11px;
+  font-weight:900;
+}
+@media(max-width:1150px){
+  #user-management .um-zone-check-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:650px){
+  #user-management .um-mz-toolbar{align-items:flex-start;flex-direction:column}
+  #user-management .um-zone-check-grid{grid-template-columns:repeat(2,1fr)}
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -8950,7 +9018,40 @@ body.locked{
 <option value="manager">Manager — ผู้จัดการเขต</option>
 <option value="admin">Admin — ผู้ดูแลระบบ</option>
 </select>
-</div><div class="form-group um-manager-zones-wrap" hidden="" id="umManagerZonesWrap"><label>เขตที่รับผิดชอบ</label><div class="um-zone-check-grid" id="umManagerZones"><label>01</label><label>02</label><label>03</label><label>04</label><label>05</label><label>06</label><label>07</label><label>08</label><label>09</label><label>10</label><label>11</label><label>12</label><label>13</label><label>14</label><label>15</label><label>90</label></div><small class="um-help">เลือกได้มากกว่า 1 เขตสำหรับ Manager</small></div>
+</div><div class="form-group um-manager-zones-wrap" hidden="" id="umManagerZonesWrap">
+<label class="um-mz-title">เขตที่รับผิดชอบ <span class="um-required">*</span></label>
+<div class="um-mz-toolbar">
+<div class="um-mz-buttons">
+<button class="btn secondary um-mz-tool" id="umManagerSelectAll" type="button">
+<i class="fa-solid fa-check-double"></i> เลือกทั้งหมด
+    </button>
+<button class="btn secondary um-mz-tool" id="umManagerClearAll" type="button">
+<i class="fa-solid fa-eraser"></i> ล้างทั้งหมด
+    </button>
+</div>
+<div class="um-mz-count" id="umManagerZoneCount">เลือกแล้ว 0 เขต</div>
+</div>
+<div class="um-zone-check-grid" id="umManagerZones">
+<label><input type="checkbox" value="01"/><span>เขต 01</span></label>
+<label><input type="checkbox" value="02"/><span>เขต 02</span></label>
+<label><input type="checkbox" value="03"/><span>เขต 03</span></label>
+<label><input type="checkbox" value="04"/><span>เขต 04</span></label>
+<label><input type="checkbox" value="05"/><span>เขต 05</span></label>
+<label><input type="checkbox" value="06"/><span>เขต 06</span></label>
+<label><input type="checkbox" value="07"/><span>เขต 07</span></label>
+<label><input type="checkbox" value="08"/><span>เขต 08</span></label>
+<label><input type="checkbox" value="09"/><span>เขต 09</span></label>
+<label><input type="checkbox" value="10"/><span>เขต 10</span></label>
+<label><input type="checkbox" value="11"/><span>เขต 11</span></label>
+<label><input type="checkbox" value="12"/><span>เขต 12</span></label>
+<label><input type="checkbox" value="13"/><span>เขต 13</span></label>
+<label><input type="checkbox" value="14"/><span>เขต 14</span></label>
+<label><input type="checkbox" value="15"/><span>เขต 15</span></label>
+<label><input type="checkbox" value="90"/><span>เขต 90</span></label>
+</div>
+<small class="um-help">Manager สามารถเลือกได้มากกว่า 1 เขต และต้องเลือกอย่างน้อย 1 เขต</small>
+<div class="um-mz-error" hidden="" id="umManagerZoneError">กรุณาเลือกอย่างน้อย 1 เขต</div>
+</div>
 <div class="form-group">
 <label for="umZone">เขต</label>
 <input id="umZone" placeholder="เช่น 05" type="text"/>
@@ -12063,7 +12164,7 @@ document.addEventListener('DOMContentLoaded', function(){
   function renderUsers(){
     const q=(value('umSearch')||'').toLowerCase();
     const list=profiles.filter(p=>
-      [p.employee_code,p.full_name,p.email,p.role,p.zone,p.subzone]
+      [p.employee_code,p.full_name,p.email,p.role,p.zone,p.subzone,(window.CaneManagerZones?.getProfileZones?.(p)||[]).join(' ')]
         .join(' ')
         .toLowerCase()
         .includes(q)
@@ -12079,7 +12180,7 @@ document.addEventListener('DOMContentLoaded', function(){
           <td>${p.full_name||'-'}</td>
           <td>${p.email||'-'}</td>
           <td><span class="um-role">${p.role}</span></td>
-          <td>${p.zone||'-'}</td>
+          <td>${window.CaneManagerZones?.renderTableZones?.(p) || p.zone || '-'}</td>
           <td>${p.subzone||'-'}</td>
           <td class="${p.status==='active'?'um-status-active':'um-status-inactive'}">
             ${p.status==='active'?'ใช้งาน':'ปิดใช้งาน'}
@@ -12117,6 +12218,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     profiles=data||[];
+    window.CANENEXT_USER_PROFILES=profiles;
     renderUsers();
   }
 
@@ -13129,118 +13231,6 @@ document.addEventListener('DOMContentLoaded', function(){
     refresh:loadProfile,
     get:()=>window.CANENEXT_CURRENT_PROFILE||null
   };
-})();
-</script><script id="canenext-manager-multizone-master-script">
-(function(){
-  const TABLE='user_zone_access';
-
-  const roleEl=()=>document.getElementById('umRole');
-  const zoneEl=()=>document.getElementById('umZone');
-  const subzoneEl=()=>document.getElementById('umSubzone');
-  const wrapEl=()=>document.getElementById('umManagerZonesWrap');
-
-  function selectedZones(){
-    return [...document.querySelectorAll('#umManagerZones input:checked')]
-      .map(cb=>cb.value);
-  }
-
-  function setSelectedZones(zones=[]){
-    const normalized=new Set((zones||[]).map(v=>String(v).padStart(2,'0')));
-    document.querySelectorAll('#umManagerZones input').forEach(cb=>{
-      cb.checked=normalized.has(String(cb.value).padStart(2,'0'));
-    });
-  }
-
-  function applyRoleUI(){
-    const isManager=String(roleEl()?.value||'').toLowerCase()==='manager';
-
-    if(wrapEl()) wrapEl().hidden=!isManager;
-
-    if(zoneEl()){
-      zoneEl().disabled=isManager;
-      if(isManager) zoneEl().value='';
-    }
-
-    if(subzoneEl()){
-      subzoneEl().disabled=isManager;
-      if(isManager) subzoneEl().value='';
-    }
-  }
-
-  async function fetchManagerZones(profileId){
-    if(!profileId || !window.caneSupabase) return [];
-
-    const {data,error}=await window.caneSupabase
-      .from(TABLE)
-      .select('zone')
-      .eq('user_id',profileId)
-      .order('zone',{ascending:true});
-
-    if(error) throw error;
-    return (data||[]).map(row=>row.zone);
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    roleEl()?.addEventListener('change',applyRoleUI);
-    applyRoleUI();
-  });
-
-  const timer=setInterval(()=>{
-    if(!window.CaneUserAdmin) return;
-    clearInterval(timer);
-
-    const api=window.CaneUserAdmin;
-
-    if(typeof api.openCreate==='function'){
-      const original=api.openCreate;
-      api.openCreate=function(){
-        const result=original.apply(this,arguments);
-        setSelectedZones([]);
-        setTimeout(applyRoleUI,0);
-        return result;
-      };
-    }
-
-    if(typeof api.openEdit==='function'){
-      const original=api.openEdit;
-      api.openEdit=async function(profileId){
-        const result=original.apply(this,arguments);
-        setTimeout(applyRoleUI,0);
-
-        try{
-          const zones=await fetchManagerZones(profileId);
-          setSelectedZones(zones);
-        }catch(err){
-          console.error('โหลดเขต Manager ไม่สำเร็จ:',err);
-          setSelectedZones([]);
-        }
-
-        return result;
-      };
-    }
-
-    if(typeof api.saveUser==='function'){
-      const original=api.saveUser;
-      api.saveUser=async function(){
-        const role=String(roleEl()?.value||'').toLowerCase();
-        const zones=selectedZones();
-
-        if(role==='manager' && zones.length===0){
-          alert('กรุณาเลือกอย่างน้อย 1 เขตสำหรับ Manager');
-          return;
-        }
-
-        window.CANENEXT_MANAGER_ZONES=zones;
-        return original.apply(this,arguments);
-      };
-    }
-
-    window.CaneManagerZones={
-      get:selectedZones,
-      set:setSelectedZones,
-      applyRoleUI
-    };
-  },100);
 })();
 </script><script id="canenext-realplot-water-label-final-script">
 (function(){
@@ -14532,6 +14522,232 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
       </div>
     `;
   };
+})();
+</script><script id="canenext-manager-multizone-v350-script">
+(function(){
+  const ACCESS_TABLE='user_zone_access';
+  const ALL_ZONES=['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','90'];
+  const profileZoneCache=new Map();
+
+  const $=id=>document.getElementById(id);
+  const roleEl=()=>$('umRole');
+  const zoneEl=()=>$('umZone');
+  const subzoneEl=()=>$('umSubzone');
+  const wrapEl=()=>$('umManagerZonesWrap');
+  const checkboxes=()=>[...document.querySelectorAll('#umManagerZones input[type="checkbox"]')];
+
+  function normalizeZones(zones){
+    return [...new Set((Array.isArray(zones)?zones:[])
+      .map(v=>String(v||'').replace(/\D/g,'').padStart(2,'0'))
+      .filter(v=>ALL_ZONES.includes(v)))].sort((a,b)=>Number(a)-Number(b));
+  }
+
+  function selectedZones(){
+    return normalizeZones(checkboxes().filter(cb=>cb.checked).map(cb=>cb.value));
+  }
+
+  function refreshSelectionUI(){
+    checkboxes().forEach(cb=>{
+      cb.closest('label')?.classList.toggle('is-selected',cb.checked);
+    });
+    const count=selectedZones().length;
+    if($('umManagerZoneCount')) $('umManagerZoneCount').textContent=`เลือกแล้ว ${count} เขต`;
+    if($('umManagerZoneError') && count>0) $('umManagerZoneError').hidden=true;
+  }
+
+  function setSelectedZones(zones=[]){
+    const wanted=new Set(normalizeZones(zones));
+    checkboxes().forEach(cb=>cb.checked=wanted.has(cb.value));
+    refreshSelectionUI();
+  }
+
+  function isManager(){
+    return String(roleEl()?.value||'').toLowerCase()==='manager';
+  }
+
+  function applyRoleUI(){
+    const manager=isManager();
+    if(wrapEl()) wrapEl().hidden=!manager;
+
+    // Keep original zone/subzone behavior for every non-Manager role.
+    if(zoneEl()){
+      zoneEl().disabled=manager;
+      zoneEl().closest('.form-group')?.toggleAttribute('hidden',manager);
+    }
+    if(subzoneEl()){
+      subzoneEl().disabled=manager;
+      subzoneEl().closest('.form-group')?.toggleAttribute('hidden',manager);
+    }
+    refreshSelectionUI();
+  }
+
+  function getProfileZones(profile){
+    if(!profile) return [];
+    const cached=profileZoneCache.get(String(profile.id));
+    if(cached?.length) return cached;
+
+    const embedded =
+      profile.manager_zones ||
+      profile.managerZones ||
+      profile.zones ||
+      profile.zone_access;
+
+    if(Array.isArray(embedded) && embedded.length){
+      return normalizeZones(
+        embedded.map(x=>typeof x==='object'?(x.zone||x.code):x)
+      );
+    }
+
+    // Backward-compatible fallback for old Manager records.
+    if(String(profile.role||'').toLowerCase()==='manager' && profile.zone){
+      return normalizeZones([profile.zone]);
+    }
+    return [];
+  }
+
+  function renderTableZones(profile){
+    if(String(profile?.role||'').toLowerCase()!=='manager'){
+      return profile?.zone || '-';
+    }
+    const zones=getProfileZones(profile);
+    if(!zones.length) return '-';
+    const title=zones.map(z=>`เขต ${z}`).join(', ');
+    return `<div class="um-zone-badges" title="${title}">${zones.map(z=>`<span class="um-zone-badge">${z}</span>`).join('')}</div>`;
+  }
+
+  async function fetchProfileZones(profileId, fallbackZone=''){
+    const id=String(profileId||'');
+    if(!id || !window.caneSupabase){
+      return normalizeZones(fallbackZone?[fallbackZone]:[]);
+    }
+    try{
+      const {data,error}=await window.caneSupabase
+        .from(ACCESS_TABLE)
+        .select('zone')
+        .eq('user_id',id)
+        .order('zone',{ascending:true});
+      if(error) throw error;
+      const zones=normalizeZones((data||[]).map(row=>row.zone));
+      profileZoneCache.set(id,zones);
+      return zones.length?zones:normalizeZones(fallbackZone?[fallbackZone]:[]);
+    }catch(err){
+      console.warn('Manager zone access fallback:',err);
+      return normalizeZones(fallbackZone?[fallbackZone]:[]);
+    }
+  }
+
+  async function preloadAllManagerZones(){
+    if(!window.caneSupabase) return;
+    try{
+      const {data,error}=await window.caneSupabase
+        .from(ACCESS_TABLE)
+        .select('user_id,zone')
+        .order('zone',{ascending:true});
+      if(error) throw error;
+      const grouped={};
+      (data||[]).forEach(row=>{
+        const key=String(row.user_id||'');
+        (grouped[key] ||= []).push(row.zone);
+      });
+      Object.entries(grouped).forEach(([id,zones])=>{
+        profileZoneCache.set(id,normalizeZones(zones));
+      });
+    }catch(err){
+      console.warn('ไม่สามารถโหลดตารางเขต Manager ล่วงหน้าได้:',err);
+    }
+  }
+
+  function validate(){
+    if(!isManager()) return true;
+    if(selectedZones().length) return true;
+
+    const error=$('umManagerZoneError');
+    if(error) error.hidden=false;
+    wrapEl()?.scrollIntoView({behavior:'smooth',block:'center'});
+    alert('กรุณาเลือกอย่างน้อย 1 เขตสำหรับ Manager');
+    return false;
+  }
+
+  function bindUI(){
+    roleEl()?.addEventListener('change',applyRoleUI);
+    checkboxes().forEach(cb=>cb.addEventListener('change',refreshSelectionUI));
+    $('umManagerSelectAll')?.addEventListener('click',()=>setSelectedZones(ALL_ZONES));
+    $('umManagerClearAll')?.addEventListener('click',()=>setSelectedZones([]));
+    applyRoleUI();
+  }
+
+  document.addEventListener('DOMContentLoaded',bindUI);
+
+  const timer=setInterval(()=>{
+    const api=window.CaneUserAdmin;
+    if(!api) return;
+    clearInterval(timer);
+
+    if(typeof api.openCreate==='function'){
+      const original=api.openCreate;
+      api.openCreate=function(){
+        const result=original.apply(this,arguments);
+        setSelectedZones([]);
+        setTimeout(applyRoleUI,0);
+        return result;
+      };
+    }
+
+    if(typeof api.openEdit==='function'){
+      const original=api.openEdit;
+      api.openEdit=async function(profileId){
+        const profile=(window.CANENEXT_USER_PROFILES||[]).find?.(p=>String(p.id)===String(profileId));
+        const result=original.apply(this,arguments);
+        setTimeout(applyRoleUI,0);
+
+        // The original profile list is closure-scoped, so use the current table/cache,
+        // then query normalized access rows. Old records fall back to profile.zone.
+        const fallback=profile?.zone || '';
+        const zones=await fetchProfileZones(profileId,fallback);
+        setSelectedZones(zones);
+        return result;
+      };
+    }
+
+    if(typeof api.saveUser==='function'){
+      const original=api.saveUser;
+      api.saveUser=async function(){
+        if(!validate()) return;
+        const zones=isManager()?selectedZones():[];
+        window.CANENEXT_MANAGER_ZONES=zones;
+
+        // Keep legacy zone populated with the first selected zone for existing modules.
+        if(isManager() && zoneEl()) zoneEl().value=zones[0]||'';
+
+        const result=await original.apply(this,arguments);
+        setTimeout(async()=>{
+          await preloadAllManagerZones();
+          try{ api.renderUsers?.(); }catch(e){}
+        },250);
+        return result;
+      };
+    }
+
+    if(typeof api.loadUsers==='function'){
+      const original=api.loadUsers;
+      api.loadUsers=async function(){
+        await preloadAllManagerZones();
+        const result=await original.apply(this,arguments);
+        setTimeout(()=>{ try{api.renderUsers?.()}catch(e){} },0);
+        return result;
+      };
+    }
+
+    window.CaneManagerZones={
+      get:selectedZones,
+      set:setSelectedZones,
+      validate,
+      applyRoleUI,
+      getProfileZones,
+      renderTableZones,
+      preloadAllManagerZones
+    };
+  },100);
 })();
 </script></body>
 </html>

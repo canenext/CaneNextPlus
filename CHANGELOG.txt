@@ -159,3 +159,13 @@ v3.4.7
 - Redesigned the internal layout of AI Recommendation.
 - Simplified content into KPI summary, recommendation summary, scenario comparison, Next Best Action, Action Plan, and comparison highlights.
 - Improved readability and responsive behavior.
+
+v3.5.0
+- Added multi-zone checkbox selection for Role = Manager only.
+- Added zones 01–15 and 90.
+- Added Select All, Clear All, and live selected-zone count.
+- Added required validation before saving a Manager.
+- Restores previously assigned Manager zones when editing.
+- Displays Manager zones as badges in the user table.
+- Preserves legacy zone field using the first selected zone, keeping other modules backward compatible.
+- Other roles and system modules remain unchanged.
