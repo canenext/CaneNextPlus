@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="th">
-<head>
+<head><script id="canenext-route-pending-script">document.documentElement.classList.add('canenext-route-pending');</script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Cane Next Plus+ | Smart Sugarcane Management Platform</title>
@@ -3614,6 +3614,36 @@ header *,
   /* intentionally left to earlier styles */
 }
 
+
+/* Risk scenario comparison table */
+#risk .risk-scenario-section{margin-top:20px;background:#fff;border:1px solid #dbe7f3;border-radius:16px;padding:18px;box-shadow:0 6px 20px rgba(18,66,112,.06)}
+#risk .risk-scenario-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}
+#risk .risk-scenario-heading h3{margin:0;color:#123b63;font-size:18px}
+#risk .risk-scenario-heading p{margin:5px 0 0;color:#60758a;font-size:13px}
+#risk .risk-scenario-table-wrap{overflow-x:hidden;width:100%}
+#risk .risk-scenario-table{width:100%;min-width:0;margin:0;table-layout:fixed}
+#risk .risk-scenario-table th{white-space:normal;text-align:center;vertical-align:middle;background:#eaf4ff;color:#153b60;font-size:10.5px;line-height:1.2;padding:7px 3px;word-break:break-word}
+#risk .risk-scenario-table td{text-align:right;vertical-align:middle;white-space:nowrap;font-size:11px;padding:6px 3px;overflow:hidden;text-overflow:ellipsis}
+#risk .risk-scenario-table td:first-child,#risk .risk-scenario-table td:nth-child(4),#risk .risk-scenario-table td:last-child{text-align:center}
+#risk .risk-scenario-table th:nth-child(1){width:7%}
+#risk .risk-scenario-table th:nth-child(2){width:10%}
+#risk .risk-scenario-table th:nth-child(3){width:8%}
+#risk .risk-scenario-table th:nth-child(4){width:6%}
+#risk .risk-scenario-table th:nth-child(5){width:14%}
+#risk .risk-scenario-table th:nth-child(6),#risk .risk-scenario-table th:nth-child(7),#risk .risk-scenario-table th:nth-child(8),#risk .risk-scenario-table th:nth-child(9){width:11%}
+#risk .risk-scenario-table th:nth-child(10){width:6%}
+#risk .risk-scenario-ton{width:100%;min-width:0;box-sizing:border-box;text-align:right;border:1px solid #c7d8e8;border-radius:6px;padding:5px 4px;font:inherit}
+#risk .risk-grade{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;font-weight:800;background:#e8f1fb;color:#174d7a}
+#risk .risk-grade.grade-a{background:#dff5e9;color:#147546}
+#risk .risk-grade.grade-b{background:#e3f1ff;color:#1767a5}
+#risk .risk-grade.grade-c{background:#fff4d7;color:#956400}
+#risk .risk-grade.grade-d{background:#ffe8dc;color:#a44a18}
+#risk .risk-grade.grade-f{background:#ffe1e1;color:#b42318}
+#risk .risk-negative{color:#c62828!important;font-weight:800}
+#risk .risk-delete-scenario{border:0;background:#fff0f0;color:#ad2525;border-radius:8px;padding:7px 10px;cursor:pointer;font-weight:700}
+#risk .risk-delete-scenario:hover{background:#ffdede}
+#risk .risk-scenario-note{margin-top:12px;color:#60758a;font-size:12px}
+@media(max-width:700px){#risk .risk-scenario-heading{flex-direction:column}#risk .risk-scenario-heading .btn{width:100%}}
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
 <style id="final-typography-refactor">
@@ -6705,11 +6735,6 @@ body.is-admin .admin-only-menu{display:flex!important}
   .um-form-actions{flex-direction:column}
   .um-form-actions .btn{width:100%}
 }
-</style><style id="canenext-admin-access-style">
-.admin-only-menu{display:none!important}
-body.is-admin .admin-only-menu{display:flex!important}
-body:not(.is-admin) #data-management,
-body:not(.is-admin) #user-management{display:none!important}
 </style><style id="login-options-after-forgot-remove">
 .login-options{
   justify-content:flex-start !important;
@@ -6815,18 +6840,6 @@ body:not(.is-admin) #user-management{display:none!important}
 #plot-data #guaranteeDiff,
 #plot-data #deStatus{
   font-weight:900 !important;
-}
-</style><style id="canenext-admin-menu-visibility-style">
-/* Hide admin menus by default; reveal only after verified active admin login */
-.admin-only-menu{
-  display:none !important;
-}
-body.is-admin .admin-only-menu{
-  display:flex !important;
-}
-body:not(.is-admin) #data-management,
-body:not(.is-admin) #user-management{
-  display:none !important;
 }
 </style><style id="canenext-login-alert-style">
 .login-alert-overlay{
@@ -7007,22 +7020,1350 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><style id="manager-zone-selector-v348">
-.um-manager-zones-group{grid-column:1/-1!important}
-.um-zone-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:2px 0 10px}
-.um-zone-tool{border:1px solid #BCD6EE;background:#fff;color:#0B5CAD;border-radius:9px;padding:7px 12px;font-weight:800;cursor:pointer}
-.um-zone-tool:hover{background:#EEF6FF}
-#umZoneCount{margin-left:auto;color:#5B6F86;font-size:12px;font-weight:700}
-.um-zone-selector{display:grid;grid-template-columns:repeat(8,minmax(72px,1fr));gap:10px}
-.um-zone-option{position:relative;display:block;cursor:pointer;margin:0!important}
-.um-zone-option input{position:absolute;opacity:0;pointer-events:none}
-.um-zone-option span{display:flex;align-items:center;justify-content:center;min-height:48px;border:1px solid #CFE0F1;border-radius:12px;background:#F7FBFF;color:#083B73;font-weight:900;transition:.16s ease;user-select:none}
-.um-zone-option:hover span{border-color:#70A9DB;background:#EDF6FF}
-.um-zone-option input:checked + span{background:#0B5CAD;color:#fff;border-color:#0B5CAD;box-shadow:0 4px 12px rgba(11,92,173,.18)}
-.um-zone-option input:focus-visible + span{outline:3px solid rgba(11,92,173,.22);outline-offset:2px}
-.um-zone-help{display:block;margin-top:9px;color:#667A90;font-weight:600}
-@media(max-width:1000px){.um-zone-selector{grid-template-columns:repeat(4,minmax(72px,1fr))}}
-@media(max-width:600px){.um-zone-selector{grid-template-columns:repeat(2,minmax(72px,1fr))}#umZoneCount{width:100%;margin-left:0}}
+</style><meta content="3.4.7" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+#user-management .um-manager-zones-wrap{
+  grid-column:1 / -1;
+}
+#user-management .um-zone-check-grid{
+  display:grid;
+  grid-template-columns:repeat(8,minmax(54px,1fr));
+  gap:8px;
+}
+#user-management .um-zone-check-grid label{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-height:40px;
+  margin:0;
+  border:1px solid #D5E6F8;
+  border-radius:10px;
+  background:#F7FBFF;
+  color:#083B73;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  user-select:none;
+}
+#user-management .um-zone-check-grid label:has(input:checked){
+  background:#EAF4FF;
+  border-color:#0B5CAD;
+  color:#0B5CAD;
+}
+#user-management .um-zone-check-grid input{
+  width:15px;
+  height:15px;
+  margin:0;
+}
+#user-management .um-help{
+  display:block;
+  margin-top:7px;
+  color:#6B7F93;
+  font-size:12px;
+}
+@media(max-width:1100px){
+  #user-management .um-zone-check-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+}
+@media(max-width:600px){
+  #user-management .um-zone-check-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+</style><style id="canenext-role-notice-hide-style">
+/* Hide role/activity notices shown in the middle of the app after login */
+#userScopeChip,
+.user-scope-chip,
+.login-role-notice,
+.role-notice,
+.role-status-banner,
+.user-role-banner,
+.auth-status-banner,
+.session-status-banner,
+.current-role-card,
+.current-role-notice{
+  display:none !important;
+}
+</style><style id="canenext-promotion-pages-style">
+#promotion.promotion-document-page{padding-top:18px!important}
+#promotion .promotion-document-header{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:18px;margin-bottom:16px
+}
+#promotion .promotion-document-header h3{
+  margin:0 0 5px!important;color:#0A3D78!important;
+  font-size:22px!important;font-weight:800!important
+}
+#promotion .promotion-document-header p{margin:0;color:#5B6F86;font-size:14px}
+#promotion .promotion-document-actions{
+  display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap
+}
+#promotion .promotion-document-actions .btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:38px;padding:8px 13px;text-decoration:none;
+  box-shadow:none;font-size:13px
+}
+#promotion .promotion-zoom-value{
+  min-width:52px;text-align:center;color:#0A3D78;font-weight:800;font-size:13px
+}
+#promotion .promotion-pdf-card{
+  overflow:hidden;background:#fff;border:1px solid #D5E6F8;
+  border-radius:18px;box-shadow:0 8px 24px rgba(8,59,115,.07)
+}
+#promotion .promotion-pdf-info{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 14px;color:#355B80;background:#F3F8FF;
+  border-bottom:1px solid #D5E6F8;font-size:12px;font-weight:600
+}
+#promotion .promotion-page-scroll{
+  height:calc(100vh - 245px);
+  min-height:620px;
+  overflow-y:auto;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  touch-action:pan-y pan-x;
+  background:#E7EBF0;
+  padding:18px 10px 40px;
+}
+#promotion .promotion-page-list{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+#promotion .promotion-page-item{
+  width:min(100%, 1050px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+#promotion .promotion-page-label{
+  margin:0 0 7px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#0A3D78;
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+}
+#promotion .promotion-page-image{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#fff;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);
+  user-select:none;
+  -webkit-user-drag:none;
+}
+@media(max-width:900px){
+  #promotion .promotion-document-header{flex-direction:column}
+  #promotion .promotion-document-actions{width:100%;justify-content:flex-start}
+  #promotion .promotion-pdf-info{align-items:flex-start;flex-direction:column}
+  #promotion .promotion-page-scroll{
+    height:calc(100dvh - 300px);
+    min-height:460px;
+    padding:12px 6px 30px;
+  }
+  #promotion .promotion-page-list{gap:12px}
+}
+</style><style id="canenext-portrait-responsive-style">
+@media (orientation:portrait) and (max-width:1100px){
+html,body{width:100%;max-width:100%;overflow-x:hidden!important}
+body{min-width:0!important}
+.app-shell,.app-layout,.layout,.main-layout,.app-body{width:100%!important;max-width:100%!important;display:block!important;grid-template-columns:1fr!important}
+.topbar,.app-header,header{width:100%!important;max-width:100%!important}
+.topbar,.app-header{min-height:auto!important;padding:12px 14px!important;flex-wrap:wrap!important;align-items:flex-start!important;gap:10px!important}
+.brand,.brand-wrap,.logo-wrap,.brand-title,.brand-text,.site-title{min-width:0!important;max-width:100%!important}
+.brand img,.logo-wrap img{max-width:54px!important;height:auto!important}
+.brand-title h1,.site-title{font-size:20px!important;line-height:1.2!important;white-space:normal!important}
+.brand-title p,.site-subtitle{font-size:12px!important;line-height:1.3!important;white-space:normal!important}
+.current-user,.user-area,.header-user{width:100%!important;max-width:100%!important;justify-content:space-between!important;flex-wrap:wrap!important;gap:8px!important}
+.sidebar,.side-menu,nav.sidebar{position:relative!important;top:auto!important;left:auto!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important;max-height:none!important;margin:0!important;padding:8px 10px!important;border-radius:0!important;border-left:0!important;border-right:0!important;overflow-x:auto!important;overflow-y:hidden!important;-webkit-overflow-scrolling:touch;white-space:nowrap!important}
+.sidebar .menu-list,.side-menu .menu-list,.sidebar-menu,.menu-container{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;gap:8px!important;width:max-content!important;min-width:100%!important}
+.menu-row{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;min-width:auto!important;margin:0!important}
+.menu-row a{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:max-content!important;width:auto!important;height:42px!important;padding:9px 14px!important;border-radius:10px!important;white-space:nowrap!important;font-size:13px!important}
+.menu-row a i{margin-right:7px!important}
+.app-main,main,.main-content,.content{width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:12px!important;overflow-x:hidden!important}
+.app-page{width:100%!important;max-width:100%!important;min-width:0!important}
+.card,.panel,.section-card,.content-card,.dashboard-card,.scenario-card,.table-card{width:100%!important;max-width:100%!important;min-width:0!important;overflow:hidden!important}
+.grid,.form-grid,.summary-grid,.dashboard-grid,.scenario-grid,.kpi-grid{grid-template-columns:1fr!important}
+.form-row,.search-row,.filter-row,.toolbar-row,.action-row{flex-wrap:wrap!important}
+.form-group,.field,.input-group{width:100%!important;min-width:0!important;max-width:100%!important}
+input,select,textarea,button{max-width:100%!important}
+.table-responsive,.table-wrap,.data-table-wrap,.real-plots-table-wrap{width:100%!important;max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+table{min-width:760px}
+#business-partner .search-row,#business-partner .bp-search-row{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+#business-partner .search-row .form-group,#business-partner .bp-search-row .form-group{width:100%!important}
+#business-partner .search-row button,#business-partner .bp-search-row button{width:100%!important}
+#plot-data .scenario-area-grid,#scenario .scenario-area-grid,#plot-data .scenario-detail-grid,#scenario .scenario-detail-grid{grid-template-columns:1fr 1fr!important}
+#promotion .promotion-document-header{display:block!important}
+#promotion .promotion-document-actions{width:100%!important;margin-top:12px!important;justify-content:flex-start!important}
+#promotion .promotion-page-scroll{width:100%!important;max-width:100%!important;height:calc(100dvh - 280px)!important;min-height:440px!important;overflow:auto!important}
+#promotion .promotion-page-item,#promotion .promotion-page-image{width:100%!important;max-width:100%!important}
+}
+@media (orientation:portrait) and (max-width:600px){
+.topbar,.app-header{padding:10px!important}
+.brand-title h1,.site-title{font-size:18px!important}
+.current-user,.user-area,.header-user{font-size:12px!important}
+.app-main,main,.main-content,.content{padding:8px!important}
+#business-partner .search-row,#business-partner .bp-search-row,#plot-data .scenario-area-grid,#scenario .scenario-area-grid,#plot-data .scenario-detail-grid,#scenario .scenario-detail-grid{grid-template-columns:1fr!important}
+.promotion-document-actions .btn,.promotion-document-actions button,.promotion-document-actions a{flex:1 1 calc(50% - 6px)!important;min-width:0!important}
+table{min-width:680px}
+}
+</style><style id="canenext-portrait-left-scroll-style">
+/* Portrait solution: retain the left sidebar and make it vertically scrollable */
+@media (orientation:portrait) and (max-width:1100px){
+  .menu-row{
+    position:fixed !important;
+    top:92px !important;
+    left:10px !important;
+    right:auto !important;
+
+    width:220px !important;
+    max-width:220px !important;
+    height:auto !important;
+    max-height:calc(100dvh - 108px) !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+    flex-wrap:nowrap !important;
+    align-items:stretch !important;
+    gap:4px !important;
+
+    margin:0 !important;
+    padding:10px !important;
+
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior-y:contain !important;
+    touch-action:pan-y !important;
+    scrollbar-width:thin;
+    z-index:100 !important;
+  }
+
+  .menu-row a{
+    display:flex !important;
+    flex:0 0 auto !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:auto !important;
+    min-height:42px !important;
+    margin:0 !important;
+    padding:9px 11px !important;
+    white-space:normal !important;
+    line-height:1.25 !important;
+    font-size:13px !important;
+  }
+
+  .menu-row::-webkit-scrollbar{
+    width:6px;
+  }
+
+  .menu-row::-webkit-scrollbar-track{
+    background:transparent;
+  }
+
+  .menu-row::-webkit-scrollbar-thumb{
+    background:rgba(11,92,173,.38);
+    border-radius:999px;
+  }
+
+  .app-main{
+    width:auto !important;
+    max-width:none !important;
+    min-width:0 !important;
+    margin-left:242px !important;
+    padding:12px !important;
+    overflow-x:hidden !important;
+  }
+
+  .header-row{
+    padding-left:0 !important;
+  }
+}
+
+/* Narrow phones: use a compact vertically scrollable drawer-width menu */
+@media (orientation:portrait) and (max-width:600px){
+  .menu-row{
+    top:84px !important;
+    left:6px !important;
+    width:172px !important;
+    max-width:172px !important;
+    max-height:calc(100dvh - 96px) !important;
+    padding:7px !important;
+  }
+
+  .menu-row a{
+    min-height:39px !important;
+    padding:8px 9px !important;
+    font-size:12px !important;
+  }
+
+  .menu-row .menu-icon{
+    margin-right:7px !important;
+    font-size:16px !important;
+  }
+
+  .app-main{
+    margin-left:184px !important;
+    padding:8px !important;
+  }
+}
+</style><style id="canenext-admin-controller-v325-style">
+html.canenext-route-pending .app-page{
+  visibility:hidden !important;
+}
+.menu-row .admin-only-menu{
+  display:none !important;
+  visibility:hidden !important;
+}
+html.can-admin-access .menu-row .admin-only-menu{
+  display:flex !important;
+  visibility:visible !important;
+}
+html:not(.can-admin-access) #data-management,
+html:not(.can-admin-access) #user-management{
+  display:none !important;
+}
+</style><style id="canenext-portrait-layout-v326-style">
+@media (orientation:portrait) and (max-width:1100px){
+html,body,body,.app-shell,.app-layout,.layout,.main-layout,.app-body,.app-main,main,.main-content,.content,.app-page{
+width:100%!important;max-width:100%!important;min-width:0!important;overflow-x:hidden!important}
+*{box-sizing:border-box!important}
+img,svg,canvas,video,iframe{max-width:100%!important}
+.topbar,.app-header,header{width:100%!important;max-width:100%!important;min-width:0!important}
+.topbar,.app-header{display:flex!important;flex-wrap:wrap!important;gap:10px!important;min-height:auto!important;padding:10px 12px!important}
+.brand,.brand-wrap,.logo-wrap,.brand-title,.brand-text,.site-title{min-width:0!important;max-width:100%!important}
+.brand-title h1,.site-title{white-space:normal!important;overflow-wrap:anywhere!important;font-size:19px!important}
+.brand-title p,.site-subtitle{white-space:normal!important;overflow-wrap:anywhere!important;font-size:12px!important}
+.current-user,.user-area,.header-user{width:100%!important;display:flex!important;flex-wrap:wrap!important;justify-content:space-between!important;gap:8px!important}
+.menu-row{position:relative!important;inset:auto!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:34vh!important;margin:0!important;padding:8px!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:4px!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;touch-action:pan-y!important;z-index:auto!important}
+.menu-row a{width:100%!important;max-width:100%!important;min-width:0!important;min-height:42px!important;height:auto!important;margin:0!important;padding:9px 11px!important;display:flex!important;white-space:normal!important;overflow-wrap:anywhere!important;font-size:13px!important}
+.app-main,main,.main-content,.content{margin:0!important;padding:10px!important}
+.card,.panel,.section-card,.content-card,.dashboard-card,.scenario-card,.table-card,.summary-card,.kpi-card,.promotion-pdf-card{width:100%!important;max-width:100%!important;min-width:0!important;margin-left:0!important;margin-right:0!important;overflow:hidden!important}
+.grid,.form-grid,.summary-grid,.dashboard-grid,.scenario-grid,.kpi-grid,.scenario-area-grid,.scenario-detail-grid{display:grid!important;grid-template-columns:1fr!important;width:100%!important;gap:10px!important}
+.form-row,.search-row,.filter-row,.toolbar-row,.action-row,.button-row{display:flex!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;gap:9px!important}
+.form-group,.field,.input-group,.search-field,.filter-field,input,select,textarea,button,.btn{width:100%!important;max-width:100%!important;min-width:0!important}
+h1,h2,h3,h4,h5,h6,p,span,label,div{overflow-wrap:anywhere}
+.table-responsive,.table-wrap,.data-table-wrap,.real-plots-table-wrap{width:100%!important;max-width:100%!important;overflow:visible!important}
+table{width:100%!important;min-width:0!important;max-width:100%!important;border-collapse:separate!important}
+table thead{display:none!important}
+table tbody,table tr,table td{display:block!important;width:100%!important;max-width:100%!important}
+table tbody{display:flex!important;flex-direction:column!important;gap:10px!important}
+table tr{overflow:hidden!important;border:1px solid #D9E7F5!important;border-radius:12px!important;background:#fff!important}
+table td{position:relative!important;min-height:42px!important;padding:10px 10px 10px 46%!important;border:0!important;border-bottom:1px solid #EDF3F9!important;text-align:right!important;white-space:normal!important}
+table td:last-child{border-bottom:0!important}
+table td::before{content:attr(data-label);position:absolute!important;left:10px!important;top:10px!important;width:42%!important;color:#315B84!important;font-weight:700!important;text-align:left!important}
+table td[colspan]{padding-left:10px!important;text-align:left!important}
+table td[colspan]::before{display:none!important}
+#business-partner .search-row,#business-partner .bp-search-row{display:grid!important;grid-template-columns:1fr!important;gap:9px!important}
+#promotion .promotion-document-header{display:flex!important;flex-direction:column!important;width:100%!important;gap:10px!important}
+#promotion .promotion-document-actions{width:100%!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+#promotion .promotion-page-scroll{width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:10px 4px 24px!important}
+#promotion .promotion-page-list,#promotion .promotion-page-item,#promotion .promotion-page-image{width:100%!important;max-width:100%!important;min-width:0!important}
+}
+@media (orientation:portrait) and (max-width:600px){
+.topbar,.app-header{padding:9px!important}
+.app-main,main,.main-content,.content{padding:8px!important}
+.menu-row{max-height:31vh!important;padding:6px!important}
+.menu-row a{min-height:39px!important;padding:8px 9px!important;font-size:12px!important}
+table td{padding-left:44%!important;font-size:12px!important}
+table td::before{width:39%!important;font-size:12px!important}
+#promotion .promotion-document-actions{grid-template-columns:1fr!important}
+}
+</style><style id="canenext-portrait-menu-grid-v327-style">
+@media (orientation:portrait) and (max-width:1100px){
+.menu-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important;gap:8px!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:none!important;margin:0!important;padding:8px!important;overflow:visible!important;touch-action:auto!important}
+.menu-row a{display:flex!important;align-items:center!important;justify-content:flex-start!important;width:100%!important;max-width:100%!important;min-width:0!important;min-height:48px!important;height:auto!important;margin:0!important;padding:10px 12px!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.25!important}
+.menu-row .admin-only-menu[hidden]{display:none!important}
+.menu-row a i,.menu-row a .menu-icon{flex:0 0 auto!important;margin-right:8px!important}
+.menu-row a span,.menu-row a .menu-text{min-width:0!important;overflow-wrap:anywhere!important}
+}
+@media (orientation:portrait) and (max-width:500px){
+.menu-row{grid-template-columns:1fr!important;gap:6px!important}
+.menu-row a{min-height:44px!important;padding:9px 10px!important}
+}
+</style><style id="canenext-mobile-login-v329-style">
+/* =========================================================
+   Mobile / portrait Login fix
+   - Login page scrolls vertically
+   - Submit button is always reachable
+   - The application behind Login is completely hidden
+   ========================================================= */
+
+/* Never show the application/Demo User behind the Login screen */
+body.locked > :not(#loginScreen):not(script){
+  display:none !important;
+}
+
+body.locked{
+  width:100% !important;
+  height:100% !important;
+  overflow:hidden !important;
+}
+
+#loginScreen.login-screen{
+  width:100% !important;
+  height:100dvh !important;
+  min-height:100dvh !important;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior:contain !important;
+}
+
+/* Tablet and phone portrait */
+@media (orientation:portrait) and (max-width:900px){
+  #loginScreen.login-screen{
+    position:fixed !important;
+    inset:0 !important;
+    display:block !important;
+    padding:
+      max(14px, env(safe-area-inset-top))
+      12px
+      max(24px, env(safe-area-inset-bottom)) !important;
+    background:#fff !important;
+  }
+
+  #loginScreen .login-shell{
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    max-width:520px !important;
+    min-height:0 !important;
+    height:auto !important;
+    margin:0 auto !important;
+    border-radius:22px !important;
+    overflow:visible !important;
+  }
+
+  #loginScreen .login-brand-panel{
+    flex:0 0 auto !important;
+    width:100% !important;
+    min-height:0 !important;
+    padding:20px 20px 12px !important;
+    border-right:0 !important;
+    border-bottom:1px solid var(--line) !important;
+    gap:8px !important;
+  }
+
+  #loginScreen .login-logo-img{
+    width:54px !important;
+    height:54px !important;
+    margin-bottom:4px !important;
+  }
+
+  #loginScreen .login-brand-panel h1{
+    margin:0 0 4px !important;
+    font-size:30px !important;
+    line-height:1.08 !important;
+    letter-spacing:-.5px !important;
+  }
+
+  #loginScreen .login-brand-panel .login-tagline{
+    margin:0 !important;
+    font-size:15px !important;
+    line-height:1.35 !important;
+  }
+
+  #loginScreen .login-brand-panel p{
+    font-size:13px !important;
+    line-height:1.5 !important;
+  }
+
+  /* Large decorative photo is unnecessary on phone Login */
+  #loginScreen .login-image-space{
+    display:none !important;
+  }
+
+  #loginScreen .login-form-panel{
+    flex:0 0 auto !important;
+    width:100% !important;
+    min-height:0 !important;
+    padding:20px !important;
+    display:block !important;
+  }
+
+  #loginScreen .login-card{
+    width:100% !important;
+    max-width:none !important;
+  }
+
+  #loginScreen .login-card h2{
+    margin:0 0 5px !important;
+    font-size:26px !important;
+    line-height:1.2 !important;
+  }
+
+  #loginScreen .login-card .hint{
+    margin:0 0 18px !important;
+    font-size:13px !important;
+    line-height:1.45 !important;
+  }
+
+  #loginScreen .form-group{
+    margin-bottom:13px !important;
+  }
+
+  #loginScreen .form-group label{
+    margin-bottom:6px !important;
+    font-size:13px !important;
+  }
+
+  #loginScreen .form-group input{
+    min-height:46px !important;
+    padding:11px 13px !important;
+    border-radius:13px !important;
+    font-size:16px !important;
+  }
+
+  #loginScreen .login-submit{
+    width:100% !important;
+    min-height:48px !important;
+    margin:4px 0 0 !important;
+    padding:12px 16px !important;
+  }
+
+  #loginScreen .demo-note{
+    display:none !important;
+  }
+}
+
+/* Short phone screens */
+@media (orientation:portrait) and (max-width:500px), (max-height:700px) and (max-width:900px){
+  #loginScreen.login-screen{
+    padding:
+      max(8px, env(safe-area-inset-top))
+      8px
+      max(18px, env(safe-area-inset-bottom)) !important;
+  }
+
+  #loginScreen .login-shell{
+    border-radius:18px !important;
+  }
+
+  #loginScreen .login-brand-panel{
+    padding:14px 16px 10px !important;
+  }
+
+  #loginScreen .login-logo-img{
+    width:44px !important;
+    height:44px !important;
+  }
+
+  #loginScreen .login-brand-panel h1{
+    font-size:25px !important;
+  }
+
+  #loginScreen .login-brand-panel .login-tagline{
+    font-size:13px !important;
+  }
+
+  #loginScreen .login-brand-panel p{
+    display:none !important;
+  }
+
+  #loginScreen .login-form-panel{
+    padding:15px 16px 18px !important;
+  }
+
+  #loginScreen .login-card h2{
+    font-size:23px !important;
+  }
+
+  #loginScreen .login-card .hint{
+    margin-bottom:13px !important;
+  }
+}
+</style><style id="canenext-risk-v331-style">
+#risk.risk-analysis-page{padding-bottom:32px}
+#risk .risk-page-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+#risk .risk-page-header h2{margin:0;color:#083B73;font-size:24px;font-weight:800}
+#risk .risk-year-inline{display:flex;align-items:center;gap:10px;min-width:300px}
+#risk .risk-year-inline label{color:#173B61;font-size:13px;font-weight:800;white-space:nowrap}
+#risk .risk-year-inline select{width:190px;min-height:42px;padding:9px 11px;border:1px solid #C8DDF5;border-radius:12px;background:#fff;color:#173B61;font-size:14px}
+#risk .risk-input-card{padding:18px;border:1px solid #D4E5F8;border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(8,59,115,.06)}
+#risk .risk-input-rows{display:flex;flex-direction:column;gap:14px}
+#risk .risk-input-grid{display:grid;gap:14px}
+#risk .risk-input-grid-row1{grid-template-columns:repeat(5,minmax(0,1fr))}
+#risk .risk-input-grid-row2{grid-template-columns:repeat(6,minmax(0,1fr))}
+#risk .risk-field{min-width:0;padding:14px;border:1px solid #D5E6F8;border-radius:16px;background:#F8FBFF}
+#risk .risk-field label{display:flex;align-items:center;justify-content:center;min-height:38px;margin-bottom:7px;color:#173B61;font-size:13px;font-weight:800;line-height:1.35;text-align:center}
+#risk .risk-field input{width:100%;min-height:48px;padding:10px 12px;border:1px solid #C8DDF5;border-radius:13px;background:#fff;color:#173B61;font-size:16px;text-align:center;font-weight:700}
+#risk .risk-field input:focus{outline:3px solid rgba(12,112,230,.12);border-color:#0C70E6}
+#risk .risk-field input[readonly]{color:#0A478E;font-weight:800;background:#F1F7FF}
+#risk .risk-calculated{background:#F0F7FF}
+#risk .risk-action-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+#risk .risk-action-row .btn{width:auto;min-height:44px;padding:10px 18px}
+#risk .risk-save-status{min-height:20px;margin-top:9px;color:#167248;font-size:12px;font-weight:700}
+#risk .risk-summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:16px}
+#risk .risk-summary-card{min-width:0;min-height:112px;padding:17px;border:1px solid #C7DDF8;border-radius:18px;background:linear-gradient(135deg,#EAF3FF,#DFF4FF)}
+#risk .risk-summary-card span{display:block;margin-bottom:10px;color:#60758D;font-size:13px;font-weight:700}
+#risk .risk-summary-card strong,.risk-kpi-value{display:block;color:#074598;font-size:21px;line-height:1.25;overflow-wrap:anywhere}
+#risk .risk-level-card strong{display:inline-flex;padding:7px 12px;border-radius:999px;background:#EAF8F0;color:#167248;font-size:19px}
+#risk .risk-level-card.risk-mid strong{color:#986000;background:#FFF7E6}
+#risk .risk-level-card.risk-high strong{color:#B45309;background:#FFF1E8}
+#risk .risk-level-card.risk-critical strong{color:#A32020;background:#FFF0F0}
+#risk .risk-summary-card.is-negative strong{color:#C62828}
+@media(max-width:1100px){
+#risk .risk-input-grid-row1,#risk .risk-input-grid-row2{grid-template-columns:repeat(2,minmax(0,1fr))}
+#risk .risk-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+#risk .risk-page-header{align-items:stretch;flex-direction:column}
+#risk .risk-year-inline{width:100%;min-width:0;flex-direction:column;align-items:stretch}
+#risk .risk-year-inline select{width:100%}
+#risk .risk-input-grid-row1,#risk .risk-input-grid-row2,#risk .risk-summary-grid{grid-template-columns:1fr}
+#risk .risk-action-row{display:grid;grid-template-columns:1fr}
+#risk .risk-action-row .btn{width:100%}
+}
+</style><style id="canenext-risk-v333-style">
+/* D/E KPI normalization */
+#risk #riskDERatio{
+  font-size:21px !important;
+  font-weight:700 !important;
+  line-height:1.25 !important;
+  color:#074598 !important;
+  font-family:inherit !important;
+}
+</style><style id="canenext-farmer-plots-v3312-style">
+#real-plots .real-plot-loading,
+#real-plots .real-plot-message{
+  padding:18px !important;
+  text-align:center !important;
+  color:#60758D !important;
+}
+#real-plots .real-plot-error{
+  color:#C62828 !important;
+}
+</style><style id="canenext-business-partner-spacing-v3313-style">
+/* Business Partner card spacing alignment */
+#business-partner{
+  padding-bottom:32px !important;
+}
+
+#business-partner > * + *{
+  margin-top:20px !important;
+}
+
+#business-partner .bp-section,
+#business-partner .bp-card,
+#business-partner .section-card,
+#business-partner .content-card,
+#business-partner .table-card{
+  margin:0 !important;
+  padding:18px !important;
+  border:1px solid #D9E6F4 !important;
+  border-radius:16px !important;
+  background:#fff !important;
+  box-shadow:0 6px 18px rgba(8,59,115,.05) !important;
+}
+
+#business-partner .bp-section + .bp-section,
+#business-partner .bp-card + .bp-card,
+#business-partner .section-card + .section-card,
+#business-partner .content-card + .content-card,
+#business-partner .table-card + .table-card{
+  margin-top:20px !important;
+}
+
+#business-partner .bp-section > h3,
+#business-partner .bp-card > h3,
+#business-partner .section-card > h3,
+#business-partner .content-card > h3,
+#business-partner .table-card > h3{
+  margin:0 0 14px !important;
+  padding:0 0 12px !important;
+  border-bottom:1px solid #E5EDF5 !important;
+  color:#0A3D78 !important;
+  line-height:1.35 !important;
+}
+
+#business-partner .bp-section > h3 + *,
+#business-partner .bp-card > h3 + *,
+#business-partner .section-card > h3 + *,
+#business-partner .content-card > h3 + *,
+#business-partner .table-card > h3 + *{
+  margin-top:0 !important;
+}
+
+#business-partner .table-responsive{
+  margin-top:4px !important;
+}
+
+#business-partner .bp-search-row,
+#business-partner .search-row{
+  margin-bottom:0 !important;
+}
+
+@media (orientation:portrait) and (max-width:1100px){
+  #business-partner > * + *{
+    margin-top:16px !important;
+  }
+
+  #business-partner .bp-section,
+  #business-partner .bp-card,
+  #business-partner .section-card,
+  #business-partner .content-card,
+  #business-partner .table-card{
+    padding:15px !important;
+  }
+
+  #business-partner .bp-section + .bp-section,
+  #business-partner .bp-card + .bp-card,
+  #business-partner .section-card + .section-card,
+  #business-partner .content-card + .content-card,
+  #business-partner .table-card + .table-card{
+    margin-top:16px !important;
+  }
+}
+
+@media (max-width:600px){
+  #business-partner .bp-section,
+  #business-partner .bp-card,
+  #business-partner .section-card,
+  #business-partner .content-card,
+  #business-partner .table-card{
+    padding:12px !important;
+    border-radius:14px !important;
+  }
+}
+</style><style id="canenext-basic-cost-4col-style">
+/* Basic Cost: 4-column layout */
+#basic-cost .cost-grid,
+#basic-cost .basic-cost-grid,
+#basic-cost .cost-items,
+#basic-cost .form-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+@media (max-width:1100px){
+ #basic-cost .cost-grid,
+ #basic-cost .basic-cost-grid,
+ #basic-cost .cost-items,
+ #basic-cost .form-grid{
+   grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+ }
+}
+@media (max-width:700px){
+ #basic-cost .cost-grid,
+ #basic-cost .basic-cost-grid,
+ #basic-cost .cost-items,
+ #basic-cost .form-grid{
+   grid-template-columns:1fr !important;
+ }
+}
+</style><style id="canenext-basic-cost-card-v3316-style">
+/* Basic Cost card layout */
+#basic-cost .basic-cost-card-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:14px !important;
+  width:100%;
+  margin-top:16px;
+}
+#basic-cost .basic-cost-item-card{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  min-width:0;
+  min-height:132px;
+  padding:16px;
+  border:1px solid #D7E6F5;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 6px 18px rgba(8,59,115,.05);
+}
+#basic-cost .basic-cost-icon{
+  flex:0 0 42px;
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:#EAF3FF;
+  color:#0A5EB8;
+  font-size:18px;
+}
+#basic-cost .basic-cost-item-body{
+  flex:1 1 auto;
+  min-width:0;
+}
+#basic-cost .basic-cost-item-title{
+  display:block;
+  min-height:40px;
+  margin:0 0 10px;
+  color:#173B61;
+  font-size:13px;
+  font-weight:800;
+  line-height:1.35;
+}
+#basic-cost .basic-cost-input-wrap{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:100%;
+}
+#basic-cost .basic-cost-input-wrap .cost-input{
+  flex:1 1 auto;
+  width:100%;
+  min-width:0;
+  min-height:44px;
+  padding:9px 11px;
+  border:1px solid #C8DDF5;
+  border-radius:12px;
+  background:#F9FCFF;
+  color:#0A3D78;
+  font-size:16px;
+  font-weight:700;
+  text-align:right;
+}
+#basic-cost .basic-cost-input-wrap .cost-input:focus{
+  outline:3px solid rgba(12,112,230,.12);
+  border-color:#0C70E6;
+}
+#basic-cost .basic-cost-unit{
+  flex:0 0 auto;
+  color:#60758D;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+}
+@media(max-width:1100px){
+  #basic-cost .basic-cost-card-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+@media(max-width:700px){
+  #basic-cost .basic-cost-card-grid{
+    grid-template-columns:1fr !important;
+  }
+  #basic-cost .basic-cost-item-card{
+    min-height:0;
+  }
+}
+</style><style id="canenext-basic-cost-svg-v3317-style">
+/* Inline SVG icons for Basic Cost cards */
+#basic-cost .basic-cost-icon svg{
+  width:22px !important;
+  height:22px !important;
+  display:block !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+  vector-effect:non-scaling-stroke;
+}
+</style><style id="canenext-scenario-profit-kpi-v3321-style">
+#scenario .scenario-profit-kpi{
+  background:#EAF8F0 !important;
+  border-color:#C7E7D5 !important;
+}
+#scenario .scenario-profit-kpi span{
+  color:#356B4E !important;
+}
+#scenario .scenario-profit-kpi b{
+  color:#167248 !important;
+  font-size:16px !important;
+}
+</style><style id="plot-layout-4col-style">
+#plot-data .plot-detail-grid,
+#plot-data .plot-grid,
+#plot-data .detail-grid{
+ display:grid!important;
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:16px!important;
+ align-items:end;
+}
+@media(max-width:900px){
+#plot-data .plot-detail-grid,
+#plot-data .plot-grid,
+#plot-data .detail-grid{grid-template-columns:repeat(2,1fr)!important;}
+}
+@media(max-width:600px){
+#plot-data .plot-detail-grid,
+#plot-data .plot-grid,
+#plot-data .detail-grid{grid-template-columns:1fr!important;}
+}
+</style>
+<style id="canenext-v341-stability-responsive">
+/* Real plot table: keep true table structure at every screen size */
+#real-plots .table-responsive{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  -webkit-overflow-scrolling:touch;
+}
+#real-plots .real-plot-table{
+  display:table !important;
+  width:100% !important;
+  min-width:940px !important;
+  table-layout:auto !important;
+  border-collapse:collapse !important;
+}
+#real-plots .real-plot-table thead{
+  display:table-header-group !important;
+}
+#real-plots .real-plot-table tbody{
+  display:table-row-group !important;
+}
+#real-plots .real-plot-table tr{
+  display:table-row !important;
+  width:auto !important;
+}
+#real-plots .real-plot-table th,
+#real-plots .real-plot-table td{
+  display:table-cell !important;
+  position:static !important;
+  width:auto !important;
+  min-width:105px !important;
+  max-width:none !important;
+  padding:10px 12px !important;
+  white-space:nowrap !important;
+  word-break:keep-all !important;
+  overflow-wrap:normal !important;
+  writing-mode:horizontal-tb !important;
+  line-height:1.35 !important;
+  vertical-align:middle !important;
+}
+#real-plots .real-plot-table th::before,
+#real-plots .real-plot-table td::before,
+#real-plots .real-plot-table th::after,
+#real-plots .real-plot-table td::after{
+  content:none !important;
+  display:none !important;
+}
+#real-plots .real-sort-btn{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:5px !important;
+  width:auto !important;
+  min-width:0 !important;
+  white-space:nowrap !important;
+  word-break:keep-all !important;
+  writing-mode:horizontal-tb !important;
+  line-height:1.25 !important;
+}
+#real-plots .real-sort-icon{
+  flex:0 0 auto !important;
+}
+
+/* Guarantee comparison: always render as a clean two-column table */
+#plot-data .compare-table{
+  display:table !important;
+  width:100% !important;
+  table-layout:fixed !important;
+  border-collapse:separate !important;
+  border-spacing:0 !important;
+}
+#plot-data .compare-table thead{
+  display:table-header-group !important;
+}
+#plot-data .compare-table tbody{
+  display:table-row-group !important;
+}
+#plot-data .compare-table tr{
+  display:table-row !important;
+}
+#plot-data .compare-table th,
+#plot-data .compare-table td{
+  display:table-cell !important;
+  position:static !important;
+  width:auto !important;
+  min-width:0 !important;
+  height:auto !important;
+  padding:13px 14px !important;
+  white-space:normal !important;
+  word-break:normal !important;
+  overflow-wrap:break-word !important;
+  writing-mode:horizontal-tb !important;
+  line-height:1.45 !important;
+  vertical-align:middle !important;
+}
+#plot-data .compare-table th::before,
+#plot-data .compare-table td::before,
+#plot-data .compare-table th::after,
+#plot-data .compare-table td::after{
+  content:none !important;
+  display:none !important;
+}
+#plot-data .compare-table th:first-child,
+#plot-data .compare-table td:first-child{
+  width:62% !important;
+  text-align:left !important;
+}
+#plot-data .compare-table th:last-child,
+#plot-data .compare-table td:last-child{
+  width:38% !important;
+  text-align:right !important;
+  white-space:nowrap !important;
+  font-variant-numeric:tabular-nums;
+}
+
+@media(max-width:1024px){
+  #real-plots .real-plot-table{
+    min-width:900px !important;
+    font-size:13px !important;
+  }
+}
+@media(max-width:767px){
+  #real-plots .table-responsive{
+    border:1px solid #D9E6F4 !important;
+    border-radius:14px !important;
+  }
+  #real-plots .real-plot-table{
+    min-width:860px !important;
+    font-size:12px !important;
+  }
+  #real-plots .real-plot-table th,
+  #real-plots .real-plot-table td{
+    min-width:96px !important;
+    padding:8px 9px !important;
+  }
+
+  #plot-data .compare-table{
+    font-size:14px !important;
+  }
+  #plot-data .compare-table th,
+  #plot-data .compare-table td{
+    padding:12px 10px !important;
+  }
+  #plot-data .compare-table th:first-child,
+  #plot-data .compare-table td:first-child{
+    width:60% !important;
+  }
+  #plot-data .compare-table th:last-child,
+  #plot-data .compare-table td:last-child{
+    width:40% !important;
+  }
+}
+</style>
+<style>
+#dashboard, .dashboard-page, [data-page="dashboard"], [data-menu="dashboard"], a[href*="dashboard"]{display:none!important;}
+</style><style id="ai-recommendation-v347-style">
+#ai-recommendation.ai-v347-page{
+  padding-top:14px!important;
+}
+.ai-v347-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  padding:22px 24px;
+  margin-bottom:18px;
+  border:1px solid #D6E5F3;
+  border-radius:20px;
+  background:linear-gradient(135deg,#F8FBFF 0%,#EEF6FF 100%);
+}
+.ai-v347-eyebrow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#0B5CAD;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.04em;
+  margin-bottom:7px;
+}
+.ai-v347-header h3{
+  margin:0 0 7px!important;
+  color:#083B73!important;
+  font-size:24px!important;
+  font-weight:900!important;
+}
+.ai-v347-header p{
+  margin:0;
+  color:#5B6F86;
+  font-size:14px;
+  line-height:1.6;
+}
+.ai-v347-ready{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border:1px solid #D5E6F8;
+  border-radius:999px;
+  background:#fff;
+  color:#46617E;
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.ai-v347-ready .dot{
+  width:9px;height:9px;border-radius:50%;
+  background:#1FA971;
+  box-shadow:0 0 0 4px rgba(31,169,113,.12);
+}
+.ai-v347-empty{
+  padding:42px 24px;
+  text-align:center;
+  border:1px dashed #BFD3E7;
+  border-radius:18px;
+  background:#F8FBFF;
+  color:#5B6F86;
+  font-weight:700;
+}
+.ai-v347-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 340px;
+  gap:18px;
+  align-items:start;
+}
+.ai-v347-main{
+  display:grid;
+  gap:16px;
+}
+.ai-v347-side{
+  display:grid;
+  gap:16px;
+  position:sticky;
+  top:16px;
+}
+.ai-v347-kpis{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.ai-v347-kpi{
+  min-width:0;
+  padding:16px;
+  border:1px solid #D8E6F3;
+  border-radius:16px;
+  background:#fff;
+}
+.ai-v347-kpi-label{
+  color:#667A90;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+.ai-v347-kpi-value{
+  color:#083B73;
+  font-size:22px;
+  font-weight:900;
+  line-height:1.25;
+  overflow-wrap:anywhere;
+}
+.ai-v347-kpi-note{
+  margin-top:6px;
+  color:#7A8EA3;
+  font-size:12px;
+  line-height:1.4;
+}
+.ai-v347-panel{
+  overflow:hidden;
+  border:1px solid #D8E6F3;
+  border-radius:18px;
+  background:#fff;
+}
+.ai-v347-panel-head{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:14px 17px;
+  border-bottom:1px solid #E5EEF7;
+  background:#F6FAFE;
+  color:#083B73;
+  font-size:15px;
+  font-weight:900;
+}
+.ai-v347-panel-body{
+  padding:16px 18px;
+}
+.ai-v347-summary-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.ai-v347-summary-item{
+  padding:14px;
+  border:1px solid #E1EBF5;
+  border-radius:14px;
+  background:#fff;
+}
+.ai-v347-summary-item strong{
+  display:block;
+  margin-bottom:6px;
+  color:#083B73;
+  font-size:13px;
+}
+.ai-v347-summary-item p{
+  margin:0;
+  color:#46617E;
+  font-size:13px;
+  line-height:1.6;
+}
+.ai-v347-decision{
+  padding:20px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#0B5CAD 0%,#083B73 100%);
+  color:#fff;
+}
+.ai-v347-decision .caption{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.04em;
+  color:#D9EDFF;
+  margin-bottom:8px;
+}
+.ai-v347-decision h4{
+  margin:0 0 10px!important;
+  color:#fff!important;
+  font-size:21px!important;
+  font-weight:900!important;
+}
+.ai-v347-decision p{
+  margin:0;
+  color:#fff!important;
+  font-size:13px;
+  line-height:1.65;
+}
+.ai-v347-decision .amount{
+  display:block;
+  margin-top:14px;
+  color:#fff;
+  font-size:26px;
+  font-weight:900;
+}
+.ai-v347-progress{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+  margin-top:15px;
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+}
+.ai-v347-progress-track{
+  grid-column:1/-1;
+  height:7px;
+  overflow:hidden;
+  border-radius:999px;
+  background:rgba(255,255,255,.22);
+}
+.ai-v347-progress-fill{
+  height:100%;
+  border-radius:999px;
+  background:#fff;
+}
+.ai-v347-actions{
+  display:grid;
+  gap:10px;
+}
+.ai-v347-action{
+  display:grid;
+  grid-template-columns:24px minmax(0,1fr);
+  gap:10px;
+  align-items:start;
+  padding:11px 12px;
+  border:1px solid #E1EBF5;
+  border-radius:12px;
+  background:#fff;
+}
+.ai-v347-action input{
+  margin-top:2px;
+  width:17px;
+  height:17px;
+}
+.ai-v347-action label{
+  color:#294B6D;
+  font-size:13px;
+  line-height:1.55;
+}
+.ai-v347-table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.ai-v347-table{
+  width:100%;
+  min-width:720px;
+  border-collapse:collapse;
+}
+.ai-v347-table th,
+.ai-v347-table td{
+  padding:10px 12px!important;
+  border-bottom:1px solid #E8EFF6;
+  text-align:right;
+  white-space:nowrap;
+  font-size:13px;
+}
+.ai-v347-table th:first-child,
+.ai-v347-table td:first-child{
+  text-align:left;
+}
+.ai-v347-table th{
+  background:#F6FAFE;
+  color:#083B73;
+  font-weight:900;
+}
+.ai-v347-recommended{
+  background:#F0F7FF;
+}
+.ai-v347-badge{
+  display:inline-flex;
+  align-items:center;
+  margin-left:6px;
+  padding:3px 7px;
+  border-radius:999px;
+  background:#E7F7EF;
+  color:#137A50;
+  font-size:10px;
+  font-weight:900;
+}
+.ai-v347-mini{
+  display:grid;
+  gap:9px;
+}
+.ai-v347-mini-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:center;
+  padding-bottom:9px;
+  border-bottom:1px solid #EDF2F7;
+}
+.ai-v347-mini-row:last-child{
+  padding-bottom:0;
+  border-bottom:0;
+}
+.ai-v347-mini-row span:first-child{
+  color:#60758A;
+  font-size:12px;
+  font-weight:700;
+}
+.ai-v347-mini-row span:last-child{
+  color:#083B73;
+  font-size:13px;
+  font-weight:900;
+  text-align:right;
+}
+@media(max-width:1100px){
+  .ai-v347-layout{grid-template-columns:1fr}
+  .ai-v347-side{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ai-v347-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+  .ai-v347-header{display:block;padding:18px}
+  .ai-v347-ready{margin-top:14px;width:max-content;max-width:100%;white-space:normal}
+  .ai-v347-header h3{font-size:21px!important}
+  .ai-v347-kpis,
+  .ai-v347-summary-grid,
+  .ai-v347-side{grid-template-columns:1fr}
+  .ai-v347-kpi-value{font-size:20px}
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -7047,9 +8388,6 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <div class="form-group">
 <label for="password">รหัสผ่าน</label>
 <input autocomplete="current-password" id="password" placeholder="กรอกรหัสผ่าน" required="" type="password"/>
-</div>
-<div class="login-options">
-<label><input type="checkbox"/> จดจำการเข้าสู่ระบบ</label>
 </div>
 <button class="btn login-submit" type="submit">เข้าสู่ระบบ</button>
 <div class="demo-note" id="authMessage" style="display:none;"></div>
@@ -7080,7 +8418,6 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <a href="#scenario" onclick="showMainMenu(event, 'scenario')"><i class="fa-solid fa-chart-line menu-icon"></i> Scenario Analysis</a>
 <a href="#analytics" onclick="showMainMenu(event, 'analytics')"><i class="fa-solid fa-chart-column menu-icon"></i> ระบบวิเคราะห์ข้อมูล</a>
 <a href="#ai-recommendation" onclick="showMainMenu(event, 'ai-recommendation')"><i class="fa-solid fa-robot menu-icon"></i> AI Recommendation</a>
-<a href="#dashboard" onclick="showMainMenu(event, 'dashboard')"><i class="fa-solid fa-gauge-high menu-icon"></i> Dashboard</a>
 <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
 <a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> หลักเกณฑ์การส่งเสริม</a>
 <a class="admin-only-menu" href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
@@ -7095,19 +8432,19 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <div class="bp-clean-grid">
 <div class="form-group">
 <label for="bpCode">รหัสชาวไร่</label>
-<input id="bpCode" placeholder="เช่น 778899" type="text"/>
+<input id="bpCode" placeholder="" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="bpName">ชื่อ-สกุล ชาวไร่</label>
-<input id="bpName" placeholder="เช่น นายอ้อยดี มีกำไร" type="text"/>
+<input id="bpName" placeholder="" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="showZone">สังกัดเขต</label>
-<input id="showZone" readonly="" type="text" value="เขต 05"/>
+<input id="showZone" readonly="" type="text" value=""/>
 </div>
 <div class="form-group">
 <label for="showSubZone">สังกัดเขตย่อย</label>
-<input id="showSubZone" readonly="" type="text" value="เขตย่อย 05-03"/>
+<input id="showSubZone" readonly="" type="text" value=""/>
 </div>
 <button class="btn bp-search-btn" onclick="searchBusinessPartner()" type="button">ค้นหา</button>
 </div>
@@ -7121,7 +8458,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <th>ปีการผลิต</th>
 <th>พื้นที่ (ไร่)</th>
 <th>ยืนยันสัญญาตัน (ตัน)</th>
-<th>ส่งอ้อย (ตัน)</th>
+<th>ส่งอ้อย<br/>(ตัน)</th>
 <th>เกรด</th>
 </tr>
 </thead>
@@ -7211,13 +8548,10 @@ body.logged-in .user-scope-chip{display:inline-flex}
 </div>
 <div class="table-responsive">
 <table class="table real-plot-table">
-<thead><tr><th><button class="real-sort-btn" data-sort-key="year" type="button">ปีการผลิต<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="project_name" type="button">โครงการ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="crop_type" type="button">ประเภทอ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="plot_id" type="button">รหัสแปลง<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="area" type="button">พื้นที่ (ไร่)<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="variety" type="button">พันธุ์อ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="water" type="button">รูปแบบการให้น้ำ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="status" type="button">สถานะแปลง<span class="real-sort-icon">↕</span></button></th></tr></thead>
+<thead><tr><th><button class="real-sort-btn" data-sort-key="year" type="button">ปีการผลิต<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="project_name" type="button">โครงการ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="crop_type" type="button">ประเภทอ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="plot_id" type="button">รหัสแปลง<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="area" type="button">พื้นที่ (ไร่)<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="variety" type="button">พันธุ์อ้อย<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="water" type="button">แหล่งน้ำ<span class="real-sort-icon">↕</span></button></th><th><button class="real-sort-btn" data-sort-key="status" type="button">สถานะแปลง<span class="real-sort-icon">↕</span></button></th></tr></thead>
 <tbody id="realPlotTableBody"></tbody>
 </table>
 </div>
-</div>
-<div class="real-actions">
-<button class="btn" onclick="createScenarioFromRealPlot()" type="button">สร้าง Scenario จากแปลงจริง</button>
 </div>
 </section>
 <section class="section app-page basic-cost-page" id="basic-cost">
@@ -7232,29 +8566,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <button class="btn" onclick="saveBasicCosts()" type="button">บันทึกโครงสร้างต้นทุน</button>
 <button class="btn secondary" onclick="resetBasicCosts()" type="button">คืนค่าตั้งต้น</button>
 </div>
-<table class="table cost-table">
-<thead>
-<tr>
-<th>รายการต้นทุนพื้นฐาน</th>
-<th>บาท/ไร่</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>ค่าเช่าที่</td><td><input class="cost-input" data-default="2200" type="text" value="2,200"/></td></tr>
-<tr><td>ค่าไถเตรียมดิน</td><td><input class="cost-input" data-default="532" type="text" value="532"/></td></tr>
-<tr><td>ค่าพรวน</td><td><input class="cost-input" data-default="320" type="text" value="320"/></td></tr>
-<tr><td>ค่าปลูก</td><td><input class="cost-input" data-default="691" type="text" value="691"/></td></tr>
-<tr><td>ค่าสารกำจัด/ควบคุมวัชพืช</td><td><input class="cost-input" data-default="350" type="text" value="350"/></td></tr>
-<tr><td>ค่าฉีดพ่นสารกำจัด/ควบคุมวัชพืช</td><td><input class="cost-input" data-default="100" type="text" value="100"/></td></tr>
-<tr><td>ค่าพันธุ์อ้อย</td><td><input class="cost-input" data-default="1409" type="text" value="1,409"/></td></tr>
-<tr><td>ปุ๋ยรองพื้น</td><td><input class="cost-input" data-default="1041" type="text" value="1,041"/></td></tr>
-<tr><td>ปุ๋ยแต่งหน้า</td><td><input class="cost-input" data-default="1318" type="text" value="1,318"/></td></tr>
-<tr><td>ค่าใส่ปุ๋ยแต่งหน้า</td><td><input class="cost-input" data-default="250" type="text" value="250"/></td></tr>
-<tr><td>ปุ๋ยเพิ่มผลผลิต</td><td><input class="cost-input" data-default="1611" type="text" value="1,611"/></td></tr>
-<tr><td>ค่าใส่ปุ๋ยเพิ่มผลผลิต</td><td><input class="cost-input" data-default="250" type="text" value="250"/></td></tr>
-<tr><td>ค่าใช้จ่ายอื่น ๆ ในการจัดการไร่</td><td><input class="cost-input" data-default="0" type="text" value="0"/></td></tr>
-</tbody>
-</table>
+<div class="basic-cost-card-grid"><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 19h18M5 16V8l7-4 7 4v8M9 16v-5h6v5"></path><path d="M7 20v-2m5 2v-2m5 2v-2"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าเช่าที่</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="2200" type="text" value="2,200"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="7" cy="17" r="3"></circle><circle cx="18" cy="17" r="2"></circle><path d="M4 14h11l2 3M9 14V8h5l2 4h3M5 8h4M14 8V5h3"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าไถเตรียมดิน</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="532" type="text" value="532"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 18c4-5 8-7 16-8M4 14c4-3 9-5 16-5M7 20l-2-6m6 5-1-7m6 5v-6"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าพรวน</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="320" type="text" value="320"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 20V9"></path><path d="M12 12c-4 0-6-2-6-6 4 0 6 2 6 6Zm0 3c4 0 6-2 6-6-4 0-6 2-6 6Z"></path><path d="M5 20h14"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าปลูก</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="691" type="text" value="691"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M7 7l10 10M9 13c1-3 3-5 6-6M10 15c2-1 4-1 6-1"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าสารกำจัด/ควบคุมวัชพืช</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="350" type="text" value="350"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M5 9h7l3 3v7H7a2 2 0 0 1-2-2V9Z"></path><path d="M8 9V6h4v3m3 5h3l2-2M18 8h3M18 11h4"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าฉีดพ่นสารกำจัด/ควบคุมวัชพืช</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="100" type="text" value="100"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 21V5"></path><path d="M12 8c-4 0-6-2-7-5 4 0 6 1 7 5Zm0 5c4 0 6-2 7-5-4 0-6 1-7 5Zm0 4c-3 0-5-1-6-4 3 0 5 1 6 4Z"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าพันธุ์อ้อย</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="1409" type="text" value="1,409"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M9 3h6v4l3 5v7H6v-7l3-5V3Z"></path><path d="M9 7h6M8 14h8M10 17h4"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ปุ๋ยรองพื้น</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="1041" type="text" value="1,041"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 20V10"></path><path d="M12 13c-3 0-5-2-5-5 3 0 5 2 5 5Zm0 3c3 0 5-2 5-5-3 0-5 2-5 5Z"></path><path d="M5 20h14M4 6h16M7 3h10"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ปุ๋ยแต่งหน้า</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="1318" type="text" value="1,318"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="8" cy="6" r="2"></circle><path d="M6 20v-6l2-3 3 2 2 4M13 8h5l2 3M15 11l-2 3M17 15l3 2M10 20h4"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าใส่ปุ๋ยแต่งหน้า</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="250" type="text" value="250"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 19h16M6 16l4-4 3 3 5-7"></path><path d="M15 8h3v3"></path><path d="M8 19v-3m5 3v-4m5 4v-7"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ปุ๋ยเพิ่มผลผลิต</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="1611" type="text" value="1,611"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="7" cy="6" r="2"></circle><path d="M5 20v-6l2-3 3 2 2 4M12 9h7M15 6l4 3-4 3M10 20h4"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าใส่ปุ๋ยเพิ่มผลผลิต</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="250" type="text" value="250"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article><article class="basic-cost-item-card"><div class="basic-cost-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 7v10M9 9.5c.8-1 2-1.5 3.5-1.5 1.9 0 3.5 1 3.5 2.5s-1.2 2.2-3.5 2.5S9 14 9 15.5 10.6 18 12.5 18c1.4 0 2.6-.4 3.5-1.3"></path></svg></div><div class="basic-cost-item-body"><label class="basic-cost-item-title">ค่าใช้จ่ายอื่น ๆ ในการจัดการไร่</label><div class="basic-cost-input-wrap"><input class="cost-input" data-default="0" type="text" value="0"/><span class="basic-cost-unit">บาท/ไร่</span></div></div></article></div>
 </section>
 <section class="section app-page plot-page" id="plot-data">
 <div class="scenario-source-panel">
@@ -7361,14 +8673,42 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <div class="analytics-section">
 <h4>Scenario Comparison</h4>
 <table class="table analytics-table" id="scenarioCompareTable">
-<thead><tr><th>Scenario</th><th>ผลผลิต (ตัน/ไร่)</th><th>คาดการณ์ผลผลิตอ้อย</th><th>งบส่งเสริม</th><th>รายได้</th><th>ต้นทุนรวม</th><th>กำไรสุทธิ</th><th>กำไร/ไร่</th></tr></thead>
+<thead><tr><th>Scenario</th><th>ผลผลิต (ตัน/ไร่)</th><th>คาดการณ์ผลผลิตอ้อย</th><th>งบส่งเสริม</th><th>รายได้</th><th>ต้นทุนรวม</th><th>กำไรสุทธิ</th><th>กำไร/ไร่</th><th>กำไร/ตัน</th></tr></thead>
 <tbody>
-<tr><td colspan="8">ยังไม่มีข้อมูล Scenario</td></tr>
+<tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>
 </tbody>
 </table>
 </div>
 </section>
-<section class="section app-page" id="promotion"><p class="lead">เตรียมพื้นที่สำหรับแผนส่งเสริมและงบสนับสนุน</p></section>
+<section class="section app-page promotion-document-page" id="promotion">
+<div class="promotion-document-header">
+<div>
+<h3>หลักเกณฑ์การส่งเสริม</h3>
+<p>คู่มือหลักการและหลักเกณฑ์การส่งเสริม ปี 2569/70</p>
+</div>
+<div class="promotion-document-actions">
+<button class="btn secondary" id="promotionZoomOut" type="button">−</button>
+<span class="promotion-zoom-value" id="promotionZoomValue">100%</span>
+<button class="btn secondary" id="promotionZoomIn" type="button">+</button>
+<button class="btn secondary" id="promotionZoomReset" type="button">พอดีหน้าจอ</button>
+<a class="btn secondary" href="assets/pdf/promotion_manual_2569_70.pdf" rel="noopener" target="_blank">
+      เปิด PDF
+    </a>
+<a class="btn" download="หลักเกณฑ์ส่งเสริมปี 2569-70.pdf" href="assets/pdf/promotion_manual_2569_70.pdf">
+      ดาวน์โหลด PDF
+    </a>
+</div>
+</div>
+<div class="promotion-pdf-card">
+<div class="promotion-pdf-info">
+<span>เอกสาร 28 หน้า</span>
+<span>เลื่อนขึ้น-ลงเพื่อดูเอกสารแต่ละหน้า</span>
+</div>
+<div class="promotion-page-scroll" id="promotionPageScroll">
+<div class="promotion-page-list" id="promotionPageList"></div>
+</div>
+</div>
+</section>
 <section class="section app-page dashboard-page" id="dashboard">
 <div class="dashboard-kpi-grid">
 <div class="dashboard-kpi"><span>⭐ Scenario ที่แนะนำ</span><b id="dashRecommended">-</b></div>
@@ -7390,16 +8730,6 @@ body.logged-in .user-scope-chip{display:inline-flex}
 </table>
 </div>
 <div class="dashboard-section">
-<h4>Executive Comparison</h4>
-<div class="dashboard-comparison-grid">
-<div class="dash-compare-card"><span>🌾 ผลผลิตสูงสุด</span><b id="cmpBestYield">-</b></div>
-<div class="dash-compare-card"><span>💰 กำไรสูงสุด</span><b id="cmpBestProfit">-</b></div>
-<div class="dash-compare-card"><span>📈 กำไร/ไร่สูงสุด</span><b id="cmpBestProfitPerRai">-</b></div>
-<div class="dash-compare-card"><span>💸 ต้นทุนต่ำสุด</span><b id="cmpLowestCost">-</b></div>
-<div class="dash-compare-card"><span>🚰 ระบบน้ำคุ้มค่าที่สุด</span><b id="cmpBestWater">-</b></div>
-</div>
-</div>
-<div class="dashboard-section">
 <h4>Financial Summary</h4>
 <div class="dashboard-financial-grid">
 <div class="dashboard-fin-card">
@@ -7419,11 +8749,117 @@ body.logged-in .user-scope-chip{display:inline-flex}
 </div>
 </div>
 </section>
-<section class="section app-page" id="risk"><p class="lead">เตรียมพื้นที่สำหรับวิเคราะห์ความเสี่ยงในการส่งเสริม</p></section>
-<section class="section app-page ai-recommendation-page" id="ai-recommendation">
-<div class="ai-advisor-empty" id="aiAdvisorContent">
-    กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติจากข้อมูล Scenario Analysis
-  </div>
+<section class="section app-page risk-analysis-page" id="risk">
+<div class="risk-page-header">
+<h2>วิเคราะห์ความเสี่ยง</h2>
+<div class="risk-year-inline">
+<label for="riskProductionYear">ปีการผลิต</label>
+<select id="riskProductionYear">
+<option value="">เลือกปีการผลิต</option>
+</select>
+</div>
+</div>
+<div class="risk-input-card">
+<div class="risk-input-rows">
+<div class="risk-input-grid risk-input-grid-row1">
+<div class="risk-field risk-readonly">
+<label for="riskGuaranteeTotal">วงเงินค้ำประกันรวม (บาท)</label>
+<input id="riskGuaranteeTotal" readonly="" type="text" value="0"/>
+</div>
+<div class="risk-field risk-readonly">
+<label for="riskDueDebt">หนี้สินครบ Due ชำระ (บาท)</label>
+<input id="riskDueDebt" readonly="" type="text" value="0"/>
+</div>
+<div class="risk-field">
+<label for="riskAdditionalPromotion">ต้องการรับส่งเสริมเพิ่ม (บาท)</label>
+<input id="riskAdditionalPromotion" inputmode="numeric" type="text" value="0"/>
+</div>
+<div class="risk-field risk-calculated">
+<label for="riskTotalObligation">หนี้ครบ Due + ส่งเสริมเพิ่ม (บาท)</label>
+<input id="riskTotalObligation" readonly="" type="text" value="0"/>
+</div>
+<div class="risk-field risk-calculated">
+<label for="riskDERatio">D/E</label>
+<input id="riskDERatio" readonly="" type="text" value="0.00"/>
+</div>
+</div>
+<div class="risk-input-grid risk-input-grid-row2">
+<div class="risk-field risk-readonly">
+<label for="riskContractTon">ยืนยันสัญญาตัน (ตัน)</label>
+<input id="riskContractTon" readonly="" type="text" value="0"/>
+</div>
+<div class="risk-field risk-calculated">
+<label for="riskBahtPerTon">บาท/ตัน</label>
+<input id="riskBahtPerTon" readonly="" type="text" value="0.00"/>
+</div>
+<div class="risk-field">
+<label for="riskBasePrice">ราคาอ้อยขั้นต้น (บาท/ตัน)</label>
+<input id="riskBasePrice" inputmode="decimal" type="text" value="950"/>
+</div>
+<div class="risk-field">
+<label for="riskCcs">CCS (% CCS)</label>
+<input id="riskCcs" inputmode="decimal" min="0" step="0.01" type="number" value="13.80"/>
+</div>
+<div class="risk-field risk-calculated">
+<label for="riskTotalCanePrice">ราคาอ้อยขั้นต้น + CCS (บาท/ตัน)</label>
+<input id="riskTotalCanePrice" readonly="" type="text" value="1,166.60"/>
+</div>
+<div class="risk-field">
+<label for="riskHarvestCost">ค่าใช้จ่าย ตัด+ขึ้น+บรรทุก (บาท/ตัน)</label>
+<input id="riskHarvestCost" inputmode="decimal" type="text" value="400"/>
+</div>
+</div>
+<input id="riskCcsValue" type="hidden" value="216.60"/>
+</div>
+<div class="risk-action-row">
+<button class="btn primary" id="riskSaveDefaults" type="button">💾 บันทึกค่าที่กรอก</button>
+<button class="btn secondary" id="riskResetDefaults" type="button">↺ คืนค่าตั้งต้น</button>
+</div>
+<div aria-live="polite" class="risk-save-status" id="riskSaveStatus"></div>
+</div>
+<div class="risk-scenario-section">
+<div class="risk-scenario-heading">
+<div>
+<h3>คาดการณ์ส่งอ้อยเทียบสัญญาตันของชาวไร่</h3>
+</div>
+<button class="btn primary" id="riskAddScenario" type="button">+ เพิ่มกรณี</button>
+</div>
+<div class="table-responsive risk-scenario-table-wrap">
+<table class="table risk-scenario-table">
+<thead>
+<tr>
+<th>กรณี</th>
+<th>ส่งอ้อย<br/>(ตัน)</th>
+<th>% เทียบ<br/>สัญญา</th>
+<th>เกรด</th>
+<th>Due + ส่งเสริม<br/>(บาท)</th>
+<th>รายได้<br/>(บาท)</th>
+<th>รายจ่าย<br/>(บาท)</th>
+<th>ผลต่าง<br/>(บาท)</th>
+<th>กำไรสุทธิ<br/>(บาท)</th>
+<th>จัดการ</th>
+</tr>
+</thead>
+<tbody id="riskScenarioBody"></tbody>
+</table>
+</div>
+</div>
+</section>
+<section class="section app-page ai-recommendation-page ai-v347-page" id="ai-recommendation">
+<div class="ai-v347-header">
+<div>
+<div class="ai-v347-eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> AI RECOMMENDATION</div>
+<h3>ศูนย์ช่วยตัดสินใจด้านการส่งเสริม</h3>
+<p>สรุปข้อมูลสำคัญจาก Scenario Analysis เพื่อช่วยเลือกแนวทางที่เหมาะสมที่สุด</p>
+</div>
+<div class="ai-v347-ready">
+<span class="dot"></span>
+<span>พร้อมวิเคราะห์เมื่อมี Scenario</span>
+</div>
+</div>
+<div class="ai-v347-empty" id="aiAdvisorContent">
+  กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติ
+</div>
 </section>
 <section class="section app-page data-management-page" id="data-management">
 <div class="dm-card">
@@ -7514,24 +8950,12 @@ body.logged-in .user-scope-chip{display:inline-flex}
 <option value="manager">Manager — ผู้จัดการเขต</option>
 <option value="admin">Admin — ผู้ดูแลระบบ</option>
 </select>
-</div>
-<div class="form-group um-manager-zones-group" hidden="" id="umManagerZonesGroup">
-<label>เขตที่รับผิดชอบ</label>
-<div class="um-zone-tools">
-<button class="um-zone-tool" id="umSelectAllZones" type="button">เลือกทั้งหมด</button>
-<button class="um-zone-tool" id="umClearAllZones" type="button">ล้างทั้งหมด</button>
-<span id="umZoneCount">เลือกแล้ว 0 เขต</span>
-</div>
-<div class="um-zone-selector" id="umManagerZones">
-<label class="um-zone-option"><input type="checkbox" value="01"/><span>01</span></label><label class="um-zone-option"><input type="checkbox" value="02"/><span>02</span></label><label class="um-zone-option"><input type="checkbox" value="03"/><span>03</span></label><label class="um-zone-option"><input type="checkbox" value="04"/><span>04</span></label><label class="um-zone-option"><input type="checkbox" value="05"/><span>05</span></label><label class="um-zone-option"><input type="checkbox" value="06"/><span>06</span></label><label class="um-zone-option"><input type="checkbox" value="07"/><span>07</span></label><label class="um-zone-option"><input type="checkbox" value="08"/><span>08</span></label><label class="um-zone-option"><input type="checkbox" value="09"/><span>09</span></label><label class="um-zone-option"><input type="checkbox" value="10"/><span>10</span></label><label class="um-zone-option"><input type="checkbox" value="11"/><span>11</span></label><label class="um-zone-option"><input type="checkbox" value="12"/><span>12</span></label><label class="um-zone-option"><input type="checkbox" value="13"/><span>13</span></label><label class="um-zone-option"><input type="checkbox" value="14"/><span>14</span></label><label class="um-zone-option"><input type="checkbox" value="15"/><span>15</span></label><label class="um-zone-option"><input type="checkbox" value="90"/><span>90</span></label>
-</div>
-<small class="um-zone-help">สามารถเลือกได้มากกว่า 1 เขตสำหรับ Manager</small>
-</div>
-<div class="form-group" id="umSingleZoneGroup">
+</div><div class="form-group um-manager-zones-wrap" hidden="" id="umManagerZonesWrap"><label>เขตที่รับผิดชอบ</label><div class="um-zone-check-grid" id="umManagerZones"><label>01</label><label>02</label><label>03</label><label>04</label><label>05</label><label>06</label><label>07</label><label>08</label><label>09</label><label>10</label><label>11</label><label>12</label><label>13</label><label>14</label><label>15</label><label>90</label></div><small class="um-help">เลือกได้มากกว่า 1 เขตสำหรับ Manager</small></div>
+<div class="form-group">
 <label for="umZone">เขต</label>
 <input id="umZone" placeholder="เช่น 05" type="text"/>
 </div>
-<div class="form-group" id="umSubzoneGroup">
+<div class="form-group">
 <label for="umSubzone">เขตย่อย</label>
 <input id="umSubzone" placeholder="เช่น 05-03" type="text"/>
 </div>
@@ -7621,7 +9045,7 @@ function parseThaiNumber(value){
   return Number(String(value || '').replace(/,/g,'').trim()) || 0;
 }
 function formatNumber(value){
-  return Number(value || 0).toLocaleString('th-TH', {maximumFractionDigits:2});
+  return Number(value || 0).toLocaleString('th-TH', {maximumFractionDigits:0});
 }
 function formatInputValue(input){
   const raw = String(input.value || '').replace(/,/g,'').trim();
@@ -7640,7 +9064,7 @@ function calculateBasicCostTotal(){
 }
 function resetBasicCosts(){
   document.querySelectorAll('.cost-input').forEach(input => {
-    input.value = Number(input.dataset.default || 0).toLocaleString('th-TH');
+    input.value = Number(input.dataset.default || 0).toLocaleString('th-TH' ,{maximumFractionDigits:0});
   });
   calculateBasicCostTotal();
 }
@@ -7660,8 +9084,8 @@ function searchBusinessPartner(){
     document.getElementById('showZone').value = 'เขต 09';
     document.getElementById('showSubZone').value = 'เขตย่อย 09-02';
   }else{
-    codeInput.value = code || '778899';
-    nameInput.value = name || 'นายอ้อยดี มีกำไร';
+    codeInput.value = code || '';
+    nameInput.value = name || '';
     document.getElementById('showZone').value = 'เขต 05';
     document.getElementById('showSubZone').value = 'เขตย่อย 05-03';
   }
@@ -7734,8 +9158,8 @@ function scenarioCostDefaults(){
   ];
 }
 function getIrrigationCostPerRai(water){
-  if(water === 'ระบบน้ำหยด') return 2000;
-  if(water === 'ระบบน้ำราด') return 500;
+  if(water === 'ระบบน้ำหยด') return 600;
+  if(water === 'ระบบน้ำราด') return 300;
   return 0;
 }
 function getScenarioDefault(){
@@ -7869,7 +9293,8 @@ function renderScenarioCardV2(data){
           <div class="scenario-result-row"><span>รายได้</span><b data-result="revenue">0.00 บาท</b></div>
           <div class="scenario-result-row"><span>ต้นทุนรวม</span><b data-result="totalCost">0.00 บาท</b></div>
           <div class="scenario-result-row"><span>กำไรสุทธิ</span><b data-result="netProfit">0.00 บาท</b></div>
-          <div class="scenario-result-row"><span>กำไร</span><b data-result="profitPerRai">0.00 บาท/ไร่</b></div>
+          <div class="scenario-result-row scenario-profit-kpi"><span>กำไร</span><b data-result="profitPerRai">0 บาท/ไร่</b></div>
+          <div class="scenario-result-row scenario-profit-kpi"><span>กำไร</span><b data-result="profitPerTon">0 บาท/ตัน</b></div>
         </div>
       </div>
     </div>
@@ -7921,7 +9346,8 @@ function updateScenarioV2(button){
   const harvestCostTotal = totalYield * d.harvestCost;
   const totalCost = promotionCost + waterCost + harvestCostTotal;
   const netProfit = revenue - totalCost;
-  const profitPerRai = netProfit / d.area;
+  const profitPerRai = d.area > 0 ? netProfit / d.area : 0;
+  const profitPerTon = totalYield > 0 ? netProfit / totalYield : 0;
   const guarantee = 5500000;
   const deRatio = guarantee > 0 ? (promotionCost + waterCost) / guarantee : 0;
 
@@ -7938,8 +9364,8 @@ function updateScenarioV2(button){
   setInput('totalCanePrice', totalCanePrice, 2);
   setInput('stalkPerRai', stalkPerRai, 2);
 
-  setText('yieldPerRai', `${yieldPerRai.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})} ตัน/ไร่`);
-  setText('totalYield', `${totalYield.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})} ตัน`);
+  setText('yieldPerRai', `${yieldPerRai.toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})} ตัน/ไร่`);
+  setText('totalYield', `${totalYield.toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})} ตัน`);
   setText('promotionCost', `${formatMoney0(promotionCost)} บาท`);
   setText('deRatio', deRatio.toFixed(2));
   setText('waterCost', `${formatMoney0(waterCost)} บาท`);
@@ -7948,6 +9374,7 @@ function updateScenarioV2(button){
   setText('totalCost', `${formatMoney0(totalCost)} บาท`);
   setText('netProfit', `${formatMoney0(netProfit)} บาท`);
   setText('profitPerRai', `${formatMoney0(profitPerRai)} บาท/ไร่`);
+  setText('profitPerTon', `${formatMoney0(profitPerTon)} บาท/ตัน`);
 }
 function updateAllScenarios(){
   document.querySelectorAll('.scenario-panel-v2 .scenario-update-btn').forEach(btn=>updateScenarioV2(btn));
@@ -8020,7 +9447,7 @@ function refreshAnalysisTable(){
   const rows = getScenarioAnalyticsData();
 
   if(rows.length === 0){
-    tb.innerHTML = '<tr><td colspan="8">ยังไม่มีข้อมูล Scenario</td></tr>';
+    tb.innerHTML = '<tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>';
     updateAnalyticsSummary([]);
     return;
   }
@@ -8039,6 +9466,7 @@ function refreshAnalysisTable(){
       <td class="${r.totalCost===minCost ? 'analytics-highlight-best' : ''}">${r.totalCostText}</td>
       <td class="${r.netProfit===maxProfit ? 'analytics-highlight-best' : ''}">${r.netProfitText}</td>
       <td>${r.profitPerRaiText}</td>
+      <td>${r.profitPerTonText}</td>
     </tr>
   `).join('');
 
@@ -8247,6 +9675,7 @@ function aiGetScenarioRows(){
       totalCostText:get('totalCost'),
       netProfitText:get('netProfit'),
       profitPerRaiText:get('profitPerRai'),
+        profitPerTonText:get('profitPerTon'),
       yieldPerRai:aiParseMetric(get('yieldPerRai')),
       totalYield:aiParseMetric(get('totalYield')),
       promotion:aiParseMetric(get('promotionCost')),
@@ -8413,6 +9842,7 @@ function dashboardGetRows(){
       totalCostText:get('totalCost'),
       netProfitText:get('netProfit'),
       profitPerRaiText:get('profitPerRai'),
+        profitPerTonText:get('profitPerTon'),
       yield:dashboardParse(get('yieldPerRai')),
       totalYield:dashboardParse(get('totalYield')),
       promotion:dashboardParse(get('promotionCost')),
@@ -9121,7 +10551,7 @@ window.addEventListener("click",()=>setTimeout(apply,80));
         <td>${p.project_name}</td>
         <td>${p.crop_type}</td>
         <td>${p.plot_id}</td>
-        <td>${p.area.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})}</td>
+        <td>${p.area.toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})}</td>
         <td><span class="status ${p.status==='พร้อมวิเคราะห์'?'ok':'warn'}">${p.status}</span></td>
       </tr>
     `).join('');
@@ -9132,7 +10562,7 @@ window.addEventListener("click",()=>setTimeout(apply,80));
     const p=selectedRealPlot;
     const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
     set('realDetailPlotId',p.plot_id);
-    set('realDetailArea',p.area.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' ไร่');
+    set('realDetailArea',p.area.toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})+' ไร่');
     set('realDetailYear',p.year);
     set('realDetailCropType',p.crop_type);
     set('realDetailVariety',p.variety);
@@ -9161,7 +10591,7 @@ window.addEventListener("click",()=>setTimeout(apply,80));
       alert('กรุณากรอกรหัสชาวไร่');
       return;
     }
-    document.getElementById('realFarmerName').value='นายอ้อยดี มีกำไร';
+    document.getElementById('realFarmerName').value='';
     document.getElementById('realZone').value='เขต 05';
     document.getElementById('realSubzone').value='เขตย่อย 05-03';
     renderRealPlots();
@@ -9227,7 +10657,7 @@ window.filterRealPlotsByYear=function(){
 <td>${p.project_name}</td>
 <td>${p.crop_type}</td>
 <td>${p.plot_id}</td>
-<td>${Number(p.area).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})}</td>
+<td>${Number(p.area).toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:0})}</td>
 <td><span class="status ${p.status==='พร้อมวิเคราะห์'?'ok':'warn'}">${p.status}</span></td>
 </tr>`;
 }).join('');
@@ -9257,8 +10687,8 @@ window.filterRealPlotsByYear=function(){
           <td>${plot.crop_type}</td>
           <td>${plot.plot_id}</td>
           <td>${Number(plot.area).toLocaleString('th-TH',{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
+            minimumFractionDigits:0,
+            maximumFractionDigits:0
           })}</td>
           <td><span class="status ${plot.status === 'พร้อมวิเคราะห์' ? 'ok' : 'warn'}">${plot.status}</span></td>
         </tr>`;
@@ -9612,7 +11042,7 @@ document.addEventListener('DOMContentLoaded', function(){
    conn(error?'error':'ok',error?'เชื่อมต่อได้ แต่ยังไม่มีสิทธิ์อ่านข้อมูล':'เชื่อมต่อ Supabase สำเร็จ');
   }catch(e){conn('error','เชื่อมต่อ Supabase ไม่สำเร็จ')}
  }
- function card(i,count,ok,msg){const c=document.querySelectorAll('#dmSummaryGrid .dm-sheet')[i];if(!c)return;c.className='dm-sheet '+(ok?'ok':'error');c.querySelector('b').textContent=Number(count||0).toLocaleString('th-TH');c.querySelector('small').textContent=msg}
+ function card(i,count,ok,msg){const c=document.querySelectorAll('#dmSummaryGrid .dm-sheet')[i];if(!c)return;c.className='dm-sheet '+(ok?'ok':'error');c.querySelector('b').textContent=Number(count||0).toLocaleString('th-TH' ,{maximumFractionDigits:0});c.querySelector('small').textContent=msg}
  async function parse(file){
   const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});
   const result={sheets:{},errors:[]};
@@ -9803,12 +11233,12 @@ document.addEventListener('DOMContentLoaded', function(){
       if(d){
         debtBody.innerHTML=`
           <tr>
-            <td>${fmt(d.old_debt)}</td>
-            <td>${fmt(d.debt_2568_69)}</td>
-            <td>${fmt(d.debt_2569_70)}</td>
-            <td>${fmt(d.debt_2570_71)}</td>
-            <td>${fmt(d.future_debt)}</td>
-            <td><strong>${fmt(d.total_debt)}</strong></td>
+            <td>${Number(d.old_debt||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td>${Number(d.debt_2568_69||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td>${Number(d.debt_2569_70||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td>${Number(d.debt_2570_71||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td>${Number(d.future_debt||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</td>
+            <td><strong>${Number(d.total_debt||0).toLocaleString('th-TH',{maximumFractionDigits:0})}</strong></td>
           </tr>`;
       }else emptyRow(debtBody,6,'ไม่พบข้อมูลหนี้สิน');
 
@@ -10008,9 +11438,7 @@ document.addEventListener('DOMContentLoaded', function(){
   ];
 
   function savedFarmer(){
-    if(window.CANENEXT_CURRENT_FARMER) return window.CANENEXT_CURRENT_FARMER;
-    try{return JSON.parse(localStorage.getItem('canenext_current_farmer')||'null')}
-    catch(e){return null}
+    return null;
   }
 
   function setInput(id,value){
@@ -10025,13 +11453,13 @@ document.addEventListener('DOMContentLoaded', function(){
     bar=document.createElement('div');
     bar.className='farmer-context-bar';
     bar.innerHTML=`
-      <span class="fc-label">รหัสชาวไร่</span><span class="fc-value" data-code>-</span>
+      <span class="fc-label">รหัสชาวไร่</span><span class="fc-value" data-code></span>
       <span class="fc-sep"></span>
-      <span class="fc-label">ชื่อ-สกุล</span><span class="fc-value" data-name>-</span>
+      <span class="fc-label">ชื่อ-สกุล</span><span class="fc-value" data-name></span>
       <span class="fc-sep"></span>
-      <span class="fc-label">เขต</span><span class="fc-value" data-zone>-</span>
+      <span class="fc-label">เขต</span><span class="fc-value" data-zone></span>
       <span class="fc-sep"></span>
-      <span class="fc-label">เขตย่อย</span><span class="fc-value" data-subzone>-</span>`;
+      <span class="fc-label">เขตย่อย</span><span class="fc-value" data-subzone></span>`;
     page.insertBefore(bar,page.firstChild);
     return bar;
   }
@@ -10041,10 +11469,10 @@ document.addEventListener('DOMContentLoaded', function(){
       const bar=ensureBar(document.getElementById(id));
       if(!bar) return;
       bar.classList.toggle('has-farmer',!!farmer);
-      bar.querySelector('[data-code]').textContent=farmer?.farmer_code||'-';
-      bar.querySelector('[data-name]').textContent=farmer?.name||'-';
-      bar.querySelector('[data-zone]').textContent=farmer?.zone||'-';
-      bar.querySelector('[data-subzone]').textContent=farmer?.subzone||'-';
+      bar.querySelector('[data-code]').textContent=farmer?.farmer_code||'';
+      bar.querySelector('[data-name]').textContent=farmer?.name||'';
+      bar.querySelector('[data-zone]').textContent=farmer?.zone||'';
+      bar.querySelector('[data-subzone]').textContent=farmer?.subzone||'';
     });
 
     if(farmer){
@@ -10187,7 +11615,7 @@ document.addEventListener('DOMContentLoaded', function(){
       if(count>1000){
         const notice=document.createElement('div');
         notice.style.cssText='margin:10px 0;padding:10px 12px;background:#FFF7E6;border:1px solid #F4D79A;border-radius:10px;color:#7A5600;font-size:13px;';
-        notice.textContent='พบข้อมูลแปลง '+Number(count).toLocaleString('th-TH')+' รายการ ระบบแสดงครั้งละ 1,000 รายการเพื่อป้องกันหน้าเว็บค้าง';
+        notice.textContent='พบข้อมูลแปลง '+Number(count).toLocaleString('th-TH' ,{maximumFractionDigits:0})+' รายการ ระบบแสดงครั้งละ 1,000 รายการเพื่อป้องกันหน้าเว็บค้าง';
         const table=document.getElementById('realPlotTableBody')?.closest('table');
         if(table && !table.previousElementSibling?.dataset?.plotLimitNotice){
           notice.dataset.plotLimitNotice='1';
@@ -10334,7 +11762,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     const count=document.getElementById('realPlotCount');
     if(count){
-      count.textContent=`แสดง ${list.length.toLocaleString('th-TH')} จาก ${(window.currentRealPlots||[]).length.toLocaleString('th-TH')} แปลง`;
+      count.textContent=`แสดง ${list.length.toLocaleString('th-TH' ,{maximumFractionDigits:0})} จาก ${(window.currentRealPlots||[]).length.toLocaleString('th-TH' ,{maximumFractionDigits:0})} แปลง`;
     }
 
     if(list.length && typeof window.selectRealPlotFromSupabase==='function'){
@@ -10506,8 +11934,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
     setValue('umRole','viewer');
     setValue('umStatus','active');
-    window.CaneManagerZones?.setSelected([]);
-    window.CaneManagerZones?.toggleRoleFields();
 
     $('umEmail').disabled=false;
     $('umPasswordGroup').hidden=false;
@@ -10527,11 +11953,9 @@ document.addEventListener('DOMContentLoaded', function(){
     setValue('umFullName',p.full_name);
     setValue('umEmployeeCode',p.employee_code);
     setValue('umRole',p.role);
-    if(p.role==='manager'){ window.CaneManagerZones?.setSelected(p.zones||p.zone||''); }
-    setValue('umZone',p.role==='manager'?'':p.zone);
+    setValue('umZone',p.zone);
     setValue('umSubzone',p.subzone);
     setValue('umStatus',p.status);
-    window.CaneManagerZones?.toggleRoleFields();
 
     $('umEmail').disabled=true;
     $('umPasswordGroup').hidden=true;
@@ -10565,15 +11989,11 @@ document.addEventListener('DOMContentLoaded', function(){
         full_name:value('umFullName'),
         employee_code:value('umEmployeeCode'),
         role:value('umRole'),
-        zones:value('umRole')==='manager' ? (window.CaneManagerZones?.selected()||[]) : [],
-        zone:value('umRole')==='manager' ? (window.CaneManagerZones?.selected()||[]).join(',')||null : value('umZone')||null,
+        zone:value('umZone')||null,
         subzone:value('umSubzone')||null,
-        status:value('umStatus')
+        status:value('umStatus'),
+        manager_zones: window.CaneManagerZones?.get?.() || []
       };
-
-      if(payload.role==='manager' && !payload.zones.length){
-        throw new Error('กรุณาเลือกเขตที่รับผิดชอบอย่างน้อย 1 เขต');
-      }
 
       if(!editingId){
         if(!payload.email || !payload.password || !payload.full_name){
@@ -10659,7 +12079,7 @@ document.addEventListener('DOMContentLoaded', function(){
           <td>${p.full_name||'-'}</td>
           <td>${p.email||'-'}</td>
           <td><span class="um-role">${p.role}</span></td>
-          <td>${Array.isArray(p.zones)&&p.zones.length?p.zones.join(', '):(p.zone||'-')}</td>
+          <td>${p.zone||'-'}</td>
           <td>${p.subzone||'-'}</td>
           <td class="${p.status==='active'?'um-status-active':'um-status-inactive'}">
             ${p.status==='active'?'ใช้งาน':'ปิดใช้งาน'}
@@ -10726,175 +12146,6 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
   window.addEventListener('canenext:farmer-changed',()=>setTimeout(applyRole,50));
-})();
-</script><script id="canenext-admin-access-control">
-(function(){
-  const ADMIN_PAGES=new Set(['data-management','user-management']);
-  let currentProfile=null;
-  let profilePromise=null;
-
-  async function ensureClient(){
-    if(window.caneSupabase) return window.caneSupabase;
-    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
-      throw new Error('ยังไม่สามารถเชื่อมต่อ Supabase ได้');
-    }
-    window.caneSupabase=window.supabase.createClient(
-      window.CANENEXT_CONFIG.SUPABASE_URL,
-      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
-    );
-    return window.caneSupabase;
-  }
-
-  async function loadProfile(force=false){
-    if(currentProfile && !force) return currentProfile;
-    if(profilePromise && !force) return profilePromise;
-
-    profilePromise=(async()=>{
-      const db=await ensureClient();
-      const {data:{user},error:userError}=await db.auth.getUser();
-      if(userError || !user){
-        currentProfile=null;
-        return null;
-      }
-
-      const {data,error}=await db
-        .from('user_profiles')
-        .select('*')
-        .ilike('email',user.email)
-        .maybeSingle();
-
-      if(error) throw error;
-      currentProfile=data||null;
-      window.CANENEXT_CURRENT_PROFILE=currentProfile;
-      return currentProfile;
-    })();
-
-    try{
-      return await profilePromise;
-    }finally{
-      profilePromise=null;
-    }
-  }
-
-  function isActiveAdmin(profile=currentProfile){
-    return profile?.role==='admin' && profile?.status==='active';
-  }
-
-  function applyVisibility(){
-    const admin=isActiveAdmin();
-    document.body.classList.toggle('is-admin',admin);
-
-    document.querySelectorAll('.admin-only-menu').forEach(link=>{
-      link.style.display=admin?'flex':'none';
-      link.setAttribute('aria-hidden',admin?'false':'true');
-      link.tabIndex=admin?0:-1;
-    });
-
-    const dmPage=document.getElementById('data-management');
-    const umPage=document.getElementById('user-management');
-
-    if(!admin){
-      dmPage?.classList.remove('active-page');
-      umPage?.classList.remove('active-page');
-    }
-
-    const dmInput=document.getElementById('dmExcelFile');
-    const dmPreview=document.getElementById('dmPreviewBtn');
-    const dmImport=document.getElementById('dmImportBtn');
-
-    if(dmInput) dmInput.disabled=!admin;
-    if(dmPreview) dmPreview.disabled=!admin || dmPreview.disabled;
-    if(dmImport) dmImport.disabled=!admin || dmImport.disabled;
-  }
-
-  async function requireAdmin(showMessage=true){
-    try{
-      const profile=await loadProfile();
-      const allowed=isActiveAdmin(profile);
-      applyVisibility();
-
-      if(!allowed && showMessage){
-        alert('เมนูนี้สำหรับ Admin เท่านั้น');
-      }
-      return allowed;
-    }catch(err){
-      console.error('Admin permission check failed:',err);
-      applyVisibility();
-      if(showMessage) alert('ไม่สามารถตรวจสอบสิทธิ์ผู้ใช้งานได้');
-      return false;
-    }
-  }
-
-  // Final route guard. This is intentionally the last showMainMenu override.
-  const previousShowMainMenu=window.showMainMenu;
-  window.showMainMenu=async function(event,pageId){
-    if(event && typeof event.preventDefault==='function'){
-      event.preventDefault();
-    }
-
-    if(ADMIN_PAGES.has(pageId)){
-      const allowed=await requireAdmin(true);
-      if(!allowed){
-        if(typeof previousShowMainMenu==='function'){
-          return previousShowMainMenu(null,'business-partner');
-        }
-        return;
-      }
-    }
-
-    if(typeof previousShowMainMenu==='function'){
-      return previousShowMainMenu(event,pageId);
-    }
-  };
-
-  // Protect Data Management actions even if called directly from DevTools.
-  if(window.CaneDataManager){
-    const originalPreview=window.CaneDataManager.preview?.bind(window.CaneDataManager);
-    const originalImport=window.CaneDataManager.importToSupabase?.bind(window.CaneDataManager);
-
-    window.CaneDataManager.preview=async function(){
-      if(!(await requireAdmin(true))) return;
-      return originalPreview?.();
-    };
-
-    window.CaneDataManager.importToSupabase=async function(){
-      if(!(await requireAdmin(true))) return;
-      return originalImport?.();
-    };
-  }
-
-  // Protect User Management actions even if called directly.
-  if(window.CaneUserAdmin){
-    ['openCreate','openEdit','saveUser','toggleStatus','resetPassword','loadUsers']
-      .forEach(name=>{
-        const original=window.CaneUserAdmin[name];
-        if(typeof original!=='function') return;
-
-        window.CaneUserAdmin[name]=async function(){
-          if(!(await requireAdmin(true))) return;
-          return original.apply(this,arguments);
-        };
-      });
-  }
-
-  async function initialize(){
-    await loadProfile(true);
-    applyVisibility();
-
-    const db=await ensureClient();
-    db.auth.onAuthStateChange(async()=>{
-      currentProfile=null;
-      await loadProfile(true);
-      applyVisibility();
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded',initialize);
-  window.CaneAccessControl={
-    loadProfile,
-    requireAdmin,
-    isActiveAdmin:()=>isActiveAdmin()
-  };
 })();
 </script><script id="scenario-year-financial-link-script">
 (function(){
@@ -11144,13 +12395,15 @@ document.addEventListener('DOMContentLoaded', function(){
         totalCostText:get('totalCost'),
         netProfitText:get('netProfit'),
         profitPerRaiText:get('profitPerRai'),
+        profitPerTonText:get('profitPerTon'),
         yieldPerRai:parseMetric(get('yieldPerRai')),
         totalYield:parseMetric(get('totalYield')),
         promotion:parseMetric(get('promotionCost')),
         revenue:parseMetric(get('revenue')),
         totalCost:parseMetric(get('totalCost')),
         netProfit:parseMetric(get('netProfit')),
-        profitPerRai:parseMetric(get('profitPerRai'))
+        profitPerRai:parseMetric(get('profitPerRai')),
+        profitPerTon:parseMetric(get('profitPerTon'))
       };
     });
   }
@@ -11173,7 +12426,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const rows=scenarioRows();
 
     if(!rows.length){
-      tbody.innerHTML='<tr><td colspan="8">ยังไม่มีข้อมูล Scenario</td></tr>';
+      tbody.innerHTML='<tr><td colspan="9">ยังไม่มีข้อมูล Scenario</td></tr>';
       ['bestProfitScenario','bestYieldScenario','lowestCostScenario',
        'bestProfitValue','bestYieldValue','lowestCostValue'].forEach(id=>setText(id,'-'));
       return;
@@ -11193,6 +12446,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <td class="${r.totalCost===minCost?'analytics-highlight-best':''}">${r.totalCostText}</td>
         <td class="${r.netProfit===maxProfit?'analytics-highlight-best':''}">${r.netProfitText}</td>
         <td>${r.profitPerRaiText}</td>
+        <td>${r.profitPerTonText}</td>
       </tr>`).join('');
 
     const bestProfit=[...rows].sort((a,b)=>b.netProfit-a.netProfit)[0];
@@ -11289,95 +12543,6 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
   window.addEventListener('canenext:scenario-financial-updated',refreshBoth);
-})();
-</script><script id="canenext-admin-menu-visibility-script">
-(function(){
-  async function ensureClient(){
-    if(window.caneSupabase) return window.caneSupabase;
-    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
-      throw new Error('ไม่สามารถเชื่อมต่อ Supabase ได้');
-    }
-    window.caneSupabase=window.supabase.createClient(
-      window.CANENEXT_CONFIG.SUPABASE_URL,
-      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
-    );
-    return window.caneSupabase;
-  }
-
-  function applyAdminState(profile){
-    const isAdmin=profile?.role==='admin' && profile?.status==='active';
-    document.body.classList.toggle('is-admin',isAdmin);
-    window.CANENEXT_CURRENT_PROFILE=profile||null;
-
-    document.querySelectorAll('.admin-only-menu').forEach(link=>{
-      link.style.display=isAdmin?'flex':'none';
-      link.setAttribute('aria-hidden',isAdmin?'false':'true');
-      link.tabIndex=isAdmin?0:-1;
-    });
-
-    if(!isAdmin){
-      document.getElementById('data-management')?.classList.remove('active-page');
-      document.getElementById('user-management')?.classList.remove('active-page');
-    }
-    return isAdmin;
-  }
-
-  async function refreshRole(){
-    try{
-      const db=await ensureClient();
-      const {data:{user},error:userError}=await db.auth.getUser();
-
-      if(userError || !user){
-        applyAdminState(null);
-        return false;
-      }
-
-      const {data:profile,error}=await db
-        .from('user_profiles')
-        .select('email,role,status')
-        .ilike('email',user.email)
-        .maybeSingle();
-
-      if(error) throw error;
-      return applyAdminState(profile);
-    }catch(err){
-      console.error('ตรวจสอบสิทธิ์ Admin ไม่สำเร็จ:',err);
-      applyAdminState(null);
-      return false;
-    }
-  }
-
-  const previousShowMainMenu=window.showMainMenu;
-  window.showMainMenu=async function(event,pageId){
-    if(event?.preventDefault) event.preventDefault();
-
-    if(pageId==='data-management' || pageId==='user-management'){
-      const allowed=await refreshRole();
-      if(!allowed){
-        if(typeof previousShowMainMenu==='function'){
-          return previousShowMainMenu(null,'business-partner');
-        }
-        return;
-      }
-    }
-
-    if(typeof previousShowMainMenu==='function'){
-      return previousShowMainMenu(event,pageId);
-    }
-  };
-
-  document.addEventListener('DOMContentLoaded',async()=>{
-    await refreshRole();
-
-    const db=await ensureClient();
-    db.auth.onAuthStateChange(async()=>{
-      await refreshRole();
-    });
-  });
-
-  window.CaneAdminMenuVisibility={
-    refresh:refreshRole
-  };
 })();
 </script>
 <div class="login-alert-overlay" hidden="" id="loginAlertModal">
@@ -11649,6 +12814,7 @@ document.addEventListener('DOMContentLoaded', function(){
         totalCostText:get('totalCost'),
         netProfitText:get('netProfit'),
         profitPerRaiText:get('profitPerRai'),
+        profitPerTonText:get('profitPerTon'),
         yieldPerRai:parseNumber(get('yieldPerRai')),
         totalYield:parseNumber(get('totalYield')),
         promotion:parseNumber(get('promotionCost')),
@@ -11848,108 +13014,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
   window.syncScenarioAreaAndCropFromSelectedPlot=syncAreaAndCropFromSelectedPlot;
 })();
-</script><script id="canenext-page-state-script">
-(function(){
-  const STORAGE_KEY='canenext_active_page';
-  const DEFAULT_PAGE='business-partner';
-  const ADMIN_ONLY=new Set(['data-management','user-management']);
-
-  function getSavedPage(){
-    return localStorage.getItem(STORAGE_KEY) || DEFAULT_PAGE;
-  }
-
-  function savePage(pageId){
-    if(pageId) localStorage.setItem(STORAGE_KEY,pageId);
-  }
-
-  function isAdmin(){
-    const p=window.CANENEXT_CURRENT_PROFILE;
-    return p?.role==='admin' && p?.status==='active';
-  }
-
-  function safePage(pageId){
-    if(!document.getElementById(pageId)) return DEFAULT_PAGE;
-    if(ADMIN_ONLY.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
-    return pageId;
-  }
-
-  function activatePage(pageId){
-    const finalPage=safePage(pageId);
-
-    document.querySelectorAll('.app-page').forEach(page=>{
-      page.classList.toggle('active-page',page.id===finalPage);
-    });
-
-    document.querySelectorAll('.menu-row a').forEach(link=>{
-      link.classList.toggle(
-        'active-menu',
-        link.getAttribute('href')==='#'+finalPage
-      );
-    });
-
-    savePage(finalPage);
-
-    if(finalPage==='real-plots' && typeof window.loadCurrentFarmerPlotsLazy==='function'){
-      setTimeout(()=>window.loadCurrentFarmerPlotsLazy(),0);
-    }
-    if(finalPage==='dashboard' && typeof window.refreshDashboardFromScenario==='function'){
-      setTimeout(()=>window.refreshDashboardFromScenario(),50);
-    }
-    if(finalPage==='analytics' && typeof window.refreshAnalysisTable==='function'){
-      setTimeout(()=>window.refreshAnalysisTable(),50);
-    }
-    if(finalPage==='ai-recommendation' && typeof window.refreshAIAdvisor==='function'){
-      setTimeout(()=>window.refreshAIAdvisor(),50);
-    }
-
-    return finalPage;
-  }
-
-  // Final page-switch function: save current page every time a menu is opened.
-  window.showMainMenu=async function(event,pageId){
-    if(event?.preventDefault) event.preventDefault();
-
-    if(ADMIN_ONLY.has(pageId)){
-      if(window.CaneAdminMenuVisibility?.refresh){
-        await window.CaneAdminMenuVisibility.refresh();
-      }
-      if(!isAdmin()){
-        return activatePage(DEFAULT_PAGE);
-      }
-    }
-
-    return activatePage(pageId);
-  };
-
-  function restorePage(){
-    const page=getSavedPage();
-    activatePage(page);
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    setTimeout(restorePage,900);
-  });
-
-  // Returning to the tab/window must keep the current menu.
-  document.addEventListener('visibilitychange',()=>{
-    if(!document.hidden){
-      setTimeout(restorePage,50);
-    }
-  });
-
-  window.addEventListener('focus',()=>{
-    setTimeout(restorePage,50);
-  });
-
-  // Restore after Supabase refreshes the session/profile.
-  window.addEventListener('canenext:auth-restored',restorePage);
-
-  window.CanePageState={
-    get:()=>safePage(getSavedPage()),
-    restore:restorePage,
-    clear:()=>localStorage.removeItem(STORAGE_KEY)
-  };
-})();
 </script><script id="canenext-user-scope-script">
 (function(){
   async function ensureClient(){
@@ -12066,33 +13130,1408 @@ document.addEventListener('DOMContentLoaded', function(){
     get:()=>window.CANENEXT_CURRENT_PROFILE||null
   };
 })();
-</script><script id="manager-zone-selector-v348-js">
+</script><script id="canenext-manager-multizone-master-script">
 (function(){
-  const allZones=['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','90'];
-  const $=id=>document.getElementById(id);
-  function boxes(){return [...document.querySelectorAll('#umManagerZones input[type="checkbox"]')];}
-  function selected(){return boxes().filter(x=>x.checked).map(x=>x.value);}
-  function updateCount(){const el=$('umZoneCount');if(el)el.textContent=`เลือกแล้ว ${selected().length} เขต`;}
-  function setSelected(values){
-    const arr=Array.isArray(values)?values:String(values||'').split(',').map(x=>x.trim()).filter(Boolean);
-    boxes().forEach(x=>x.checked=arr.includes(x.value));updateCount();
+  const TABLE='user_zone_access';
+
+  const roleEl=()=>document.getElementById('umRole');
+  const zoneEl=()=>document.getElementById('umZone');
+  const subzoneEl=()=>document.getElementById('umSubzone');
+  const wrapEl=()=>document.getElementById('umManagerZonesWrap');
+
+  function selectedZones(){
+    return [...document.querySelectorAll('#umManagerZones input:checked')]
+      .map(cb=>cb.value);
   }
-  function toggleRoleFields(){
-    const role=$('umRole')?.value;
-    const isManager=role==='manager';
-    if($('umManagerZonesGroup')) $('umManagerZonesGroup').hidden=!isManager;
-    if($('umSingleZoneGroup')) $('umSingleZoneGroup').hidden=isManager;
-    if($('umSubzoneGroup')) $('umSubzoneGroup').hidden=isManager;
-    if(!isManager) setSelected([]);
+
+  function setSelectedZones(zones=[]){
+    const normalized=new Set((zones||[]).map(v=>String(v).padStart(2,'0')));
+    document.querySelectorAll('#umManagerZones input').forEach(cb=>{
+      cb.checked=normalized.has(String(cb.value).padStart(2,'0'));
+    });
   }
+
+  function applyRoleUI(){
+    const isManager=String(roleEl()?.value||'').toLowerCase()==='manager';
+
+    if(wrapEl()) wrapEl().hidden=!isManager;
+
+    if(zoneEl()){
+      zoneEl().disabled=isManager;
+      if(isManager) zoneEl().value='';
+    }
+
+    if(subzoneEl()){
+      subzoneEl().disabled=isManager;
+      if(isManager) subzoneEl().value='';
+    }
+  }
+
+  async function fetchManagerZones(profileId){
+    if(!profileId || !window.caneSupabase) return [];
+
+    const {data,error}=await window.caneSupabase
+      .from(TABLE)
+      .select('zone')
+      .eq('user_id',profileId)
+      .order('zone',{ascending:true});
+
+    if(error) throw error;
+    return (data||[]).map(row=>row.zone);
+  }
+
   document.addEventListener('DOMContentLoaded',()=>{
-    $('umRole')?.addEventListener('change',toggleRoleFields);
-    boxes().forEach(x=>x.addEventListener('change',updateCount));
-    $('umSelectAllZones')?.addEventListener('click',()=>setSelected(allZones));
-    $('umClearAllZones')?.addEventListener('click',()=>setSelected([]));
-    toggleRoleFields();updateCount();
+    roleEl()?.addEventListener('change',applyRoleUI);
+    applyRoleUI();
   });
-  window.CaneManagerZones={selected,setSelected,toggleRoleFields};
+
+  const timer=setInterval(()=>{
+    if(!window.CaneUserAdmin) return;
+    clearInterval(timer);
+
+    const api=window.CaneUserAdmin;
+
+    if(typeof api.openCreate==='function'){
+      const original=api.openCreate;
+      api.openCreate=function(){
+        const result=original.apply(this,arguments);
+        setSelectedZones([]);
+        setTimeout(applyRoleUI,0);
+        return result;
+      };
+    }
+
+    if(typeof api.openEdit==='function'){
+      const original=api.openEdit;
+      api.openEdit=async function(profileId){
+        const result=original.apply(this,arguments);
+        setTimeout(applyRoleUI,0);
+
+        try{
+          const zones=await fetchManagerZones(profileId);
+          setSelectedZones(zones);
+        }catch(err){
+          console.error('โหลดเขต Manager ไม่สำเร็จ:',err);
+          setSelectedZones([]);
+        }
+
+        return result;
+      };
+    }
+
+    if(typeof api.saveUser==='function'){
+      const original=api.saveUser;
+      api.saveUser=async function(){
+        const role=String(roleEl()?.value||'').toLowerCase();
+        const zones=selectedZones();
+
+        if(role==='manager' && zones.length===0){
+          alert('กรุณาเลือกอย่างน้อย 1 เขตสำหรับ Manager');
+          return;
+        }
+
+        window.CANENEXT_MANAGER_ZONES=zones;
+        return original.apply(this,arguments);
+      };
+    }
+
+    window.CaneManagerZones={
+      get:selectedZones,
+      set:setSelectedZones,
+      applyRoleUI
+    };
+  },100);
+})();
+</script><script id="canenext-realplot-water-label-final-script">
+(function(){
+  function applyWaterSourceLabel(){
+    const button=document.querySelector(
+      '#real-plots thead .real-sort-btn[data-sort-key="water"]'
+    );
+    if(!button) return;
+
+    const icon=button.querySelector('.real-sort-icon');
+    const iconCopy=icon ? icon.cloneNode(true) : null;
+    button.textContent='แหล่งน้ำ';
+    if(iconCopy) button.appendChild(iconCopy);
+  }
+
+  document.addEventListener('DOMContentLoaded',applyWaterSourceLabel);
+  window.addEventListener('canenext:farmer-changed',()=>{
+    setTimeout(applyWaterSourceLabel,40);
+  });
+})();
+</script><script id="canenext-farmer-session-memory-v4-script">
+(function(){
+  const SESSION_KEY='canenext_current_farmer_session_v4';
+
+  const DEFAULT_FARMER=Object.freeze({
+    farmer_code:'',
+    farmer_name:'',
+    name:'',
+    full_name:'',
+    zone:'',
+    subzone:''
+  });
+
+  function normalizeFarmer(source={}){
+    const farmerName=String(
+      source.farmer_name ||
+      source.name ||
+      source.full_name ||
+      ''
+    ).trim();
+
+    return {
+      ...source,
+      farmer_code:String(source.farmer_code||'').trim(),
+      farmer_name:farmerName,
+      name:farmerName,
+      full_name:farmerName,
+      zone:String(source.zone||'').trim(),
+      subzone:String(source.subzone||'').trim()
+    };
+  }
+
+  function readSession(){
+    try{
+      const raw=sessionStorage.getItem(SESSION_KEY);
+      if(!raw) return null;
+      const data=normalizeFarmer(JSON.parse(raw));
+      return data.farmer_code ? data : null;
+    }catch(e){
+      return null;
+    }
+  }
+
+  function writeSession(source){
+    const farmer=normalizeFarmer(source);
+    if(!farmer.farmer_code) return null;
+    sessionStorage.setItem(SESSION_KEY,JSON.stringify(farmer));
+    window.CANENEXT_CURRENT_FARMER=farmer;
+    return farmer;
+  }
+
+  function setElement(id,value){
+    const el=document.getElementById(id);
+    if(!el) return;
+    if('value' in el) el.value=value ?? '';
+    else el.textContent=value ?? '';
+  }
+
+  function applyToAllMenus(source,{fillSearch=false,dispatch=true}={}){
+    const farmer=normalizeFarmer(source);
+    window.CANENEXT_CURRENT_FARMER=farmer;
+
+    // Search fields stay empty initially and show placeholders.
+    if(fillSearch){
+      setElement('bpCode',farmer.farmer_code);
+      setElement('bpName',farmer.farmer_name);
+    }else{
+      setElement('bpCode','');
+      setElement('bpName','');
+    }
+
+    // Other menus and display fields always show the current farmer context.
+    const fields={
+      showZone:farmer.zone,
+      showSubZone:farmer.subzone,
+      farmerCode:farmer.farmer_code,
+      farmerName:farmer.farmer_name,
+      zone:farmer.zone,
+      subzone:farmer.subzone
+    };
+
+    Object.entries(fields).forEach(([id,value])=>setElement(id,value));
+
+    document.querySelectorAll('[data-farmer-field]').forEach(el=>{
+      const key=el.getAttribute('data-farmer-field');
+      const value=farmer[key] ?? '';
+      if('value' in el) el.value=value;
+      else el.textContent=value;
+    });
+
+    if(dispatch){
+      window.dispatchEvent(new CustomEvent('canenext:farmer-context-ready',{
+        detail:farmer
+      }));
+    }
+
+    return farmer;
+  }
+
+  function initialize(){
+    const saved=readSession();
+    if(saved){
+      applyToAllMenus(saved,{fillSearch:true});
+    }else{
+      applyToAllMenus(DEFAULT_FARMER,{fillSearch:false});
+    }
+  }
+
+  window.addEventListener('canenext:farmer-changed',event=>{
+    const candidate=event?.detail || window.CANENEXT_CURRENT_FARMER;
+    const farmer=normalizeFarmer(candidate);
+    if(!farmer.farmer_code) return;
+
+    // Ignore the initial default broadcast as a "real search".
+    const isDefault=
+      farmer.farmer_code===DEFAULT_FARMER.farmer_code &&
+      farmer.farmer_name===DEFAULT_FARMER.farmer_name &&
+      !readSession();
+
+    if(isDefault){
+      applyToAllMenus(DEFAULT_FARMER,{fillSearch:false,dispatch:false});
+      return;
+    }
+
+    writeSession(farmer);
+    applyToAllMenus(farmer,{fillSearch:true,dispatch:false});
+  });
+
+  const searchTimer=setInterval(()=>{
+    const original=window.searchBusinessPartner;
+    if(typeof original!=='function' || original.__farmerSessionWrapped) return;
+    clearInterval(searchTimer);
+
+    const wrapped=async function(){
+      const result=await original.apply(this,arguments);
+
+      setTimeout(()=>{
+        const farmer=normalizeFarmer(window.CANENEXT_CURRENT_FARMER||{});
+        if(farmer.farmer_code){
+          writeSession(farmer);
+          applyToAllMenus(farmer,{fillSearch:true,dispatch:false});
+        }
+      },80);
+
+      return result;
+    };
+
+    wrapped.__farmerSessionWrapped=true;
+    window.searchBusinessPartner=wrapped;
+  },100);
+
+  const logoutTimer=setInterval(()=>{
+    const original=window.logoutSupabase;
+    if(typeof original!=='function' || original.__farmerSessionWrapped) return;
+    clearInterval(logoutTimer);
+
+    const wrapped=async function(){
+      sessionStorage.removeItem(SESSION_KEY);
+      window.CANENEXT_CURRENT_FARMER=null;
+      return await original.apply(this,arguments);
+    };
+
+    wrapped.__farmerSessionWrapped=true;
+    window.logoutSupabase=wrapped;
+  },100);
+
+  document.addEventListener('DOMContentLoaded',initialize);
+
+  window.CaneFarmerSessionV4={
+    defaults:DEFAULT_FARMER,
+    get:()=>readSession() || normalizeFarmer(DEFAULT_FARMER),
+    save:farmer=>{
+      const saved=writeSession(farmer);
+      if(saved) applyToAllMenus(saved,{fillSearch:true});
+      return saved;
+    },
+    apply:applyToAllMenus,
+    clear:()=>{
+      sessionStorage.removeItem(SESSION_KEY);
+      window.CANENEXT_CURRENT_FARMER=null;
+    }
+  };
+})();
+</script><script id="canenext-promotion-pages-script">
+(function(){
+  const PAGE_COUNT=28;
+  let zoom=1;
+
+  function buildPages(){
+    const list=document.getElementById('promotionPageList');
+    if(!list || list.childElementCount) return;
+
+    const fragment=document.createDocumentFragment();
+
+    for(let i=1;i<=PAGE_COUNT;i++){
+      const item=document.createElement('div');
+      item.className='promotion-page-item';
+
+      const label=document.createElement('div');
+      label.className='promotion-page-label';
+      label.textContent=`หน้า ${i} / ${PAGE_COUNT}`;
+
+      const img=document.createElement('img');
+      img.className='promotion-page-image';
+      img.loading=i<=2?'eager':'lazy';
+      img.decoding='async';
+      img.alt=`หลักเกณฑ์การส่งเสริม หน้า ${i}`;
+      img.src=`assets/pdf/pages/page-${String(i).padStart(2,'0')}.jpg`;
+
+      item.append(label,img);
+      fragment.appendChild(item);
+    }
+
+    list.appendChild(fragment);
+  }
+
+  function applyZoom(){
+    const list=document.getElementById('promotionPageList');
+    const value=document.getElementById('promotionZoomValue');
+    if(!list) return;
+
+    list.style.width=`${Math.round(zoom*100)}%`;
+    list.style.minWidth=zoom>1?`${Math.round(zoom*100)}%`:'100%';
+    if(value) value.textContent=`${Math.round(zoom*100)}%`;
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    buildPages();
+
+    document.getElementById('promotionZoomIn')?.addEventListener('click',()=>{
+      zoom=Math.min(2,zoom+0.1);
+      applyZoom();
+    });
+
+    document.getElementById('promotionZoomOut')?.addEventListener('click',()=>{
+      zoom=Math.max(0.6,zoom-0.1);
+      applyZoom();
+    });
+
+    document.getElementById('promotionZoomReset')?.addEventListener('click',()=>{
+      zoom=1;
+      applyZoom();
+    });
+  });
+
+  window.CanePromotionViewer={build:buildPages};
+})();
+</script><script id="canenext-portrait-responsive-script">
+(function(){
+function update(){const p=matchMedia('(orientation: portrait)').matches;document.documentElement.classList.toggle('is-portrait',p);document.documentElement.classList.toggle('is-landscape',!p)}
+update();addEventListener('resize',update,{passive:true});addEventListener('orientationchange',()=>setTimeout(update,120),{passive:true});
+})();
+</script><script id="canenext-admin-controller-v325-script">
+(function(){
+  const KEY='canenext_active_page_v3';
+  const DEFAULT_PAGE='business-partner';
+  const ADMIN_PAGES=new Set(['data-management','user-management']);
+
+  let profile=null;
+  let selectedPage=localStorage.getItem(KEY)||DEFAULT_PAGE;
+  let internalRender=false;
+
+  function norm(value){
+    return String(value||'').trim().toLowerCase();
+  }
+
+  function isAdmin(){
+    return norm(profile?.role)==='admin' &&
+           norm(profile?.status)==='active';
+  }
+
+  function pageExists(pageId){
+    return Boolean(pageId && document.getElementById(pageId));
+  }
+
+  function safePage(pageId){
+    if(!pageExists(pageId)) return DEFAULT_PAGE;
+    if(ADMIN_PAGES.has(pageId) && !isAdmin()) return DEFAULT_PAGE;
+    return pageId;
+  }
+
+  function applyAdminUI(){
+    const allowed=isAdmin();
+    document.documentElement.classList.toggle('can-admin-access',allowed);
+    document.body?.classList.toggle('is-admin',allowed);
+    window.CANENEXT_CURRENT_PROFILE=profile;
+
+    document.querySelectorAll('.admin-only-menu').forEach(link=>{
+      link.hidden=!allowed;
+      link.setAttribute('aria-hidden',allowed?'false':'true');
+      link.tabIndex=allowed?0:-1;
+      if(allowed){
+        link.style.setProperty('display','flex','important');
+        link.style.setProperty('visibility','visible','important');
+      }else{
+        link.style.setProperty('display','none','important');
+        link.style.setProperty('visibility','hidden','important');
+        link.classList.remove('active-menu');
+      }
+    });
+  }
+
+  function render(pageId,{remember=true}={}){
+    const target=safePage(pageId);
+
+    internalRender=true;
+
+    document.querySelectorAll('.app-page').forEach(page=>{
+      page.classList.toggle('active-page',page.id===target);
+    });
+
+    document.querySelectorAll('.menu-row a[href^="#"]').forEach(link=>{
+      link.classList.toggle(
+        'active-menu',
+        link.getAttribute('href')==='#'+target
+      );
+    });
+
+    document.documentElement.setAttribute('data-canepage',target);
+
+    if(remember){
+      selectedPage=target;
+      localStorage.setItem(KEY,target);
+    }
+
+    if(target==='dashboard'){
+      setTimeout(()=>window.refreshDashboardFromScenario?.(),0);
+    }else if(target==='analytics'){
+      setTimeout(()=>window.refreshAnalysisTable?.(),0);
+    }else if(target==='ai-recommendation'){
+      setTimeout(()=>window.refreshAIAdvisor?.(),0);
+    }else if(target==='user-management'){
+      setTimeout(()=>window.CaneUserAdmin?.loadUsers?.(),0);
+    }
+
+    requestAnimationFrame(()=>{ internalRender=false; });
+    return target;
+  }
+
+  async function getClient(){
+    if(window.caneSupabase) return window.caneSupabase;
+
+    if(!window.supabase || !window.CANENEXT_CONFIG){
+      throw new Error('Supabase client is not ready');
+    }
+
+    window.caneSupabase=window.supabase.createClient(
+      window.CANENEXT_CONFIG.SUPABASE_URL,
+      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+    );
+    return window.caneSupabase;
+  }
+
+  async function loadProfile(){
+    const db=await getClient();
+    const {data:{user}}=await db.auth.getUser();
+
+    if(!user){
+      profile=null;
+      applyAdminUI();
+      return null;
+    }
+
+    let result=await db
+      .from('user_profiles')
+      .select('*')
+      .eq('auth_uid',user.id)
+      .maybeSingle();
+
+    // Compatibility fallback for older profile schemas.
+    if(result.error){
+      const fallback=await db
+        .from('user_profiles')
+        .select('*')
+        .eq('id',user.id)
+        .maybeSingle();
+
+      if(!fallback.error){
+        result=fallback;
+      }
+    }
+
+    if(result.error) throw result.error;
+
+    profile=result.data||null;
+    applyAdminUI();
+    return profile;
+  }
+
+  function installNavigation(){
+    // Capture all menu clicks once and do not allow older inline wrappers
+    // to redirect Admin users back to Business Partner.
+    document.addEventListener('click',event=>{
+      const link=event.target.closest('.menu-row a[href^="#"]');
+      if(!link) return;
+
+      const pageId=link.getAttribute('href').slice(1);
+
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+
+      if(ADMIN_PAGES.has(pageId) && !isAdmin()){
+        render(DEFAULT_PAGE);
+        return;
+      }
+
+      render(pageId);
+    },true);
+
+    // Final global router used by remaining internal buttons.
+    window.showMainMenu=function(event,pageId){
+      event?.preventDefault?.();
+
+      // Ignore automatic attempts to return to Business Partner after sleep,
+      // auth refresh or session restoration when another page was selected.
+      if(!event?.isTrusted &&
+         pageId===DEFAULT_PAGE &&
+         selectedPage!==DEFAULT_PAGE){
+        return render(selectedPage,{remember:false});
+      }
+
+      return render(pageId);
+    };
+  }
+
+  function installPageGuard(){
+    const root=document.querySelector('.app-main')||document.body;
+
+    new MutationObserver(()=>{
+      if(internalRender) return;
+
+      const active=document.querySelector('.app-page.active-page')?.id;
+      const expected=safePage(selectedPage);
+
+      if(active && active!==expected){
+        render(expected,{remember:false});
+      }
+    }).observe(root,{
+      subtree:true,
+      attributes:true,
+      attributeFilter:['class']
+    });
+  }
+
+  async function initialize(){
+    installNavigation();
+
+    try{
+      await loadProfile();
+    }catch(error){
+      console.error('Profile loading failed:',error);
+      profile=null;
+      applyAdminUI();
+    }
+
+    selectedPage=safePage(selectedPage);
+    render(selectedPage);
+    installPageGuard();
+
+    document.documentElement.classList.remove('canenext-route-pending');
+
+    try{
+      const db=await getClient();
+      db.auth.onAuthStateChange(async()=>{
+        try{
+          await loadProfile();
+        }catch(error){
+          console.error('Profile refresh failed:',error);
+          profile=null;
+          applyAdminUI();
+        }
+
+        selectedPage=safePage(selectedPage);
+        render(selectedPage);
+      });
+    }catch(error){
+      console.error('Auth listener setup failed:',error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded',initialize);
+
+  window.CaneAdminController={
+    refresh:async()=>{
+      await loadProfile();
+      selectedPage=safePage(selectedPage);
+      return render(selectedPage);
+    },
+    isAdmin,
+    getProfile:()=>profile,
+    open:pageId=>render(pageId)
+  };
+})();
+</script><script id="canenext-portrait-layout-v326-script">
+(function(){
+function labels(root=document){
+root.querySelectorAll('table').forEach(t=>{
+const hs=[...t.querySelectorAll('thead th')].map(x=>(x.textContent||'').trim());
+if(!hs.length)return;
+t.querySelectorAll('tbody tr').forEach(r=>[...r.children].forEach((c,i)=>{
+if(c.tagName==='TD'&&!c.hasAttribute('data-label'))c.setAttribute('data-label',hs[i]||'');
+}));
+});
+}
+document.addEventListener('DOMContentLoaded',()=>{
+labels();
+const root=document.querySelector('.app-main')||document.body;
+new MutationObserver(()=>labels(root)).observe(root,{subtree:true,childList:true});
+});
+})();
+</script><script id="canenext-portrait-menu-grid-v327-script">(function(){function a(){document.documentElement.classList.toggle('canenext-portrait-menu-grid',matchMedia('(orientation: portrait) and (max-width: 1100px)').matches)}a();addEventListener('resize',a,{passive:true});addEventListener('orientationchange',()=>setTimeout(a,120),{passive:true})})();</script><script id="canenext-mobile-login-v329-script">
+(function(){
+  function resetLoginScroll(){
+    const screen=document.getElementById('loginScreen');
+    if(screen && !screen.classList.contains('hidden')){
+      screen.scrollTop=0;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded',resetLoginScroll);
+  window.addEventListener('orientationchange',()=>setTimeout(resetLoginScroll,120),{passive:true});
+})();
+</script><script id="canenext-risk-v332-script">
+(function(){
+const DEFAULTS={additionalPromotion:0,basePrice:950,ccs:13.80,harvestCost:400};
+const PREFIX='canenext_risk_inputs_v332_';
+const SCENARIO_PREFIX='canenext_risk_scenarios_v332_';
+let currentDebt=0,currentContractTon=0,currentGuarantee=0,loading=false;
+let scenarios=[];
+const $=id=>document.getElementById(id);
+const num=v=>Number(String(v??'').replace(/,/g,''))||0;
+const integer=v=>Math.max(0,Math.round(num(v)));
+const money=(v,d=2)=>Number(v||0).toLocaleString('th-TH',{minimumFractionDigits:d,maximumFractionDigits:d});
+function farmer(){return window.CANENEXT_CURRENT_FARMER||window.CaneFarmerSessionV4?.get?.()||null}
+function key(){return PREFIX+(farmer()?.farmer_code||'default')}
+function scenarioKey(){return SCENARIO_PREFIX+(farmer()?.farmer_code||'default')}
+function setVal(id,v){const e=$(id);if(e)e.value=v}
+function setText(id,v){const e=$(id);if(e)e.textContent=v}
+function formatEditable(id,dec=0){const e=$(id);if(!e)return;e.value=money(num(e.value),dec)}
+function rawEditable(id){const e=$(id);if(!e)return;e.value=String(num(e.value)||'')}
+function inputs(){return{additionalPromotion:integer($('riskAdditionalPromotion')?.value),basePrice:Math.max(0,num($('riskBasePrice')?.value)),ccs:Math.max(0,num($('riskCcs')?.value)),harvestCost:Math.max(0,num($('riskHarvestCost')?.value))}}
+function apply(d){setVal('riskAdditionalPromotion',money(integer(d.additionalPromotion),0));setVal('riskBasePrice',money(num(d.basePrice)||950,0));setVal('riskCcs',(num(d.ccs)||13.8).toFixed(2));setVal('riskHarvestCost',money(num(d.harvestCost)||400,0));calc()}
+function loadSaved(){try{const s=JSON.parse(localStorage.getItem(key())||'null');apply(s?{...DEFAULTS,...s}:DEFAULTS)}catch{apply(DEFAULTS)}}
+function save(){localStorage.setItem(key(),JSON.stringify(inputs()));saveScenarios();setText('riskSaveStatus','บันทึกค่าที่กรอกและกรณีเปรียบเทียบเรียบร้อยแล้ว');setTimeout(()=>setText('riskSaveStatus',''),2200)}
+function reset(){localStorage.removeItem(key());localStorage.removeItem(scenarioKey());scenarios=[{tons:currentContractTon||0}];apply(DEFAULTS);renderScenarios();setText('riskSaveStatus','คืนค่าตั้งต้นเรียบร้อยแล้ว');setTimeout(()=>setText('riskSaveStatus',''),2200)}
+function grade(percent,net){if(net<0)return'F';if(percent>=100)return'A';if(percent>=85)return'B';if(percent>=55)return'C';return'D'}
+function saveScenarios(){localStorage.setItem(scenarioKey(),JSON.stringify(scenarios.map(s=>({tons:Math.max(0,num(s.tons))}))))}
+function loadScenarios(){try{const saved=JSON.parse(localStorage.getItem(scenarioKey())||'[]');scenarios=Array.isArray(saved)&&saved.length?saved.map(s=>({tons:Math.max(0,num(s.tons))})):[{tons:currentContractTon||0}]}catch{scenarios=[{tons:currentContractTon||0}]}}
+function scenarioValues(tons){
+ const x=inputs();
+ const ccsValue=Math.max(0,x.ccs-10)*0.06*x.basePrice;
+ const totalPrice=x.basePrice+ccsValue;
+ const obligation=currentDebt;
+ const percent=currentContractTon>0?(tons/currentContractTon)*100:0;
+ const revenue=tons*totalPrice;
+ const expense=tons*x.harvestCost;
+ const diff=revenue-expense;
+ const net=diff-obligation;
+ return{percent,obligation,revenue,expense,diff,net,grade:grade(percent,net)};
+}
+function renderScenarios(){
+ const body=$('riskScenarioBody');if(!body)return;
+ if(!scenarios.length)scenarios=[{tons:currentContractTon||0}];
+ body.innerHTML=scenarios.map((s,i)=>{
+  const v=scenarioValues(Math.max(0,num(s.tons)));
+  const neg=v.net<0?' risk-negative':'';
+  const diffNeg=v.diff<0?' risk-negative':'';
+  return `<tr data-index="${i}">
+   <td><b>กรณีที่ ${i+1}</b></td>
+   <td><input class="risk-scenario-ton" data-action="tons" type="text" inputmode="numeric" value="${money(s.tons,0)}" aria-label="ส่งอ้อย กรณีที่ ${i+1}"></td>
+   <td>${money(v.percent,0)}%</td>
+   <td><span class="risk-grade grade-${v.grade.toLowerCase()}">${v.grade}</span></td>
+   <td>${money(v.obligation,0)}</td>
+   <td>${money(v.revenue,0)}</td>
+   <td>${money(v.expense,0)}</td>
+   <td class="${diffNeg.trim()}">${money(v.diff,0)}</td>
+   <td class="${neg.trim()}">${money(v.net,0)}</td>
+   <td><button class="risk-delete-scenario" data-action="delete" type="button" ${scenarios.length===1?'disabled title="ต้องมีอย่างน้อย 1 กรณี"':''}>ลบ</button></td>
+  </tr>`;
+ }).join('');
+ saveScenarios();
+}
+function calc(){
+ const x=inputs();
+ const ccsValue=Math.max(0,x.ccs-10)*0.06*x.basePrice;
+ const totalPrice=x.basePrice+ccsValue;
+ const totalObligation=currentDebt+x.additionalPromotion;
+ const deRatio=currentGuarantee>0?totalObligation/currentGuarantee:0;
+ const bahtPerTon=currentContractTon>0?totalObligation/currentContractTon:0;
+ setVal('riskTotalObligation',money(totalObligation,0));
+ setVal('riskDERatio',deRatio.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2}));
+ setVal('riskBahtPerTon',money(bahtPerTon,2));
+ setVal('riskCcsValue',money(ccsValue,2));
+ setVal('riskTotalCanePrice',money(totalPrice,2));
+ renderScenarios();
+ window.CANENEXT_RISK_ANALYSIS={production_year:$('riskProductionYear')?.value||'',total_guarantee:currentGuarantee,due_debt:currentDebt,additional_promotion:x.additionalPromotion,total_obligation:totalObligation,de_ratio:deRatio,baht_per_ton:bahtPerTon,contract_ton:currentContractTon,base_price:x.basePrice,ccs:x.ccs,ccs_value_per_ton:ccsValue,total_cane_price_per_ton:totalPrice,harvest_cost_per_ton:x.harvestCost,scenarios:scenarios.map(s=>({tons:num(s.tons),...scenarioValues(num(s.tons))}))};
+}
+async function client(){if(window.caneSupabase)return window.caneSupabase;if(!window.supabase||!window.CANENEXT_CONFIG)return null;window.caneSupabase=window.supabase.createClient(window.CANENEXT_CONFIG.SUPABASE_URL,window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY);return window.caneSupabase}
+async function years(preferred=''){
+ const s=$('riskProductionYear'),f=farmer();if(!s)return;
+ s.innerHTML='<option value="">เลือกปีการผลิต</option>';
+ if(!f?.farmer_code)return;
+ try{
+  const db=await client();if(!db)return;
+  const {data,error}=await db.from('production_history').select('production_year').eq('farmer_code',f.farmer_code).order('production_year',{ascending:false});
+  if(error)throw error;
+  const ys=[...new Set((data||[]).map(r=>r.production_year).filter(Boolean))];
+  ys.forEach(y=>{const o=document.createElement('option');o.value=y;o.textContent=y;s.appendChild(o)});
+  s.value=preferred&&ys.includes(preferred)?preferred:(ys[0]||'');
+  if(s.value)await loadYear();
+ }catch(e){console.error('Risk years:',e)}
+}
+async function loadYear(){
+ if(loading)return;
+ const f=farmer(),y=$('riskProductionYear')?.value||'';
+ currentDebt=currentContractTon=currentGuarantee=0;
+ if(!f?.farmer_code||!y){setVal('riskGuaranteeTotal','0');setVal('riskDueDebt','0');setVal('riskContractTon','0');calc();return}
+ loading=true;
+ try{
+  const db=await client();if(!db)return;
+  const [h,g,d]=await Promise.all([
+   db.from('production_history').select('contract_ton').eq('farmer_code',f.farmer_code).eq('production_year',y).maybeSingle(),
+   db.from('guarantees').select('total_amount').eq('farmer_code',f.farmer_code).eq('production_year',y).maybeSingle(),
+   db.from('debts').select('yearly_debt').eq('farmer_code',f.farmer_code).maybeSingle()
+  ]);
+  if(h.error)throw h.error;if(g.error)throw g.error;if(d.error)throw d.error;
+  currentContractTon=num(h.data?.contract_ton);
+  currentGuarantee=num(g.data?.total_amount);
+  currentDebt=num(d.data?.yearly_debt?.[y]);
+  setVal('riskGuaranteeTotal',money(currentGuarantee,0));
+  setVal('riskDueDebt',money(currentDebt,0));
+  setVal('riskContractTon',Number(currentContractTon||0).toLocaleString('th-TH',{maximumFractionDigits:0}));
+  if(scenarios.length===1 && !scenarios[0].tons)scenarios[0].tons=currentContractTon;
+  calc();
+ }catch(e){console.error('Risk data:',e);setVal('riskGuaranteeTotal','0');setVal('riskDueDebt','0');setVal('riskContractTon','0');calc()}
+ finally{loading=false}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+ loadSaved();loadScenarios();renderScenarios();
+ ['riskAdditionalPromotion','riskBasePrice','riskCcs','riskHarvestCost'].forEach(id=>{$(id)?.addEventListener('input',calc);$(id)?.addEventListener('change',calc)});
+ [['riskAdditionalPromotion',0],['riskBasePrice',0],['riskHarvestCost',0]].forEach(([id,dec])=>{const e=$(id);e?.addEventListener('focus',()=>rawEditable(id));e?.addEventListener('blur',()=>{formatEditable(id,dec);calc()})});
+ $('riskCcs')?.addEventListener('blur',()=>{setVal('riskCcs',money(num($('riskCcs')?.value),2));calc()});
+ $('riskProductionYear')?.addEventListener('change',loadYear);
+ $('riskSaveDefaults')?.addEventListener('click',save);
+ $('riskResetDefaults')?.addEventListener('click',reset);
+ $('riskAddScenario')?.addEventListener('click',()=>{const last=scenarios[scenarios.length-1];scenarios.push({tons:num(last?.tons)||currentContractTon||0});renderScenarios()});
+ $('riskScenarioBody')?.addEventListener('focusin',e=>{if(e.target.dataset.action==='tons')e.target.value=String(integer(e.target.value)||'')});
+ $('riskScenarioBody')?.addEventListener('change',e=>{const row=e.target.closest('tr');if(!row||e.target.dataset.action!=='tons')return;const i=Number(row.dataset.index);scenarios[i].tons=Math.max(0,num(e.target.value));renderScenarios()});
+ $('riskScenarioBody')?.addEventListener('focusout',e=>{const row=e.target.closest('tr');if(!row||e.target.dataset.action!=='tons')return;const i=Number(row.dataset.index);scenarios[i].tons=Math.max(0,num(e.target.value));renderScenarios()});
+ $('riskScenarioBody')?.addEventListener('click',e=>{const btn=e.target.closest('[data-action="delete"]');if(!btn||scenarios.length<=1)return;const row=btn.closest('tr');scenarios.splice(Number(row.dataset.index),1);renderScenarios()});
+ setTimeout(()=>years(),700);
+});
+window.addEventListener('canenext:farmer-changed',()=>{const y=$('riskProductionYear')?.value||'';loadSaved();loadScenarios();renderScenarios();setTimeout(()=>years(y),120)});
+window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset,save,addScenario:()=>{scenarios.push({tons:currentContractTon||0});renderScenarios()}};
+})();
+</script><script id="canenext-farmer-plots-v3312-script">
+(function(){
+  let requestToken=0;
+  let loadedFarmerCode='';
+  let selectedPlotId='';
+  let realSortKey='';
+  let realSortDirection='';
+
+  const esc=value=>String(value??'')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+  const fmt=(value,digits=2)=>Number(value||0).toLocaleString('th-TH',{
+    minimumFractionDigits:digits,
+    maximumFractionDigits:digits
+  });
+
+  function currentFarmer(){
+    if(window.CANENEXT_CURRENT_FARMER) return window.CANENEXT_CURRENT_FARMER;
+    try{
+      return JSON.parse(localStorage.getItem('canenext_current_farmer')||'null');
+    }catch(e){
+      return null;
+    }
+  }
+
+  async function ensureClient(){
+    if(window.caneSupabase) return window.caneSupabase;
+    if(!window.supabase?.createClient || !window.CANENEXT_CONFIG){
+      throw new Error('ยังไม่สามารถเชื่อมต่อ Supabase ได้');
+    }
+    window.caneSupabase=window.supabase.createClient(
+      window.CANENEXT_CONFIG.SUPABASE_URL,
+      window.CANENEXT_CONFIG.SUPABASE_PUBLISHABLE_KEY
+    );
+    return window.caneSupabase;
+  }
+
+  function mapPlot(row){
+    return {
+      plot_id:row.plot_id ?? row.id ?? '-',
+      project_name:row.project_type ?? row.project_name ?? '-',
+      area:Number(row.area_rai ?? row.area ?? 0),
+      year:row.production_year ?? row.year ?? '-',
+      crop_type:row.plot_type ?? row.crop_type ?? '-',
+      variety:row.variety ?? '-',
+      soil:row.soil_type ?? row.soil ?? '-',
+      water:row.irrigation ?? row.water_source ?? row.water ?? '-',
+      status:row.plot_status ?? row.status ?? 'active',
+      raw:row
+    };
+  }
+
+  function setFarmerFields(farmer){
+    const values={
+      realFarmerCode:farmer?.farmer_code||'',
+      realFarmerName:farmer?.name||farmer?.farmer_name||'',
+      realZone:farmer?.zone||'',
+      realSubzone:farmer?.subzone||''
+    };
+    Object.entries(values).forEach(([id,value])=>{
+      const el=document.getElementById(id);
+      if(el) el.value=value;
+    });
+  }
+
+  function populateYears(plots){
+    const select=document.getElementById('realProductionYearFilter');
+    if(!select) return;
+
+    const previous=select.value;
+    const years=[...new Set(
+      plots.map(plot=>plot.year).filter(year=>year && year!=='-')
+    )].sort((a,b)=>String(b).localeCompare(String(a),'th',{numeric:true}));
+
+    select.innerHTML=
+      years.map(year=>`<option value="${esc(year)}">${esc(year)}</option>`).join('')+
+      '<option value="ALL">ทั้งหมด</option>';
+
+    if(previous && [...select.options].some(option=>option.value===previous)){
+      select.value=previous;
+    }else if(years.length){
+      select.value=years[0];
+    }else{
+      select.value='ALL';
+    }
+  }
+
+  function compareRealPlotValues(a,b,key){
+    let av=a?.[key];
+    let bv=b?.[key];
+
+    if(key==='area'){
+      av=Number(av||0);
+      bv=Number(bv||0);
+      return av-bv;
+    }
+
+    return String(av??'').localeCompare(String(bv??''),'th',{
+      numeric:true,
+      sensitivity:'base'
+    });
+  }
+
+  function updateRealSortHeaders(){
+    document.querySelectorAll('#real-plots .real-sort-btn').forEach(btn=>{
+      const active=btn.dataset.sortKey===realSortKey && !!realSortDirection;
+      btn.classList.toggle('active',active);
+      const icon=btn.querySelector('.real-sort-icon');
+      if(icon) icon.textContent=!active?'↕':realSortDirection==='asc'?'▲':'▼';
+      btn.setAttribute('aria-sort',
+        !active?'none':realSortDirection==='asc'?'ascending':'descending'
+      );
+    });
+  }
+
+  function filteredPlots(){
+    const plots=[...(window.currentRealPlots||[])];
+    const year=document.getElementById('realProductionYearFilter')?.value||'ALL';
+    const project=document.getElementById('realProjectFilter')?.value||'ALL';
+    const crop=document.getElementById('realCropTypeFilter')?.value||'ALL';
+    const status=document.getElementById('realStatusFilter')?.value||'ALL';
+
+    const list=plots.filter(plot=>
+      (year==='ALL'||plot.year===year) &&
+      (project==='ALL'||plot.project_name===project) &&
+      (crop==='ALL'||plot.crop_type===crop) &&
+      (status==='ALL'||(plot.status==='active'?'ใช้งาน':plot.status)===status)
+    );
+
+    if(realSortKey && realSortDirection){
+      list.sort((a,b)=>{
+        const result=compareRealPlotValues(a,b,realSortKey);
+        return realSortDirection==='asc'?result:-result;
+      });
+    }
+    return list;
+  }
+
+  function fillSelect(id,values){
+    const select=document.getElementById(id);
+    if(!select) return;
+
+    const previous=select.value;
+    const unique=[...new Set(values.filter(v=>v && v!=='-'))]
+      .sort((a,b)=>String(a).localeCompare(String(b),'th',{numeric:true}));
+
+    select.innerHTML='<option value="ALL">ทั้งหมด</option>'+
+      unique.map(value=>`<option value="${esc(value)}">${esc(value)}</option>`).join('');
+
+    if([...select.options].some(option=>option.value===previous)){
+      select.value=previous;
+    }
+  }
+
+  function updateFilterOptions(){
+    const plots=window.currentRealPlots||[];
+    fillSelect('realProjectFilter',plots.map(p=>p.project_name));
+    fillSelect('realCropTypeFilter',plots.map(p=>p.crop_type));
+    fillSelect('realStatusFilter',plots.map(p=>p.status==='active'?'ใช้งาน':p.status));
+  }
+
+  function selectPlotById(plotId){
+    const plot=(window.currentRealPlots||[])
+      .find(item=>String(item.plot_id)===String(plotId));
+    if(!plot) return;
+
+    selectedPlotId=String(plot.plot_id);
+    window.currentSelectedRealPlot=plot;
+    try{
+      sessionStorage.setItem('canenext_current_plot',JSON.stringify(plot));
+    }catch(e){}
+
+    const set=(id,value)=>{
+      const el=document.getElementById(id);
+      if(el) el.textContent=value;
+    };
+
+    set('realDetailPlotId',plot.plot_id);
+    set('realDetailArea',fmt(plot.area,2)+' ไร่');
+    set('realDetailYear',plot.year);
+    set('realDetailCropType',plot.crop_type);
+    set('realDetailVariety',plot.variety);
+    set('realDetailSoil',plot.soil);
+    set('realDetailWater',plot.water);
+    set('realDetailStatus',plot.status==='active'?'ใช้งาน':plot.status);
+
+    document.querySelectorAll('#realPlotTableBody tr[data-plot-id]').forEach(row=>{
+      row.classList.toggle('selected',row.dataset.plotId===selectedPlotId);
+    });
+
+    window.dispatchEvent(new CustomEvent('canenext:plot-changed',{detail:plot}));
+  }
+
+  function render(){
+    const body=document.getElementById('realPlotTableBody');
+    if(!body) return;
+
+    const list=filteredPlots();
+    updateRealSortHeaders();
+    const count=document.getElementById('realPlotCount');
+    if(count){
+      count.textContent=`แสดง ${list.length.toLocaleString('th-TH')} จาก ${(window.currentRealPlots||[]).length.toLocaleString('th-TH')} แปลง`;
+    }
+
+    if(!list.length){
+      body.innerHTML='<tr><td colspan="8" class="real-plot-message">ไม่พบข้อมูลแปลงตามรหัสชาวไร่และตัวกรองที่เลือก</td></tr>';
+      window.currentSelectedRealPlot=null;
+      return;
+    }
+
+    body.innerHTML=list.map(plot=>`
+      <tr class="real-plot-row${String(plot.plot_id)===selectedPlotId?' selected':''}"
+          data-plot-id="${esc(plot.plot_id)}"
+          tabindex="0" role="button">
+        <td>${esc(plot.year)}</td>
+        <td>${esc(plot.project_name)}</td>
+        <td>${esc(plot.crop_type)}</td>
+        <td>${esc(plot.plot_id)}</td>
+        <td>${fmt(plot.area,2)}</td>
+        <td>${esc(plot.variety)}</td>
+        <td>${esc(plot.water)}</td>
+        <td><span class="status ${plot.status==='active'||plot.status==='พร้อมวิเคราะห์'?'ok':'warn'}">${esc(plot.status==='active'?'ใช้งาน':plot.status)}</span></td>
+      </tr>
+    `).join('');
+
+    const stillVisible=list.some(plot=>String(plot.plot_id)===selectedPlotId);
+    selectPlotById(stillVisible?selectedPlotId:list[0].plot_id);
+  }
+
+  async function loadPlotsForFarmer(farmer,{force=false}={}){
+    const code=String(farmer?.farmer_code||'').trim();
+    const body=document.getElementById('realPlotTableBody');
+
+    setFarmerFields(farmer);
+
+    if(!code){
+      window.currentRealPlots=[];
+      if(body){
+        body.innerHTML='<tr><td colspan="8" class="real-plot-message">กรุณาค้นหาชาวไร่ก่อนดูข้อมูลรายแปลง</td></tr>';
+      }
+      return [];
+    }
+
+    if(!force && loadedFarmerCode===code && Array.isArray(window.currentRealPlots)){
+      render();
+      return window.currentRealPlots;
+    }
+
+    const token=++requestToken;
+    if(body){
+      body.innerHTML='<tr><td colspan="8" class="real-plot-loading">กำลังโหลดข้อมูลรายแปลง...</td></tr>';
+    }
+
+    try{
+      const db=await ensureClient();
+      const {data,error}=await db
+        .from('plots')
+        .select('*')
+        .eq('farmer_code',code)
+        .order('production_year',{ascending:false})
+        .order('plot_id',{ascending:true});
+
+      if(error) throw error;
+      if(token!==requestToken) return [];
+
+      window.currentRealPlots=(data||[]).map(mapPlot);
+      loadedFarmerCode=code;
+      selectedPlotId='';
+      realSortKey='';
+      realSortDirection='';
+
+      populateYears(window.currentRealPlots);
+      updateFilterOptions();
+      render();
+
+      if(typeof window.refreshScenarioRealPlotOptions==='function'){
+        window.refreshScenarioRealPlotOptions();
+      }
+
+      window.dispatchEvent(new CustomEvent('canenext:farmer-plots-loaded',{
+        detail:{
+          farmer_code:code,
+          plots:window.currentRealPlots
+        }
+      }));
+
+      return window.currentRealPlots;
+    }catch(error){
+      console.error('Load farmer plots failed:',error);
+      window.currentRealPlots=[];
+      if(body){
+        body.innerHTML='<tr><td colspan="8" class="real-plot-message real-plot-error">ไม่สามารถโหลดข้อมูลรายแปลงได้</td></tr>';
+      }
+      return [];
+    }
+  }
+
+  document.addEventListener('click',event=>{
+    const btn=event.target.closest('#real-plots .real-sort-btn');
+    if(!btn) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const key=btn.dataset.sortKey||'';
+    if(!key) return;
+
+    if(realSortKey!==key){
+      realSortKey=key;
+      realSortDirection='asc';
+    }else if(realSortDirection==='asc'){
+      realSortDirection='desc';
+    }else if(realSortDirection==='desc'){
+      realSortKey='';
+      realSortDirection='';
+    }else{
+      realSortDirection='asc';
+    }
+    render();
+  });
+
+  window.filterRealPlotsByYear=render;
+  window.renderRealPlotsFromSupabase=()=>render();
+  window.selectRealPlotFromSupabase=index=>{
+    const plot=(window.currentRealPlots||[])[index];
+    if(plot) selectPlotById(plot.plot_id);
+  };
+  window.selectRealPlot=index=>{
+    const plot=(window.currentRealPlots||[])[index];
+    if(plot) selectPlotById(plot.plot_id);
+  };
+  window.searchRealPlots=async()=>{
+    const code=(document.getElementById('realFarmerCode')?.value||'').trim();
+    if(!code){
+      alert('กรุณากรอกรหัสชาวไร่');
+      return;
+    }
+
+    try{
+      const db=await ensureClient();
+      const {data,error}=await db.from('farmers')
+        .select('*')
+        .eq('farmer_code',code)
+        .maybeSingle();
+
+      if(error) throw error;
+      if(!data){
+        alert('ไม่พบข้อมูลชาวไร่');
+        return;
+      }
+
+      window.CANENEXT_CURRENT_FARMER=data;
+      localStorage.setItem('canenext_current_farmer',JSON.stringify(data));
+      window.dispatchEvent(new CustomEvent('canenext:farmer-changed',{detail:data}));
+    }catch(error){
+      console.error(error);
+      alert('ไม่สามารถค้นหาข้อมูลชาวไร่ได้');
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('realPlotTableBody')?.addEventListener('click',event=>{
+      const row=event.target.closest('tr[data-plot-id]');
+      if(row) selectPlotById(row.dataset.plotId);
+    });
+
+    document.getElementById('realPlotTableBody')?.addEventListener('keydown',event=>{
+      const row=event.target.closest('tr[data-plot-id]');
+      if(row && (event.key==='Enter'||event.key===' ')){
+        event.preventDefault();
+        selectPlotById(row.dataset.plotId);
+      }
+    });
+
+    ['realProductionYearFilter','realProjectFilter','realCropTypeFilter','realStatusFilter']
+      .forEach(id=>document.getElementById(id)?.addEventListener('change',render));
+
+    document.getElementById('realClearFiltersBtn')?.addEventListener('click',()=>{
+      ['realProjectFilter','realCropTypeFilter','realStatusFilter']
+        .forEach(id=>{
+          const el=document.getElementById(id);
+          if(el) el.value='ALL';
+        });
+      const year=document.getElementById('realProductionYearFilter');
+      if(year && [...year.options].some(option=>option.value==='ALL')){
+        year.value='ALL';
+      }
+      render();
+    });
+
+    const farmer=currentFarmer();
+    if(farmer) setTimeout(()=>loadPlotsForFarmer(farmer),500);
+  });
+
+  window.addEventListener('canenext:farmer-changed',event=>{
+    loadPlotsForFarmer(event.detail||currentFarmer(),{force:true});
+  });
+
+  window.CaneFarmerPlots={
+    load:loadPlotsForFarmer,
+    refresh:()=>loadPlotsForFarmer(currentFarmer(),{force:true}),
+    render,
+    get:()=>window.currentRealPlots||[],
+    selected:()=>window.currentSelectedRealPlot||null
+  };
+})();
+</script>
+<script id="canenext-v3328-blank-before-search">
+(function(){
+  const SESSION_KEY='canenext_current_farmer_session_v4';
+  const ids=[
+    'bpCode','bpName','showZone','showSubZone',
+    'realFarmerCode','realFarmerName','realZone','realSubzone',
+    'farmerCode','farmerName','zone','subzone'
+  ];
+
+  function setBlank(el){
+    if(!el) return;
+    if('value' in el) el.value='';
+    else el.textContent='';
+  }
+
+  function clearInitialFarmer(){
+    try{
+      sessionStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem('canenext_current_farmer');
+    }catch(e){}
+
+    window.CANENEXT_CURRENT_FARMER=null;
+
+    ids.forEach(id=>setBlank(document.getElementById(id)));
+
+    document.querySelectorAll(
+      '[data-farmer-field], .farmer-context-bar [data-code], .farmer-context-bar [data-name], ' +
+      '.farmer-context-bar [data-zone], .farmer-context-bar [data-subzone]'
+    ).forEach(setBlank);
+
+    document.querySelectorAll('.farmer-context-bar').forEach(bar=>{
+      bar.classList.remove('has-farmer');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    clearInitialFarmer();
+    setTimeout(clearInitialFarmer,0);
+    setTimeout(clearInitialFarmer,120);
+  });
+
+  window.addEventListener('pageshow',event=>{
+    if(event.persisted) clearInitialFarmer();
+  });
+})();
+</script>
+<script id="ai-recommendation-v347-js">
+(function(){
+  function n(v){return Number(String(v||'').replace(/[^0-9.-]/g,''))||0}
+  function money(v){return Number(v||0).toLocaleString('th-TH',{maximumFractionDigits:0})+' บาท'}
+  function dec(v){return Number(v||0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function scenarios(){
+    return [...document.querySelectorAll('.scenario-panel-v2')].map((card,i)=>{
+      const get=k=>card.querySelector(`[data-result="${k}"]`)?.textContent||'-';
+      return {
+        title:card.querySelector('.scenario-title')?.textContent||`Scenario ที่ ${i+1}`,
+        yield:n(get('yieldPerRai')),
+        totalYield:get('totalYield'),
+        totalCost:n(get('totalCost')),
+        totalCostText:get('totalCost'),
+        netProfit:n(get('netProfit')),
+        netProfitText:get('netProfit'),
+        profitPerRai:n(get('profitPerRai')),
+        profitPerRaiText:get('profitPerRai'),
+        de:n(get('deRatio')),
+        deText:get('deRatio'),
+        promotionText:get('promotionCost'),
+        water:card.querySelector('[data-key="water"]')?.value||'-'
+      }
+    })
+  }
+  function action(id,text){
+    return `<div class="ai-v347-action"><input type="checkbox" id="${id}"><label for="${id}">${text}</label></div>`
+  }
+  window.refreshAIAdvisor=function(){
+    const box=document.getElementById('aiAdvisorContent');
+    if(!box)return;
+
+    if(typeof window.updateScenarioV2==='function'){
+      document.querySelectorAll('.scenario-panel-v2 .scenario-update-btn').forEach(btn=>{
+        try{window.updateScenarioV2(btn)}catch(e){}
+      });
+    }
+
+    const data=scenarios();
+    if(!data.length){
+      box.className='ai-v347-empty';
+      box.innerHTML='<i class="fa-solid fa-robot" style="font-size:26px;color:#0B5CAD;margin-bottom:12px"></i><br>ยังไม่มีข้อมูล Scenario<br><span style="font-size:13px;font-weight:500">กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติ</span>';
+      return;
+    }
+
+    const safe=data.filter(x=>x.de<=1);
+    const recommended=[...(safe.length?safe:data)].sort((a,b)=>b.netProfit-a.netProfit)[0];
+    const bestYield=[...data].sort((a,b)=>b.yield-a.yield)[0];
+    const lowestCost=[...data].sort((a,b)=>a.totalCost-b.totalCost)[0];
+    const confidence=Math.max(60,Math.min(96,Math.round(84+(recommended.de<=1?7:-10)+(recommended.netProfit>0?5:-12))));
+    const score=Math.max(0,Math.min(100,Math.round(72+(recommended.de<=1?10:-12)+(recommended.netProfit>0?8:-10))));
+    const priority=recommended.de>1?'สูง':recommended.yield<10?'ปานกลาง':'ปกติ';
+
+    const financeText=recommended.de>1
+      ? 'ควรทบทวนวงเงินค้ำประกันและลดรายการส่งเสริมที่ไม่จำเป็นก่อนอนุมัติ'
+      : 'สามารถพิจารณาส่งเสริมตามแผนได้ โดยควบคุมวงเงินไม่ให้เกินกรอบที่กำหนด';
+
+    const yieldText=recommended.yield<10
+      ? 'ผลผลิตต่ำกว่าเป้าหมาย ควรเร่งติดตามน้ำ ปุ๋ย และสภาพแปลง'
+      : 'ผลผลิตอยู่ในระดับเหมาะสม ควรรักษามาตรฐานและติดตามผลจริงต่อเนื่อง';
+
+    box.className='';
+    box.innerHTML=`
+      <div class="ai-v347-layout">
+        <div class="ai-v347-main">
+          <div class="ai-v347-kpis">
+            <div class="ai-v347-kpi">
+              <div class="ai-v347-kpi-label">AI Score</div>
+              <div class="ai-v347-kpi-value">${score}/100</div>
+              <div class="ai-v347-kpi-note">คะแนนความเหมาะสมโดยรวม</div>
+            </div>
+            <div class="ai-v347-kpi">
+              <div class="ai-v347-kpi-label">ระดับความสำคัญ</div>
+              <div class="ai-v347-kpi-value">${priority}</div>
+              <div class="ai-v347-kpi-note">ใช้กำหนดลำดับการติดตาม</div>
+            </div>
+            <div class="ai-v347-kpi">
+              <div class="ai-v347-kpi-label">ผลผลิตคาดการณ์</div>
+              <div class="ai-v347-kpi-value">${dec(recommended.yield)} ตัน/ไร่</div>
+              <div class="ai-v347-kpi-note">${recommended.title}</div>
+            </div>
+            <div class="ai-v347-kpi">
+              <div class="ai-v347-kpi-label">กำไรต่อไร่</div>
+              <div class="ai-v347-kpi-value">${money(recommended.profitPerRai)}</div>
+              <div class="ai-v347-kpi-note">กำไรสุทธิ ${money(recommended.netProfit)}</div>
+            </div>
+          </div>
+
+          <div class="ai-v347-panel">
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-lightbulb"></i> สรุปคำแนะนำ</div>
+            <div class="ai-v347-panel-body">
+              <div class="ai-v347-summary-grid">
+                <div class="ai-v347-summary-item"><strong>Scenario ที่แนะนำ</strong><p>ใช้ <b>${recommended.title}</b> เป็นแผนหลัก เนื่องจากให้ผลตอบแทนเหมาะสมที่สุด</p></div>
+                <div class="ai-v347-summary-item"><strong>การส่งเสริมและวงเงิน</strong><p>${financeText}</p></div>
+                <div class="ai-v347-summary-item"><strong>ผลผลิตและการจัดการแปลง</strong><p>${yieldText}</p></div>
+                <div class="ai-v347-summary-item"><strong>รูปแบบการให้น้ำ</strong><p>${recommended.water&&recommended.water!=='-'?`ควรใช้รูปแบบ ${recommended.water} และติดตามต้นทุนจริง`:'ควรประเมินแหล่งน้ำก่อนเลือกระบบน้ำ'}</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-v347-panel">
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-table-list"></i> เปรียบเทียบ Scenario</div>
+            <div class="ai-v347-table-wrap">
+              <table class="ai-v347-table">
+                <thead><tr><th>Scenario</th><th>ผลผลิต/ไร่</th><th>ต้นทุนรวม</th><th>กำไรสุทธิ</th><th>กำไร/ไร่</th><th>D/E</th></tr></thead>
+                <tbody>
+                  ${data.map(x=>`<tr class="${x.title===recommended.title?'ai-v347-recommended':''}">
+                    <td>${x.title}${x.title===recommended.title?'<span class="ai-v347-badge">แนะนำ</span>':''}</td>
+                    <td>${dec(x.yield)}</td>
+                    <td>${x.totalCostText}</td>
+                    <td>${x.netProfitText}</td>
+                    <td>${x.profitPerRaiText}</td>
+                    <td>${x.deText}</td>
+                  </tr>`).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <aside class="ai-v347-side">
+          <div class="ai-v347-decision">
+            <div class="caption">NEXT BEST ACTION</div>
+            <h4>เลือก ${recommended.title}</h4>
+            <p>อนุมัติภายใต้กรอบวงเงิน และติดตามผลผลิตจริงเทียบแผนเป็นระยะ</p>
+            <span class="amount">${recommended.promotionText}</span>
+            <div class="ai-v347-progress">
+              <span>AI Confidence</span><span>${confidence}%</span>
+              <div class="ai-v347-progress-track"><div class="ai-v347-progress-fill" style="width:${confidence}%"></div></div>
+            </div>
+          </div>
+
+          <div class="ai-v347-panel">
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-list-check"></i> Action Plan</div>
+            <div class="ai-v347-panel-body">
+              <div class="ai-v347-actions">
+                ${action('ai347a1','ตรวจสอบ D/E และวงเงินค้ำประกันก่อนอนุมัติ')}
+                ${action('ai347a2','ยืนยันรายการส่งเสริมที่จำเป็น')}
+                ${action('ai347a3','ติดตามผลผลิตจริงเทียบแผน')}
+                ${action('ai347a4','ประเมินต้นทุนและกำไรระหว่างฤดู')}
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-v347-panel">
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-chart-simple"></i> จุดเปรียบเทียบ</div>
+            <div class="ai-v347-panel-body">
+              <div class="ai-v347-mini">
+                <div class="ai-v347-mini-row"><span>ผลผลิตสูงสุด</span><span>${bestYield.title}</span></div>
+                <div class="ai-v347-mini-row"><span>ต้นทุนต่ำสุด</span><span>${lowestCost.title}</span></div>
+                <div class="ai-v347-mini-row"><span>Scenario แนะนำ</span><span>${recommended.title}</span></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    `;
+  };
 })();
 </script></body>
 </html>
