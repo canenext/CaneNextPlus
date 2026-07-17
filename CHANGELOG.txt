@@ -154,3 +154,15 @@ v3.4.5
 - Added recommendation cards, risk analysis, scenario comparison, and action plan.
 - Fixed AI Recommendation highest-risk calculation.
 - Added responsive layout for desktop, tablet, and phone.
+
+v3.4.7
+- Redesigned the internal layout of AI Recommendation.
+- Simplified content into KPI summary, recommendation summary, scenario comparison, Next Best Action, Action Plan, and comparison highlights.
+- Improved readability and responsive behavior.
+
+v3.4.8
+- Fixed User Management: Manager role can select multiple responsible zones.
+- User role is limited to one responsible zone.
+- Admin role automatically has access to all zones.
+- Added a summary of selected responsible zones.
+- Reapplies role permissions when forms/modals are dynamically rendered.
