@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.28" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.32" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7892,7 +7892,48 @@ body.locked{
 #plot-data .plot-grid,
 #plot-data .detail-grid{grid-template-columns:1fr!important;}
 }
-</style></head>
+</style>
+<style id="analytics-hub-v3332-style">
+  .analytics-hub-tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0 0 18px;
+  }
+  .analytics-hub-tab{
+    border:1px solid #cfd8e3;
+    background:#fff;
+    color:#17365d;
+    border-radius:10px;
+    padding:10px 16px;
+    font:inherit;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s ease;
+  }
+  .analytics-hub-tab:hover{
+    background:#eef6ff;
+    border-color:#8cb9e8;
+  }
+  .analytics-hub-tab.active{
+    color:#fff;
+    background:#0b5cab;
+    border-color:#0b5cab;
+    box-shadow:0 4px 12px rgba(11,92,171,.18);
+  }
+  .analytics-hub-panel{display:none;}
+  .analytics-hub-panel.active{display:block;}
+  [data-section="ai-recommendation"],
+  [data-section="dashboard"],
+  [data-page="ai-recommendation"],
+  [data-page="dashboard"],
+  [href="#ai-recommendation"],
+  [href="#dashboard"]{
+    display:none!important;
+  }
+</style>
+
+</head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
@@ -7944,7 +7985,7 @@ body.locked{
 <a href="#basic-cost" onclick="showMainMenu(event, 'basic-cost')"><i class="fa-solid fa-file-invoice-dollar menu-icon"></i> ต้นทุนพื้นฐาน</a>
 <a href="#plot-data" onclick="showMainMenu(event, 'plot-data')"><i class="fa-solid fa-seedling menu-icon"></i> Scenario Setup</a>
 <a href="#scenario" onclick="showMainMenu(event, 'scenario')"><i class="fa-solid fa-chart-line menu-icon"></i> Scenario Analysis</a>
-<a href="#analytics" onclick="showMainMenu(event, 'analytics')"><i class="fa-solid fa-chart-column menu-icon"></i> ระบบวิเคราะห์ข้อมูล</a>
+<a href="#analytics" onclick="showMainMenu(event, 'analytics')"><i class="fa-solid fa-chart-column menu-icon"></i> วิเคราะห์และติดตามผล</a>
 <a href="#ai-recommendation" onclick="showMainMenu(event, 'ai-recommendation')"><i class="fa-solid fa-robot menu-icon"></i> AI Recommendation</a>
 <a href="#dashboard" onclick="showMainMenu(event, 'dashboard')"><i class="fa-solid fa-gauge-high menu-icon"></i> Dashboard</a>
 <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
@@ -13834,6 +13875,118 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
 
   window.addEventListener('pageshow',event=>{
     if(event.persisted) clearInitialFarmer();
+  });
+})();
+</script>
+
+
+<script id="analytics-hub-v3332-script">
+(function(){
+  const byText = (selector, texts) => {
+    const nodes = [...document.querySelectorAll(selector)];
+    return nodes.find(el => texts.some(t => (el.textContent || '').trim() === t)) || null;
+  };
+
+  function findSectionByHeading(texts){
+    const headings = [...document.querySelectorAll('h1,h2,h3,.page-title,.section-title')];
+    const h = headings.find(el => texts.some(t => (el.textContent || '').trim() === t));
+    return h ? (h.closest('section, .page, .content-section, .menu-page, main > div') || h.parentElement) : null;
+  }
+
+  function findAnalyticsSection(){
+    return document.getElementById('analytics')
+      || document.getElementById('data-analysis')
+      || document.querySelector('[data-page="analytics"]')
+      || document.querySelector('[data-page="data-analysis"]')
+      || findSectionByHeading(['วิเคราะห์และติดตามผล','ระบบวิเคราะห์ข้อมูล']);
+  }
+
+  function findAISection(){
+    return document.getElementById('ai-recommendation')
+      || document.getElementById('aiRecommendation')
+      || document.querySelector('[data-page="ai-recommendation"]')
+      || findSectionByHeading(['AI Recommendation','AI Recommentdation']);
+  }
+
+  function findDashboardSection(){
+    return document.getElementById('dashboard')
+      || document.querySelector('[data-page="dashboard"]')
+      || findSectionByHeading(['Dashboard','Dshboard']);
+  }
+
+  function buildHub(){
+    const analytics = findAnalyticsSection();
+    if(!analytics || analytics.dataset.analyticsHubReady === '1') return;
+
+    const ai = findAISection();
+    const dashboard = findDashboardSection();
+
+    analytics.dataset.analyticsHubReady = '1';
+
+    const oldChildren = [...analytics.childNodes];
+    const title = analytics.querySelector('h1,h2,h3,.page-title');
+    if(title) title.textContent = 'วิเคราะห์และติดตามผล';
+
+    const tabs = document.createElement('div');
+    tabs.className = 'analytics-hub-tabs';
+    tabs.innerHTML = `
+      <button type="button" class="analytics-hub-tab active" data-target="analytics-summary">Dashboard</button>
+      <button type="button" class="analytics-hub-tab" data-target="analytics-detail">วิเคราะห์ข้อมูล</button>
+      <button type="button" class="analytics-hub-tab" data-target="analytics-ai">AI Recommendation</button>
+    `;
+
+    const summary = document.createElement('div');
+    summary.className = 'analytics-hub-panel active';
+    summary.id = 'analytics-summary';
+
+    const detail = document.createElement('div');
+    detail.className = 'analytics-hub-panel';
+    detail.id = 'analytics-detail';
+
+    const aiPanel = document.createElement('div');
+    aiPanel.className = 'analytics-hub-panel';
+    aiPanel.id = 'analytics-ai';
+
+    // Keep the original analytics content as the detailed-analysis tab.
+    oldChildren.forEach(node => {
+      if(node !== title && node.parentNode === analytics) detail.appendChild(node);
+    });
+
+    // Move existing Dashboard and AI content into this single page.
+    if(dashboard && dashboard !== analytics){
+      dashboard.style.display = '';
+      dashboard.classList.remove('active');
+      summary.appendChild(dashboard);
+    } else {
+      summary.innerHTML = '<div class="card"><h3>Dashboard</h3><p>สรุปข้อมูลภาพรวมเพื่อใช้ติดตามสถานการณ์และผลการดำเนินงาน</p></div>';
+    }
+
+    if(ai && ai !== analytics){
+      ai.style.display = '';
+      ai.classList.remove('active');
+      aiPanel.appendChild(ai);
+    } else {
+      aiPanel.innerHTML = '<div class="card"><h3>AI Recommendation</h3><p>ข้อเสนอแนะเพื่อช่วยวางแผนและตัดสินใจจากข้อมูลที่วิเคราะห์ได้</p></div>';
+    }
+
+    analytics.appendChild(tabs);
+    analytics.appendChild(summary);
+    analytics.appendChild(detail);
+    analytics.appendChild(aiPanel);
+
+    tabs.addEventListener('click', function(e){
+      const btn = e.target.closest('.analytics-hub-tab');
+      if(!btn) return;
+      tabs.querySelectorAll('.analytics-hub-tab').forEach(b => b.classList.toggle('active', b === btn));
+      analytics.querySelectorAll('.analytics-hub-panel').forEach(p => p.classList.toggle('active', p.id === btn.dataset.target));
+      window.dispatchEvent(new Event('resize'));
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    buildHub();
+    setTimeout(buildHub, 100);
+    setTimeout(buildHub, 500);
   });
 })();
 </script>
