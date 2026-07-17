@@ -143,9 +143,3 @@ v3.4.1
 - Restored true table structure for real plots on mobile/tablet.
 - Restored two-column comparison table without duplicated pseudo labels.
 - Fixed real plot sorting on desktop: ascending, descending, reset.
-
-
-v3.4.2
-- Removed Executive Comparison menu/section.
-- Removed related labels, rendering calls, and unused hooks.
-- Remaining layout expands without the removed section.
