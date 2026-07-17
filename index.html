@@ -8970,7 +8970,7 @@ input[type="checkbox"][data-zone]:disabled + label{
 <option value="manager">Manager — ผู้จัดการเขต</option>
 <option value="admin">Admin — ผู้ดูแลระบบ</option>
 </select>
-</div><div class="form-group um-manager-zones-wrap" hidden="" id="umManagerZonesWrap"><label>เขตที่รับผิดชอบ</label><div class="um-zone-check-grid" id="umManagerZones"><label>01</label><label>02</label><label>03</label><label>04</label><label>05</label><label>06</label><label>07</label><label>08</label><label>09</label><label>10</label><label>11</label><label>12</label><label>13</label><label>14</label><label>15</label><label>90</label></div><small class="um-help">เลือกได้มากกว่า 1 เขตสำหรับ Manager</small></div>
+</div><div class="form-group um-manager-zones-wrap" hidden="" id="umManagerZonesWrap"><label>เขตที่รับผิดชอบ</label><div class="um-zone-check-grid" id="umManagerZones"><label><input type="checkbox" value="01"/> เขต 01</label><label><input type="checkbox" value="02"/> เขต 02</label><label><input type="checkbox" value="03"/> เขต 03</label><label><input type="checkbox" value="04"/> เขต 04</label><label><input type="checkbox" value="05"/> เขต 05</label><label><input type="checkbox" value="06"/> เขต 06</label><label><input type="checkbox" value="07"/> เขต 07</label><label><input type="checkbox" value="08"/> เขต 08</label><label><input type="checkbox" value="09"/> เขต 09</label><label><input type="checkbox" value="10"/> เขต 10</label><label><input type="checkbox" value="11"/> เขต 11</label><label><input type="checkbox" value="12"/> เขต 12</label><label><input type="checkbox" value="13"/> เขต 13</label><label><input type="checkbox" value="14"/> เขต 14</label><label><input type="checkbox" value="15"/> เขต 15</label><label><input type="checkbox" value="90"/> เขต 90</label></div><small class="um-help">เลือกได้มากกว่า 1 เขตสำหรับ Manager</small></div>
 <div class="form-group">
 <label for="umZone">เขต</label>
 <input id="umZone" placeholder="เช่น 05" type="text"/>
@@ -12009,9 +12009,8 @@ document.addEventListener('DOMContentLoaded', function(){
         full_name:value('umFullName'),
         employee_code:value('umEmployeeCode'),
         role:value('umRole'),
-        zones:(window.CANENEXT_MANAGER_ZONES||[]),
-        zone:(String(value('umRole')).toLowerCase()==='manager'?null:(value('umZone')||null)),
-        subzone:(String(value('umRole')).toLowerCase()==='manager'?null:(value('umSubzone')||null)),
+        zone:value('umZone')||null,
+        subzone:value('umSubzone')||null,
         status:value('umStatus'),
         manager_zones: window.CaneManagerZones?.get?.() || []
       };
