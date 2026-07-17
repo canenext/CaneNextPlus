@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.24" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.27" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7873,6 +7873,25 @@ body.locked{
   color:#167248 !important;
   font-size:16px !important;
 }
+</style><style id="plot-layout-4col-style">
+#plot-data .plot-detail-grid,
+#plot-data .plot-grid,
+#plot-data .detail-grid{
+ display:grid!important;
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:16px!important;
+ align-items:end;
+}
+@media(max-width:900px){
+#plot-data .plot-detail-grid,
+#plot-data .plot-grid,
+#plot-data .detail-grid{grid-template-columns:repeat(2,1fr)!important;}
+}
+@media(max-width:600px){
+#plot-data .plot-detail-grid,
+#plot-data .plot-grid,
+#plot-data .detail-grid{grid-template-columns:1fr!important;}
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -8595,8 +8614,8 @@ function searchBusinessPartner(){
   }else{
     codeInput.value = code || '';
     nameInput.value = name || '';
-    document.getElementById('showZone').value = '';
-    document.getElementById('showSubZone').value = '';
+    document.getElementById('showZone').value = 'เขต 05';
+    document.getElementById('showSubZone').value = 'เขตย่อย 05-03';
   }
 }
 document.addEventListener('input', function(event){
@@ -10101,8 +10120,8 @@ window.addEventListener("click",()=>setTimeout(apply,80));
       return;
     }
     document.getElementById('realFarmerName').value='';
-    document.getElementById('realZone').value='';
-    document.getElementById('realSubzone').value='';
+    document.getElementById('realZone').value='เขต 05';
+    document.getElementById('realSubzone').value='เขตย่อย 05-03';
     renderRealPlots();
     selectRealPlot(0);
   };
@@ -12781,7 +12800,7 @@ document.addEventListener('DOMContentLoaded', function(){
     farmer_name:'',
     name:'',
     full_name:'',
-    zone:'',
+    zone:'8',
     subzone:''
   });
 
@@ -13771,107 +13790,6 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     render,
     get:()=>window.currentRealPlots||[],
     selected:()=>window.currentSelectedRealPlot||null
-  };
-})();
-</script><script id="canenext-blank-farmer-state-v3324-script">
-(function(){
-  const SESSION_KEY='canenext_current_farmer_session_v4';
-  const LEGACY_KEY='canenext_current_farmer';
-
-  function validSessionFarmer(){
-    try{
-      const raw=sessionStorage.getItem(SESSION_KEY);
-      if(!raw) return null;
-      const farmer=JSON.parse(raw);
-      return String(farmer?.farmer_code||'').trim() ? farmer : null;
-    }catch(e){
-      return null;
-    }
-  }
-
-  function setValue(id,value=''){
-    const el=document.getElementById(id);
-    if(!el) return;
-    if('value' in el) el.value=value;
-    else el.textContent=value;
-  }
-
-  function blankContextBars(){
-    document.querySelectorAll('.farmer-context-bar').forEach(bar=>{
-      ['code','name','zone','subzone'].forEach(key=>{
-        const el=bar.querySelector(`[data-${key}]`);
-        if(el) el.textContent='';
-      });
-      bar.classList.remove('has-farmer');
-    });
-  }
-
-  function clearFarmerDisplay(){
-    window.CANENEXT_CURRENT_FARMER=null;
-    window.currentSelectedRealPlot=null;
-    window.currentRealPlots=[];
-
-    [
-      'bpCode','bpName','showZone','showSubZone',
-      'realFarmerCode','realFarmerName','realZone','realSubzone'
-    ].forEach(id=>setValue(id,''));
-
-    const bpCode=document.getElementById('bpCode');
-    const bpName=document.getElementById('bpName');
-    if(bpCode) bpCode.placeholder='';
-    if(bpName) bpName.placeholder='';
-
-    blankContextBars();
-
-    const plotBody=document.getElementById('realPlotTableBody');
-    if(plotBody){
-      plotBody.innerHTML='<tr><td colspan="8" style="text-align:center;color:#6B7F93;">กรุณาค้นหาชาวไร่ก่อนดูข้อมูลรายแปลง</td></tr>';
-    }
-
-    const plotCount=document.getElementById('realPlotCount');
-    if(plotCount) plotCount.textContent='แสดง 0 จาก 0 แปลง';
-  }
-
-  // A new browser session must start blank. Old localStorage farmer data
-  // is ignored unless a valid same-session farmer exists.
-  if(!validSessionFarmer()){
-    try{ localStorage.removeItem(LEGACY_KEY); }catch(e){}
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    const saved=validSessionFarmer();
-    if(!saved){
-      clearFarmerDisplay();
-
-      // Re-apply after older initialization scripts finish.
-      setTimeout(clearFarmerDisplay,150);
-      setTimeout(clearFarmerDisplay,700);
-    }
-  });
-
-  // Logout always returns all menus to a blank farmer state.
-  const timer=setInterval(()=>{
-    const original=window.logoutSupabase;
-    if(typeof original!=='function' || original.__blankFarmerWrapped) return;
-    clearInterval(timer);
-
-    const wrapped=async function(){
-      try{
-        sessionStorage.removeItem(SESSION_KEY);
-        sessionStorage.removeItem('canenext_current_plot');
-        localStorage.removeItem(LEGACY_KEY);
-      }catch(e){}
-      clearFarmerDisplay();
-      return await original.apply(this,arguments);
-    };
-
-    wrapped.__blankFarmerWrapped=true;
-    window.logoutSupabase=wrapped;
-  },100);
-
-  window.CaneBlankFarmerState={
-    clear:clearFarmerDisplay,
-    hasFarmer:()=>Boolean(validSessionFarmer())
   };
 })();
 </script></body>
