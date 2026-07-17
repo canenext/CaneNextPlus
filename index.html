@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.30" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.28" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -13450,8 +13450,6 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
   let requestToken=0;
   let loadedFarmerCode='';
   let selectedPlotId='';
-  let realSortKey='';
-  let realSortDirection='';
 
   const esc=value=>String(value??'')
     .replace(/&/g,'&amp;')
@@ -13536,36 +13534,6 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     }
   }
 
-  function compareRealPlotValues(a,b,key){
-    let av=a?.[key];
-    let bv=b?.[key];
-
-    if(key==='area'){
-      av=Number(av||0);
-      bv=Number(bv||0);
-      return av-bv;
-    }
-
-    return String(av??'').localeCompare(String(bv??''),'th',{
-      numeric:true,
-      sensitivity:'base'
-    });
-  }
-
-  function updateRealSortHeaders(){
-    document.querySelectorAll('#real-plots .real-sort-btn').forEach(btn=>{
-      const active=btn.dataset.sortKey===realSortKey && !!realSortDirection;
-      btn.classList.toggle('active',active);
-      const icon=btn.querySelector('.real-sort-icon');
-      if(icon){
-        icon.textContent=!active?'↕':realSortDirection==='asc'?'▲':'▼';
-      }
-      btn.setAttribute('aria-sort',
-        !active?'none':realSortDirection==='asc'?'ascending':'descending'
-      );
-    });
-  }
-
   function filteredPlots(){
     const plots=[...(window.currentRealPlots||[])];
     const year=document.getElementById('realProductionYearFilter')?.value||'ALL';
@@ -13573,21 +13541,12 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     const crop=document.getElementById('realCropTypeFilter')?.value||'ALL';
     const status=document.getElementById('realStatusFilter')?.value||'ALL';
 
-    const list=plots.filter(plot=>
+    return plots.filter(plot=>
       (year==='ALL'||plot.year===year) &&
       (project==='ALL'||plot.project_name===project) &&
       (crop==='ALL'||plot.crop_type===crop) &&
       (status==='ALL'||(plot.status==='active'?'ใช้งาน':plot.status)===status)
     );
-
-    if(realSortKey && realSortDirection){
-      list.sort((a,b)=>{
-        const result=compareRealPlotValues(a,b,realSortKey);
-        return realSortDirection==='asc'?result:-result;
-      });
-    }
-
-    return list;
   }
 
   function fillSelect(id,values){
@@ -13650,7 +13609,6 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     if(!body) return;
 
     const list=filteredPlots();
-    updateRealSortHeaders();
     const count=document.getElementById('realPlotCount');
     if(count){
       count.textContent=`แสดง ${list.length.toLocaleString('th-TH')} จาก ${(window.currentRealPlots||[]).length.toLocaleString('th-TH')} แปลง`;
@@ -13720,8 +13678,6 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
       window.currentRealPlots=(data||[]).map(mapPlot);
       loadedFarmerCode=code;
       selectedPlotId='';
-      realSortKey='';
-      realSortDirection='';
 
       populateYears(window.currentRealPlots);
       updateFilterOptions();
@@ -13748,31 +13704,6 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
       return [];
     }
   }
-
-  document.addEventListener('click',event=>{
-    const btn=event.target.closest('#real-plots .real-sort-btn');
-    if(!btn) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    const key=btn.dataset.sortKey||'';
-    if(!key) return;
-
-    if(realSortKey!==key){
-      realSortKey=key;
-      realSortDirection='asc';
-    }else if(realSortDirection==='asc'){
-      realSortDirection='desc';
-    }else if(realSortDirection==='desc'){
-      realSortKey='';
-      realSortDirection='';
-    }else{
-      realSortDirection='asc';
-    }
-
-    render();
-  });
 
   window.filterRealPlotsByYear=render;
   window.renderRealPlotsFromSupabase=()=>render();
