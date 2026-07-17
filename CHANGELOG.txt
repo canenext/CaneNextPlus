@@ -122,3 +122,9 @@ Created: 2026-07-16T09:57:54
 v3.3.22
 Created: 2026-07-16T10:21:10
 - Changed result labels 'กำไร บาท/ไร่' and 'กำไร บาท/ตัน' to 'กำไร'.
+
+
+v3.3.28
+- Clear farmer code, farmer name, zone, and subzone before every new search.
+- Remove restored farmer context from localStorage/sessionStorage on initial page load.
+- Remove dash/sample placeholders from farmer context bars.

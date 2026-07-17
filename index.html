@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.27" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.3.28" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -10966,9 +10966,7 @@ document.addEventListener('DOMContentLoaded', function(){
   ];
 
   function savedFarmer(){
-    if(window.CANENEXT_CURRENT_FARMER) return window.CANENEXT_CURRENT_FARMER;
-    try{return JSON.parse(localStorage.getItem('canenext_current_farmer')||'null')}
-    catch(e){return null}
+    return null;
   }
 
   function setInput(id,value){
@@ -10983,13 +10981,13 @@ document.addEventListener('DOMContentLoaded', function(){
     bar=document.createElement('div');
     bar.className='farmer-context-bar';
     bar.innerHTML=`
-      <span class="fc-label">รหัสชาวไร่</span><span class="fc-value" data-code>-</span>
+      <span class="fc-label">รหัสชาวไร่</span><span class="fc-value" data-code></span>
       <span class="fc-sep"></span>
-      <span class="fc-label">ชื่อ-สกุล</span><span class="fc-value" data-name>-</span>
+      <span class="fc-label">ชื่อ-สกุล</span><span class="fc-value" data-name></span>
       <span class="fc-sep"></span>
-      <span class="fc-label">เขต</span><span class="fc-value" data-zone>-</span>
+      <span class="fc-label">เขต</span><span class="fc-value" data-zone></span>
       <span class="fc-sep"></span>
-      <span class="fc-label">เขตย่อย</span><span class="fc-value" data-subzone>-</span>`;
+      <span class="fc-label">เขตย่อย</span><span class="fc-value" data-subzone></span>`;
     page.insertBefore(bar,page.firstChild);
     return bar;
   }
@@ -10999,10 +10997,10 @@ document.addEventListener('DOMContentLoaded', function(){
       const bar=ensureBar(document.getElementById(id));
       if(!bar) return;
       bar.classList.toggle('has-farmer',!!farmer);
-      bar.querySelector('[data-code]').textContent=farmer?.farmer_code||'-';
-      bar.querySelector('[data-name]').textContent=farmer?.name||'-';
-      bar.querySelector('[data-zone]').textContent=farmer?.zone||'-';
-      bar.querySelector('[data-subzone]').textContent=farmer?.subzone||'-';
+      bar.querySelector('[data-code]').textContent=farmer?.farmer_code||'';
+      bar.querySelector('[data-name]').textContent=farmer?.name||'';
+      bar.querySelector('[data-zone]').textContent=farmer?.zone||'';
+      bar.querySelector('[data-subzone]').textContent=farmer?.subzone||'';
     });
 
     if(farmer){
@@ -12800,7 +12798,7 @@ document.addEventListener('DOMContentLoaded', function(){
     farmer_name:'',
     name:'',
     full_name:'',
-    zone:'8',
+    zone:'',
     subzone:''
   });
 
@@ -13505,8 +13503,8 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     const values={
       realFarmerCode:farmer?.farmer_code||'',
       realFarmerName:farmer?.name||farmer?.farmer_name||'',
-      realZone:farmer?.zone||'-',
-      realSubzone:farmer?.subzone||'-'
+      realZone:farmer?.zone||'',
+      realSubzone:farmer?.subzone||''
     };
     Object.entries(values).forEach(([id,value])=>{
       const el=document.getElementById(id);
@@ -13792,5 +13790,53 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     selected:()=>window.currentSelectedRealPlot||null
   };
 })();
-</script></body>
+</script>
+<script id="canenext-v3328-blank-before-search">
+(function(){
+  const SESSION_KEY='canenext_current_farmer_session_v4';
+  const ids=[
+    'bpCode','bpName','showZone','showSubZone',
+    'realFarmerCode','realFarmerName','realZone','realSubzone',
+    'farmerCode','farmerName','zone','subzone'
+  ];
+
+  function setBlank(el){
+    if(!el) return;
+    if('value' in el) el.value='';
+    else el.textContent='';
+  }
+
+  function clearInitialFarmer(){
+    try{
+      sessionStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem('canenext_current_farmer');
+    }catch(e){}
+
+    window.CANENEXT_CURRENT_FARMER=null;
+
+    ids.forEach(id=>setBlank(document.getElementById(id)));
+
+    document.querySelectorAll(
+      '[data-farmer-field], .farmer-context-bar [data-code], .farmer-context-bar [data-name], ' +
+      '.farmer-context-bar [data-zone], .farmer-context-bar [data-subzone]'
+    ).forEach(setBlank);
+
+    document.querySelectorAll('.farmer-context-bar').forEach(bar=>{
+      bar.classList.remove('has-farmer');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    clearInitialFarmer();
+    setTimeout(clearInitialFarmer,0);
+    setTimeout(clearInitialFarmer,120);
+  });
+
+  window.addEventListener('pageshow',event=>{
+    if(event.persisted) clearInitialFarmer();
+  });
+})();
+</script>
+
+</body>
 </html>
