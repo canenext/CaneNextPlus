@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.3.28" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.4.0" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -7892,7 +7892,262 @@ body.locked{
 #plot-data .plot-grid,
 #plot-data .detail-grid{grid-template-columns:1fr!important;}
 }
-</style></head>
+</style>
+<style id="canenext-v340-responsive-fix">
+/* ---------- Global responsive safety ---------- */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+table {
+  max-width: 100%;
+}
+.table-responsive,
+.table-wrap,
+.table-container,
+.real-plot-table-wrap,
+.loan-compare-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Real plots ---------- */
+#real-plots .table-responsive,
+#real-plots .table-wrap,
+#real-plots .table-container,
+#real-plots .real-plot-table-wrap {
+  display: block;
+  width: 100%;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+#real-plots table {
+  width: 100%;
+  min-width: 980px;
+  table-layout: auto !important;
+  border-collapse: collapse;
+}
+
+#real-plots th,
+#real-plots td {
+  min-width: 96px;
+  max-width: none;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+  vertical-align: middle;
+}
+
+#real-plots th:first-child,
+#real-plots td:first-child {
+  min-width: 120px;
+}
+
+#real-plots .real-sort-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  max-width: 100%;
+  white-space: normal !important;
+  line-height: 1.25;
+  text-align: center;
+  padding: 6px 4px;
+}
+
+#real-plots .real-sort-icon {
+  flex: 0 0 auto;
+}
+
+/* ---------- Loan / guarantee comparison cards ---------- */
+#risk-analysis .comparison-card,
+#risk-analysis .compare-card,
+#risk-analysis .loan-card,
+#risk-analysis .guarantee-card,
+#risk-analysis .summary-card,
+#risk-analysis .metric-card,
+#promotion .comparison-card,
+#promotion .compare-card,
+#promotion .loan-card,
+#promotion .guarantee-card,
+#promotion .summary-card,
+#promotion .metric-card {
+  min-width: 0 !important;
+  overflow: hidden;
+}
+
+#risk-analysis .comparison-card h3,
+#risk-analysis .compare-card h3,
+#risk-analysis .loan-card h3,
+#risk-analysis .guarantee-card h3,
+#risk-analysis .summary-card h3,
+#risk-analysis .metric-card h3,
+#promotion .comparison-card h3,
+#promotion .compare-card h3,
+#promotion .loan-card h3,
+#promotion .guarantee-card h3,
+#promotion .summary-card h3,
+#promotion .metric-card h3,
+#risk-analysis .comparison-card .card-title,
+#risk-analysis .compare-card .card-title,
+#risk-analysis .loan-card .card-title,
+#risk-analysis .guarantee-card .card-title,
+#risk-analysis .summary-card .card-title,
+#risk-analysis .metric-card .card-title,
+#promotion .comparison-card .card-title,
+#promotion .compare-card .card-title,
+#promotion .loan-card .card-title,
+#promotion .guarantee-card .card-title,
+#promotion .summary-card .card-title,
+#promotion .metric-card .card-title {
+  position: static !important;
+  min-height: 56px;
+  display: flex !important;
+  align-items: center;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: anywhere;
+  line-height: 1.35 !important;
+  padding: 12px 16px !important;
+  margin: 0 !important;
+}
+
+/* generic card header fallback for this section */
+#risk-analysis [class*="card"] > :first-child,
+#promotion [class*="card"] > :first-child {
+  max-width: 100%;
+}
+
+/* ---------- Tablet portrait ---------- */
+@media (max-width: 1024px) {
+  #real-plots table {
+    min-width: 900px;
+    font-size: 13px;
+  }
+
+  #real-plots th,
+  #real-plots td {
+    padding: 8px 10px !important;
+  }
+
+  #risk-analysis .comparison-grid,
+  #risk-analysis .compare-grid,
+  #risk-analysis .summary-grid,
+  #promotion .comparison-grid,
+  #promotion .compare-grid,
+  #promotion .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ---------- Phone portrait ---------- */
+@media (max-width: 767px) {
+  .content,
+  main,
+  .page-content,
+  .section-content {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #real-plots table {
+    min-width: 820px;
+    font-size: 12px;
+  }
+
+  #real-plots th,
+  #real-plots td {
+    min-width: 88px;
+    padding: 7px 8px !important;
+  }
+
+  #real-plots th:first-child,
+  #real-plots td:first-child {
+    min-width: 110px;
+  }
+
+  #risk-analysis .comparison-grid,
+  #risk-analysis .compare-grid,
+  #risk-analysis .summary-grid,
+  #promotion .comparison-grid,
+  #promotion .compare-grid,
+  #promotion .summary-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  #risk-analysis .comparison-card h3,
+  #risk-analysis .compare-card h3,
+  #risk-analysis .loan-card h3,
+  #risk-analysis .guarantee-card h3,
+  #risk-analysis .summary-card h3,
+  #risk-analysis .metric-card h3,
+  #promotion .comparison-card h3,
+  #promotion .compare-card h3,
+  #promotion .loan-card h3,
+  #promotion .guarantee-card h3,
+  #promotion .summary-card h3,
+  #promotion .metric-card h3,
+  #risk-analysis .comparison-card .card-title,
+  #risk-analysis .compare-card .card-title,
+  #risk-analysis .loan-card .card-title,
+  #risk-analysis .guarantee-card .card-title,
+  #risk-analysis .summary-card .card-title,
+  #risk-analysis .metric-card .card-title,
+  #promotion .comparison-card .card-title,
+  #promotion .compare-card .card-title,
+  #promotion .loan-card .card-title,
+  #promotion .guarantee-card .card-title,
+  #promotion .summary-card .card-title,
+  #promotion .metric-card .card-title {
+    min-height: 64px;
+    font-size: 16px !important;
+    padding: 14px 16px !important;
+  }
+
+  #risk-analysis .comparison-card,
+  #risk-analysis .compare-card,
+  #risk-analysis .loan-card,
+  #risk-analysis .guarantee-card,
+  #risk-analysis .summary-card,
+  #risk-analysis .metric-card,
+  #promotion .comparison-card,
+  #promotion .compare-card,
+  #promotion .loan-card,
+  #promotion .guarantee-card,
+  #promotion .summary-card,
+  #promotion .metric-card {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #risk-analysis .comparison-card .value-row,
+  #risk-analysis .compare-card .value-row,
+  #risk-analysis .loan-card .value-row,
+  #risk-analysis .guarantee-card .value-row,
+  #risk-analysis .summary-card .value-row,
+  #risk-analysis .metric-card .value-row,
+  #promotion .comparison-card .value-row,
+  #promotion .compare-card .value-row,
+  #promotion .loan-card .value-row,
+  #promotion .guarantee-card .value-row,
+  #promotion .summary-card .value-row,
+  #promotion .metric-card .value-row {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) auto;
+    gap: 12px;
+    align-items: center;
+  }
+}
+</style>
+
+</head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">

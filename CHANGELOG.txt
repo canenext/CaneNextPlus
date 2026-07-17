@@ -128,3 +128,11 @@ v3.3.28
 - Clear farmer code, farmer name, zone, and subzone before every new search.
 - Remove restored farmer context from localStorage/sessionStorage on initial page load.
 - Remove dash/sample placeholders from farmer context bars.
+
+
+v3.4.0
+- Fixed overlapping text on phone/tablet portrait layouts.
+- Real plot table now uses horizontal scrolling and safe column widths.
+- Sort headers wrap correctly without collapsing into one-character lines.
+- Loan/guarantee comparison cards now use flexible multi-line headers.
+- Improved phone and tablet portrait responsive spacing and typography.
