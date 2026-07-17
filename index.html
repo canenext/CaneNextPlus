@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.4.3" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.4.4" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -8048,7 +8048,9 @@ body.locked{
   }
 }
 </style>
-</head>
+<style>
+#dashboard, .dashboard-page, [data-page="dashboard"], [data-menu="dashboard"], a[href*="dashboard"]{display:none!important;}
+</style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
@@ -8102,7 +8104,7 @@ body.locked{
 <a href="#scenario" onclick="showMainMenu(event, 'scenario')"><i class="fa-solid fa-chart-line menu-icon"></i> Scenario Analysis</a>
 <a href="#analytics" onclick="showMainMenu(event, 'analytics')"><i class="fa-solid fa-chart-column menu-icon"></i> ระบบวิเคราะห์ข้อมูล</a>
 <a href="#ai-recommendation" onclick="showMainMenu(event, 'ai-recommendation')"><i class="fa-solid fa-robot menu-icon"></i> AI Recommendation</a>
-<a href="#dashboard" onclick="showMainMenu(event, 'dashboard')"><i class="fa-solid fa-gauge-high menu-icon"></i> Dashboard</a>
+
 <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
 <a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> หลักเกณฑ์การส่งเสริม</a>
 <a class="admin-only-menu" href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
@@ -8414,7 +8416,6 @@ body.locked{
 </tbody>
 </table>
 </div>
-
 <div class="dashboard-section">
 <h4>Financial Summary</h4>
 <div class="dashboard-financial-grid">
