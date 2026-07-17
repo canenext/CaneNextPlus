@@ -147,3 +147,10 @@ v3.4.1
 
 v3.4.3
 - Removed the complete Executive Comparison section from Dashboard.
+
+v3.4.5
+- Redesigned AI Recommendation as an AI Decision Support Center.
+- Added AI Score, priority, forecast yield, profit per rai, and confidence.
+- Added recommendation cards, risk analysis, scenario comparison, and action plan.
+- Fixed AI Recommendation highest-risk calculation.
+- Added responsive layout for desktop, tablet, and phone.

@@ -7020,7 +7020,7 @@ body.logged-in .user-scope-chip{display:inline-flex}
     border-radius:14px;
   }
 }
-</style><meta content="3.4.4" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
+</style><meta content="3.4.5" name="canenext-version"/><style id="canenext-manager-multizone-master-style">
 #user-management .um-manager-zones-wrap{
   grid-column:1 / -1;
 }
@@ -8050,6 +8050,296 @@ body.locked{
 </style>
 <style>
 #dashboard, .dashboard-page, [data-page="dashboard"], [data-menu="dashboard"], a[href*="dashboard"]{display:none!important;}
+</style><style id="ai-recommendation-center-v345">
+#ai-recommendation.ai-center-page{
+  padding-top:16px !important;
+}
+.ai-center-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  padding:22px 24px;
+  margin-bottom:18px;
+  background:linear-gradient(135deg,#F7FBFF 0%,#EDF6FF 100%);
+  border:1px solid #CFE0F1;
+  border-radius:20px;
+}
+.ai-center-eyebrow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#0B5CAD;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.02em;
+  margin-bottom:7px;
+}
+.ai-center-header h3{
+  margin:0 0 7px !important;
+  color:#083B73 !important;
+  font-size:25px !important;
+  font-weight:900 !important;
+}
+.ai-center-header p{
+  margin:0;
+  color:#5B6F86;
+  font-size:14px;
+  line-height:1.6;
+}
+.ai-center-status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#46617E;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+  padding:8px 12px;
+  background:#fff;
+  border:1px solid #D5E6F8;
+  border-radius:999px;
+}
+.ai-status-dot{
+  width:9px;height:9px;border-radius:50%;
+  background:#22A06B;
+  box-shadow:0 0 0 4px rgba(34,160,107,.12);
+}
+.ai-center-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 320px;
+  gap:18px;
+  align-items:start;
+}
+.ai-center-main{
+  display:grid;
+  gap:16px;
+}
+.ai-center-side{
+  display:grid;
+  gap:16px;
+  position:sticky;
+  top:16px;
+}
+.ai-hero-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.ai-metric-card{
+  background:#fff;
+  border:1px solid #D5E6F8;
+  border-radius:16px;
+  padding:15px 16px;
+  min-width:0;
+}
+.ai-metric-label{
+  color:#5B6F86;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+.ai-metric-value{
+  color:#083B73;
+  font-size:22px;
+  font-weight:900;
+  line-height:1.2;
+  overflow-wrap:anywhere;
+}
+.ai-metric-note{
+  margin-top:6px;
+  color:#6E8298;
+  font-size:12px;
+  line-height:1.45;
+}
+.ai-decision-card{
+  background:linear-gradient(135deg,#0B5CAD,#083B73);
+  color:#fff;
+  border-radius:20px;
+  padding:20px;
+}
+.ai-decision-kicker{
+  font-size:12px;
+  font-weight:800;
+  opacity:.82;
+  margin-bottom:8px;
+}
+.ai-decision-card h4{
+  margin:0 0 10px !important;
+  color:#fff !important;
+  font-size:21px !important;
+  font-weight:900 !important;
+}
+.ai-decision-card p{
+  margin:0;
+  line-height:1.65;
+  font-size:14px;
+  opacity:.95;
+}
+.ai-decision-amount{
+  display:block;
+  margin-top:14px;
+  font-size:27px;
+  font-weight:900;
+}
+.ai-confidence{
+  margin-top:15px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  font-weight:700;
+}
+.ai-confidence-track{
+  grid-column:1/-1;
+  height:7px;
+  border-radius:999px;
+  background:rgba(255,255,255,.2);
+  overflow:hidden;
+}
+.ai-confidence-fill{
+  height:100%;
+  border-radius:999px;
+  background:#fff;
+}
+.ai-panel{
+  background:#fff;
+  border:1px solid #D5E6F8;
+  border-radius:18px;
+  overflow:hidden;
+}
+.ai-panel-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 17px;
+  background:#F5F9FE;
+  border-bottom:1px solid #E1ECF7;
+  color:#083B73;
+  font-size:16px;
+  font-weight:900;
+}
+.ai-panel-body{
+  padding:16px 18px;
+}
+.ai-recommend-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.ai-recommend-item{
+  border:1px solid #E0EBF6;
+  border-radius:14px;
+  padding:14px;
+  background:#fff;
+}
+.ai-recommend-item strong{
+  display:block;
+  color:#083B73;
+  font-size:14px;
+  margin-bottom:6px;
+}
+.ai-recommend-item p{
+  margin:0;
+  color:#46617E;
+  font-size:13px;
+  line-height:1.6;
+}
+.ai-risk-line{
+  display:grid;
+  grid-template-columns:140px minmax(0,1fr) auto;
+  gap:12px;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid #EDF2F7;
+}
+.ai-risk-line:last-child{border-bottom:0}
+.ai-risk-name{color:#46617E;font-size:13px;font-weight:700}
+.ai-risk-bar{height:8px;background:#EDF3F8;border-radius:999px;overflow:hidden}
+.ai-risk-fill{height:100%;border-radius:999px;background:#0B5CAD}
+.ai-risk-level{font-size:12px;font-weight:900;color:#083B73}
+.ai-action-list{
+  display:grid;
+  gap:10px;
+}
+.ai-action-item{
+  display:grid;
+  grid-template-columns:24px minmax(0,1fr);
+  gap:10px;
+  align-items:start;
+  padding:11px 12px;
+  border:1px solid #E0EBF6;
+  border-radius:12px;
+  background:#fff;
+}
+.ai-action-item input{
+  margin-top:2px;
+  width:17px;height:17px;
+}
+.ai-action-item label{
+  color:#294B6D;
+  font-size:13px;
+  line-height:1.55;
+  cursor:pointer;
+}
+.ai-scenario-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:720px;
+}
+.ai-scenario-table th,
+.ai-scenario-table td{
+  padding:10px 12px !important;
+  border-bottom:1px solid #E5EDF5;
+  text-align:right;
+  font-size:13px;
+  white-space:nowrap;
+}
+.ai-scenario-table th:first-child,
+.ai-scenario-table td:first-child{text-align:left}
+.ai-scenario-table th{
+  background:#F5F9FE;
+  color:#083B73;
+  font-weight:900;
+}
+.ai-best-row{background:#F1F8FF}
+.ai-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  margin-left:6px;
+}
+.ai-badge.safe{background:#E8F7F0;color:#137A50}
+.ai-badge.warn{background:#FFF4D9;color:#9A6500}
+.ai-advisor-empty{
+  background:#F7FBFF !important;
+  border:1px dashed #BFD3E7 !important;
+  border-radius:18px !important;
+  padding:40px 24px !important;
+  text-align:center !important;
+  color:#5B6F86 !important;
+  font-weight:700 !important;
+}
+@media(max-width:1100px){
+  .ai-center-layout{grid-template-columns:1fr}
+  .ai-center-side{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ai-hero-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+  .ai-center-header{display:block;padding:18px}
+  .ai-center-status{margin-top:14px;width:max-content;max-width:100%;white-space:normal}
+  .ai-center-header h3{font-size:22px !important}
+  .ai-hero-grid,
+  .ai-recommend-grid,
+  .ai-center-side{grid-template-columns:1fr}
+  .ai-risk-line{grid-template-columns:110px minmax(0,1fr);gap:8px}
+  .ai-risk-level{grid-column:2;text-align:right}
+  .ai-metric-value{font-size:20px}
+}
 </style></head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -8104,7 +8394,6 @@ body.locked{
 <a href="#scenario" onclick="showMainMenu(event, 'scenario')"><i class="fa-solid fa-chart-line menu-icon"></i> Scenario Analysis</a>
 <a href="#analytics" onclick="showMainMenu(event, 'analytics')"><i class="fa-solid fa-chart-column menu-icon"></i> ระบบวิเคราะห์ข้อมูล</a>
 <a href="#ai-recommendation" onclick="showMainMenu(event, 'ai-recommendation')"><i class="fa-solid fa-robot menu-icon"></i> AI Recommendation</a>
-
 <a href="#risk" onclick="showMainMenu(event, 'risk')"><i class="fa-solid fa-shield-halved menu-icon"></i> วิเคราะห์ความเสี่ยง</a>
 <a href="#promotion" onclick="showMainMenu(event, 'promotion')"><i class="fa-solid fa-handshake-angle menu-icon"></i> หลักเกณฑ์การส่งเสริม</a>
 <a class="admin-only-menu" href="#data-management" onclick="showMainMenu(event, 'data-management')"><i class="fa-solid fa-database menu-icon"></i> Data Management</a>
@@ -8532,11 +8821,17 @@ body.locked{
 </div>
 </div>
 </section>
-<section class="section app-page ai-recommendation-page" id="ai-recommendation">
-<div class="ai-advisor-empty" id="aiAdvisorContent">
-    กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติจากข้อมูล Scenario Analysis
-  </div>
-</section>
+<section class="section app-page ai-recommendation-page ai-center-page" id="ai-recommendation"><div class="ai-center-header">
+<div>
+<div class="ai-center-eyebrow"><i class="fa-solid fa-robot"></i> AI Decision Support Center</div>
+<h3>AI Recommendation</h3>
+<p>วิเคราะห์ข้อมูล Scenario เพื่อช่วยวางแผนการส่งเสริม ผลผลิต ต้นทุน กำไร และความเสี่ยง</p>
+</div>
+<div class="ai-center-status">
+<span class="ai-status-dot"></span>
+<span>พร้อมวิเคราะห์เมื่อมีข้อมูล Scenario</span>
+</div>
+</div><div class="ai-advisor-empty" id="aiAdvisorContent">กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติจากข้อมูล Scenario Analysis</div></section>
 <section class="section app-page data-management-page" id="data-management">
 <div class="dm-card">
 <div class="dm-heading-row">
@@ -14050,5 +14345,239 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
   });
 })();
 </script>
-</body>
+<script id="ai-recommendation-center-v345-js">
+(function(){
+  function num(text){
+    return Number(String(text||'').replace(/[^0-9.-]/g,''))||0;
+  }
+  function money(v){
+    return Number(v||0).toLocaleString('th-TH',{maximumFractionDigits:0})+' บาท';
+  }
+  function dec(v){
+    return Number(v||0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  function rows(){
+    return [...document.querySelectorAll('.scenario-panel-v2')].map((card,index)=>{
+      const get=k=>card.querySelector(`[data-result="${k}"]`)?.textContent||'-';
+      const title=card.querySelector('.scenario-title')?.textContent||`Scenario ที่ ${index+1}`;
+      const water=card.querySelector('[data-key="water"]')?.value||'-';
+      return {
+        title,water,
+        yieldText:get('yieldPerRai'),
+        totalYieldText:get('totalYield'),
+        promotionText:get('promotionCost'),
+        deText:get('deRatio'),
+        netProfitText:get('netProfit'),
+        profitPerRaiText:get('profitPerRai'),
+        totalCostText:get('totalCost'),
+        yield:num(get('yieldPerRai')),
+        totalYield:num(get('totalYield')),
+        promotion:num(get('promotionCost')),
+        de:num(get('deRatio')),
+        netProfit:num(get('netProfit')),
+        profitPerRai:num(get('profitPerRai')),
+        totalCost:num(get('totalCost'))
+      };
+    });
+  }
+  function riskLabel(value,low,high){
+    if(value<=low) return ['ต่ำ',28];
+    if(value<=high) return ['ปานกลาง',58];
+    return ['สูง',88];
+  }
+  function getFarmer(){
+    const f=window.CANENEXT_CURRENT_FARMER||{};
+    return f.name||f.farmer_name||document.getElementById('bpName')?.value||'ยังไม่ได้เลือกชาวไร่';
+  }
+  function actionItem(id,text){
+    return `<div class="ai-action-item">
+      <input type="checkbox" id="${id}">
+      <label for="${id}">${text}</label>
+    </div>`;
+  }
+
+  window.refreshAIAdvisor=function(){
+    const content=document.getElementById('aiAdvisorContent');
+    if(!content) return;
+
+    if(typeof window.updateScenarioV2==='function'){
+      document.querySelectorAll('.scenario-panel-v2 .scenario-update-btn').forEach(btn=>{
+        try{window.updateScenarioV2(btn)}catch(e){}
+      });
+    }
+
+    const data=rows();
+    if(!data.length){
+      content.className='ai-advisor-empty';
+      content.innerHTML='<i class="fa-solid fa-wand-magic-sparkles" style="font-size:26px;color:#0B5CAD;margin-bottom:12px"></i><br>ยังไม่มีข้อมูล Scenario<br><span style="font-size:13px;font-weight:500">กรุณาสร้าง Scenario ก่อน ระบบจะแสดงคำแนะนำอัตโนมัติ</span>';
+      return;
+    }
+
+    const safe=data.filter(r=>r.de<=1);
+    const recommended=[...(safe.length?safe:data)].sort((a,b)=>b.netProfit-a.netProfit)[0];
+    const bestYield=[...data].sort((a,b)=>b.yield-a.yield)[0];
+    const lowestCost=[...data].sort((a,b)=>a.totalCost-b.totalCost)[0];
+    const highestRisk=[...data].sort((a,b)=>b.de-a.de)[0];
+
+    const confidence=Math.max(62,Math.min(96,
+      Math.round(82 + (recommended.de<=1?7:-8) + (recommended.netProfit>0?5:-10))
+    ));
+    const overallScore=Math.max(0,Math.min(100,
+      Math.round(70 + Math.min(recommended.profitPerRai/500,15) + (recommended.de<=1?10:-12))
+    ));
+    const priority=recommended.de>1||recommended.netProfit<0?'สูง':recommended.yield<10?'ปานกลาง':'ปกติ';
+    const yieldRisk=riskLabel(recommended.yield<10?80:recommended.yield<12?50:25,30,65);
+    const debtRisk=riskLabel(recommended.de*70,35,70);
+    const profitRisk=riskLabel(recommended.netProfit<0?90:recommended.profitPerRai<2000?60:25,35,70);
+
+    const investmentAdvice=recommended.de>1
+      ? 'ควรลดรายการส่งเสริมที่ไม่จำเป็น และทบทวนวงเงินค้ำประกันก่อนอนุมัติ'
+      : recommended.netProfit>0
+        ? 'สามารถพิจารณาส่งเสริมตาม Scenario ที่แนะนำ โดยควบคุมงบไม่ให้เกินกรอบ'
+        : 'ยังไม่ควรเพิ่มวงเงินส่งเสริมจนกว่าจะปรับต้นทุนและผลตอบแทนให้เหมาะสม';
+
+    const waterAdvice=recommended.water&&recommended.water!=='-'
+      ? `รูปแบบการให้น้ำของแผนที่แนะนำคือ ${recommended.water} ควรติดตามความชื้นและต้นทุนจริง`
+      : 'ควรประเมินแหล่งน้ำและความเสี่ยงฝนทิ้งช่วงก่อนเลือกระบบน้ำ';
+
+    content.className='';
+    content.innerHTML=`
+      <div class="ai-center-layout">
+        <div class="ai-center-main">
+          <div class="ai-hero-grid">
+            <div class="ai-metric-card">
+              <div class="ai-metric-label">AI Score</div>
+              <div class="ai-metric-value">${overallScore}/100</div>
+              <div class="ai-metric-note">คะแนนความเหมาะสมโดยรวม</div>
+            </div>
+            <div class="ai-metric-card">
+              <div class="ai-metric-label">ระดับความสำคัญ</div>
+              <div class="ai-metric-value">${priority}</div>
+              <div class="ai-metric-note">ใช้กำหนดลำดับการติดตาม</div>
+            </div>
+            <div class="ai-metric-card">
+              <div class="ai-metric-label">ผลผลิตคาดการณ์</div>
+              <div class="ai-metric-value">${dec(recommended.yield)} ตัน/ไร่</div>
+              <div class="ai-metric-note">${recommended.title}</div>
+            </div>
+            <div class="ai-metric-card">
+              <div class="ai-metric-label">กำไรต่อไร่</div>
+              <div class="ai-metric-value">${money(recommended.profitPerRai)}</div>
+              <div class="ai-metric-note">กำไรสุทธิ ${money(recommended.netProfit)}</div>
+            </div>
+          </div>
+
+          <div class="ai-panel">
+            <div class="ai-panel-head"><i class="fa-solid fa-lightbulb"></i> คำแนะนำหลัก</div>
+            <div class="ai-panel-body">
+              <div class="ai-recommend-grid">
+                <div class="ai-recommend-item">
+                  <strong>Scenario ที่เหมาะสม</strong>
+                  <p>เลือก <b>${recommended.title}</b> เป็นแนวทางหลัก เพราะให้ผลตอบแทนเหมาะสมภายใต้ระดับ D/E ปัจจุบัน</p>
+                </div>
+                <div class="ai-recommend-item">
+                  <strong>การส่งเสริมและวงเงิน</strong>
+                  <p>${investmentAdvice}</p>
+                </div>
+                <div class="ai-recommend-item">
+                  <strong>การจัดการผลผลิต</strong>
+                  <p>${recommended.yield<10?'ผลผลิตต่ำกว่าเป้าหมาย ควรเร่งจัดการน้ำ วัชพืช และปุ๋ยตามช่วงอายุอ้อย':'ผลผลิตอยู่ในเกณฑ์ดี ควรรักษามาตรฐานและติดตามผลจริงรายเดือน'}</p>
+                </div>
+                <div class="ai-recommend-item">
+                  <strong>ระบบน้ำ</strong>
+                  <p>${waterAdvice}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-panel">
+            <div class="ai-panel-head"><i class="fa-solid fa-shield-halved"></i> วิเคราะห์ความเสี่ยง</div>
+            <div class="ai-panel-body">
+              <div class="ai-risk-line">
+                <div class="ai-risk-name">ผลผลิต</div>
+                <div class="ai-risk-bar"><div class="ai-risk-fill" style="width:${yieldRisk[1]}%"></div></div>
+                <div class="ai-risk-level">${yieldRisk[0]}</div>
+              </div>
+              <div class="ai-risk-line">
+                <div class="ai-risk-name">หนี้และ D/E</div>
+                <div class="ai-risk-bar"><div class="ai-risk-fill" style="width:${debtRisk[1]}%"></div></div>
+                <div class="ai-risk-level">${debtRisk[0]}</div>
+              </div>
+              <div class="ai-risk-line">
+                <div class="ai-risk-name">กำไรและต้นทุน</div>
+                <div class="ai-risk-bar"><div class="ai-risk-fill" style="width:${profitRisk[1]}%"></div></div>
+                <div class="ai-risk-level">${profitRisk[0]}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-panel">
+            <div class="ai-panel-head"><i class="fa-solid fa-table-list"></i> เปรียบเทียบ Scenario</div>
+            <div class="table-responsive">
+              <table class="ai-scenario-table">
+                <thead><tr>
+                  <th>Scenario</th><th>ผลผลิต/ไร่</th><th>ต้นทุนรวม</th>
+                  <th>กำไรสุทธิ</th><th>กำไร/ไร่</th><th>D/E</th>
+                </tr></thead>
+                <tbody>
+                  ${data.map(r=>`<tr class="${r.title===recommended.title?'ai-best-row':''}">
+                    <td>${r.title}${r.title===recommended.title?'<span class="ai-badge safe">แนะนำ</span>':''}</td>
+                    <td>${dec(r.yield)}</td>
+                    <td>${r.totalCostText}</td>
+                    <td>${r.netProfitText}</td>
+                    <td>${r.profitPerRaiText}</td>
+                    <td>${r.deText}${r.de>1?'<span class="ai-badge warn">เสี่ยง</span>':''}</td>
+                  </tr>`).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <aside class="ai-center-side">
+          <div class="ai-decision-card">
+            <div class="ai-decision-kicker">NEXT BEST ACTION · ${getFarmer()}</div>
+            <h4>ใช้ ${recommended.title} เป็นแผนหลัก</h4>
+            <p>พิจารณาอนุมัติภายใต้กรอบวงเงิน และติดตามผลผลิตจริงเทียบแผนเป็นระยะ</p>
+            <span class="ai-decision-amount">${recommended.promotionText}</span>
+            <div class="ai-confidence">
+              <span>AI Confidence</span><span>${confidence}%</span>
+              <div class="ai-confidence-track"><div class="ai-confidence-fill" style="width:${confidence}%"></div></div>
+            </div>
+          </div>
+
+          <div class="ai-panel">
+            <div class="ai-panel-head"><i class="fa-solid fa-list-check"></i> Action Plan</div>
+            <div class="ai-panel-body">
+              <div class="ai-action-list">
+                ${actionItem('aiAct1','ตรวจสอบ D/E และวงเงินค้ำประกันก่อนอนุมัติ')}
+                ${actionItem('aiAct2','ยืนยันรายการส่งเสริมที่จำเป็นต่อการเพิ่มผลผลิต')}
+                ${actionItem('aiAct3','ติดตามการให้น้ำและความชื้นของแปลง')}
+                ${actionItem('aiAct4','ติดตามผลผลิตจริงเทียบ Scenario ทุกเดือน')}
+                ${actionItem('aiAct5','ประเมินต้นทุนและกำไรก่อนปิดฤดูผลิต')}
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-panel">
+            <div class="ai-panel-head"><i class="fa-solid fa-ranking-star"></i> จุดเปรียบเทียบ</div>
+            <div class="ai-panel-body" style="font-size:13px;line-height:1.8;color:#46617E">
+              <div><b>ผลผลิตสูงสุด:</b> ${bestYield.title}</div>
+              <div><b>ต้นทุนต่ำสุด:</b> ${lowestCost.title}</div>
+              <div><b>ความเสี่ยงสูงสุด:</b> ${highestRisk.title}</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    `;
+  };
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    if(document.getElementById('ai-recommendation')?.classList.contains('active-page')){
+      setTimeout(window.refreshAIAdvisor,120);
+    }
+  });
+})();
+</script></body>
 </html>
