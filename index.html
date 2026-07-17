@@ -13838,5 +13838,23 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
 })();
 </script>
 
+
+<script id="v3329-sort-fix">
+document.addEventListener('click',function(e){
+ const btn=e.target.closest('#real-plots .real-sort-btn');
+ if(!btn) return;
+ e.stopImmediatePropagation();
+ const key=btn.dataset.sortKey;
+ if(typeof window.state==='undefined'){
+   window.__realSortState=window.__realSortState||{sortKey:null,sortDirection:null};
+ }
+ const s=window.state||window.__realSortState;
+ if(s.sortKey!==key){s.sortKey=key;s.sortDirection='asc';}
+ else if(s.sortDirection==='asc') s.sortDirection='desc';
+ else if(s.sortDirection==='desc'){s.sortKey=null;s.sortDirection=null;}
+ else s.sortDirection='asc';
+ if(window.filterRealPlotsByYear) window.filterRealPlotsByYear();
+},true);
+</script>
 </body>
 </html>
