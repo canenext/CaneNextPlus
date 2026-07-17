@@ -8450,7 +8450,7 @@ body.locked{
 <h2>เข้าสู่ระบบ</h2>
 <p class="hint">กรอกUserและPassword เพื่อเข้าสู่แพลตฟอร์ม Cane Next Plus+</p>
 <div class="form-group">
-<label for="username">User</label>
+<label for="username">User <small style="font-weight:500;color:#666">(รหัสพนักงาน / ชื่อ-สกุล / อีเมล)</small></label>
 <input autocomplete="email" id="username" placeholder="กรอกUser" required="" type="email"/>
 </div>
 <div class="form-group">
@@ -8995,7 +8995,7 @@ body.locked{
 <h3 id="umFormTitle">เพิ่มผู้ใช้งาน</h3>
 <div class="um-form-grid">
 <div class="form-group">
-<label for="umEmail">User</label>
+<label for="umEmail">User <small style="font-weight:500;color:#666">(รหัสพนักงาน / ชื่อ-สกุล / อีเมล)</small></label>
 <input id="umEmail" placeholder="name@example.com" type="email"/>
 </div>
 <div class="form-group" id="umPasswordGroup">
@@ -9088,7 +9088,7 @@ body.locked{
 <tr>
 <th>รหัสพนักงาน</th>
 <th>ชื่อ-สกุล</th>
-<th>User</th>
+<th>User <small style="font-weight:500;color:#666">(รหัสพนักงาน / ชื่อ-สกุล / อีเมล)</small></th>
 <th>Role</th>
 <th>เขต</th>
 <th>เขตย่อย</th>
@@ -14749,5 +14749,23 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     };
   },100);
 })();
-</script></body>
+</script>
+<script id="login-multi-user-v352">
+(function(){
+const t=setInterval(()=>{
+ const api=window.CaneAuth||window.Auth||window.Login||window.CaneLogin;
+ if(!api)return;
+ clearInterval(t);
+ if(typeof api.findUser==='function'){
+   const old=api.findUser;
+   api.findUser=function(v){
+      return old.call(this,v)
+      || old.call(this,String(v).trim())
+      || (this.users||[]).find(u=>u.employee_code===v||u.full_name===v||u.email===v);
+   }
+ }
+},100);
+})();
+</script>
+</body>
 </html>
