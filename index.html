@@ -8433,16 +8433,28 @@ body.locked{
   #user-management .um-zone-check-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
-<style id="risk-baht-ton-color">
-.risk-bt-green{color:#16a34a!important}
-.risk-bt-orange{color:#f59e0b!important}
-.risk-bt-red{color:#dc2626!important}
-</style>
 
-<style id="risk-bt-icon-style">
-.baht-ton-display{display:inline-flex;align-items:center;gap:6px}
-.baht-ton-icon{font-size:14px;line-height:1}
-.baht-ton-number{color:#0B5CAD!important;font-weight:800!important}
+
+
+
+<style id="risk-baht-ton-status-v363">
+.risk-baht-ton-value-wrap{
+  display:flex;
+  align-items:center;
+  width:100%;
+  gap:8px;
+}
+.risk-baht-ton-status{
+  flex:0 0 auto;
+  font-size:16px;
+  line-height:1;
+}
+#riskBahtPerTon{
+  flex:1 1 auto;
+  min-width:0;
+  color:#0b5cad !important;
+  font-weight:800 !important;
+}
 </style>
 </head>
 <body class="locked">
@@ -8868,9 +8880,12 @@ body.locked{
 <label for="riskContractTon">ยืนยันสัญญาตัน (ตัน)</label>
 <input id="riskContractTon" readonly="" type="text" value="0"/>
 </div>
-<div class="risk-field risk-calculated">
+<div class="risk-field risk-calculated risk-baht-ton-field">
 <label for="riskBahtPerTon">บาท/ตัน</label>
+<div class="risk-baht-ton-value-wrap">
+<span aria-label="สถานะความเสี่ยง" class="risk-baht-ton-status" id="riskBahtPerTonStatus">🟢</span>
 <input id="riskBahtPerTon" readonly="" type="text" value="0.00"/>
+</div>
 </div>
 <div class="risk-field">
 <label for="riskBasePrice">ราคาอ้อยขั้นต้น (บาท/ตัน)</label>
@@ -13856,6 +13871,11 @@ function calc(){
  setVal('riskTotalObligation',money(totalObligation,0));
  setVal('riskDERatio',deRatio.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2}));
  setVal('riskBahtPerTon',money(bahtPerTon,2));
+ const riskBahtPerTonStatus=$('riskBahtPerTonStatus');
+ if(riskBahtPerTonStatus){
+   riskBahtPerTonStatus.textContent=bahtPerTon>600?'🔴':(bahtPerTon>500?'🟠':'🟢');
+   riskBahtPerTonStatus.setAttribute('aria-label',bahtPerTon>600?'ความเสี่ยงสูง':(bahtPerTon>500?'ความเสี่ยงปานกลาง':'ความเสี่ยงต่ำ'));
+ }
  setVal('riskCcsValue',money(ccsValue,2));
  setVal('riskTotalCanePrice',money(totalPrice,2));
  renderScenarios();
@@ -14741,39 +14761,8 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
 </script><script id='loginAliasSearch'>
 window.findLoginUser=function(users,input){input=String(input).trim();return (users||[]).find(u=>String(u.employee_code||'').trim()===input||String(u.full_name||'').trim()===input||String(u.email||'').trim().toLowerCase()===input.toLowerCase());};
 </script>
-<script id="risk-baht-ton-color-js">
-(function(){
-function update(){
- document.querySelectorAll('[data-result="bahtPerTon"],.baht-per-ton-value').forEach(el=>{
-   const v=parseFloat((el.textContent||'').replace(/[^0-9.]/g,'')); if(isNaN(v)) return;
-   el.classList.remove('risk-bt-green','risk-bt-orange','risk-bt-red');
-   if(v>600) el.classList.add('risk-bt-red');
-   else if(v>500) el.classList.add('risk-bt-orange');
-   else el.classList.add('risk-bt-green');
- });
-}
-setInterval(update,800);
-document.addEventListener('DOMContentLoaded',update);
-})();
-</script>
 
-<script id="risk-bt-icon-style-js">
-(function(){
-function upd(){
- document.querySelectorAll('[data-result="bahtPerTon"],.baht-per-ton-value').forEach(el=>{
-  const txt=el.textContent||'';
-  const v=parseFloat(txt.replace(/[^0-9.]/g,'')); if(isNaN(v)) return;
-  let icon='🟢';
-  if(v>600) icon='🔴';
-  else if(v>500) icon='🟠';
-  if(el.dataset.done===txt)return;
-  el.dataset.done=txt;
-  el.innerHTML='<span class="baht-ton-display"><span class="baht-ton-icon">'+icon+'</span><span class="baht-ton-number">'+txt+'</span></span>';
- });
-}
-setInterval(upd,700);
-document.addEventListener('DOMContentLoaded',upd);
-})();
-</script>
+
+
 </body>
 </html>
