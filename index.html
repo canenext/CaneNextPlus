@@ -8728,7 +8728,13 @@ body.locked{
 #aiAdvisorContent .ai-v347-decision p,#aiAdvisorContent .ai-v347-decision .desc{color:#F8FBFF!important}
 #aiAdvisorContent .ai-v347-decision .amount{color:#FFF3A3!important;font-size:28px!important;font-weight:900!important}
 #aiAdvisorContent .ai-v347-decision .confidence,#aiAdvisorContent .ai-v347-decision .confidence *,#aiAdvisorContent .ai-v347-decision .badge{color:#FFF!important;background:rgba(255,255,255,.18)!important;border-color:rgba(255,255,255,.28)!important}
-</style></head>
+</style>
+<style id="risk-baht-ton-status-v404">
+.risk-baht-ton-value-wrap{display:flex!important;align-items:center!important;gap:8px!important;width:100%!important}
+.risk-baht-ton-status{font-size:16px!important;line-height:1!important;flex:0 0 auto!important}
+#riskBahtPerTon{color:#0B5CAD!important;font-weight:900!important;flex:1 1 auto!important;min-width:0!important}
+</style>
+</head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
@@ -15110,6 +15116,23 @@ window.findLoginUser=function(users,input){input=String(input).trim();return (us
   }
   document.addEventListener('DOMContentLoaded',applyInlineActions);
   new MutationObserver(applyInlineActions).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+
+<script id="risk-baht-ton-status-js-v404">
+(function(){
+ function updateRiskBahtTon(){
+   var input=document.getElementById('riskBahtPerTon');
+   var icon=document.getElementById('riskBahtPerTonStatus');
+   if(!input||!icon)return;
+   var value=parseFloat(String(input.value||'').replace(/,/g,'').replace(/[^0-9.]/g,''));
+   if(isNaN(value))return;
+   icon.textContent=value>600?'🔴':(value>=500?'🟠':'🟢');
+   input.style.color='#0B5CAD';
+   input.style.fontWeight='900';
+ }
+ document.addEventListener('DOMContentLoaded',updateRiskBahtTon);
+ setInterval(updateRiskBahtTon,400);
 })();
 </script>
 </body>
