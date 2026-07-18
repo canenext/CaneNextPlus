@@ -8432,7 +8432,19 @@ body.locked{
   #user-management .um-mz-toolbar{align-items:flex-start;flex-direction:column}
   #user-management .um-zone-check-grid{grid-template-columns:repeat(2,1fr)}
 }
-</style></head>
+</style>
+<style id="risk-baht-ton-color">
+.risk-bt-green{color:#16a34a!important}
+.risk-bt-orange{color:#f59e0b!important}
+.risk-bt-red{color:#dc2626!important}
+</style>
+
+<style id="risk-bt-icon-style">
+.baht-ton-display{display:inline-flex;align-items:center;gap:6px}
+.baht-ton-icon{font-size:14px;line-height:1}
+.baht-ton-number{color:#0B5CAD!important;font-weight:800!important}
+</style>
+</head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
@@ -14728,5 +14740,40 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
 })();
 </script><script id='loginAliasSearch'>
 window.findLoginUser=function(users,input){input=String(input).trim();return (users||[]).find(u=>String(u.employee_code||'').trim()===input||String(u.full_name||'').trim()===input||String(u.email||'').trim().toLowerCase()===input.toLowerCase());};
-</script></body>
+</script>
+<script id="risk-baht-ton-color-js">
+(function(){
+function update(){
+ document.querySelectorAll('[data-result="bahtPerTon"],.baht-per-ton-value').forEach(el=>{
+   const v=parseFloat((el.textContent||'').replace(/[^0-9.]/g,'')); if(isNaN(v)) return;
+   el.classList.remove('risk-bt-green','risk-bt-orange','risk-bt-red');
+   if(v>600) el.classList.add('risk-bt-red');
+   else if(v>500) el.classList.add('risk-bt-orange');
+   else el.classList.add('risk-bt-green');
+ });
+}
+setInterval(update,800);
+document.addEventListener('DOMContentLoaded',update);
+})();
+</script>
+
+<script id="risk-bt-icon-style-js">
+(function(){
+function upd(){
+ document.querySelectorAll('[data-result="bahtPerTon"],.baht-per-ton-value').forEach(el=>{
+  const txt=el.textContent||'';
+  const v=parseFloat(txt.replace(/[^0-9.]/g,'')); if(isNaN(v)) return;
+  let icon='🟢';
+  if(v>600) icon='🔴';
+  else if(v>500) icon='🟠';
+  if(el.dataset.done===txt)return;
+  el.dataset.done=txt;
+  el.innerHTML='<span class="baht-ton-display"><span class="baht-ton-icon">'+icon+'</span><span class="baht-ton-number">'+txt+'</span></span>';
+ });
+}
+setInterval(upd,700);
+document.addEventListener('DOMContentLoaded',upd);
+})();
+</script>
+</body>
 </html>
