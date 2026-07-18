@@ -8682,6 +8682,45 @@ body.locked{
   }
 }
 </style>
+
+<style id="user-actions-inline-v402">
+/* Keep all user-management action buttons in one line */
+#userManagementTable td:nth-child(8),
+.user-management-table td:nth-child(8),
+#usersTable td:nth-child(8){
+  white-space:nowrap !important;
+}
+#userManagementTable td:nth-child(8) > *,
+.user-management-table td:nth-child(8) > *,
+#usersTable td:nth-child(8) > *{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex-wrap:nowrap !important;
+  gap:6px !important;
+}
+#userManagementTable td:nth-child(8) button,
+.user-management-table td:nth-child(8) button,
+#usersTable td:nth-child(8) button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:auto !important;
+  min-width:auto !important;
+  height:30px !important;
+  padding:4px 9px !important;
+  margin:0 3px 0 0 !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  vertical-align:middle !important;
+}
+#userManagementTable td:nth-child(8) button:last-child,
+.user-management-table td:nth-child(8) button:last-child,
+#usersTable td:nth-child(8) button:last-child{
+  margin-right:0 !important;
+}
+</style>
 </head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -15028,5 +15067,43 @@ window.findLoginUser=function(users,input){input=String(input).trim();return (us
 
 
 
+
+<script id="user-actions-inline-script-v402">
+(function(){
+  function applyInlineActions(){
+    const tables = [
+      document.getElementById('userManagementTable'),
+      document.getElementById('usersTable'),
+      document.querySelector('.user-management-table')
+    ].filter(Boolean);
+
+    tables.forEach(table=>{
+      table.querySelectorAll('tbody tr').forEach(row=>{
+        const cell = row.cells && row.cells[7];
+        if(!cell) return;
+        cell.style.whiteSpace='nowrap';
+        const buttons = cell.querySelectorAll('button');
+        buttons.forEach(btn=>{
+          btn.style.display='inline-flex';
+          btn.style.width='auto';
+          btn.style.marginRight='3px';
+          btn.style.verticalAlign='middle';
+        });
+        Array.from(cell.children).forEach(child=>{
+          if(child.querySelector && child.querySelector('button')){
+            child.style.display='inline-flex';
+            child.style.flexWrap='nowrap';
+            child.style.gap='6px';
+            child.style.alignItems='center';
+            child.style.justifyContent='center';
+          }
+        });
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded',applyInlineActions);
+  new MutationObserver(applyInlineActions).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>
