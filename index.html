@@ -8456,6 +8456,109 @@ body.locked{
   font-weight:800 !important;
 }
 </style>
+
+<style id="ai-recommendation-layout-v364">
+/* AI Recommendation: full-width decision flow */
+#aiAdvisorContent .ai-v347-layout{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:18px !important;
+}
+#aiAdvisorContent .ai-v347-main{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:18px !important;
+  width:100% !important;
+}
+#aiAdvisorContent .ai-v347-side{
+  position:static !important;
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:18px !important;
+  width:100% !important;
+  align-items:stretch !important;
+}
+#aiAdvisorContent .ai-v347-side > *{
+  height:100%;
+  margin:0 !important;
+}
+#aiAdvisorContent .ai-v347-panel,
+#aiAdvisorContent .ai-v347-decision{
+  border-radius:16px !important;
+  box-shadow:0 8px 24px rgba(15,63,109,.08) !important;
+  overflow:hidden !important;
+}
+#aiAdvisorContent .ai-v347-panel-head{
+  min-height:52px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:16px !important;
+  font-weight:800 !important;
+}
+#aiAdvisorContent .ai-v347-summary-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+#aiAdvisorContent .ai-v347-summary-item{
+  min-height:112px;
+  border:1px solid #dbeaf7;
+  border-radius:14px;
+  background:#f8fbff;
+  padding:16px !important;
+}
+#aiAdvisorContent .ai-v347-table-wrap{
+  overflow:auto;
+}
+#aiAdvisorContent .ai-v347-table th{
+  white-space:nowrap;
+  font-weight:800;
+}
+#aiAdvisorContent .ai-v347-decision{
+  padding:20px !important;
+  display:flex;
+  flex-direction:column;
+}
+#aiAdvisorContent .ai-v347-decision .caption{
+  letter-spacing:.5px;
+  font-size:13px !important;
+  font-weight:900 !important;
+}
+#aiAdvisorContent .ai-v347-decision h4{
+  margin-top:10px !important;
+  font-size:20px !important;
+}
+#aiAdvisorContent .ai-v347-decision .amount{
+  margin-top:auto;
+  padding-top:12px;
+  font-weight:800;
+}
+#aiAdvisorContent .ai-v347-actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+#aiAdvisorContent .ai-v347-mini-row{
+  padding:12px 0 !important;
+}
+@media(max-width:1100px){
+  #aiAdvisorContent .ai-v347-side{
+    grid-template-columns:1fr 1fr !important;
+  }
+  #aiAdvisorContent .ai-v347-side > :first-child{
+    grid-column:1 / -1;
+  }
+}
+@media(max-width:720px){
+  #aiAdvisorContent .ai-v347-side,
+  #aiAdvisorContent .ai-v347-summary-grid{
+    grid-template-columns:1fr !important;
+  }
+  #aiAdvisorContent .ai-v347-side > :first-child{
+    grid-column:auto;
+  }
+}
+</style>
 </head>
 <body class="locked">
 <section class="login-screen" id="loginScreen">
@@ -14474,7 +14577,7 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
           </div>
 
           <div class="ai-v347-panel">
-            <div class="ai-v347-panel-head"><i class="fa-solid fa-table-list"></i> เปรียบเทียบ Scenario</div>
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-table-list"></i> เปรียบเทียบ SCENARIO</div>
             <div class="ai-v347-table-wrap">
               <table class="ai-v347-table">
                 <thead><tr><th>Scenario</th><th>ผลผลิต/ไร่</th><th>ต้นทุนรวม</th><th>กำไรสุทธิ</th><th>กำไร/ไร่</th><th>D/E</th></tr></thead>
@@ -14506,7 +14609,7 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
           </div>
 
           <div class="ai-v347-panel">
-            <div class="ai-v347-panel-head"><i class="fa-solid fa-list-check"></i> Action Plan</div>
+            <div class="ai-v347-panel-head"><i class="fa-solid fa-list-check"></i> ACTION PLAN</div>
             <div class="ai-v347-panel-body">
               <div class="ai-v347-actions">
                 ${action('ai347a1','ตรวจสอบ D/E และวงเงินค้ำประกันก่อนอนุมัติ')}
