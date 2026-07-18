@@ -1,17 +1,9 @@
-Cane Next+ v3.3.0
+CaneNext Master v4.0.0
 
-เมนูวิเคราะห์ความเสี่ยง:
-1. เลือกปีการผลิต
-2. ระบบดึงหนี้สินครบ Due และยืนยันสัญญาตันจาก Supabase
-3. กรอกงบส่งเสริมเพิ่ม ราคาอ้อย CCS และค่าใช้จ่าย
-4. ระบบคำนวณค่า CCS ราคาอ้อยรวม รายได้ รายจ่าย และความเสี่ยงทันที
-5. ปุ่มบันทึกค่าที่กรอกจะบันทึกค่าตามรหัสชาวไร่ไว้ใน Browser
-6. ปุ่มคืนค่าตั้งต้นกลับเป็น:
-   - งบส่งเสริมเพิ่ม 0 บาท
-   - ราคาอ้อยขั้นต้น 950 บาท/ตัน
-   - CCS 13.80
-   - ค่าใช้จ่าย 400 บาท/ตัน
+Data Management Import:
+1. Login ด้วยบัญชีที่มีสิทธิ์ Admin
+2. เลือกไฟล์ Excel ที่มี 6 Sheets
+3. ตรวจสอบข้อมูลและกด Import เข้า Supabase
 
-ตาราง Supabase ที่ใช้:
-- production_history: farmer_code, production_year, contract_ton
-- debts: farmer_code, yearly_debt
+สำคัญ: ต้องกำหนด RLS ให้บัญชี Admin สามารถ INSERT/UPDATE ตาราง farmers, plots, production_history, guarantees, debts และ harvests ได้
+ระบบนี้ใช้ Publishable/Anon key และ session ของผู้ใช้ ไม่ใช้ Service Role Key ในหน้าเว็บ

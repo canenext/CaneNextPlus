@@ -9102,7 +9102,8 @@ body.locked{
 <div class="dm-progress"><i id="dmProgressBar"></i></div>
 <div id="dmProgressText">0%</div>
 </div>
-<div class="dm-security-note">การ Import ใช้ Edge Function ฝั่งเซิร์ฟเวอร์ และไม่เก็บ Secret Key ใน HTML</div>
+<div class="dm-security-note">การ Import ทำผ่านบัญชีผู้ใช้งานที่เข้าสู่ระบบ โดยสิทธิ์การบันทึกข้อมูลควบคุมด้วย Supabase RLS</div>
+<div class="dm-security-note" style="margin-top:8px;border-left-color:#f59e0b">บัญชีผู้ใช้งานต้องมีสิทธิ์ INSERT/UPDATE ตามนโยบาย RLS ของทั้ง 6 ตาราง</div>
 </div>
 <div class="dm-card" hidden="" id="dmPreviewCard">
 <h3>ตัวอย่างข้อมูล 10 แถวแรก</h3>
@@ -11263,17 +11264,24 @@ document.addEventListener('DOMContentLoaded', function(){
   ProductionHistory:['ProductionHistory','03_ProductionHistory'],
   Guarantee:['Guarantee','04_Guarantee'],Debt:['Debt','05_Debt'],Harvest:['Harvest','06_Harvest']
  };
+ const ORDER=['Farmer','Plot','ProductionHistory','Guarantee','Debt','Harvest'];
+ const TABLES={Farmer:'farmers',Plot:'plots',ProductionHistory:'production_history',Guarantee:'guarantees',Debt:'debts',Harvest:'harvests'};
+ const CONFLICTS={Farmer:'farmer_code',Plot:'farmer_code,production_year,plot_id',ProductionHistory:'farmer_code,production_year',Guarantee:'farmer_code,production_year',Debt:'farmer_code',Harvest:'farmer_code,production_year'};
  let parsed=null;
 
+ const str=v=>String(v??'').trim();
+ const num=v=>{const n=Number(String(v??0).replace(/,/g,''));return Number.isFinite(n)?n:0};
  function conn(state,text){const e=document.getElementById('dmConnectionStatus');if(!e)return;e.className='dm-connection '+state;e.querySelector('span:last-child').textContent=text}
  async function testConnection(){
   try{
    if(!window.caneSupabase){conn('error','กรุณา Login ก่อน');return}
+   const {data:{session}}=await window.caneSupabase.auth.getSession();
+   if(!session){conn('error','กรุณา Login ก่อน');return}
    const {error}=await window.caneSupabase.from('farmers').select('farmer_code').limit(1);
-   conn(error?'error':'ok',error?'เชื่อมต่อได้ แต่ยังไม่มีสิทธิ์อ่านข้อมูล':'เชื่อมต่อ Supabase สำเร็จ');
+   conn(error?'error':'ok',error?'เชื่อมต่อได้ แต่ไม่มีสิทธิ์อ่านข้อมูล':'เชื่อมต่อ Supabase สำเร็จ');
   }catch(e){conn('error','เชื่อมต่อ Supabase ไม่สำเร็จ')}
  }
- function card(i,count,ok,msg){const c=document.querySelectorAll('#dmSummaryGrid .dm-sheet')[i];if(!c)return;c.className='dm-sheet '+(ok?'ok':'error');c.querySelector('b').textContent=Number(count||0).toLocaleString('th-TH' ,{maximumFractionDigits:0});c.querySelector('small').textContent=msg}
+ function card(i,count,ok,msg){const c=document.querySelectorAll('#dmSummaryGrid .dm-sheet')[i];if(!c)return;c.className='dm-sheet '+(ok?'ok':'error');c.querySelector('b').textContent=Number(count||0).toLocaleString('th-TH',{maximumFractionDigits:0});c.querySelector('small').textContent=msg}
  async function parse(file){
   const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});
   const result={sheets:{},errors:[]};
@@ -11294,32 +11302,62 @@ document.addEventListener('DOMContentLoaded', function(){
   if(parsed.errors.length){b.className='dm-validation error';b.innerHTML='พบข้อผิดพลาด:<br>'+parsed.errors.map(x=>'• '+x).join('<br>');p.disabled=true;im.disabled=true}
   else{b.className='dm-validation ok';b.textContent='ตรวจสอบผ่าน: พบข้อมูลครบทั้ง 6 Sheets';p.disabled=false;im.disabled=false}
  }
+ function transform(name,rows){
+  if(name==='Farmer') return rows.map(r=>({farmer_code:str(r.farmer_code),name:str(r.name),zone:str(r.zone),subzone:str(r.subzone),factory:str(r.factory),status:str(r.status)||'active'})).filter(r=>r.farmer_code&&r.name);
+  if(name==='Plot') return rows.map(r=>({farmer_code:str(r.farmer_code),production_year:str(r.production_year),project_type:str(r.project_type)||null,plot_type:str(r.plot_type)||null,plot_id:str(r.plot_id),area_rai:num(r.area_rai),soil_type:str(r.soil_type)||null,variety:str(r.variety)||null,irrigation:str(r.irrigation)||null,row_spacing_m:str(r.row_spacing_m)===''?null:num(r.row_spacing_m)})).filter(r=>r.farmer_code&&r.production_year&&r.plot_id);
+  if(name==='ProductionHistory') return rows.map(r=>({farmer_code:str(r.farmer_code),production_year:str(r.production_year),area_rai:num(r.area_rai),contract_ton:num(r.contract_ton),delivered_ton:num(r.delivered_ton),grade:str(r.grade)||null})).filter(r=>r.farmer_code&&r.production_year);
+  if(name==='Guarantee') return rows.map(r=>({farmer_code:str(r.farmer_code),production_year:str(r.production_year),property_amount:num(r.property_amount),group_amount:num(r.group_amount),total_amount:num(r.total_amount)})).filter(r=>r.farmer_code&&r.production_year);
+  if(name==='Debt') return rows.map(r=>({farmer_code:str(r.farmer_code),old_debt:num(r.old_debt),yearly_debt:{'2568/69':num(r['2568/69_debt']),'2569/70':num(r['2569/70_debt']),'2570/71':num(r['2570/71_debt'])},future_debt:num(r.future_debt),total_debt:num(r.total_debt)})).filter(r=>r.farmer_code);
+  if(name==='Harvest') return rows.map(r=>({farmer_code:str(r.farmer_code),production_year:str(r.production_year),harvest_machine:num(r.harvest_machine),harvest_straight:num(r.harvest_straight),harvest_station:num(r.harvest_station),net_weight_ton:num(r.net_weight_ton),factory:str(r.factory)||null})).filter(r=>r.farmer_code&&r.production_year);
+  return [];
+ }
+ async function upsertChunks(name,rows,onProgress){
+  const chunkSize=500,total=rows.length;
+  if(!total){onProgress(1);return 0}
+  let done=0;
+  for(let i=0;i<total;i+=chunkSize){
+   const chunk=rows.slice(i,i+chunkSize);
+   const {error}=await window.caneSupabase.from(TABLES[name]).upsert(chunk,{onConflict:CONFLICTS[name]});
+   if(error) throw new Error(name+': '+error.message);
+   done+=chunk.length;onProgress(done/total);
+  }
+  return done;
+ }
+ function setProgress(percent,label){
+  const wrap=document.getElementById('dmProgressWrap'),bar=document.getElementById('dmProgressBar'),text=document.getElementById('dmProgressText');
+  wrap.hidden=false;bar.style.width=Math.max(0,Math.min(100,percent))+'%';text.textContent=label||Math.round(percent)+'%';
+ }
  window.CaneDataManager={
   preview(){
    if(!parsed)return;
-   const sheet=parsed.sheets.Farmer, rows=sheet.rows.slice(0,10);
+   const sheet=parsed.sheets.Farmer,rows=sheet.rows.slice(0,10);
    document.getElementById('dmPreviewCard').hidden=false;
    document.getElementById('dmPreviewHead').innerHTML='<tr>'+sheet.headers.map(h=>'<th>'+h+'</th>').join('')+'</tr>';
    document.getElementById('dmPreviewBody').innerHTML=rows.map(r=>'<tr>'+sheet.headers.map(h=>'<td>'+(r[h]??'')+'</td>').join('')+'</tr>').join('');
   },
   async importToSupabase(){
-   if(!parsed || parsed.errors.length)return;
+   if(!parsed||parsed.errors.length)return;
+   if(!window.caneSupabase){alert('ยังไม่สามารถเชื่อมต่อ Supabase ได้');return}
    const {data:{session}}=await window.caneSupabase.auth.getSession();
    if(!session){alert('กรุณา Login ก่อน Import');return}
-   const wrap=document.getElementById('dmProgressWrap'),bar=document.getElementById('dmProgressBar'),text=document.getElementById('dmProgressText');
-   wrap.hidden=false;bar.style.width='10%';text.textContent='10%';
-   const sheets={};Object.keys(REQUIRED).forEach(n=>sheets[n]=parsed.sheets[n].rows);
+   const btn=document.getElementById('dmImportBtn');
+   const results={};
    try{
-    const {data,error}=await window.caneSupabase.functions.invoke('import-cane-excel',{body:{sheets}});
-    if(error)throw error;
-    bar.style.width='100%';text.textContent='100%';
-    alert('Import สำเร็จ');
-    console.log(data);
+    btn.disabled=true;btn.textContent='กำลัง Import...';setProgress(2,'เตรียมข้อมูล...');
+    for(let s=0;s<ORDER.length;s++){
+      const name=ORDER[s],rows=transform(name,parsed.sheets[name].rows);
+      results[name]=await upsertChunks(name,rows,part=>{
+        const overall=((s+part)/ORDER.length)*100;
+        setProgress(overall,Math.round(overall)+'% · '+name);
+      });
+    }
+    setProgress(100,'100% · Import สำเร็จ');
+    const summary=ORDER.map(n=>n+' '+Number(results[n]||0).toLocaleString('th-TH')+' รายการ').join('\n');
+    alert('Import สำเร็จ\n\n'+summary);
    }catch(err){
-    bar.style.width='0%';text.textContent='0%';
-    alert('ยัง Import ไม่ได้: กรุณา Deploy Edge Function import-cane-excel ก่อน');
-    console.error(err);
-   }
+    console.error(err);setProgress(0,'Import ไม่สำเร็จ');
+    alert('Import ไม่สำเร็จ\n'+(err?.message||err)+'\n\nโปรดตรวจสอบสิทธิ์ RLS ของตารางและคอลัมน์ในฐานข้อมูล');
+   }finally{btn.disabled=false;btn.textContent='Import เข้า Supabase'}
   }
  };
  document.addEventListener('DOMContentLoaded',()=>{
