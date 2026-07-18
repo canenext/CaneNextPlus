@@ -14429,29 +14429,6 @@ window.CaneRiskAnalysis={refresh:loadYear,reloadYears:years,calculate:calc,reset
     box.innerHTML=`
       <div class="ai-v347-layout">
         <div class="ai-v347-main">
-          <div class="ai-v347-kpis">
-            <div class="ai-v347-kpi">
-              <div class="ai-v347-kpi-label">AI Score</div>
-              <div class="ai-v347-kpi-value">${score}/100</div>
-              <div class="ai-v347-kpi-note">คะแนนความเหมาะสมโดยรวม</div>
-            </div>
-            <div class="ai-v347-kpi">
-              <div class="ai-v347-kpi-label">ระดับความสำคัญ</div>
-              <div class="ai-v347-kpi-value">${priority}</div>
-              <div class="ai-v347-kpi-note">ใช้กำหนดลำดับการติดตาม</div>
-            </div>
-            <div class="ai-v347-kpi">
-              <div class="ai-v347-kpi-label">ผลผลิตคาดการณ์</div>
-              <div class="ai-v347-kpi-value">${dec(recommended.yield)} ตัน/ไร่</div>
-              <div class="ai-v347-kpi-note">${recommended.title}</div>
-            </div>
-            <div class="ai-v347-kpi">
-              <div class="ai-v347-kpi-label">กำไรต่อไร่</div>
-              <div class="ai-v347-kpi-value">${money(recommended.profitPerRai)}</div>
-              <div class="ai-v347-kpi-note">กำไรสุทธิ ${money(recommended.netProfit)}</div>
-            </div>
-          </div>
-
           <div class="ai-v347-panel">
             <div class="ai-v347-panel-head"><i class="fa-solid fa-lightbulb"></i> สรุปคำแนะนำ</div>
             <div class="ai-v347-panel-body">
