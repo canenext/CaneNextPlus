@@ -7,3 +7,6 @@ Data Management Import:
 
 สำคัญ: ต้องกำหนด RLS ให้บัญชี Admin สามารถ INSERT/UPDATE ตาราง farmers, plots, production_history, guarantees, debts และ harvests ได้
 ระบบนี้ใช้ Publishable/Anon key และ session ของผู้ใช้ ไม่ใช้ Service Role Key ในหน้าเว็บ
+
+
+Executive PDF print setting: A4 landscape with 30 mm margins on top, bottom, left, and right.

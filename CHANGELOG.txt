@@ -1,3 +1,8 @@
+
+Version 4.0.10 - 30 mm Print Safe Margin
+- Set Executive Report PDF page margins to 30 mm on all sides.
+- Recalculated printable content height for A4 landscape.
+- Moved the printed footer inward to remain inside the safe area.
 v4.0.6
 - ปรับ Export PDF ให้แสดงเฉพาะผลการวิเคราะห์จาก Scenario Analysis, ระบบวิเคราะห์ข้อมูล, AI Recommendation และวิเคราะห์ความเสี่ยง
 - ตัดปุ่ม เมนู แบบฟอร์ม และข้อมูลที่ไม่ใช่ผลการวิเคราะห์ออกจากรายงาน
