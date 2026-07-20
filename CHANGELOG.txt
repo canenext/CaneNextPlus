@@ -12,3 +12,9 @@ CaneNext Master v4.0.0
 - แสดงสถานะและความคืบหน้าราย Sheet
 - ใช้สิทธิ์ของผู้ใช้ที่ Login และ Supabase RLS
 - ไม่ฝัง Service Role Key ใน HTML
+
+v4.0.10 - Scenario Profit / ROI Charts
+- เพิ่มกราฟแท่งเปรียบเทียบกำไรสุทธิราย Scenario ใน Executive PDF
+- เพิ่มกราฟแท่งเปรียบเทียบ ROI โดยคำนวณจากกำไรสุทธิ ÷ ต้นทุนรวม × 100
+- รองรับค่ากำไรและ ROI ติดลบ พร้อมแสดงสีแยกสถานะ
+- จัดกราฟแบบ 2 คอลัมน์ภายใน Safe Margin 15 มม.

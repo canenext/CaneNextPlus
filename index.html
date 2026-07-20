@@ -15260,10 +15260,10 @@ window.findLoginUser=function(users,input){input=String(input).trim();return (us
       return cloneSelectors(['#scenarioList']);
     }
     if(menu==='analytics'){
-      return cloneSelectors([
-        '#analytics .analytics-summary-grid',
-        '#scenarioCompareTable'
-      ]);
+      var summary=cloneSelectors(['#analytics .analytics-summary-grid']);
+      var charts=buildScenarioComparisonCharts();
+      var table=cloneSelectors(['#scenarioCompareTable']);
+      return summary+charts+table;
     }
     if(menu==='ai'){
       return cloneSelectors(['#aiAdvisorContent']);
@@ -15276,6 +15276,50 @@ window.findLoginUser=function(users,input){input=String(input).trim();return (us
       ]);
     }
     return '<div class="empty">ไม่พบข้อมูล</div>';
+  }
+
+  function formatChartNumber(value){
+    var n=Number(value)||0;
+    return n.toLocaleString('th-TH',{maximumFractionDigits:0});
+  }
+
+  function buildMetricChart(title, subtitle, rows, metricKey, formatter){
+    if(!rows.length) return '';
+    var values=rows.map(function(row){ return Number(row[metricKey])||0; });
+    var maxAbs=Math.max.apply(null,values.map(function(v){return Math.abs(v);}).concat([1]));
+    var items=rows.map(function(row){
+      var value=Number(row[metricKey])||0;
+      var width=Math.max(2,Math.min(100,Math.abs(value)/maxAbs*100));
+      var state=value<0?'negative':(value===0?'neutral':'positive');
+      return '<div class="scenario-chart-row">'+
+        '<div class="scenario-chart-name">'+esc(row.title||'-')+'</div>'+
+        '<div class="scenario-chart-track"><div class="scenario-chart-bar '+state+'" style="width:'+width.toFixed(1)+'%"></div></div>'+
+        '<div class="scenario-chart-value '+state+'">'+esc(formatter(value))+'</div>'+
+      '</div>';
+    }).join('');
+    return '<div class="scenario-chart-card">'+
+      '<div class="scenario-chart-head"><div><h3>'+esc(title)+'</h3><p>'+esc(subtitle)+'</p></div></div>'+
+      '<div class="scenario-chart-list">'+items+'</div>'+
+    '</div>';
+  }
+
+  function buildScenarioComparisonCharts(){
+    var rows=[];
+    try{
+      if(typeof window.getScenarioAnalyticsData==='function') rows=window.getScenarioAnalyticsData()||[];
+    }catch(e){ rows=[]; }
+    rows=rows.filter(function(row){return row && row.title;}).slice(0,8).map(function(row){
+      var totalCost=Number(row.totalCost)||0;
+      var netProfit=Number(row.netProfit)||0;
+      return Object.assign({},row,{roi:totalCost!==0?(netProfit/totalCost*100):0});
+    });
+    if(!rows.length) return '';
+    var profitChart=buildMetricChart('เปรียบเทียบกำไรสุทธิ','บาทต่อ Scenario',rows,'netProfit',function(v){return formatChartNumber(v)+' บาท';});
+    var roiChart=buildMetricChart('เปรียบเทียบ ROI','ผลตอบแทนเทียบต้นทุนรวม',rows,'roi',function(v){return v.toLocaleString('th-TH',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';});
+    return '<div class="scenario-charts-section">'+
+      '<div class="scenario-charts-title"><span>Scenario Performance</span><b>กำไร / ROI</b></div>'+
+      '<div class="scenario-charts-grid">'+profitChart+roiChart+'</div>'+
+    '</div>';
   }
 
   function hasAnalyzedData(){
@@ -15347,6 +15391,7 @@ body{font-family:"Leelawadee UI","Noto Sans Thai","Tahoma",sans-serif;color:#173
 .report-content svg,.report-content canvas{display:none!important}
 .report-content table{width:100%!important;border-collapse:collapse!important;font-size:8.6px!important;table-layout:fixed!important;margin-top:7px!important;break-inside:avoid}
 .report-content th,.report-content td{border:1px solid #d2e1ee!important;padding:5px 6px!important;vertical-align:middle!important;overflow-wrap:anywhere!important}.report-content th{background:#eaf4fc!important;color:#083b73!important;font-weight:900!important;text-align:center!important}.report-content td{text-align:right!important}.report-content td:first-child{text-align:left!important}.report-content tbody tr:nth-child(even) td{background:#f9fcff!important}
+.scenario-charts-section{margin:0 0 9px!important;break-inside:avoid!important}.scenario-charts-title{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 5px;padding:0 1px}.scenario-charts-title span{font-size:8px;color:#6b7f92;font-weight:800;text-transform:uppercase;letter-spacing:.5px}.scenario-charts-title b{font-size:10px;color:#083b73;font-weight:900}.scenario-charts-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.scenario-chart-card{border:1px solid #d6e5f2;border-radius:10px;background:#fbfdff;padding:7px 8px;min-height:34mm}.scenario-chart-head{display:flex;justify-content:space-between;border-bottom:1px solid #e0ebf4;padding-bottom:4px;margin-bottom:5px}.scenario-chart-head h3{font-size:10px!important;color:#083b73!important;margin:0!important;font-weight:900!important}.scenario-chart-head p{font-size:7.2px;color:#728598;margin:1px 0 0;font-weight:700}.scenario-chart-list{display:grid;gap:4px}.scenario-chart-row{display:grid;grid-template-columns:27mm minmax(0,1fr) 25mm;gap:5px;align-items:center;min-height:4mm}.scenario-chart-name{font-size:7.3px;color:#3d5871;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.scenario-chart-track{height:4.2mm;background:#edf3f8;border-radius:999px;overflow:hidden;position:relative}.scenario-chart-bar{height:100%;border-radius:999px;background:linear-gradient(90deg,#0b69b8,#28a9df)}.scenario-chart-bar.positive{background:linear-gradient(90deg,#0b69b8,#28a9df)}.scenario-chart-bar.negative{background:linear-gradient(90deg,#d64b4b,#ef7b6f)}.scenario-chart-bar.neutral{background:#a9b9c7}.scenario-chart-value{font-size:7.3px;text-align:right;font-weight:900;color:#0b5cad;white-space:nowrap}.scenario-chart-value.negative{color:#c62828!important}.scenario-chart-value.neutral{color:#718395!important}
 .report-content .analytics-summary-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;margin:0 0 10px!important}
 .report-content .analytics-summary-grid>*{position:relative!important;min-height:31mm!important;border:1px solid #d6e6f3!important;border-radius:12px!important;background:linear-gradient(180deg,#f9fcff,#f2f8fd)!important;padding:10px 12px 9px 15mm!important;display:flex!important;flex-direction:column!important;justify-content:center!important;box-shadow:none!important;overflow:hidden!important}
 .report-content .analytics-summary-grid>*:before{position:absolute;left:5mm;top:50%;transform:translateY(-50%);width:8mm;height:8mm;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#dff0ff;color:#0b5cad;font-size:15px;font-weight:900}
