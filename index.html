@@ -15166,7 +15166,8 @@ window.findLoginUser=function(users,input){input=String(input).trim();return (us
 })();
 </script>
 
-<script id="export-pdf-v405-script">
+
+<script id="export-pdf-v406-script">
 (function(){
   function esc(value){
     return String(value == null ? '' : value)
@@ -15192,72 +15193,118 @@ window.findLoginUser=function(users,input){input=String(input).trim();return (us
     };
   }
 
-  function cleanClone(sectionId){
-    var source = document.getElementById(sectionId);
-    if(!source) return '<div class="empty">ไม่พบข้อมูลในเมนูนี้</div>';
-    var clone = source.cloneNode(true);
+  function fieldToValue(el){
+    var span=document.createElement('span');
+    span.className='pdf-field-value';
+    if(el.tagName==='SELECT'){
+      span.textContent=el.options && el.selectedIndex>=0
+        ? el.options[el.selectedIndex].text : (el.value||'-');
+    }else{
+      span.textContent=el.value||'-';
+    }
+    el.replaceWith(span);
+  }
 
+  function sanitizeClone(clone){
     clone.querySelectorAll(
-      'button,input[type="button"],input[type="file"],.scenario-actions,.risk-year-inline,' +
-      '.export-pdf-btn,.logout-btn,.admin-only-menu,script,style'
-    ).forEach(function(el){ el.remove(); });
+      'button,input[type="button"],input[type="file"],input[type="hidden"],' +
+      '.scenario-actions,.risk-year-inline,.risk-action-row,.risk-save-status,' +
+      '.export-pdf-btn,.logout-btn,script,style'
+    ).forEach(function(el){el.remove();});
 
-    clone.querySelectorAll('input,select,textarea').forEach(function(el){
-      var span = document.createElement('span');
-      span.className = 'pdf-field-value';
-      if(el.tagName === 'SELECT'){
-        span.textContent = el.options && el.selectedIndex >= 0
-          ? el.options[el.selectedIndex].text
-          : (el.value || '-');
-      }else{
-        span.textContent = el.value || '-';
-      }
-      el.replaceWith(span);
-    });
-
+    clone.querySelectorAll('input,select,textarea').forEach(fieldToValue);
+    clone.querySelectorAll('[hidden]').forEach(function(el){el.removeAttribute('hidden');});
     clone.querySelectorAll('.app-page').forEach(function(el){
       el.style.display='block';
       el.style.opacity='1';
       el.style.visibility='visible';
     });
-
-    return clone.innerHTML;
+    return clone;
   }
 
-  window.exportCaneNextPdf = function(){
-    var farmer = getFarmer();
-    if(!farmer.code || farmer.code === '-'){
-      alert('กรุณาค้นหาและเลือกชาวไร่จากเมนู Business Partner ก่อน Export PDF');
+  function cloneSelectors(selectors){
+    var wrap=document.createElement('div');
+    var found=false;
+    selectors.forEach(function(selector){
+      var el=document.querySelector(selector);
+      if(!el) return;
+      found=true;
+      wrap.appendChild(sanitizeClone(el.cloneNode(true)));
+    });
+    return found ? wrap.innerHTML :
+      '<div class="empty">ยังไม่มีผลการวิเคราะห์ในเมนูนี้</div>';
+  }
+
+  function analyzedSection(menu){
+    if(menu==='scenario'){
+      return cloneSelectors(['#scenarioList']);
+    }
+    if(menu==='analytics'){
+      return cloneSelectors([
+        '#analytics .analytics-summary-grid',
+        '#scenarioCompareTable'
+      ]);
+    }
+    if(menu==='ai'){
+      return cloneSelectors(['#aiAdvisorContent']);
+    }
+    if(menu==='risk'){
+      return cloneSelectors([
+        '#risk .risk-input-grid-row1',
+        '#risk .risk-input-grid-row2',
+        '#risk .risk-scenario-section'
+      ]);
+    }
+    return '<div class="empty">ไม่พบข้อมูล</div>';
+  }
+
+  function hasAnalyzedData(){
+    var scenario=document.querySelectorAll('#scenarioList .scenario-card, #scenarioList [data-scenario-id]').length;
+    var analyticsRows=document.querySelectorAll('#scenarioCompareTable tbody tr').length;
+    var ai=document.getElementById('aiAdvisorContent');
+    var riskRows=document.querySelectorAll('#riskScenarioBody tr').length;
+    return scenario>0 || analyticsRows>0 ||
+      (ai && !ai.classList.contains('ai-v347-empty')) || riskRows>0;
+  }
+
+  window.exportCaneNextPdf=function(){
+    var farmer=getFarmer();
+    if(!farmer.code || farmer.code==='-'){
+      alert('กรุณาค้นหาและเลือกชาวไร่ก่อน Export PDF');
+      return;
+    }
+    if(!hasAnalyzedData()){
+      alert('ยังไม่มีผลการวิเคราะห์สำหรับ Export PDF');
       return;
     }
 
-    var user = document.getElementById('currentUserName')?.textContent?.trim() || '-';
-    var now = new Date();
-    var exportDate = now.toLocaleDateString('th-TH',{
+    var user=document.getElementById('currentUserName')?.textContent?.trim()||'-';
+    var now=new Date();
+    var exportDate=now.toLocaleDateString('th-TH',{
       year:'numeric',month:'long',day:'numeric'
-    }) + ' ' + now.toLocaleTimeString('th-TH',{
+    })+' '+now.toLocaleTimeString('th-TH',{
       hour:'2-digit',minute:'2-digit'
-    }) + ' น.';
+    })+' น.';
 
-    var sections = [
+    var sections=[
       ['Scenario Analysis','scenario'],
       ['ระบบวิเคราะห์ข้อมูล','analytics'],
-      ['AI Recommendation','ai-recommendation'],
+      ['AI Recommendation','ai'],
       ['วิเคราะห์ความเสี่ยง','risk']
     ];
 
-    var reportBody = sections.map(function(item){
-      return '<section class="report-section">' +
-        '<h2>' + esc(item[0]) + '</h2>' +
-        '<div class="report-content">' + cleanClone(item[1]) + '</div>' +
+    var reportBody=sections.map(function(item){
+      return '<section class="report-section">'+
+        '<h2>'+esc(item[0])+'</h2>'+
+        '<div class="report-content">'+analyzedSection(item[1])+'</div>'+
       '</section>';
     }).join('');
 
-    var report = `<!doctype html>
+    var report=`<!doctype html>
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<title>CaneNext Report - ${esc(farmer.code)}</title>
+<title>CaneNext Analysis Report - ${esc(farmer.code)}</title>
 <style>
 @page{size:A4 landscape;margin:10mm}
 *{box-sizing:border-box}
@@ -15273,7 +15320,6 @@ body{font-family:"Noto Sans Thai","Tahoma",sans-serif;color:#183f66;margin:0;bac
 .report-section:first-of-type{page-break-before:auto}
 .report-section h2{margin:0 0 10px;padding:8px 12px;background:#0b5cad;color:#fff;border-radius:8px;font-size:16px}
 .report-content{width:100%}
-.report-content .section-title,.report-content h1,.report-content h2{color:#083b73!important}
 .report-content table{width:100%!important;border-collapse:collapse!important;font-size:9px!important}
 .report-content th,.report-content td{border:1px solid #cbdbea!important;padding:5px!important;vertical-align:middle!important}
 .report-content th{background:#eaf4ff!important;color:#083b73!important;font-weight:800!important}
@@ -15281,20 +15327,22 @@ body{font-family:"Noto Sans Thai","Tahoma",sans-serif;color:#183f66;margin:0;bac
 .report-content [class*="kpi"],.report-content [class*="decision"]{
   box-shadow:none!important;break-inside:avoid;border-color:#cbdbea!important
 }
+.report-content .analytics-summary-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:10px!important;margin-bottom:12px}
+.report-content .risk-input-grid{display:grid!important;grid-template-columns:repeat(5,1fr)!important;gap:8px!important;margin-bottom:10px}
+.report-content .risk-input-grid-row2{grid-template-columns:repeat(6,1fr)!important}
+.report-content .risk-field{border:1px solid #d7e5f2;border-radius:8px;padding:7px;background:#f8fbff}
+.report-content .risk-field label{display:block;font-size:8px;color:#63778c;margin-bottom:3px}
 .report-content .ai-v347-side{display:grid!important;grid-template-columns:repeat(3,1fr)!important}
 .report-content .ai-v347-layout,.report-content .ai-v347-main{display:block!important}
-.pdf-field-value{display:block;border:1px solid #d5e3f0;background:#f8fbff;border-radius:5px;padding:4px 6px;font-weight:700;color:#0b5cad}
-.empty{padding:20px;text-align:center;color:#7a8998}
-.no-print-note{font-size:9px;color:#708090;margin-top:10px}
-@media print{
-  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-}
+.pdf-field-value{display:block;font-weight:800;color:#0b5cad}
+.empty{padding:20px;text-align:center;color:#7a8998;border:1px dashed #cbdbea;border-radius:8px}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
 <body>
 <header class="report-header">
-  <div class="report-title">CaneNext Plus+ — รายงานวิเคราะห์และคำแนะนำ</div>
-  <div class="report-subtitle">Scenario Analysis • ระบบวิเคราะห์ข้อมูล • AI Recommendation • วิเคราะห์ความเสี่ยง</div>
+  <div class="report-title">CaneNext Plus+ — รายงานผลการวิเคราะห์</div>
+  <div class="report-subtitle">แสดงเฉพาะผลลัพธ์จาก 4 เมนูที่ผ่านการวิเคราะห์แล้ว</div>
   <div class="meta">
     <div class="meta-item"><span>วันที่ Export</span><b>${esc(exportDate)}</b></div>
     <div class="meta-item"><span>ผู้ Export</span><b>${esc(user)}</b></div>
@@ -15303,16 +15351,11 @@ body{font-family:"Noto Sans Thai","Tahoma",sans-serif;color:#183f66;margin:0;bac
   </div>
 </header>
 ${reportBody}
-<div class="no-print-note">เอกสารนี้สร้างจากระบบ CaneNext Plus+ ณ วันที่และเวลาที่ระบุด้านบน</div>
-<script>
-window.onload=function(){
-  setTimeout(function(){ window.print(); },500);
-};
-<\/script>
+<script>window.onload=function(){setTimeout(function(){window.print();},500)};<\/script>
 </body>
 </html>`;
 
-    var win = window.open('','_blank','width=1200,height=900');
+    var win=window.open('','_blank','width=1200,height=900');
     if(!win){
       alert('เบราว์เซอร์บล็อกหน้าต่าง Export กรุณาอนุญาต Pop-up แล้วลองใหม่');
       return;
@@ -15323,5 +15366,6 @@ window.onload=function(){
   };
 })();
 </script>
+
 </body>
 </html>
