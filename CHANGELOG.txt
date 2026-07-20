@@ -1,3 +1,7 @@
+v4.0.5
+- เพิ่มปุ่ม Export PDF รวม Scenario Analysis, ระบบวิเคราะห์ข้อมูล, AI Recommendation และวิเคราะห์ความเสี่ยง
+- เพิ่มวันที่ Export, ผู้ Export, รหัสชาวไร่ และชื่อ-สกุลชาวไร่ในหัวรายงาน
+
 CaneNext Master v4.0.0
 - เปลี่ยน Data Management Import จาก Edge Function เป็น Client-side Supabase upsert
 - รองรับข้อมูล 6 Sheets และแบ่งส่งครั้งละ 500 รายการ

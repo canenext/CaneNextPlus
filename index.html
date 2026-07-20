@@ -8734,31 +8734,34 @@ body.locked{
 .risk-baht-ton-status{font-size:16px!important;line-height:1!important;flex:0 0 auto!important}
 #riskBahtPerTon{color:#0B5CAD!important;font-weight:900!important;flex:1 1 auto!important;min-width:0!important}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style id="export-pdf-v405-style">
-.export-pdf-btn{position:fixed;top:14px;right:22px;z-index:1200;display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;padding:10px 16px;background:#0B5CAD;color:#fff;font-weight:800;box-shadow:0 6px 18px rgba(11,92,173,.22);cursor:pointer}
-.export-pdf-btn:hover{background:#084b8e}
-.export-pdf-btn:disabled{opacity:.6;cursor:wait}
-#caneExportReport{position:fixed;left:-99999px;top:0;width:794px;background:#fff;color:#1f2937;padding:28px;font-family:Arial,"Noto Sans Thai",sans-serif}
-#caneExportReport .report-title{color:#0B5CAD;font-size:24px;font-weight:900;margin-bottom:6px}
-#caneExportReport .report-subtitle{color:#475569;font-size:13px;margin-bottom:18px}
-#caneExportReport .report-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;padding:14px;border:1px solid #dbe7f3;border-radius:12px;background:#f8fbff;margin-bottom:18px}
-#caneExportReport .report-section{margin:0 0 18px;page-break-inside:avoid}
-#caneExportReport .report-section h2{margin:0 0 10px;padding:9px 12px;background:#0B5CAD;color:#fff;border-radius:8px;font-size:16px}
-#caneExportReport .report-body{border:1px solid #dbe7f3;border-radius:10px;padding:12px;overflow:hidden}
-#caneExportReport table{width:100%!important;max-width:100%!important;border-collapse:collapse!important;font-size:10px!important}
-#caneExportReport th,#caneExportReport td{border:1px solid #d7e2ec!important;padding:5px!important;color:#1f2937!important;background:#fff!important}
-#caneExportReport th{background:#eaf4ff!important;font-weight:800!important}
-#caneExportReport button,#caneExportReport input,#caneExportReport select,#caneExportReport textarea{display:none!important}
-@media(max-width:900px){.export-pdf-btn{top:10px;right:10px;padding:8px 12px;font-size:12px}}
+.export-pdf-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  height:38px;
+  padding:0 14px;
+  border:0;
+  border-radius:10px;
+  background:#d92d20;
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 5px 14px rgba(217,45,32,.18);
+  margin-right:8px;
+  white-space:nowrap;
+}
+.export-pdf-btn:hover{filter:brightness(.96)}
+.export-pdf-btn i{font-size:15px}
+@media(max-width:760px){
+  .export-pdf-btn{height:34px;padding:0 10px;font-size:12px}
+}
 </style>
 </head>
 <body class="locked">
-<button class="export-pdf-btn" id="exportPdfButton" type="button" onclick="exportCaneNextPDF()">
-  <i class="fa-solid fa-file-pdf"></i> Export PDF
-</button>
-<div id="caneExportReport"></div>
-
 <section class="login-screen" id="loginScreen">
 <div class="login-shell">
 <div class="login-brand-panel">
@@ -8800,6 +8803,10 @@ body.locked{
 </div>
 <div class="user-scope-chip" id="userScopeChip">กำลังตรวจสอบขอบเขตข้อมูล...</div><div class="current-user">
 <div>👤 ผู้ใช้งานปัจจุบัน: <span id="currentUserName">Demo User</span></div>
+
+<button class="export-pdf-btn" id="exportPdfBtn" onclick="exportCaneNextPdf()" type="button">
+  <i class="fa-solid fa-file-pdf"></i> Export PDF
+</button>
 <button class="logout-btn" onclick="logoutSupabase()">ออกจากระบบ</button>
 </div>
 </div>
@@ -15161,104 +15168,158 @@ window.findLoginUser=function(users,input){input=String(input).trim();return (us
 
 <script id="export-pdf-v405-script">
 (function(){
-  function firstValue(ids,fallback){
-    fallback=fallback||'-';
-    for(var i=0;i<ids.length;i++){
-      var el=document.getElementById(ids[i]);
-      if(!el) continue;
-      var v=('value' in el?el.value:el.textContent);
-      if(v&&String(v).trim()) return String(v).trim();
-    }
-    return fallback;
+  function esc(value){
+    return String(value == null ? '' : value)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-  function findTextByLabel(labels){
-    var all=[].slice.call(document.querySelectorAll('label,th,td,span,div,p,strong'));
-    for(var i=0;i<labels.length;i++){
-      var label=labels[i];
-      var node=all.find(function(el){return String(el.textContent||'').trim()===label;});
-      if(!node) continue;
-      var next=node.nextElementSibling;
-      if(next){
-        var v=('value' in next?next.value:next.textContent);
-        if(v&&String(v).trim()) return String(v).trim();
+
+  function getFarmer(){
+    var f = window.CANENEXT_CURRENT_FARMER || null;
+    if(!f){
+      try{ f = JSON.parse(sessionStorage.getItem('canenext_current_farmer_session_v4') || 'null'); }catch(e){}
+    }
+    if(!f){
+      try{ f = JSON.parse(localStorage.getItem('canenext_current_farmer') || 'null'); }catch(e){}
+    }
+    f = f || {};
+    return {
+      code: f.farmer_code || f.code || document.getElementById('farmerCode')?.value ||
+            document.getElementById('bpCode')?.value || '-',
+      name: f.farmer_name || f.full_name || f.name ||
+            document.getElementById('farmerName')?.value ||
+            document.getElementById('bpName')?.value || '-'
+    };
+  }
+
+  function cleanClone(sectionId){
+    var source = document.getElementById(sectionId);
+    if(!source) return '<div class="empty">ไม่พบข้อมูลในเมนูนี้</div>';
+    var clone = source.cloneNode(true);
+
+    clone.querySelectorAll(
+      'button,input[type="button"],input[type="file"],.scenario-actions,.risk-year-inline,' +
+      '.export-pdf-btn,.logout-btn,.admin-only-menu,script,style'
+    ).forEach(function(el){ el.remove(); });
+
+    clone.querySelectorAll('input,select,textarea').forEach(function(el){
+      var span = document.createElement('span');
+      span.className = 'pdf-field-value';
+      if(el.tagName === 'SELECT'){
+        span.textContent = el.options && el.selectedIndex >= 0
+          ? el.options[el.selectedIndex].text
+          : (el.value || '-');
+      }else{
+        span.textContent = el.value || '-';
       }
-      var parent=node.parentElement;
-      if(parent){
-        var text=String(parent.textContent||'').replace(label,'').trim();
-        if(text) return text;
-      }
-    }
-    return '-';
-  }
-  function getFarmerCode(){
-    return firstValue(['farmerCode','bpFarmerCode','searchFarmerCode','riskFarmerCode','farmerId','farmer_code'],findTextByLabel(['รหัสชาวไร่','รหัสเกษตรกร']));
-  }
-  function getFarmerName(){
-    return firstValue(['farmerName','bpFarmerName','searchFarmerName','riskFarmerName','fullName','farmer_name'],findTextByLabel(['ชื่อ-สกุล ชาวไร่','ชื่อ-สกุล','ชื่อชาวไร่']));
-  }
-  function getExporter(){
-    return firstValue(['currentUserName','loggedInUserName','userDisplayName','headerUserName','currentUser'],(window.currentUser&&(window.currentUser.full_name||window.currentUser.name||window.currentUser.email))||'ผู้ใช้งานระบบ');
-  }
-  function findByKnownIds(ids){
-    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el)return el;}
-    return null;
-  }
-  function findSectionByText(texts){
-    var headings=[].slice.call(document.querySelectorAll('h1,h2,h3,h4,.section-title,.page-title,.card-title,.menu-title'));
-    for(var i=0;i<texts.length;i++){
-      var text=texts[i].toLowerCase();
-      var h=headings.find(function(el){return String(el.textContent||'').trim().toLowerCase().indexOf(text)!==-1;});
-      if(h) return h.closest('section,.page,.view,.content-section,.card,.panel,.tab-pane')||h.parentElement;
-    }
-    return null;
-  }
-  function cleanClone(el){
-    if(!el)return null;
-    var c=el.cloneNode(true);
-    c.querySelectorAll('button,.btn,input[type=file],script,style,.no-export').forEach(function(n){n.remove();});
-    c.querySelectorAll('input:not([type=file]),select,textarea').forEach(function(n){
-      var span=document.createElement('span');
-      span.textContent=n.value||'-';
-      n.replaceWith(span);
+      el.replaceWith(span);
     });
-    c.querySelectorAll('[hidden]').forEach(function(n){n.remove();});
-    c.style.display='block';c.style.visibility='visible';c.style.position='static';c.style.width='100%';c.style.maxWidth='100%';
-    return c;
+
+    clone.querySelectorAll('.app-page').forEach(function(el){
+      el.style.display='block';
+      el.style.opacity='1';
+      el.style.visibility='visible';
+    });
+
+    return clone.innerHTML;
   }
-  window.exportCaneNextPDF=async function(){
-    var btn=document.getElementById('exportPdfButton');
-    var report=document.getElementById('caneExportReport');
-    btn.disabled=true;
-    btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> กำลังสร้าง PDF';
-    try{
-      var sections=[
-        {title:'Scenario Analysis',el:findByKnownIds(['scenarioAnalysis','scenarioSection','scenarioPage','scenarioContent'])||findSectionByText(['scenario analysis','scenario'])},
-        {title:'ระบบวิเคราะห์ข้อมูล',el:findByKnownIds(['dataAnalysis','analysisSystem','analysisPage','analysisContent'])||findSectionByText(['ระบบวิเคราะห์ข้อมูล','วิเคราะห์ข้อมูล'])},
-        {title:'AI Recommendation',el:findByKnownIds(['aiAdvisorContent','aiRecommendation','aiRecommendationPage'])||findSectionByText(['ai recommendation'])},
-        {title:'วิเคราะห์ความเสี่ยง',el:findByKnownIds(['riskAnalysis','riskSection','riskPage','riskContent'])||findSectionByText(['วิเคราะห์ความเสี่ยง'])}
-      ];
-      var now=new Date();
-      var exportDate=now.toLocaleString('th-TH',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
-      report.innerHTML='';
-      var header=document.createElement('div');
-      header.innerHTML='<div class="report-title">Cane Next Plus+ — รายงานวิเคราะห์และข้อเสนอแนะ</div><div class="report-subtitle">Smart Sugarcane Management Platform</div><div class="report-meta"><div><strong>วันที่ Export:</strong> '+exportDate+'</div><div><strong>ผู้ Export:</strong> '+getExporter()+'</div><div><strong>รหัสชาวไร่:</strong> '+getFarmerCode()+'</div><div><strong>ชื่อ-สกุล ชาวไร่:</strong> '+getFarmerName()+'</div></div>';
-      report.appendChild(header);
-      var added=0;
-      sections.forEach(function(s){
-        var clone=cleanClone(s.el);if(!clone)return;
-        var sec=document.createElement('section');sec.className='report-section';sec.innerHTML='<h2>'+s.title+'</h2>';
-        var body=document.createElement('div');body.className='report-body';body.appendChild(clone);sec.appendChild(body);report.appendChild(sec);added++;
-      });
-      if(!added) throw new Error('ไม่พบข้อมูลจากเมนูที่กำหนดสำหรับ Export');
-      if(typeof html2pdf==='undefined') throw new Error('ไม่สามารถโหลดระบบสร้าง PDF ได้ กรุณาตรวจสอบอินเทอร์เน็ต');
-      var filename='CaneNext_Report_'+getFarmerCode().replace(/[^\wก-๙-]/g,'_')+'_'+now.toISOString().slice(0,10)+'.pdf';
-      await html2pdf().set({margin:[8,8,8,8],filename:filename,image:{type:'jpeg',quality:.98},html2canvas:{scale:1.6,useCORS:true,logging:false,backgroundColor:'#fff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['avoid-all','css','legacy']}}).from(report).save();
-    }catch(err){
-      alert('Export PDF ไม่สำเร็จ: '+(err&&err.message?err.message:err));
-    }finally{
-      btn.disabled=false;
-      btn.innerHTML='<i class="fa-solid fa-file-pdf"></i> Export PDF';
+
+  window.exportCaneNextPdf = function(){
+    var farmer = getFarmer();
+    if(!farmer.code || farmer.code === '-'){
+      alert('กรุณาค้นหาและเลือกชาวไร่จากเมนู Business Partner ก่อน Export PDF');
+      return;
     }
+
+    var user = document.getElementById('currentUserName')?.textContent?.trim() || '-';
+    var now = new Date();
+    var exportDate = now.toLocaleDateString('th-TH',{
+      year:'numeric',month:'long',day:'numeric'
+    }) + ' ' + now.toLocaleTimeString('th-TH',{
+      hour:'2-digit',minute:'2-digit'
+    }) + ' น.';
+
+    var sections = [
+      ['Scenario Analysis','scenario'],
+      ['ระบบวิเคราะห์ข้อมูล','analytics'],
+      ['AI Recommendation','ai-recommendation'],
+      ['วิเคราะห์ความเสี่ยง','risk']
+    ];
+
+    var reportBody = sections.map(function(item){
+      return '<section class="report-section">' +
+        '<h2>' + esc(item[0]) + '</h2>' +
+        '<div class="report-content">' + cleanClone(item[1]) + '</div>' +
+      '</section>';
+    }).join('');
+
+    var report = `<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>CaneNext Report - ${esc(farmer.code)}</title>
+<style>
+@page{size:A4 landscape;margin:10mm}
+*{box-sizing:border-box}
+body{font-family:"Noto Sans Thai","Tahoma",sans-serif;color:#183f66;margin:0;background:#fff;font-size:11px}
+.report-header{border-bottom:3px solid #0b5cad;padding:0 0 10px;margin-bottom:14px}
+.report-title{font-size:24px;font-weight:900;color:#083b73;margin:0 0 3px}
+.report-subtitle{font-size:12px;color:#5b6f86}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:11px}
+.meta-item{border:1px solid #d9e7f4;border-radius:8px;padding:7px 9px;background:#f7fbff}
+.meta-item span{display:block;font-size:9px;color:#6a7d91;margin-bottom:3px}
+.meta-item b{font-size:11px;color:#083b73}
+.report-section{page-break-before:always}
+.report-section:first-of-type{page-break-before:auto}
+.report-section h2{margin:0 0 10px;padding:8px 12px;background:#0b5cad;color:#fff;border-radius:8px;font-size:16px}
+.report-content{width:100%}
+.report-content .section-title,.report-content h1,.report-content h2{color:#083b73!important}
+.report-content table{width:100%!important;border-collapse:collapse!important;font-size:9px!important}
+.report-content th,.report-content td{border:1px solid #cbdbea!important;padding:5px!important;vertical-align:middle!important}
+.report-content th{background:#eaf4ff!important;color:#083b73!important;font-weight:800!important}
+.report-content .card,.report-content [class*="card"],.report-content [class*="panel"],
+.report-content [class*="kpi"],.report-content [class*="decision"]{
+  box-shadow:none!important;break-inside:avoid;border-color:#cbdbea!important
+}
+.report-content .ai-v347-side{display:grid!important;grid-template-columns:repeat(3,1fr)!important}
+.report-content .ai-v347-layout,.report-content .ai-v347-main{display:block!important}
+.pdf-field-value{display:block;border:1px solid #d5e3f0;background:#f8fbff;border-radius:5px;padding:4px 6px;font-weight:700;color:#0b5cad}
+.empty{padding:20px;text-align:center;color:#7a8998}
+.no-print-note{font-size:9px;color:#708090;margin-top:10px}
+@media print{
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header class="report-header">
+  <div class="report-title">CaneNext Plus+ — รายงานวิเคราะห์และคำแนะนำ</div>
+  <div class="report-subtitle">Scenario Analysis • ระบบวิเคราะห์ข้อมูล • AI Recommendation • วิเคราะห์ความเสี่ยง</div>
+  <div class="meta">
+    <div class="meta-item"><span>วันที่ Export</span><b>${esc(exportDate)}</b></div>
+    <div class="meta-item"><span>ผู้ Export</span><b>${esc(user)}</b></div>
+    <div class="meta-item"><span>รหัสชาวไร่</span><b>${esc(farmer.code)}</b></div>
+    <div class="meta-item"><span>ชื่อ-สกุล ชาวไร่</span><b>${esc(farmer.name)}</b></div>
+  </div>
+</header>
+${reportBody}
+<div class="no-print-note">เอกสารนี้สร้างจากระบบ CaneNext Plus+ ณ วันที่และเวลาที่ระบุด้านบน</div>
+<script>
+window.onload=function(){
+  setTimeout(function(){ window.print(); },500);
+};
+<\/script>
+</body>
+</html>`;
+
+    var win = window.open('','_blank','width=1200,height=900');
+    if(!win){
+      alert('เบราว์เซอร์บล็อกหน้าต่าง Export กรุณาอนุญาต Pop-up แล้วลองใหม่');
+      return;
+    }
+    win.document.open();
+    win.document.write(report);
+    win.document.close();
   };
 })();
 </script>
